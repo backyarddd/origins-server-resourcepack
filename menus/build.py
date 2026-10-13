@@ -1,6 +1,6 @@
 """Build the DeluxeMenus chest-menu backgrounds for the Cobblemon Origins server pack.
 
-Run:  python -I menus/build.py <validate|figma|build|selftest>
+Run:  python -I menus/build.py <validate|figma|build|layouts|selftest>
 
 menus/spec.json is the source of truth: per menu its chest rows, title, font glyph and elements placed in chest cells
 (9 columns, cell (x, y) = slot y*9+x), plus the DeluxeMenus item (name, lore, click actions) of each clickable element.
@@ -14,11 +14,15 @@ menus/spec.json is the source of truth: per menu its chest rows, title, font gly
             assets/origins/font/menus.json (space shifts + one bitmap glyph per menu), a reference to it in
             assets/minecraft/font/default.json (other providers are kept), the invisible-button item model (PAPER with
             custom_model_data 7300) and menus/deluxemenus/*.yml for the server.
+  layouts   write menus/mod/<id>.json (slots per item key) for the menus with renderer "mod"; build runs it too.
   selftest  run the checks above on synthetic data in temp dirs.
 
 Optional spec features: top-level "commands" are command-only DeluxeMenus menus (a registered /command that runs its
 actions instead of opening a menu); a menu "dynamic" block marks the grid and the prev/next buttons that
 menus/warps_sync.py fills from the server's warps.
+A menu with "renderer": "mod" is drawn by a server-side Fabric mod instead of DeluxeMenus: it gets the same background
+texture and font glyph, but no DeluxeMenus yml and no open_command; its items are only {"key"} and `layouts` writes
+menus/mod/<id>.json ({id, rows, glyph, slots: {key: [slot indexes]}}) for the mod to read.
 """
 import contextlib
 import io
@@ -41,6 +45,7 @@ EXPORT = os.path.join(HERE, 'export')
 FIGMA = os.path.join(HERE, 'figma')
 FIGMA_OUT = os.path.join(FIGMA, 'out')
 DM_OUT = os.path.join(HERE, 'deluxemenus')
+MOD_OUT = os.path.join(HERE, 'mod')
 KEY = (229, 229, 229)
 CMD = 7300  # custom_model_data of the invisible button item
 SHIFT_IN, SHIFT_OUT = '\uE3F0', '\uE3F1'  # advances -8 and -169
@@ -64,11 +69,12 @@ LABEL_MAX = {2: 4, 3: 7, 4: 10}  # button width in cells -> max label characters
 # a typo such as "shift_rigth" must fail validation instead of silently dropping the action
 ELEMENT_KEYS = {'type', 'x', 'y', 'w', 'h', 'style', 'color', 'icon', 'label', 'item'}
 ITEM_KEYS = {'key', 'name', 'lore', 'material', *ACTIONS}
-MENU_KEYS = {'id', 'glyph', 'rows', 'title', 'open_command', 'elements', 'dynamic'}
+MENU_KEYS = {'id', 'glyph', 'rows', 'title', 'open_command', 'elements', 'dynamic', 'renderer'}
 SPEC_KEYS = {'menus', 'commands'}
 COMMAND_KEYS = {'id', 'command', 'actions'}
 DYNAMIC_KEYS = {'source', 'grid', 'prev', 'next'}
 OPEN_MENU = '[openguimenu] '
+MOD = 'mod'  # the only non-default value of a menu's "renderer"
 ID_RE = re.compile(r'[a-z][a-z0-9_]*')
 CMD_RE = re.compile(r'[a-z0-9_]+')
 MAT_RE = re.compile(r'[A-Z0-9_]+')
@@ -117,8 +123,13 @@ def _strs(v):
     return isinstance(v, list) and all(isinstance(s, str) for s in v)
 
 
-def _check_elements(m, ids):
+def _is_mod(m):
+    return m.get('renderer') == MOD
+
+
+def _check_elements(m, ids, mods):
     mid, rows = m['id'], m['rows']
+    mod = mid in mods
     els = m.get('elements')
     if not isinstance(els, list):
         raise SystemExit(f'{mid}: elements must be a list')
@@ -175,6 +186,9 @@ def _check_elements(m, ids):
         need(i, isinstance(k, str) and ID_RE.fullmatch(k), 'item key must match [a-z][a-z0-9_]*')
         need(i, k not in keys, f'duplicate item key {k!r}')
         keys.add(k)
+        if mod:  # the mod owns names, lore, materials and clicks; the spec only places the key
+            need(i, set(it) == {'key'}, f'item of a mod menu must only have "key", found {sorted(set(it) - {"key"})}')
+            continue
         need(i, isinstance(it.get('name'), str) and it['name'], 'item name is required')
         need(i, 'lore' not in it or _strs(it['lore']), 'item lore must be a list of strings')
         if t == 'slot':
@@ -187,6 +201,7 @@ def _check_elements(m, ids):
             for cmd in it.get(a, []):
                 target = cmd[len(OPEN_MENU):].strip() if cmd.startswith(OPEN_MENU) else None
                 need(i, target is None or target in ids, f'{cmd!r} opens a menu that is not in the spec')
+                need(i, target not in mods, f'{cmd!r} opens a mod menu, which DeluxeMenus cannot open')
         need(i, 'click' not in it or not any(a in it for a in ('left', 'right', 'shift_left', 'shift_right')),
              'item click cannot be combined with left/right/shift_left/shift_right')
     if m.get('dynamic'):
@@ -235,7 +250,7 @@ def _check_dynamic(m):
     need(d['prev'] != d['next'], 'prev and next must be different cells')
 
 
-def _check_commands(spec, ids):
+def _check_commands(spec, ids, mods):
     cmds = spec.get('commands', [])
     if not isinstance(cmds, list):
         raise SystemExit('spec: "commands" must be a list')
@@ -263,6 +278,8 @@ def _check_commands(spec, ids):
         for a in acts:
             if a.startswith(OPEN_MENU) and a[len(OPEN_MENU):].strip() not in ids:
                 raise SystemExit(f'{cid}: {a!r} opens a menu that is not in the spec')
+            if a.startswith(OPEN_MENU) and a[len(OPEN_MENU):].strip() in mods:
+                raise SystemExit(f'{cid}: {a!r} opens a mod menu, which DeluxeMenus cannot open')
 
 
 def validate(spec):
@@ -298,14 +315,21 @@ def validate(spec):
         if oc is not None and not (isinstance(oc, list) and oc and all(isinstance(c, str) and CMD_RE.fullmatch(c)
                                                                          for c in oc)):
             raise SystemExit(f'{mid}: open_command must be a non-empty list of [a-z0-9_]+ strings')
+        if 'renderer' in m and m['renderer'] != MOD:
+            raise SystemExit(f'{mid}: renderer must be "{MOD}" or absent')
+        if _is_mod(m):
+            for k in ('open_command', 'dynamic'):
+                if k in m:
+                    raise SystemExit(f'{mid}: a mod menu cannot have {k}')
+    mods = {m['id'] for m in menus if _is_mod(m)}
     dyn = [m['id'] for m in menus if 'dynamic' in m]
     if len(dyn) > 1:
         raise SystemExit(f'spec: only one menu may have "dynamic", found {dyn}')
     for m in menus:
-        _check_elements(m, ids)
+        _check_elements(m, ids, mods)
         if 'dynamic' in m:
             _check_dynamic(m)
-    _check_commands(spec, ids)
+    _check_commands(spec, ids, mods)
     # warps_sync.py names extra pages <id>_2, <id>_3, ... and removes stale ones from config.yml
     for d in dyn:
         page = re.compile(re.escape(d) + r'_\d+')
@@ -413,6 +437,25 @@ def _prune(folder, ext, keep):
             os.remove(os.path.join(folder, name))
 
 
+def write_layouts(menus, mod_out=MOD_OUT):
+    """Write mod_out/<id>.json for each mod menu, prune stale ones, and return the paths written."""
+    os.makedirs(mod_out, exist_ok=True)
+    mods = [m for m in menus if _is_mod(m)]
+    paths = []
+    for m in mods:
+        path = os.path.join(mod_out, m['id'] + '.json')
+        write_json(path, {'id': m['id'], 'rows': m['rows'], 'glyph': m['glyph'],
+                          'slots': {e['item']['key']: slots(e) for e in m['elements'] if 'item' in e}})
+        paths.append(path)
+    _prune(mod_out, '.json', {m['id'] for m in mods})
+    return paths
+
+
+def layouts(spec_path=SPEC, mod_out=MOD_OUT):
+    for p in write_layouts(load_spec(spec_path)['menus'], mod_out):
+        print(rel(p))
+
+
 def figma(spec_path=SPEC, figma_dir=FIGMA, out_dir=FIGMA_OUT):
     spec = load_spec(spec_path)
     src = {}
@@ -433,7 +476,7 @@ def figma(spec_path=SPEC, figma_dir=FIGMA, out_dir=FIGMA_OUT):
         print(f'{rel(p)} {len(text)} chars')
 
 
-def build(spec_path=SPEC, export_dir=EXPORT, pack=PACK, dm_out=DM_OUT):
+def build(spec_path=SPEC, export_dir=EXPORT, pack=PACK, dm_out=DM_OUT, mod_out=MOD_OUT):
     spec = load_spec(spec_path)
     menus = spec['menus']
     # load every export before writing anything, so a bad export leaves the outputs untouched
@@ -487,13 +530,15 @@ def build(spec_path=SPEC, export_dir=EXPORT, pack=PACK, dm_out=DM_OUT):
         os.path.join(pack, 'assets', 'origins', 'textures', 'item', 'menu_blank.png'))
 
     cmds = spec.get('commands', [])
-    for m in menus:
+    dm = [m for m in menus if not _is_mod(m)]  # mod menus are opened by the mod, DeluxeMenus never sees them
+    for m in dm:
         tw(os.path.join(dm_out, m['id'] + '.yml'), dump_yaml(yaml_menu(m)))
     for c in cmds:
         tw(os.path.join(dm_out, c['id'] + '.yml'), dump_yaml(command_doc(c)))
     tw(os.path.join(dm_out, 'gui_menus.yml'),
-       dump_yaml({'gui_menus': {x['id']: {'file': x['id'] + '.yml'} for x in menus + cmds}}))
-    _prune(dm_out, '.yml', {x['id'] for x in menus + cmds} | {'gui_menus'})
+       dump_yaml({'gui_menus': {x['id']: {'file': x['id'] + '.yml'} for x in dm + cmds}}))
+    _prune(dm_out, '.yml', {x['id'] for x in dm + cmds} | {'gui_menus'})
+    written.extend(write_layouts(menus, mod_out))
 
     for m in menus:
         n = sum('item' in e for e in m['elements'])
@@ -596,6 +641,29 @@ def selftest():
     _rejects(mutated(lambda m: m.update(open_commmand=['t'])), 'unknown keys')
     _rejects(mutated(lambda m: btn(m)['item'].update(click=['[openguimenu] nope'])), 'not in the spec')
     mutated(lambda m: btn(m)['item'].update(click=['[openguimenu] t']))()  # a menu may reopen itself
+    _rejects(mutated(lambda m: m.update(renderer='other')), 'renderer')
+
+    def mini_mod():
+        s = mini()
+        s['menus'].append({'id': 'mm', 'glyph': 'E301', 'rows': 2, 'title': 'M', 'renderer': 'mod', 'elements': [
+            {'type': 'slot', 'x': 0, 'y': 0, 'w': 2, 'item': {'key': 'grid'}},
+            {'type': 'button', 'color': 'red', 'label': 'OK', 'x': 0, 'y': 1, 'w': 2, 'item': {'key': 'ok'}}]})
+        return s
+
+    validate(mini_mod())
+
+    def mod_mutated(fn):
+        s = mini_mod()
+        fn(s)
+        return lambda: validate(s)
+
+    _rejects(mod_mutated(lambda s: s['menus'][1]['elements'][1]['item'].update(name='n')), 'must only have "key"')
+    _rejects(mod_mutated(lambda s: s['menus'][1]['elements'][0]['item'].update(material='STONE')), 'must only have "key"')
+    _rejects(mod_mutated(lambda s: s['menus'][1].update(open_command=['mm'])), 'mod menu cannot have open_command')
+    _rejects(mod_mutated(lambda s: s['menus'][1].update(dynamic={})), 'mod menu cannot have dynamic')
+    _rejects(mod_mutated(lambda s: btn(s['menus'][0])['item'].update(click=['[openguimenu] mm'])), 'mod menu')
+    _rejects(mod_mutated(lambda s: s.update(commands=[{'id': 'c', 'command': 'c', 'actions': ['[openguimenu] mm']}])),
+             'mod menu')
 
     def real_mutated(fn):
         s = json.loads(json.dumps(real))
@@ -670,7 +738,7 @@ def selftest():
     with tempfile.TemporaryDirectory() as tmp:
         spec_path = os.path.join(tmp, 'spec.json')
         shutil.copyfile(SPEC, spec_path)
-        exp, pack, dm = (os.path.join(tmp, d) for d in ('export', 'pack', 'dm'))
+        exp, pack, dm, mod = (os.path.join(tmp, d) for d in ('export', 'pack', 'dm', 'mod'))
         for m in real['menus']:
             os.makedirs(exp, exist_ok=True)
             _synthetic(m).save(os.path.join(exp, f'menu_{m["id"]}.png'))
@@ -682,20 +750,22 @@ def selftest():
         os.makedirs(os.path.dirname(stale_png))
         Image.new('RGBA', (1, 1)).save(stale_png)
         write_text(os.path.join(dm, 'old.yml'), 'x: 1\n')
+        write_json(os.path.join(mod, 'old.json'), {})
 
         with contextlib.redirect_stdout(io.StringIO()):
-            build(spec_path, exp, pack, dm)
+            build(spec_path, exp, pack, dm, mod)
         menus_ref = {'type': 'reference', 'id': REF}
         assert _load(default)['providers'] == [prefixes, menus_ref]
         with contextlib.redirect_stdout(io.StringIO()):
-            build(spec_path, exp, pack, dm)
+            build(spec_path, exp, pack, dm, mod)
         assert _load(default)['providers'] == [prefixes, menus_ref], 'second build duplicated the reference'
         assert not os.path.exists(stale_png) and not os.path.exists(os.path.join(dm, 'old.yml'))
+        assert not os.path.exists(os.path.join(mod, 'old.json'))
 
         fonts = _load(os.path.join(pack, 'assets', 'origins', 'font', 'menus.json'))['providers']
         assert fonts[0] == {'type': 'space', 'advances': {SHIFT_IN: -8, SHIFT_OUT: -169}}
-        assert [p['type'] for p in fonts[1:]] == ['bitmap'] * 4
-        assert [p['height'] for p in fonts[1:]] == [107, 89, 71, 107]
+        assert [p['type'] for p in fonts[1:]] == ['bitmap'] * 12
+        assert [p['height'] for p in fonts[1:]] == [125, 89, 71, 107, 125, 125, 89, 125, 125, 107, 125, 107]
 
         def ymenu(name):
             with open(os.path.join(dm, name + '.yml'), encoding='utf-8') as f:
@@ -706,6 +776,14 @@ def selftest():
         spawn = ymenu('menu')['items']['spawn']
         assert spawn['slots'] == [0, 1, 2, 9, 10, 11] and spawn['material'] == 'PAPER' and spawn['model_data'] == 7300
         assert list(ymenu('gui_menus')['gui_menus']) == ['menu', 'homes', 'rtp_confirm', 'warps', 'spawn_cmd', 'rules_cmd']
+        mod_ids = [m['id'] for m in real['menus'] if m.get('renderer') == 'mod']
+        assert len(mod_ids) == 8
+        assert not any(os.path.exists(os.path.join(dm, i + '.yml')) for i in mod_ids)
+        assert sorted(os.listdir(mod)) == sorted(i + '.json' for i in mod_ids), os.listdir(mod)
+        market = _load(os.path.join(mod, 'market.json'))
+        assert market['id'] == 'market' and market['rows'] == 6 and market['glyph'] == 'E304'
+        assert market['slots']['sell'] == [7, 8] and market['slots']['close'] == [53]
+        assert list(market['slots'])[:3] == ['grid', 'sell', 'mine']
         assert 'warp_1' not in ymenu('warps')['items']  # the base page has no warp items; warps_sync adds them
         spawn_cmd = ymenu('spawn_cmd')
         assert spawn_cmd['register_command'] is True and spawn_cmd['open_command'] == ['spawn']
@@ -744,7 +822,7 @@ def selftest():
     print('menus selftest ok')
 
 
-COMMANDS = {'validate': report, 'figma': figma, 'build': build, 'selftest': selftest}
+COMMANDS = {'validate': report, 'figma': figma, 'build': build, 'layouts': layouts, 'selftest': selftest}
 
 if __name__ == '__main__':
     if len(sys.argv) != 2 or sys.argv[1] not in COMMANDS:

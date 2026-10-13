@@ -35,6 +35,16 @@ Workflow:
 5. Server: copy `menus/deluxemenus/<id>.yml` to `plugins/DeluxeMenus/gui_menus/`, merge `menus/deluxemenus/gui_menus.yml`
    into `plugins/DeluxeMenus/config.yml`, `/dm reload`; publish the pack release and update `resource-pack-sha1`.
 
+### Mod menus
+
+A menu with `"renderer": "mod"` is drawn by the server-side Fabric mod `origins_server` instead of DeluxeMenus. It gets the
+same background texture and font glyph, but no `menus/deluxemenus/<id>.yml`, no `gui_menus` entry and no `open_command`;
+`[openguimenu]` actions in DeluxeMenus menus and commands cannot target it. Each element `item` is only `{"key": "<key>"}`
+(the mod supplies names, lore, materials and clicks) and `dynamic` is not allowed.
+
+`python -I menus/build.py layouts` (also run by `build`) writes `menus/mod/<id>.json` for each mod menu, which the mod reads:
+`{"id", "rows", "glyph", "slots": {"<key>": [slot indexes]}}`. Stale files in `menus/mod/` are removed. It needs no exports.
+
 ### Warps menu
 
 FTB Essentials has no placeholders for warps, so the warps menu is filled from the server's warp list by
