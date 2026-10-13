@@ -11,7 +11,7 @@ open_requirement:
       input: a
       output: b
   deny_commands:
-  - '[console] execute as %player_name% at @s run function origins:spawn'
+  - '[console] execute as %player_uuid% at @s run function origins:spawn'
 items:
   placeholder:
     material: PAPER

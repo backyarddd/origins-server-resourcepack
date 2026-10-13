@@ -189,6 +189,11 @@ def _check_elements(m, ids):
                 need(i, target is None or target in ids, f'{cmd!r} opens a menu that is not in the spec')
         need(i, 'click' not in it or not any(a in it for a in ('left', 'right', 'shift_left', 'shift_right')),
              'item click cannot be combined with left/right/shift_left/shift_right')
+    if m.get('dynamic'):
+        reserved = re.compile(r'warp_\d+|prev_page|next_page')
+        for i, e in enumerate(els):
+            k = e.get('item', {}).get('key', '')
+            need(i, not reserved.fullmatch(k), f'item key {k!r} is reserved for menus/warps_sync.py')
     # rule 3: items never share a cell; a hole never sits under a drawn button
     items = [(i, set(cells(e))) for i, e in enumerate(els) if 'item' in e]
     for (_, a), (j, b) in itertools.combinations(items, 2):
@@ -301,6 +306,12 @@ def validate(spec):
         if 'dynamic' in m:
             _check_dynamic(m)
     _check_commands(spec, ids)
+    # warps_sync.py names extra pages <id>_2, <id>_3, ... and removes stale ones from config.yml
+    for d in dyn:
+        page = re.compile(re.escape(d) + r'_\d+')
+        taken = [i for i in [m['id'] for m in menus] + [c['id'] for c in spec.get('commands', [])] if page.fullmatch(i)]
+        if taken:
+            raise SystemExit(f'spec: ids {taken} are reserved for the pages of dynamic menu {d!r}')
 
 
 def expected_transparent(menu):
@@ -618,6 +629,9 @@ def selftest():
         menu_of(s, 'homes')['dynamic'] = json.loads(json.dumps(dyn(s)))
 
     _rejects(real_mutated(second_dynamic), 'only one menu')
+    _rejects(real_mutated(lambda s: with_command(s, id='warps_2')), 'reserved for the pages')
+    _rejects(real_mutated(lambda s: menu_of(s, 'warps')['elements'][-1]['item'].update(key='next_page')),
+             'reserved for menus/warps_sync.py')
 
     m1 = {'rows': 1, 'elements': [{'type': 'slot', 'x': 0, 'y': 0}]}
     assert len(expected_transparent(m1)) == 9 + 256

@@ -34,7 +34,7 @@
             ],
             "click": [
               "[close]",
-              "[console] execute as %player_name% at @s run function origins:spawn"
+              "[console] execute as %player_uuid% at @s run function origins:spawn"
             ]
           }
         },
@@ -640,7 +640,7 @@
       "id": "spawn_cmd",
       "command": "spawn",
       "actions": [
-        "[console] execute as %player_name% at @s run function origins:spawn"
+        "[console] execute as %player_uuid% at @s run function origins:spawn"
       ]
     },
     {

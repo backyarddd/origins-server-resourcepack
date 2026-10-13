@@ -104,7 +104,7 @@ def command(cmd: str) -> None:
 
 # --- SNBT --------------------------------------------------------------------------------------------------------
 
-_BARE = re.compile(r'[A-Za-z0-9_+.\-]+')  # keys and unquoted values: numbers with b/s/L/f/d suffix, true/false, words
+_BARE = re.compile(r'[\w+.\-\u221e]+')  # keys and unquoted values: numbers with b/s/L/f/d suffix, true/false, words
 _TYPED = re.compile(r'[BIL]\s*;')  # [B; ..] [I; ..] [L; ..]
 _ESC = {'n': '\n', 't': '\t', 'r': '\r', 'b': '\b', 'f': '\f'}
 _HEX4 = re.compile(r'[0-9A-Fa-f]{4}')
@@ -293,6 +293,9 @@ def sync(dry_run: bool, data_path: str | None) -> None:
             raise SystemExit(f'cannot read {data_path}: {e}')
     else:
         raw = get_file(REMOTE_DATA)
+        # the panel answers 500 both for a missing file and for daemon errors: only an absent file means "no warps"
+        if raw is None and os.path.basename(REMOTE_DATA) in list_dir(os.path.dirname(REMOTE_DATA)):
+            raise SystemExit(f'{REMOTE_DATA}: exists but could not be read; nothing changed')
         try:
             text = raw.decode('utf-8') if raw is not None else None
         except ValueError as e:
@@ -307,10 +310,7 @@ def sync(dry_run: bool, data_path: str | None) -> None:
 
     folder = f'{REMOTE_DM}/gui_menus'
     uploaded = 0
-    for pid, doc in pages.items():
-        put_file(f'{folder}/{pid}.yml', dump_yaml(doc).encode('utf-8'))
-        uploaded += 1
-
+    # read and check config.yml before any upload, so a bad config leaves the server untouched
     cfg_path = f'{REMOTE_DM}/config.yml'
     raw = get_file(cfg_path)
     if raw is None:
@@ -327,6 +327,9 @@ def sync(dry_run: bool, data_path: str | None) -> None:
         del gui[k]
     for pid in pages:
         gui[pid] = {'file': f'{pid}.yml'}
+    for pid, doc in pages.items():
+        put_file(f'{folder}/{pid}.yml', dump_yaml(doc).encode('utf-8'))
+        uploaded += 1
     if cfg != before:  # safe_dump drops the file's comments, so only rewrite it when something changed
         put_file(cfg_path, yaml.safe_dump(cfg, sort_keys=False, allow_unicode=True).encode('utf-8'))
         uploaded += 1
@@ -442,6 +445,12 @@ def selftest() -> None:
     assert list(empty) == ['warps'] and empty['warps'] == base
     assert len(build_pages(menu, warps[:21])) == 1 and len(build_pages(menu, warps[:22])) == 2
 
+    # FTB writes non-ASCII names unquoted: they must parse (and are then skipped by NAME_RE, not crash the sync)
+    accented = '{\n\twarps: {\n\t\tpok\u00e9center: {\n\t\t\tdim: "minecraft:overworld"\n\t\t\tx: 1\n\t\t}\n\t}\n}\n'
+    assert parse_warps(accented) == [('pok\u00e9center', 'minecraft:overworld')]
+    with contextlib.redirect_stderr(io.StringIO()):
+        assert not [k for k in build_pages(menu, parse_warps(accented))['warps']['items'] if k.startswith('warp_')]
+
     # sync against an in-memory server: no network
     files = {REMOTE_DATA: _snbt([w[0] for w in warps]).encode(),
              f'{REMOTE_DM}/config.yml': yaml.safe_dump({'check_updates': True, 'gui_menus': {
@@ -503,6 +512,20 @@ def selftest() -> None:
                 sync(True, data)
             assert not puts and len(cmds) == 3 and '== warps ==' in out.getvalue() and 'Alpha' in out.getvalue()
             _rejects(lambda: sync(True, os.path.join(tmp, 'nope.snbt')), 'cannot read')
+
+        # data.snbt listed but unreadable (daemon 500): stop before touching anything
+        files[REMOTE_DATA] = _snbt(['alpha']).encode()
+        g['get_file'] = lambda path: None if path == REMOTE_DATA else files.get(path)
+        before = dict(files)
+        _rejects(lambda: sync(False, None), 'could not be read')
+        assert files == before and len(cmds) == 3
+        g['get_file'] = files.get
+
+        # broken config.yml: no page is uploaded
+        files[f'{REMOTE_DM}/config.yml'] = b'gui_menus: [not, a, dict]'
+        puts.clear()
+        _rejects(lambda: sync(False, None), 'no gui_menus section')
+        assert not puts and len(cmds) == 3
     finally:
         g.update(saved)
     print('warps_sync selftest ok')

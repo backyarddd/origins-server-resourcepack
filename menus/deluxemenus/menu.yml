@@ -19,7 +19,7 @@ items:
     - '&#c9d4ecTeleport to the town hub.'
     click_commands:
     - '[close]'
-    - '[console] execute as %player_name% at @s run function origins:spawn'
+    - '[console] execute as %player_uuid% at @s run function origins:spawn'
   rtp:
     material: PAPER
     model_data: 7300
