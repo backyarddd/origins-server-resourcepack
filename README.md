@@ -11,3 +11,26 @@ Server resource pack for the Cobblemon Origins server (Minecraft 1.21.1).
 Each release attaches `origins-server-pack.zip`. The server's `resource-pack` points at
 `https://github.com/backyarddd/origins-server-resourcepack/releases/latest/download/origins-server-pack.zip` and
 `resource-pack-sha1` must match the release.
+
+## Menus (DeluxeMenus)
+
+Chest-menu backgrounds for DeluxeMenus, drawn in the navy/gold Origins theme.
+
+- `menus/spec.json` is the source of truth: each menu's rows, title, glyph and elements in chest cells (9 columns,
+  cell (x, y) = slot y*9+x), plus the DeluxeMenus item (name, lore, click actions) for each clickable element.
+- Backgrounds are font glyphs U+E300..U+E3EF in `assets/origins/font/menus.json`; U+E3F0 (-8) and U+E3F1 (-169) shift
+  the title so the glyph covers the chest from its top-left corner and the real title text lands at the vanilla x=8.
+  Menu titles are `&f<U+E3F0><glyph><U+E3F1>&#fff1d0<Title>`.
+- Drawn buttons are invisible `PAPER` items with custom_model_data 7300 (`assets/minecraft/models/item/paper.json` →
+  `origins:item/menu_blank`); `slot` elements are transparent holes that show the vanilla slot and real items.
+- Figma file `thHX6Yp5pMOLrryrsSaITZ`: page "Menu Kit" (all parts, script `menus/figma/kit.js`) and page "Menus"
+  (composed menus, script `menus/figma/menus.js`).
+
+Workflow:
+1. Edit `menus/spec.json`, run `python -I menus/build.py validate`.
+2. `python -I menus/build.py figma`, then run `menus/figma/out/menus.run.js` with the Figma MCP `use_figma` tool.
+3. Export each page-level frame `menu_<id>` (download_assets, png, scale 1) to `menus/export/menu_<id>.png`.
+4. `python -I menus/build.py build` (validates every export pixel-exactly, writes the glyphs, fonts, item model and
+   `menus/deluxemenus/*.yml`), then `python -I build.py` for the zip and SHA-1.
+5. Server: copy `menus/deluxemenus/<id>.yml` to `plugins/DeluxeMenus/gui_menus/`, merge `menus/deluxemenus/gui_menus.yml`
+   into `plugins/DeluxeMenus/config.yml`, `/dm reload`; publish the pack release and update `resource-pack-sha1`.

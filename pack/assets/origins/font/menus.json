@@ -1,0 +1,38 @@
+{
+  "providers": [
+    {
+      "type": "space",
+      "advances": {
+        "\ue3f0": -8,
+        "\ue3f1": -169
+      }
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/menu.png",
+      "ascent": 13,
+      "height": 107,
+      "chars": [
+        "\ue300"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/homes.png",
+      "ascent": 13,
+      "height": 89,
+      "chars": [
+        "\ue301"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/rtp_confirm.png",
+      "ascent": 13,
+      "height": 71,
+      "chars": [
+        "\ue302"
+      ]
+    }
+  ]
+}

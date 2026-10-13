@@ -1,0 +1,20 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "minecraft:item/paper"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "custom_model_data": 7300
+      },
+      "model": "origins:item/menu_blank"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7301
+      },
+      "model": "origins:item/paper_plain"
+    }
+  ]
+}

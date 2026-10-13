@@ -1,5 +1,7 @@
 """Check the server pack's fonts: follow every reference from assets/minecraft/font/default.json, and for each bitmap
-provider assert the PNG exists, is `height` px tall, has binary alpha; every char must be unique across all providers.
+provider assert the PNG exists, its cell height (PNG height / number of `chars` rows) equals `height`, ascent <= height
+and alpha is binary; `space` providers are allowed (their advance chars count too). Every char must be unique across
+all providers.
 
 Run:  python -I packdev/server/resourcepack/check.py
 """
@@ -32,11 +34,24 @@ def check(pack=PACK):
             if p['type'] == 'reference':
                 todo.append(p['id'])
                 continue
+            if p['type'] == 'space':
+                for key in p['advances']:
+                    assert len(key) == 1, f'{fid}: space advance key {key!r} must be one character'
+                    assert key not in seen, f'U+{ord(key):04X} in {fid} already used by {seen[key]}'
+                    seen[key] = fid
+                    print(f'ok  U+{ord(key):04X}  space {p["advances"][key]:>4}  {fid}')
+                continue
             assert p['type'] == 'bitmap', f'{fid}: unexpected provider type {p["type"]}'
             png = res(pack, p['file'], 'textures', '')
             assert os.path.isfile(png), f'{fid}: missing {png}'
             im = Image.open(png).convert('RGBA')
-            assert im.height == p['height'] == 9, f'{png}: height {im.height}, provider height {p["height"]}'
+            rows = p['chars']
+            assert rows and rows[0] and all(len(r) == len(rows[0]) for r in rows), f'{png}: chars rows must be equal length'
+            assert im.height % len(rows) == 0 and im.width % len(rows[0]) == 0, \
+                f'{png}: {im.width}x{im.height} does not divide into {len(rows[0])}x{len(rows)} cells'
+            cell_h = im.height // len(rows)
+            assert cell_h == p['height'], f'{png}: cell height {cell_h}, provider height {p["height"]}'
+            assert p['ascent'] <= p['height'], f'{png}: ascent {p["ascent"]} > height {p["height"]}'
             alphas = set(im.getchannel('A').tobytes())
             assert alphas <= {0, 255}, f'{png}: non-binary alpha {sorted(alphas - {0, 255})}'
             for row in p['chars']:
