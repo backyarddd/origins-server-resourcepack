@@ -1,0 +1,134 @@
+[
+  {
+    "group": "owner",
+    "label": "OWNER",
+    "char": "\ue200",
+    "codepoint": "E200",
+    "width": 28,
+    "hex": {
+      "fill": "EE4B3E",
+      "text": "5A0E0A"
+    }
+  },
+  {
+    "group": "admin",
+    "label": "ADMIN",
+    "char": "\ue201",
+    "codepoint": "E201",
+    "width": 28,
+    "hex": {
+      "fill": "F98A2C",
+      "text": "5C2807"
+    }
+  },
+  {
+    "group": "moderator",
+    "label": "MOD",
+    "char": "\ue202",
+    "codepoint": "E202",
+    "width": 19,
+    "hex": {
+      "fill": "4A86F0",
+      "text": "0E2156"
+    }
+  },
+  {
+    "group": "helper",
+    "label": "HELPER",
+    "char": "\ue203",
+    "codepoint": "E203",
+    "width": 29,
+    "hex": {
+      "fill": "8EDB3A",
+      "text": "23450A"
+    }
+  },
+  {
+    "group": "builder",
+    "label": "BUILDER",
+    "char": "\ue204",
+    "codepoint": "E204",
+    "width": 33,
+    "hex": {
+      "fill": "D4D8DE",
+      "text": "3A3F47"
+    }
+  },
+  {
+    "group": "gymleader",
+    "label": "GYM LEADER",
+    "char": "\ue205",
+    "codepoint": "E205",
+    "width": 46,
+    "hex": {
+      "fill": "A35BEB",
+      "text": "32105A"
+    }
+  },
+  {
+    "group": "champion",
+    "label": "CHAMPION",
+    "char": "\ue206",
+    "codepoint": "E206",
+    "width": 40,
+    "hex": {
+      "fill": "FFCF33",
+      "text": "5A3A05"
+    }
+  },
+  {
+    "group": "elite",
+    "label": "ELITE",
+    "char": "\ue207",
+    "codepoint": "E207",
+    "width": 25,
+    "hex": {
+      "fill": "F26CB0",
+      "text": "5A1034"
+    }
+  },
+  {
+    "group": "veteran",
+    "label": "VETERAN",
+    "char": "\ue208",
+    "codepoint": "E208",
+    "width": 34,
+    "hex": {
+      "fill": "3AA04A",
+      "text": "0A2B10"
+    }
+  },
+  {
+    "group": "ace",
+    "label": "ACE",
+    "char": "\ue209",
+    "codepoint": "E209",
+    "width": 17,
+    "hex": {
+      "fill": "3DD3E8",
+      "text": "08404A"
+    }
+  },
+  {
+    "group": "challenger",
+    "label": "CHALLENGER",
+    "char": "\ue20a",
+    "codepoint": "E20A",
+    "width": 46,
+    "hex": {
+      "fill": "7FC4F5",
+      "text": "143F63"
+    }
+  },
+  {
+    "group": "default",
+    "label": "TRAINER",
+    "char": "\ue20b",
+    "codepoint": "E20B",
+    "width": 34,
+    "hex": {
+      "fill": "8592AD",
+      "text": "222838"
+    }
+  }
+]

@@ -1,0 +1,112 @@
+{
+  "providers": [
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/owner.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue200"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/admin.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue201"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/moderator.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue202"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/helper.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue203"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/builder.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue204"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/gymleader.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue205"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/champion.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue206"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/elite.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue207"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/veteran.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue208"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/ace.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue209"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/challenger.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue20a"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/default.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue20b"
+      ]
+    }
+  ]
+}
