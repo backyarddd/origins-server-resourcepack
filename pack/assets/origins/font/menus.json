@@ -33,6 +33,15 @@
       "chars": [
         "\ue302"
       ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/warps.png",
+      "ascent": 13,
+      "height": 107,
+      "chars": [
+        "\ue303"
+      ]
     }
   ]
 }

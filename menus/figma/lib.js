@@ -168,6 +168,13 @@ const ICONS = {
     return (x === 6 && y >= 5 && y <= 10) || (y === 5 && x >= 7 && x <= 9) || (y === 10 && x >= 7 && x <= 9) ? C.cream : C.gold;
   }),
 };
+// warp: a violet swirl portal (spiral bands by angle + radius, bright core)
+ICONS.warp = maskIcon((x, y) => ((x - 7.5) / 6.6) ** 2 + ((y - 7.5) / 7.4) ** 2 <= 1, (x, y) => {
+  const dx = (x - 7.5) / 6.6, dy = (y - 7.5) / 7.4, r = Math.hypot(dx, dy), a = Math.atan2(dy, dx);
+  if (r < 0.22) return C.cream;
+  if (r < 0.42) return 'D6C2FF';
+  return Math.floor(a / (2 * Math.PI) * 5 + r * 3.2 + 10) % 2 ? 'A98BEA' : '5A3DA6';
+});
 // leave: a wooden door with a green exit arrow over it (each part outlined on its own)
 ICONS.leave = (() => {
   const door = maskIcon((x, y) => x >= 2 && x <= 8 && y >= 1 && y <= 14, (x, y) => x === 7 && y === 8 ? C.goldHi : x <= 3 ? 'A0662C' : '7A4A1E');
