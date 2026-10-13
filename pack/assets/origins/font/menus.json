@@ -114,6 +114,24 @@
       "chars": [
         "\ue30b"
       ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/shop_buy.png",
+      "ascent": 13,
+      "height": 89,
+      "chars": [
+        "\ue30c"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/sell.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue30d"
+      ]
     }
   ]
 }
