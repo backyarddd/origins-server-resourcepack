@@ -20,7 +20,7 @@ open_requirement:
   - '[message] &#f7d27a6. &#fff1d0Keep builds, names and skins appropriate.'
   - '[message] &#f7d27a7. &#fff1d0No lag machines or farms that hurt server performance.'
   - '[message] &#f7d27a8. &#fff1d0Staff decisions are final. Ask on Discord if something is unclear.'
-  - '[message] &#9aa6c4Breaking the rules can lead to a mute, kick or ban. discord.gg/tEtQvqXjf8'
+  - '[message] &#9aa6c4Breaking the rules can lead to a mute, kick or ban. Appeals: /discord'
 items:
   placeholder:
     material: PAPER

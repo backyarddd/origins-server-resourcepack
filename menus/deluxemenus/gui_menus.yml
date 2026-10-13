@@ -12,3 +12,7 @@ gui_menus:
     file: spawn_cmd.yml
   rules_cmd:
     file: rules_cmd.yml
+  discord_cmd:
+    file: discord_cmd.yml
+  help_cmd:
+    file: help_cmd.yml
