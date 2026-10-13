@@ -668,7 +668,7 @@
     },
     {
       "id": "help_cmd",
-      "command": "help",
+      "command": "commands",
       "actions": [
         "[message] &#f7d27aCobblemon Origins commands",
         "[message] &#f7d27a/menu &#fff1d0- Open the server menu: spawn, wild, homes, warps",
