@@ -2,7 +2,7 @@
 menu_title: "&f\uE3F0\uE300\uE3F1&#fff1d0Cobblemon Origins"
 open_command:
 - menu
-size: 45
+size: 54
 items:
   spawn:
     material: PAPER
@@ -83,13 +83,79 @@ items:
     - '&#c9d4ecTravel to the server warps.'
     click_commands:
     - '[openguimenu] warps'
-  close:
+  market:
+    material: PAPER
+    model_data: 7300
+    slots:
+    - 36
+    - 37
+    - 38
+    display_name: '&#f7d27aAuction House'
+    lore:
+    - '&#c9d4ecBuy and sell items.'
+    click_commands:
+    - '[close]'
+    - '[player] ah'
+  pokemarket:
     material: PAPER
     model_data: 7300
     slots:
     - 39
     - 40
     - 41
+    display_name: "&#f7d27aPok\xE9mon Market"
+    lore:
+    - "&#c9d4ecBuy and sell Pok\xE9mon."
+    click_commands:
+    - '[close]'
+    - '[player] pah'
+  battlepass:
+    material: PAPER
+    model_data: 7300
+    slots:
+    - 42
+    - 43
+    - 44
+    display_name: '&#f7d27aBattle Pass'
+    lore:
+    - '&#c9d4ecSeason rewards and missions.'
+    click_commands:
+    - '[close]'
+    - '[player] bp'
+  rewards:
+    material: PAPER
+    model_data: 7300
+    slots:
+    - 45
+    - 46
+    - 47
+    display_name: '&#f7d27aRewards'
+    lore:
+    - '&#c9d4ecDaily, weekly, monthly,'
+    - '&#c9d4ecplaytime and vote rewards.'
+    click_commands:
+    - '[close]'
+    - '[player] rewards'
+  close:
+    material: PAPER
+    model_data: 7300
+    slots:
+    - 48
+    - 49
+    - 50
     display_name: '&#f7d27aClose'
     click_commands:
     - '[close]'
+  trainers:
+    material: PAPER
+    model_data: 7300
+    slots:
+    - 51
+    - 52
+    - 53
+    display_name: '&#f7d27aTrainers'
+    lore:
+    - '&#c9d4ecEvery trainer and your record.'
+    click_commands:
+    - '[close]'
+    - '[player] trainers'
