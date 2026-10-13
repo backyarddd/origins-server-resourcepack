@@ -3,7 +3,7 @@
     {
       "id": "menu",
       "glyph": "E300",
-      "rows": 5,
+      "rows": 6,
       "title": "Cobblemon Origins",
       "open_command": [
         "menu"
@@ -132,16 +132,112 @@
         },
         {
           "type": "button",
+          "color": "gold",
+          "label": "MARKET",
+          "x": 0,
+          "y": 4,
+          "w": 3,
+          "item": {
+            "key": "market",
+            "name": "&#f7d27aAuction House",
+            "lore": [
+              "&#c9d4ecBuy and sell items."
+            ],
+            "click": [
+              "[close]",
+              "[player] ah <delay=3>"
+            ]
+          }
+        },
+        {
+          "type": "button",
+          "color": "gold",
+          "label": "POKEMON",
+          "x": 3,
+          "y": 4,
+          "w": 3,
+          "item": {
+            "key": "pokemarket",
+            "name": "&#f7d27aPokémon Market",
+            "lore": [
+              "&#c9d4ecBuy and sell Pokémon."
+            ],
+            "click": [
+              "[close]",
+              "[player] pah <delay=3>"
+            ]
+          }
+        },
+        {
+          "type": "button",
+          "color": "green",
+          "label": "PASS",
+          "x": 6,
+          "y": 4,
+          "w": 3,
+          "item": {
+            "key": "battlepass",
+            "name": "&#f7d27aBattle Pass",
+            "lore": [
+              "&#c9d4ecSeason rewards and missions."
+            ],
+            "click": [
+              "[close]",
+              "[player] bp <delay=3>"
+            ]
+          }
+        },
+        {
+          "type": "button",
+          "color": "navy",
+          "label": "REWARDS",
+          "x": 0,
+          "y": 5,
+          "w": 3,
+          "item": {
+            "key": "rewards",
+            "name": "&#f7d27aRewards",
+            "lore": [
+              "&#c9d4ecDaily, weekly, monthly,",
+              "&#c9d4ecplaytime and vote rewards."
+            ],
+            "click": [
+              "[close]",
+              "[player] rewards <delay=3>"
+            ]
+          }
+        },
+        {
+          "type": "button",
           "color": "red",
           "label": "CLOSE",
           "x": 3,
-          "y": 4,
+          "y": 5,
           "w": 3,
           "item": {
             "key": "close",
             "name": "&#f7d27aClose",
             "click": [
               "[close]"
+            ]
+          }
+        },
+        {
+          "type": "button",
+          "color": "navy",
+          "label": "TRAINER",
+          "x": 6,
+          "y": 5,
+          "w": 3,
+          "item": {
+            "key": "trainers",
+            "name": "&#f7d27aTrainers",
+            "lore": [
+              "&#c9d4ecEvery trainer and your record."
+            ],
+            "click": [
+              "[close]",
+              "[player] trainers <delay=3>"
             ]
           }
         }
@@ -630,6 +726,1244 @@
               "&#c9d4ecStaff set warps around the world.",
               "&#c9d4ecClick one to travel there."
             ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "market",
+      "glyph": "E304",
+      "rows": 6,
+      "title": "Auction House",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 7,
+          "y": 0,
+          "w": 2,
+          "h": 4
+        },
+        {
+          "type": "slot",
+          "x": 0,
+          "y": 0,
+          "w": 7,
+          "h": 4,
+          "item": {
+            "key": "grid"
+          }
+        },
+        {
+          "type": "button",
+          "color": "green",
+          "label": "SELL",
+          "x": 7,
+          "y": 0,
+          "w": 2,
+          "item": {
+            "key": "sell"
+          }
+        },
+        {
+          "type": "button",
+          "color": "gold",
+          "label": "MINE",
+          "x": 7,
+          "y": 1,
+          "w": 2,
+          "item": {
+            "key": "mine"
+          }
+        },
+        {
+          "type": "button",
+          "color": "navy",
+          "label": "BOX",
+          "x": 7,
+          "y": 2,
+          "w": 2,
+          "item": {
+            "key": "collect"
+          }
+        },
+        {
+          "type": "button",
+          "color": "navy",
+          "label": "HELP",
+          "x": 7,
+          "y": 3,
+          "w": 2,
+          "item": {
+            "key": "help"
+          }
+        },
+        {
+          "type": "button",
+          "color": "navy",
+          "label": "SORT",
+          "x": 0,
+          "y": 4,
+          "w": 3,
+          "item": {
+            "key": "sort"
+          }
+        },
+        {
+          "type": "button",
+          "color": "navy",
+          "label": "SEARCH",
+          "x": 3,
+          "y": 4,
+          "w": 3,
+          "item": {
+            "key": "search"
+          }
+        },
+        {
+          "type": "button",
+          "color": "navy",
+          "label": "FILTER",
+          "x": 6,
+          "y": 4,
+          "w": 3,
+          "item": {
+            "key": "filter"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 5,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "navy",
+          "icon": "left",
+          "x": 1,
+          "y": 5,
+          "item": {
+            "key": "prev"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "x": 2,
+          "y": 5,
+          "w": 5,
+          "h": 1,
+          "item": {
+            "key": "info"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "navy",
+          "icon": "right",
+          "x": 7,
+          "y": 5,
+          "item": {
+            "key": "next"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 5,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "grid",
+      "glyph": "E305",
+      "rows": 6,
+      "title": "Collection Box",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "slot",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 5,
+          "item": {
+            "key": "grid"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 5,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "navy",
+          "icon": "left",
+          "x": 1,
+          "y": 5,
+          "item": {
+            "key": "prev"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "x": 2,
+          "y": 5,
+          "w": 4,
+          "h": 1,
+          "item": {
+            "key": "info"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "green",
+          "icon": "check",
+          "x": 6,
+          "y": 5,
+          "item": {
+            "key": "action"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "navy",
+          "icon": "right",
+          "x": 7,
+          "y": 5,
+          "item": {
+            "key": "next"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 5,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "confirm",
+      "glyph": "E306",
+      "rows": 4,
+      "title": "Confirm",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 3
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "icon": "star",
+          "label": "DETAILS",
+          "x": 0,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "details"
+          }
+        },
+        {
+          "type": "slot",
+          "x": 4,
+          "y": 1,
+          "item": {
+            "key": "preview"
+          }
+        },
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "coin",
+          "label": "PRICE",
+          "x": 6,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "price"
+          }
+        },
+        {
+          "type": "text",
+          "label": "ARE YOU SURE?",
+          "color": "cream",
+          "x": 0,
+          "y": 2,
+          "w": 9
+        },
+        {
+          "type": "button",
+          "color": "red",
+          "label": "CANCEL",
+          "x": 1,
+          "y": 3,
+          "w": 3,
+          "item": {
+            "key": "cancel"
+          }
+        },
+        {
+          "type": "button",
+          "color": "green",
+          "label": "CONFIRM",
+          "x": 5,
+          "y": 3,
+          "w": 3,
+          "item": {
+            "key": "confirm"
+          }
+        }
+      ]
+    },
+    {
+      "id": "pokemon_detail",
+      "glyph": "E307",
+      "rows": 6,
+      "title": "Pokemon",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 5
+        },
+        {
+          "type": "slot",
+          "x": 1,
+          "y": 0,
+          "item": {
+            "key": "pokemon"
+          }
+        },
+        {
+          "type": "slot",
+          "x": 1,
+          "y": 1,
+          "item": {
+            "key": "held_item"
+          }
+        },
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "star",
+          "label": "INFO",
+          "x": 3,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "summary"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "icon": "trophy",
+          "label": "STATS",
+          "x": 6,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "stats"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "label": "ORIGIN",
+          "x": 0,
+          "y": 2,
+          "w": 3,
+          "h": 1,
+          "item": {
+            "key": "origin"
+          }
+        },
+        {
+          "type": "card",
+          "color": "green",
+          "label": "IVS",
+          "x": 3,
+          "y": 2,
+          "w": 3,
+          "h": 1,
+          "item": {
+            "key": "ivs"
+          }
+        },
+        {
+          "type": "card",
+          "color": "violet",
+          "label": "EVS",
+          "x": 6,
+          "y": 2,
+          "w": 3,
+          "h": 1,
+          "item": {
+            "key": "evs"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "x": 0,
+          "y": 3,
+          "w": 2,
+          "h": 1,
+          "item": {
+            "key": "move_1"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "x": 2,
+          "y": 3,
+          "w": 2,
+          "h": 1,
+          "item": {
+            "key": "move_2"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "x": 4,
+          "y": 3,
+          "w": 2,
+          "h": 1,
+          "item": {
+            "key": "move_3"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "x": 6,
+          "y": 3,
+          "w": 2,
+          "h": 1,
+          "item": {
+            "key": "move_4"
+          }
+        },
+        {
+          "type": "slot",
+          "x": 8,
+          "y": 3,
+          "item": {
+            "key": "ball"
+          }
+        },
+        {
+          "type": "card",
+          "color": "gold",
+          "label": "PRICE",
+          "x": 3,
+          "y": 4,
+          "w": 3,
+          "h": 1,
+          "item": {
+            "key": "price"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 5,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "button",
+          "color": "green",
+          "label": "BUY",
+          "x": 3,
+          "y": 5,
+          "w": 3,
+          "item": {
+            "key": "buy"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 5,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "battlepass",
+      "glyph": "E308",
+      "rows": 6,
+      "title": "Battle Pass",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "panel",
+          "style": "stripes",
+          "x": 0,
+          "y": 1,
+          "w": 9,
+          "h": 3
+        },
+        {
+          "type": "card",
+          "color": "gold",
+          "label": "TIER",
+          "x": 0,
+          "y": 0,
+          "w": 3,
+          "h": 1,
+          "item": {
+            "key": "progress"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "label": "SEASON",
+          "x": 3,
+          "y": 0,
+          "w": 3,
+          "h": 1,
+          "item": {
+            "key": "season"
+          }
+        },
+        {
+          "type": "button",
+          "color": "green",
+          "label": "PREMIUM",
+          "x": 6,
+          "y": 0,
+          "w": 3,
+          "item": {
+            "key": "premium"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "icon": "star",
+          "x": 0,
+          "y": 1,
+          "w": 1,
+          "h": 1,
+          "item": {
+            "key": "free_label"
+          }
+        },
+        {
+          "type": "slot",
+          "x": 1,
+          "y": 1,
+          "w": 7,
+          "h": 1,
+          "item": {
+            "key": "free"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "navy",
+          "icon": "left",
+          "x": 0,
+          "y": 2,
+          "item": {
+            "key": "prev"
+          }
+        },
+        {
+          "type": "slot",
+          "x": 1,
+          "y": 2,
+          "w": 7,
+          "h": 1,
+          "item": {
+            "key": "tiers"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "navy",
+          "icon": "right",
+          "x": 8,
+          "y": 2,
+          "item": {
+            "key": "next"
+          }
+        },
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "trophy",
+          "x": 0,
+          "y": 3,
+          "w": 1,
+          "h": 1,
+          "item": {
+            "key": "premium_label"
+          }
+        },
+        {
+          "type": "slot",
+          "x": 1,
+          "y": 3,
+          "w": 7,
+          "h": 1,
+          "item": {
+            "key": "premium_row"
+          }
+        },
+        {
+          "type": "button",
+          "color": "navy",
+          "label": "MISSIONS",
+          "x": 0,
+          "y": 4,
+          "w": 4,
+          "item": {
+            "key": "missions"
+          }
+        },
+        {
+          "type": "button",
+          "color": "green",
+          "label": "CLAIM ALL",
+          "x": 5,
+          "y": 4,
+          "w": 4,
+          "item": {
+            "key": "claim_all"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 5,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "x": 2,
+          "y": 5,
+          "w": 5,
+          "h": 1,
+          "item": {
+            "key": "info"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 5,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "missions",
+      "glyph": "E309",
+      "rows": 5,
+      "title": "Missions",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 4
+        },
+        {
+          "type": "text",
+          "label": "DAILY MISSIONS",
+          "color": "gold",
+          "x": 0,
+          "y": 0,
+          "w": 9
+        },
+        {
+          "type": "slot",
+          "x": 3,
+          "y": 1,
+          "w": 3,
+          "h": 1,
+          "item": {
+            "key": "daily"
+          }
+        },
+        {
+          "type": "text",
+          "label": "WEEKLY MISSIONS",
+          "color": "gold",
+          "x": 0,
+          "y": 2,
+          "w": 9
+        },
+        {
+          "type": "slot",
+          "x": 2,
+          "y": 3,
+          "w": 5,
+          "h": 1,
+          "item": {
+            "key": "weekly"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 4,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "x": 2,
+          "y": 4,
+          "w": 5,
+          "h": 1,
+          "item": {
+            "key": "info"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 4,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "rewards",
+      "glyph": "E30A",
+      "rows": 6,
+      "title": "Rewards",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 3
+        },
+        {
+          "type": "card",
+          "color": "green",
+          "icon": "coin",
+          "label": "DAILY",
+          "x": 0,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "daily"
+          }
+        },
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "star",
+          "label": "WEEKLY",
+          "x": 3,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "weekly"
+          }
+        },
+        {
+          "type": "card",
+          "color": "violet",
+          "icon": "trophy",
+          "label": "MONTHLY",
+          "x": 6,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "monthly"
+          }
+        },
+        {
+          "type": "button",
+          "color": "green",
+          "label": "CLAIM",
+          "x": 0,
+          "y": 2,
+          "w": 3,
+          "item": {
+            "key": "claim_daily"
+          }
+        },
+        {
+          "type": "button",
+          "color": "gold",
+          "label": "CLAIM",
+          "x": 3,
+          "y": 2,
+          "w": 3,
+          "item": {
+            "key": "claim_weekly"
+          }
+        },
+        {
+          "type": "button",
+          "color": "navy",
+          "label": "CLAIM",
+          "x": 6,
+          "y": 2,
+          "w": 3,
+          "item": {
+            "key": "claim_monthly"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "label": "STREAK",
+          "x": 0,
+          "y": 3,
+          "w": 9,
+          "h": 1,
+          "item": {
+            "key": "streak"
+          }
+        },
+        {
+          "type": "button",
+          "color": "navy",
+          "label": "PLAYTIME",
+          "x": 0,
+          "y": 4,
+          "w": 4,
+          "item": {
+            "key": "playtime"
+          }
+        },
+        {
+          "type": "button",
+          "color": "gold",
+          "label": "VOTE",
+          "x": 5,
+          "y": 4,
+          "w": 4,
+          "item": {
+            "key": "vote"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 5,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "x": 2,
+          "y": 5,
+          "w": 5,
+          "h": 1,
+          "item": {
+            "key": "info"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 5,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vote",
+      "glyph": "E30B",
+      "rows": 5,
+      "title": "Vote",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 2
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "icon": "star",
+          "label": "VOTES",
+          "x": 0,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "votes"
+          }
+        },
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "trophy",
+          "label": "STREAK",
+          "x": 3,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "streak"
+          }
+        },
+        {
+          "type": "card",
+          "color": "green",
+          "icon": "coin",
+          "label": "REWARD",
+          "x": 6,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "reward"
+          }
+        },
+        {
+          "type": "slot",
+          "x": 1,
+          "y": 2,
+          "w": 7,
+          "h": 1,
+          "item": {
+            "key": "sites"
+          }
+        },
+        {
+          "type": "slot",
+          "x": 2,
+          "y": 3,
+          "w": 5,
+          "h": 1,
+          "item": {
+            "key": "milestones"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 4,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "x": 2,
+          "y": 4,
+          "w": 5,
+          "h": 1,
+          "item": {
+            "key": "info"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 4,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "shop_buy",
+      "glyph": "E30C",
+      "rows": 4,
+      "title": "Shop",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 2
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "icon": "star",
+          "label": "ITEM",
+          "x": 0,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "details"
+          }
+        },
+        {
+          "type": "slot",
+          "x": 4,
+          "y": 0,
+          "item": {
+            "key": "preview"
+          }
+        },
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "coin",
+          "label": "PRICE",
+          "x": 6,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "price"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "x": 3,
+          "y": 1,
+          "w": 3,
+          "h": 1,
+          "item": {
+            "key": "quantity"
+          }
+        },
+        {
+          "type": "button",
+          "color": "red",
+          "label": "-16",
+          "x": 0,
+          "y": 2,
+          "w": 2,
+          "item": {
+            "key": "minus_16"
+          }
+        },
+        {
+          "type": "button",
+          "color": "red",
+          "label": "-1",
+          "x": 2,
+          "y": 2,
+          "w": 2,
+          "item": {
+            "key": "minus_1"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "gold",
+          "icon": "up",
+          "x": 4,
+          "y": 2,
+          "item": {
+            "key": "max"
+          }
+        },
+        {
+          "type": "button",
+          "color": "green",
+          "label": "+1",
+          "x": 5,
+          "y": 2,
+          "w": 2,
+          "item": {
+            "key": "plus_1"
+          }
+        },
+        {
+          "type": "button",
+          "color": "green",
+          "label": "+16",
+          "x": 7,
+          "y": 2,
+          "w": 2,
+          "item": {
+            "key": "plus_16"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 3,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "button",
+          "color": "green",
+          "label": "BUY",
+          "x": 3,
+          "y": 3,
+          "w": 3,
+          "item": {
+            "key": "buy"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 3,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sell",
+      "glyph": "E30D",
+      "rows": 6,
+      "title": "Sell",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "slot",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 4,
+          "item": {
+            "key": "input"
+          }
+        },
+        {
+          "type": "card",
+          "color": "gold",
+          "x": 0,
+          "y": 4,
+          "w": 9,
+          "h": 1,
+          "item": {
+            "key": "value"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 5,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "button",
+          "color": "green",
+          "label": "SELL",
+          "x": 3,
+          "y": 5,
+          "w": 3,
+          "item": {
+            "key": "sell"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 5,
+          "item": {
+            "key": "close"
           }
         }
       ]

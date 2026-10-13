@@ -11,7 +11,7 @@
       "type": "bitmap",
       "file": "origins:menu/menu.png",
       "ascent": 13,
-      "height": 107,
+      "height": 125,
       "chars": [
         "\ue300"
       ]
@@ -41,6 +41,96 @@
       "height": 107,
       "chars": [
         "\ue303"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/market.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue304"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/grid.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue305"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/confirm.png",
+      "ascent": 13,
+      "height": 89,
+      "chars": [
+        "\ue306"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/pokemon_detail.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue307"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/battlepass.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue308"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/missions.png",
+      "ascent": 13,
+      "height": 107,
+      "chars": [
+        "\ue309"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/rewards.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue30a"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/vote.png",
+      "ascent": 13,
+      "height": 107,
+      "chars": [
+        "\ue30b"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/shop_buy.png",
+      "ascent": 13,
+      "height": 89,
+      "chars": [
+        "\ue30c"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/sell.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue30d"
       ]
     }
   ]
