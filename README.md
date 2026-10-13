@@ -34,3 +34,16 @@ Workflow:
    `menus/deluxemenus/*.yml`), then `python -I build.py` for the zip and SHA-1.
 5. Server: copy `menus/deluxemenus/<id>.yml` to `plugins/DeluxeMenus/gui_menus/`, merge `menus/deluxemenus/gui_menus.yml`
    into `plugins/DeluxeMenus/config.yml`, `/dm reload`; publish the pack release and update `resource-pack-sha1`.
+
+### Warps menu
+
+FTB Essentials has no placeholders for warps, so the warps menu is filled from the server's warp list by
+`python -I menus/warps_sync.py` (reads `AFreshWorld/ftbessentials/data.snbt`, writes one page per 21 warps, updates
+DeluxeMenus' `gui_menus`, runs `dm reload`; needs the panel API key in `~/Documents/kinetickey`). Run it after every
+`/setwarp` or `/delwarp`, and after uploading `menus/deluxemenus/*.yml` (that upload resets `warps.yml` to the empty
+base). `--dry-run` prints the pages instead.
+
+### Commands
+
+`commands` in spec.json are command-only DeluxeMenus menus (`/spawn`, `/rules`): an always-false open requirement
+runs their actions instead of opening a menu. `register_command` is on, so a new command needs a server restart.

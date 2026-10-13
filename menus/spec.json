@@ -5,29 +5,146 @@
       "glyph": "E300",
       "rows": 5,
       "title": "Cobblemon Origins",
-      "open_command": ["menu"],
+      "open_command": [
+        "menu"
+      ],
       "elements": [
-        {"type": "panel", "style": "stripes", "x": 0, "y": 0, "w": 9, "h": 4},
-        {"type": "card", "color": "navy", "icon": "pokeball", "label": "SPAWN", "x": 0, "y": 0, "w": 3, "h": 2,
-         "item": {"key": "spawn", "name": "&#f7d27aSpawn", "lore": ["&#c9d4ecTeleport to the town hub."],
-                  "click": ["[close]", "[player] spawn"]}},
-        {"type": "card", "color": "navy", "icon": "compass", "label": "RTP", "x": 3, "y": 0, "w": 3, "h": 2,
-         "item": {"key": "rtp", "name": "&#f7d27aRandom Teleport",
-                  "lore": ["&#c9d4ecTeleport to a random spot", "&#c9d4ecin the Overworld."],
-                  "click": ["[openguimenu] rtp_confirm"]}},
-        {"type": "card", "color": "navy", "icon": "house", "label": "HOMES", "x": 6, "y": 0, "w": 3, "h": 2,
-         "item": {"key": "homes", "name": "&#f7d27aHomes", "lore": ["&#c9d4ecTeleport to, set or delete", "&#c9d4ecyour homes."],
-                  "click": ["[openguimenu] homes"]}},
-        {"type": "card", "color": "navy", "icon": "back", "label": "BACK", "x": 0, "y": 2, "w": 3, "h": 2,
-         "item": {"key": "back", "name": "&#f7d27aBack", "lore": ["&#c9d4ecReturn to your last location."],
-                  "click": ["[close]", "[player] back"]}},
-        {"type": "card", "color": "gold", "icon": "pokeball", "x": 3, "y": 2, "w": 3, "h": 2},
-        {"type": "card", "color": "navy", "icon": "leave", "label": "LEAVE", "x": 6, "y": 2, "w": 3, "h": 2,
-         "item": {"key": "leave", "name": "&#f7d27aLeave Spawn",
-                  "lore": ["&#c9d4ecReturn to where you were", "&#c9d4ecbefore going to spawn."],
-                  "click": ["[close]", "[player] leave"]}},
-        {"type": "button", "color": "red", "label": "CLOSE", "x": 3, "y": 4, "w": 3,
-         "item": {"key": "close", "name": "&#f7d27aClose", "click": ["[close]"]}}
+        {
+          "type": "panel",
+          "style": "stripes",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 4
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "icon": "pokeball",
+          "label": "SPAWN",
+          "x": 0,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "spawn",
+            "name": "&#f7d27aSpawn",
+            "lore": [
+              "&#c9d4ecTeleport to the town hub."
+            ],
+            "click": [
+              "[close]",
+              "[console] execute as %player_name% at @s run function origins:spawn"
+            ]
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "icon": "compass",
+          "label": "RTP",
+          "x": 3,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "rtp",
+            "name": "&#f7d27aRandom Teleport",
+            "lore": [
+              "&#c9d4ecTeleport to a random spot",
+              "&#c9d4ecin the Overworld."
+            ],
+            "click": [
+              "[openguimenu] rtp_confirm"
+            ]
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "icon": "house",
+          "label": "HOMES",
+          "x": 6,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "homes",
+            "name": "&#f7d27aHomes",
+            "lore": [
+              "&#c9d4ecTeleport to, set or delete",
+              "&#c9d4ecyour homes."
+            ],
+            "click": [
+              "[openguimenu] homes"
+            ]
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "icon": "back",
+          "label": "BACK",
+          "x": 0,
+          "y": 2,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "back",
+            "name": "&#f7d27aBack",
+            "lore": [
+              "&#c9d4ecReturn to your last location."
+            ],
+            "click": [
+              "[close]",
+              "[player] back"
+            ]
+          }
+        },
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "pokeball",
+          "x": 3,
+          "y": 2,
+          "w": 3,
+          "h": 2
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "icon": "warp",
+          "label": "WARPS",
+          "x": 6,
+          "y": 2,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "warps",
+            "name": "&#f7d27aWarps",
+            "lore": [
+              "&#c9d4ecTravel to the server warps."
+            ],
+            "click": [
+              "[openguimenu] warps"
+            ]
+          }
+        },
+        {
+          "type": "button",
+          "color": "red",
+          "label": "CLOSE",
+          "x": 3,
+          "y": 4,
+          "w": 3,
+          "item": {
+            "key": "close",
+            "name": "&#f7d27aClose",
+            "click": [
+              "[close]"
+            ]
+          }
+        }
       ]
     },
     {
@@ -36,43 +153,326 @@
       "rows": 4,
       "title": "Homes",
       "elements": [
-        {"type": "panel", "style": "night", "x": 0, "y": 0, "w": 9, "h": 3},
-        {"type": "text", "label": "YOUR HOMES", "color": "gold", "x": 0, "y": 0, "w": 9},
-        {"type": "slot", "x": 2, "y": 1, "item": {"key": "home_1", "material": "RED_BED", "name": "&#f7d27aHome 1",
-         "lore": ["&#9aa6c4Your default /sethome home", "&#c9d4ecLeft-click: teleport", "&#c9d4ecRight-click: set here", "&#c9d4ecShift + right-click: delete"],
-         "left": ["[close]", "[player] home home"], "right": ["[close]", "[player] sethome home"], "shift_right": ["[close]", "[player] delhome home"]}},
-        {"type": "slot", "x": 3, "y": 1, "item": {"key": "home_2", "material": "ORANGE_BED", "name": "&#f7d27aHome 2",
-         "lore": ["&#c9d4ecLeft-click: teleport", "&#c9d4ecRight-click: set here", "&#c9d4ecShift + right-click: delete"],
-         "left": ["[close]", "[player] home 2"], "right": ["[close]", "[player] sethome 2"], "shift_right": ["[close]", "[player] delhome 2"]}},
-        {"type": "slot", "x": 4, "y": 1, "item": {"key": "home_3", "material": "YELLOW_BED", "name": "&#f7d27aHome 3",
-         "lore": ["&#c9d4ecLeft-click: teleport", "&#c9d4ecRight-click: set here", "&#c9d4ecShift + right-click: delete"],
-         "left": ["[close]", "[player] home 3"], "right": ["[close]", "[player] sethome 3"], "shift_right": ["[close]", "[player] delhome 3"]}},
-        {"type": "slot", "x": 5, "y": 1, "item": {"key": "home_4", "material": "LIME_BED", "name": "&#f7d27aHome 4",
-         "lore": ["&#c9d4ecLeft-click: teleport", "&#c9d4ecRight-click: set here", "&#c9d4ecShift + right-click: delete"],
-         "left": ["[close]", "[player] home 4"], "right": ["[close]", "[player] sethome 4"], "shift_right": ["[close]", "[player] delhome 4"]}},
-        {"type": "slot", "x": 6, "y": 1, "item": {"key": "home_5", "material": "GREEN_BED", "name": "&#f7d27aHome 5",
-         "lore": ["&#c9d4ecLeft-click: teleport", "&#c9d4ecRight-click: set here", "&#c9d4ecShift + right-click: delete"],
-         "left": ["[close]", "[player] home 5"], "right": ["[close]", "[player] sethome 5"], "shift_right": ["[close]", "[player] delhome 5"]}},
-        {"type": "slot", "x": 2, "y": 2, "item": {"key": "home_6", "material": "CYAN_BED", "name": "&#f7d27aHome 6",
-         "lore": ["&#c9d4ecLeft-click: teleport", "&#c9d4ecRight-click: set here", "&#c9d4ecShift + right-click: delete"],
-         "left": ["[close]", "[player] home 6"], "right": ["[close]", "[player] sethome 6"], "shift_right": ["[close]", "[player] delhome 6"]}},
-        {"type": "slot", "x": 3, "y": 2, "item": {"key": "home_7", "material": "LIGHT_BLUE_BED", "name": "&#f7d27aHome 7",
-         "lore": ["&#c9d4ecLeft-click: teleport", "&#c9d4ecRight-click: set here", "&#c9d4ecShift + right-click: delete"],
-         "left": ["[close]", "[player] home 7"], "right": ["[close]", "[player] sethome 7"], "shift_right": ["[close]", "[player] delhome 7"]}},
-        {"type": "slot", "x": 4, "y": 2, "item": {"key": "home_8", "material": "BLUE_BED", "name": "&#f7d27aHome 8",
-         "lore": ["&#c9d4ecLeft-click: teleport", "&#c9d4ecRight-click: set here", "&#c9d4ecShift + right-click: delete"],
-         "left": ["[close]", "[player] home 8"], "right": ["[close]", "[player] sethome 8"], "shift_right": ["[close]", "[player] delhome 8"]}},
-        {"type": "slot", "x": 5, "y": 2, "item": {"key": "home_9", "material": "PURPLE_BED", "name": "&#f7d27aHome 9",
-         "lore": ["&#c9d4ecLeft-click: teleport", "&#c9d4ecRight-click: set here", "&#c9d4ecShift + right-click: delete"],
-         "left": ["[close]", "[player] home 9"], "right": ["[close]", "[player] sethome 9"], "shift_right": ["[close]", "[player] delhome 9"]}},
-        {"type": "slot", "x": 6, "y": 2, "item": {"key": "home_10", "material": "MAGENTA_BED", "name": "&#f7d27aHome 10",
-         "lore": ["&#c9d4ecLeft-click: teleport", "&#c9d4ecRight-click: set here", "&#c9d4ecShift + right-click: delete"],
-         "left": ["[close]", "[player] home 10"], "right": ["[close]", "[player] sethome 10"], "shift_right": ["[close]", "[player] delhome 10"]}},
-        {"type": "icon_button", "color": "red", "icon": "return", "x": 0, "y": 3,
-         "item": {"key": "back", "name": "&#f7d27aBack", "lore": ["&#c9d4ecBack to the menu."], "click": ["[openguimenu] menu"]}},
-        {"type": "icon_button", "color": "navy", "icon": "info", "x": 8, "y": 3,
-         "item": {"key": "info", "name": "&#f7d27aHome limits",
-                  "lore": ["&#c9d4ecYour rank sets how many homes", "&#c9d4ecyou can save. Ranking up", "&#c9d4ecunlocks more home slots."]}}
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 3
+        },
+        {
+          "type": "text",
+          "label": "YOUR HOMES",
+          "color": "gold",
+          "x": 0,
+          "y": 0,
+          "w": 9
+        },
+        {
+          "type": "slot",
+          "x": 2,
+          "y": 1,
+          "item": {
+            "key": "home_1",
+            "material": "RED_BED",
+            "name": "&#f7d27aHome 1",
+            "lore": [
+              "&#9aa6c4Your default /sethome home",
+              "&#c9d4ecLeft-click: teleport",
+              "&#c9d4ecRight-click: set here",
+              "&#c9d4ecShift + right-click: delete"
+            ],
+            "left": [
+              "[close]",
+              "[player] home home"
+            ],
+            "right": [
+              "[close]",
+              "[player] sethome home"
+            ],
+            "shift_right": [
+              "[close]",
+              "[player] delhome home"
+            ]
+          }
+        },
+        {
+          "type": "slot",
+          "x": 3,
+          "y": 1,
+          "item": {
+            "key": "home_2",
+            "material": "ORANGE_BED",
+            "name": "&#f7d27aHome 2",
+            "lore": [
+              "&#c9d4ecLeft-click: teleport",
+              "&#c9d4ecRight-click: set here",
+              "&#c9d4ecShift + right-click: delete"
+            ],
+            "left": [
+              "[close]",
+              "[player] home 2"
+            ],
+            "right": [
+              "[close]",
+              "[player] sethome 2"
+            ],
+            "shift_right": [
+              "[close]",
+              "[player] delhome 2"
+            ]
+          }
+        },
+        {
+          "type": "slot",
+          "x": 4,
+          "y": 1,
+          "item": {
+            "key": "home_3",
+            "material": "YELLOW_BED",
+            "name": "&#f7d27aHome 3",
+            "lore": [
+              "&#c9d4ecLeft-click: teleport",
+              "&#c9d4ecRight-click: set here",
+              "&#c9d4ecShift + right-click: delete"
+            ],
+            "left": [
+              "[close]",
+              "[player] home 3"
+            ],
+            "right": [
+              "[close]",
+              "[player] sethome 3"
+            ],
+            "shift_right": [
+              "[close]",
+              "[player] delhome 3"
+            ]
+          }
+        },
+        {
+          "type": "slot",
+          "x": 5,
+          "y": 1,
+          "item": {
+            "key": "home_4",
+            "material": "LIME_BED",
+            "name": "&#f7d27aHome 4",
+            "lore": [
+              "&#c9d4ecLeft-click: teleport",
+              "&#c9d4ecRight-click: set here",
+              "&#c9d4ecShift + right-click: delete"
+            ],
+            "left": [
+              "[close]",
+              "[player] home 4"
+            ],
+            "right": [
+              "[close]",
+              "[player] sethome 4"
+            ],
+            "shift_right": [
+              "[close]",
+              "[player] delhome 4"
+            ]
+          }
+        },
+        {
+          "type": "slot",
+          "x": 6,
+          "y": 1,
+          "item": {
+            "key": "home_5",
+            "material": "GREEN_BED",
+            "name": "&#f7d27aHome 5",
+            "lore": [
+              "&#c9d4ecLeft-click: teleport",
+              "&#c9d4ecRight-click: set here",
+              "&#c9d4ecShift + right-click: delete"
+            ],
+            "left": [
+              "[close]",
+              "[player] home 5"
+            ],
+            "right": [
+              "[close]",
+              "[player] sethome 5"
+            ],
+            "shift_right": [
+              "[close]",
+              "[player] delhome 5"
+            ]
+          }
+        },
+        {
+          "type": "slot",
+          "x": 2,
+          "y": 2,
+          "item": {
+            "key": "home_6",
+            "material": "CYAN_BED",
+            "name": "&#f7d27aHome 6",
+            "lore": [
+              "&#c9d4ecLeft-click: teleport",
+              "&#c9d4ecRight-click: set here",
+              "&#c9d4ecShift + right-click: delete"
+            ],
+            "left": [
+              "[close]",
+              "[player] home 6"
+            ],
+            "right": [
+              "[close]",
+              "[player] sethome 6"
+            ],
+            "shift_right": [
+              "[close]",
+              "[player] delhome 6"
+            ]
+          }
+        },
+        {
+          "type": "slot",
+          "x": 3,
+          "y": 2,
+          "item": {
+            "key": "home_7",
+            "material": "LIGHT_BLUE_BED",
+            "name": "&#f7d27aHome 7",
+            "lore": [
+              "&#c9d4ecLeft-click: teleport",
+              "&#c9d4ecRight-click: set here",
+              "&#c9d4ecShift + right-click: delete"
+            ],
+            "left": [
+              "[close]",
+              "[player] home 7"
+            ],
+            "right": [
+              "[close]",
+              "[player] sethome 7"
+            ],
+            "shift_right": [
+              "[close]",
+              "[player] delhome 7"
+            ]
+          }
+        },
+        {
+          "type": "slot",
+          "x": 4,
+          "y": 2,
+          "item": {
+            "key": "home_8",
+            "material": "BLUE_BED",
+            "name": "&#f7d27aHome 8",
+            "lore": [
+              "&#c9d4ecLeft-click: teleport",
+              "&#c9d4ecRight-click: set here",
+              "&#c9d4ecShift + right-click: delete"
+            ],
+            "left": [
+              "[close]",
+              "[player] home 8"
+            ],
+            "right": [
+              "[close]",
+              "[player] sethome 8"
+            ],
+            "shift_right": [
+              "[close]",
+              "[player] delhome 8"
+            ]
+          }
+        },
+        {
+          "type": "slot",
+          "x": 5,
+          "y": 2,
+          "item": {
+            "key": "home_9",
+            "material": "PURPLE_BED",
+            "name": "&#f7d27aHome 9",
+            "lore": [
+              "&#c9d4ecLeft-click: teleport",
+              "&#c9d4ecRight-click: set here",
+              "&#c9d4ecShift + right-click: delete"
+            ],
+            "left": [
+              "[close]",
+              "[player] home 9"
+            ],
+            "right": [
+              "[close]",
+              "[player] sethome 9"
+            ],
+            "shift_right": [
+              "[close]",
+              "[player] delhome 9"
+            ]
+          }
+        },
+        {
+          "type": "slot",
+          "x": 6,
+          "y": 2,
+          "item": {
+            "key": "home_10",
+            "material": "MAGENTA_BED",
+            "name": "&#f7d27aHome 10",
+            "lore": [
+              "&#c9d4ecLeft-click: teleport",
+              "&#c9d4ecRight-click: set here",
+              "&#c9d4ecShift + right-click: delete"
+            ],
+            "left": [
+              "[close]",
+              "[player] home 10"
+            ],
+            "right": [
+              "[close]",
+              "[player] sethome 10"
+            ],
+            "shift_right": [
+              "[close]",
+              "[player] delhome 10"
+            ]
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 3,
+          "item": {
+            "key": "back",
+            "name": "&#f7d27aBack",
+            "lore": [
+              "&#c9d4ecBack to the menu."
+            ],
+            "click": [
+              "[openguimenu] menu"
+            ]
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "navy",
+          "icon": "info",
+          "x": 8,
+          "y": 3,
+          "item": {
+            "key": "info",
+            "name": "&#f7d27aHome limits",
+            "lore": [
+              "&#c9d4ecYour rank sets how many homes",
+              "&#c9d4ecyou can save. Ranking up",
+              "&#c9d4ecunlocks more home slots."
+            ]
+          }
+        }
       ]
     },
     {
@@ -81,14 +481,182 @@
       "rows": 3,
       "title": "Random Teleport",
       "elements": [
-        {"type": "panel", "style": "night", "x": 0, "y": 0, "w": 9, "h": 2},
-        {"type": "slot", "x": 4, "y": 0, "item": {"key": "info", "material": "COMPASS", "name": "&#f7d27aRandom Teleport",
-         "lore": ["&#c9d4ecSends you to a random spot", "&#c9d4ecin the Overworld."]}},
-        {"type": "text", "label": "TELEPORT TO A RANDOM SPOT?", "color": "cream", "x": 0, "y": 1, "w": 9},
-        {"type": "button", "color": "red", "label": "CANCEL", "x": 1, "y": 2, "w": 3,
-         "item": {"key": "cancel", "name": "&#f7d27aCancel", "click": ["[openguimenu] menu"]}},
-        {"type": "button", "color": "green", "label": "CONFIRM", "x": 5, "y": 2, "w": 3,
-         "item": {"key": "confirm", "name": "&#f7d27aConfirm", "lore": ["&#c9d4ecTeleport now."], "click": ["[close]", "[player] rtp"]}}
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 2
+        },
+        {
+          "type": "slot",
+          "x": 4,
+          "y": 0,
+          "item": {
+            "key": "info",
+            "material": "COMPASS",
+            "name": "&#f7d27aRandom Teleport",
+            "lore": [
+              "&#c9d4ecSends you to a random spot",
+              "&#c9d4ecin the Overworld."
+            ]
+          }
+        },
+        {
+          "type": "text",
+          "label": "TELEPORT TO A RANDOM SPOT?",
+          "color": "cream",
+          "x": 0,
+          "y": 1,
+          "w": 9
+        },
+        {
+          "type": "button",
+          "color": "red",
+          "label": "CANCEL",
+          "x": 1,
+          "y": 2,
+          "w": 3,
+          "item": {
+            "key": "cancel",
+            "name": "&#f7d27aCancel",
+            "click": [
+              "[openguimenu] menu"
+            ]
+          }
+        },
+        {
+          "type": "button",
+          "color": "green",
+          "label": "CONFIRM",
+          "x": 5,
+          "y": 2,
+          "w": 3,
+          "item": {
+            "key": "confirm",
+            "name": "&#f7d27aConfirm",
+            "lore": [
+              "&#c9d4ecTeleport now."
+            ],
+            "click": [
+              "[close]",
+              "[player] rtp"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "warps",
+      "glyph": "E303",
+      "rows": 5,
+      "title": "Warps",
+      "dynamic": {
+        "source": "ftb_warps",
+        "grid": {
+          "x": 1,
+          "y": 1,
+          "w": 7,
+          "h": 3
+        },
+        "prev": {
+          "x": 3,
+          "y": 4
+        },
+        "next": {
+          "x": 5,
+          "y": 4
+        }
+      },
+      "elements": [
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 4
+        },
+        {
+          "type": "text",
+          "label": "SERVER WARPS",
+          "color": "gold",
+          "x": 0,
+          "y": 0,
+          "w": 9
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 4,
+          "item": {
+            "key": "back",
+            "name": "&#f7d27aBack",
+            "lore": [
+              "&#c9d4ecBack to the menu."
+            ],
+            "click": [
+              "[openguimenu] menu"
+            ]
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "navy",
+          "icon": "left",
+          "x": 3,
+          "y": 4
+        },
+        {
+          "type": "icon_button",
+          "color": "navy",
+          "icon": "right",
+          "x": 5,
+          "y": 4
+        },
+        {
+          "type": "icon_button",
+          "color": "navy",
+          "icon": "info",
+          "x": 8,
+          "y": 4,
+          "item": {
+            "key": "info",
+            "name": "&#f7d27aWarps",
+            "lore": [
+              "&#c9d4ecStaff set warps around the world.",
+              "&#c9d4ecClick one to travel there."
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "id": "spawn_cmd",
+      "command": "spawn",
+      "actions": [
+        "[console] execute as %player_name% at @s run function origins:spawn"
+      ]
+    },
+    {
+      "id": "rules_cmd",
+      "command": "rules",
+      "actions": [
+        "[message] &#e2b04a&l✦ Cobblemon Origins Rules ✦",
+        "[message] &#f7d27a1. &#fff1d0Be respectful. No harassment, hate speech or discrimination.",
+        "[message] &#f7d27a2. &#fff1d0No cheating: no hacked clients, x-ray, duping or exploits. Report bugs to staff.",
+        "[message] &#f7d27a3. &#fff1d0No griefing or stealing, including with claims: never claim around, inside or next to another player's build to block, trap or take it.",
+        "[message] &#f7d27a4. &#fff1d0No scamming in trades. Agree on a deal before you trade Pokémon or items.",
+        "[message] &#f7d27a5. &#fff1d0No spam, advertising or excessive caps in chat.",
+        "[message] &#f7d27a6. &#fff1d0Keep builds, names and skins appropriate.",
+        "[message] &#f7d27a7. &#fff1d0No lag machines or farms that hurt server performance.",
+        "[message] &#f7d27a8. &#fff1d0Staff decisions are final. Ask on Discord if something is unclear.",
+        "[message] &#9aa6c4Breaking the rules can lead to a mute, kick or ban. discord.gg/tEtQvqXjf8"
       ]
     }
   ]

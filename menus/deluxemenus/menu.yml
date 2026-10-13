@@ -19,7 +19,7 @@ items:
     - '&#c9d4ecTeleport to the town hub.'
     click_commands:
     - '[close]'
-    - '[player] spawn'
+    - '[console] execute as %player_name% at @s run function origins:spawn'
   rtp:
     material: PAPER
     model_data: 7300
@@ -68,7 +68,7 @@ items:
     click_commands:
     - '[close]'
     - '[player] back'
-  leave:
+  warps:
     material: PAPER
     model_data: 7300
     slots:
@@ -78,13 +78,11 @@ items:
     - 33
     - 34
     - 35
-    display_name: '&#f7d27aLeave Spawn'
+    display_name: '&#f7d27aWarps'
     lore:
-    - '&#c9d4ecReturn to where you were'
-    - '&#c9d4ecbefore going to spawn.'
+    - '&#c9d4ecTravel to the server warps.'
     click_commands:
-    - '[close]'
-    - '[player] leave'
+    - '[openguimenu] warps'
   close:
     material: PAPER
     model_data: 7300

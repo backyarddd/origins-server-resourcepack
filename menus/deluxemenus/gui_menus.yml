@@ -6,3 +6,9 @@ gui_menus:
     file: homes.yml
   rtp_confirm:
     file: rtp_confirm.yml
+  warps:
+    file: warps.yml
+  spawn_cmd:
+    file: spawn_cmd.yml
+  rules_cmd:
+    file: rules_cmd.yml

@@ -5,7 +5,7 @@ Run:  python -I menus/build.py <validate|figma|build|selftest>
 menus/spec.json is the source of truth: per menu its chest rows, title, font glyph and elements placed in chest cells
 (9 columns, cell (x, y) = slot y*9+x), plus the DeluxeMenus item (name, lore, click actions) of each clickable element.
 
-  validate  check spec.json and print one line per menu.
+  validate  check spec.json and print one line per menu and per command.
   figma     concatenate menus/figma/{lib,kit,menus}.js into menus/figma/out/{kit,menus}.run.js (spec embedded), each
             small enough for the Figma MCP use_figma tool. Run those scripts in Figma file thHX6Yp5pMOLrryrsSaITZ.
   build     take the page-level frame exports menus/export/menu_<id>.png (download_assets, png, scale 1), check them
@@ -15,6 +15,10 @@ menus/spec.json is the source of truth: per menu its chest rows, title, font gly
             assets/minecraft/font/default.json (other providers are kept), the invisible-button item model (PAPER with
             custom_model_data 7300) and menus/deluxemenus/*.yml for the server.
   selftest  run the checks above on synthetic data in temp dirs.
+
+Optional spec features: top-level "commands" are command-only DeluxeMenus menus (a registered /command that runs its
+actions instead of opening a menu); a menu "dynamic" block marks the grid and the prev/next buttons that
+menus/warps_sync.py fills from the server's warps.
 """
 import contextlib
 import io
@@ -60,7 +64,10 @@ LABEL_MAX = {2: 4, 3: 7, 4: 10}  # button width in cells -> max label characters
 # a typo such as "shift_rigth" must fail validation instead of silently dropping the action
 ELEMENT_KEYS = {'type', 'x', 'y', 'w', 'h', 'style', 'color', 'icon', 'label', 'item'}
 ITEM_KEYS = {'key', 'name', 'lore', 'material', *ACTIONS}
-MENU_KEYS = {'id', 'glyph', 'rows', 'title', 'open_command', 'elements'}
+MENU_KEYS = {'id', 'glyph', 'rows', 'title', 'open_command', 'elements', 'dynamic'}
+SPEC_KEYS = {'menus', 'commands'}
+COMMAND_KEYS = {'id', 'command', 'actions'}
+DYNAMIC_KEYS = {'source', 'grid', 'prev', 'next'}
 OPEN_MENU = '[openguimenu] '
 ID_RE = re.compile(r'[a-z][a-z0-9_]*')
 CMD_RE = re.compile(r'[a-z0-9_]+')
@@ -193,10 +200,72 @@ def _check_elements(m, ids):
                 need(i, not set(cells(e)) & sc, f'slot hole sits under drawn element {j}')
 
 
+def _check_dynamic(m):
+    """The warps_sync contract: a grid of cells filled with items, plus prev/next buttons drawn without an item."""
+    mid, rows, els = m['id'], m['rows'], m['elements']
+    d = m['dynamic']
+
+    def need(ok, msg):
+        if not ok:
+            raise SystemExit(f'{mid}: dynamic {msg}')
+
+    def area(name, v, keys):
+        need(isinstance(v, dict) and set(v) == keys, f'{name} must be an object with keys {sorted(keys)}')
+        need(all(_int(v[k]) for k in keys), f'{name} values must be ints')
+        w, h = v.get('w', 1), v.get('h', 1)
+        need(v['x'] >= 0 and v['y'] >= 0 and w >= 1 and h >= 1, f'{name}: x and y must be >= 0, w and h >= 1')
+        need(v['x'] + w <= 9 and v['y'] + h <= rows, f'{name} is outside the 9 x {rows} area')
+        return set(cells(v))
+
+    need(isinstance(d, dict) and set(d) == DYNAMIC_KEYS, f'must be an object with keys {sorted(DYNAMIC_KEYS)}')
+    need(d['source'] == 'ftb_warps', 'source must be "ftb_warps"')
+    grid = area('grid', d['grid'], {'x', 'y', 'w', 'h'})
+    arrows = {name: area(name, d[name], {'x', 'y'}) for name in ('prev', 'next')}
+    for i, e in enumerate(els):
+        need('item' not in e or not grid & set(cells(e)), f'grid overlaps the item of element {i}')
+    buttons = {(e['x'], e['y']) for e in els if e['type'] == 'icon_button' and 'item' not in e}
+    for name, c in arrows.items():
+        need(c <= buttons, f'{name} must be the cell of an icon_button element without an item')
+        need(not grid & c, f'{name} must not lie inside the grid')
+    need(d['prev'] != d['next'], 'prev and next must be different cells')
+
+
+def _check_commands(spec, ids):
+    cmds = spec.get('commands', [])
+    if not isinstance(cmds, list):
+        raise SystemExit('spec: "commands" must be a list')
+    taken = set(ids)  # menu ids and command ids share the gui_menus namespace
+    used = {c for m in spec['menus'] for c in m.get('open_command', [])}
+    for n, c in enumerate(cmds):
+        cid = c.get('id') if isinstance(c, dict) else None
+        label = cid if isinstance(cid, str) else f'commands[{n}]'
+        if not isinstance(c, dict) or set(c) != COMMAND_KEYS:
+            raise SystemExit(f'{label}: command must be an object with keys {sorted(COMMAND_KEYS)}')
+        if not isinstance(cid, str) or not ID_RE.fullmatch(cid):
+            raise SystemExit(f'{label}: id must match [a-z][a-z0-9_]*')
+        if cid in taken:
+            raise SystemExit(f'{cid}: duplicate id (menu or command)')
+        taken.add(cid)
+        name = c['command']
+        if not isinstance(name, str) or not CMD_RE.fullmatch(name):
+            raise SystemExit(f'{cid}: command must match [a-z0-9_]+')
+        if name in used:
+            raise SystemExit(f'{cid}: duplicate command /{name}')
+        used.add(name)
+        acts = c['actions']
+        if not _strs(acts) or not acts:
+            raise SystemExit(f'{cid}: actions must be a non-empty list of strings')
+        for a in acts:
+            if a.startswith(OPEN_MENU) and a[len(OPEN_MENU):].strip() not in ids:
+                raise SystemExit(f'{cid}: {a!r} opens a menu that is not in the spec')
+
+
 def validate(spec):
     menus = spec.get('menus') if isinstance(spec, dict) else None
     if not isinstance(menus, list) or not menus:
         raise SystemExit('spec: "menus" must be a non-empty list')
+    if set(spec) - SPEC_KEYS:
+        raise SystemExit(f'spec: unknown keys {sorted(set(spec) - SPEC_KEYS)}')
     ids, glyphs = set(), set()
     for n, m in enumerate(menus):
         mid = m.get('id') if isinstance(m, dict) else None
@@ -224,8 +293,14 @@ def validate(spec):
         if oc is not None and not (isinstance(oc, list) and oc and all(isinstance(c, str) and CMD_RE.fullmatch(c)
                                                                          for c in oc)):
             raise SystemExit(f'{mid}: open_command must be a non-empty list of [a-z0-9_]+ strings')
+    dyn = [m['id'] for m in menus if 'dynamic' in m]
+    if len(dyn) > 1:
+        raise SystemExit(f'spec: only one menu may have "dynamic", found {dyn}')
     for m in menus:
         _check_elements(m, ids)
+        if 'dynamic' in m:
+            _check_dynamic(m)
+    _check_commands(spec, ids)
 
 
 def expected_transparent(menu):
@@ -290,6 +365,15 @@ def yaml_menu(menu):
         items[it['key']] = d
     doc['items'] = items
     return doc
+
+
+def command_doc(cmd: dict) -> dict:
+    # DeluxeMenus skips menus without a title or items, so both are present. The always-false open requirement means
+    # the menu never opens and its deny_commands run as the command's actions.
+    return {'menu_title': cmd['id'], 'open_command': [cmd['command']], 'register_command': True, 'size': 9,
+            'open_requirement': {'requirements': {'never': {'type': 'string equals', 'input': 'a', 'output': 'b'}},
+                                 'deny_commands': list(cmd['actions'])},
+            'items': {'placeholder': {'material': 'PAPER', 'model_data': CMD, 'slots': [0], 'display_name': ' '}}}
 
 
 def dump_yaml(doc):
@@ -391,11 +475,14 @@ def build(spec_path=SPEC, export_dir=EXPORT, pack=PACK, dm_out=DM_OUT):
     png(Image.new('RGBA', (16, 16), (0, 0, 0, 0)),
         os.path.join(pack, 'assets', 'origins', 'textures', 'item', 'menu_blank.png'))
 
+    cmds = spec.get('commands', [])
     for m in menus:
         tw(os.path.join(dm_out, m['id'] + '.yml'), dump_yaml(yaml_menu(m)))
+    for c in cmds:
+        tw(os.path.join(dm_out, c['id'] + '.yml'), dump_yaml(command_doc(c)))
     tw(os.path.join(dm_out, 'gui_menus.yml'),
-       dump_yaml({'gui_menus': {m['id']: {'file': m['id'] + '.yml'} for m in menus}}))
-    _prune(dm_out, '.yml', {m['id'] for m in menus} | {'gui_menus'})
+       dump_yaml({'gui_menus': {x['id']: {'file': x['id'] + '.yml'} for x in menus + cmds}}))
+    _prune(dm_out, '.yml', {x['id'] for x in menus + cmds} | {'gui_menus'})
 
     for m in menus:
         n = sum('item' in e for e in m['elements'])
@@ -404,8 +491,11 @@ def build(spec_path=SPEC, export_dir=EXPORT, pack=PACK, dm_out=DM_OUT):
 
 
 def report(spec_path=SPEC):
-    for m in load_spec(spec_path)['menus']:
+    spec = load_spec(spec_path)
+    for m in spec['menus']:
         print(f'ok {m["id"]} rows={m["rows"]} items={sum("item" in e for e in m["elements"])}')
+    for c in spec.get('commands', []):
+        print(f'ok command {c["id"]} /{c["command"]}')
 
 
 def _synthetic(menu):
@@ -496,6 +586,39 @@ def selftest():
     _rejects(mutated(lambda m: btn(m)['item'].update(click=['[openguimenu] nope'])), 'not in the spec')
     mutated(lambda m: btn(m)['item'].update(click=['[openguimenu] t']))()  # a menu may reopen itself
 
+    def real_mutated(fn):
+        s = json.loads(json.dumps(real))
+        fn(s)
+        return lambda: validate(s)
+
+    def menu_of(s, mid):
+        return next(m for m in s['menus'] if m['id'] == mid)
+
+    def dyn(s):
+        return menu_of(s, 'warps')['dynamic']
+
+    def with_command(s, **kw):
+        s['commands'].append({'id': 'extra', 'command': 'extra', 'actions': ['[close]'], **kw})
+
+    _rejects(real_mutated(lambda s: s.update(foo=1)), 'spec: unknown keys')
+    _rejects(real_mutated(lambda s: with_command(s, command='menu')), 'duplicate command')  # menu's open_command
+    _rejects(real_mutated(lambda s: with_command(s, command='spawn')), 'duplicate command')  # another command
+    _rejects(real_mutated(lambda s: with_command(s, id='menu')), 'duplicate id')
+    _rejects(real_mutated(lambda s: with_command(s, actions=['[openguimenu] nope'])), 'not in the spec')
+    _rejects(real_mutated(lambda s: with_command(s, actions=[])), 'non-empty list')
+    _rejects(real_mutated(lambda s: with_command(s, extra=1)), 'keys')
+    real_mutated(lambda s: with_command(s, actions=['[openguimenu] menu']))()  # a command may open a menu
+    _rejects(real_mutated(lambda s: dyn(s)['grid'].update(x=0, y=3, w=2, h=2)), 'grid overlaps')  # back button item
+    _rejects(real_mutated(lambda s: dyn(s)['prev'].update(x=4)), 'prev must be the cell of an icon_button')
+    _rejects(real_mutated(lambda s: dyn(s)['next'].update(x=3)), 'prev and next must be different')
+    _rejects(real_mutated(lambda s: dyn(s).update(source='other')), 'source')
+    _rejects(real_mutated(lambda s: dyn(s)['grid'].update(w=9)), 'outside the 9 x 5 area')
+
+    def second_dynamic(s):
+        menu_of(s, 'homes')['dynamic'] = json.loads(json.dumps(dyn(s)))
+
+    _rejects(real_mutated(second_dynamic), 'only one menu')
+
     m1 = {'rows': 1, 'elements': [{'type': 'slot', 'x': 0, 'y': 0}]}
     assert len(expected_transparent(m1)) == 9 + 256
 
@@ -557,8 +680,8 @@ def selftest():
 
         fonts = _load(os.path.join(pack, 'assets', 'origins', 'font', 'menus.json'))['providers']
         assert fonts[0] == {'type': 'space', 'advances': {SHIFT_IN: -8, SHIFT_OUT: -169}}
-        assert [p['type'] for p in fonts[1:]] == ['bitmap'] * 3
-        assert [p['height'] for p in fonts[1:]] == [107, 89, 71]
+        assert [p['type'] for p in fonts[1:]] == ['bitmap'] * 4
+        assert [p['height'] for p in fonts[1:]] == [107, 89, 71, 107]
 
         def ymenu(name):
             with open(os.path.join(dm, name + '.yml'), encoding='utf-8') as f:
@@ -568,7 +691,15 @@ def selftest():
         assert home['slots'] == [11] and home['material'] == 'RED_BED' and 'model_data' not in home
         spawn = ymenu('menu')['items']['spawn']
         assert spawn['slots'] == [0, 1, 2, 9, 10, 11] and spawn['material'] == 'PAPER' and spawn['model_data'] == 7300
-        assert list(ymenu('gui_menus')['gui_menus']) == ['menu', 'homes', 'rtp_confirm']
+        assert list(ymenu('gui_menus')['gui_menus']) == ['menu', 'homes', 'rtp_confirm', 'warps', 'spawn_cmd', 'rules_cmd']
+        assert 'warp_1' not in ymenu('warps')['items']  # the base page has no warp items; warps_sync adds them
+        spawn_cmd = ymenu('spawn_cmd')
+        assert spawn_cmd['register_command'] is True and spawn_cmd['open_command'] == ['spawn']
+        assert spawn_cmd['open_requirement']['deny_commands'] == real['commands'][0]['actions']
+        for c in real['commands']:
+            doc = command_doc(c)
+            assert list(doc) == ['menu_title', 'open_command', 'register_command', 'size', 'open_requirement', 'items']
+            assert yaml.safe_load(dump_yaml(doc)) == doc and ymenu(c['id']) == doc
 
         paper = _load(os.path.join(pack, 'assets', 'minecraft', 'models', 'item', 'paper.json'))
         assert paper['overrides'] == [{'predicate': {'custom_model_data': 7300}, 'model': 'origins:item/menu_blank'},
