@@ -3,6 +3,10 @@
     {
       "type": "reference",
       "id": "origins:prefixes"
+    },
+    {
+      "type": "reference",
+      "id": "origins:menus"
     }
   ]
 }
