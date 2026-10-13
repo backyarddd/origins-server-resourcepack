@@ -95,7 +95,7 @@ items:
     - '&#c9d4ecBuy and sell items.'
     click_commands:
     - '[close]'
-    - '[player] ah'
+    - '[player] ah <delay=3>'
   pokemarket:
     material: PAPER
     model_data: 7300
@@ -108,7 +108,7 @@ items:
     - "&#c9d4ecBuy and sell Pok\xE9mon."
     click_commands:
     - '[close]'
-    - '[player] pah'
+    - '[player] pah <delay=3>'
   battlepass:
     material: PAPER
     model_data: 7300
@@ -121,7 +121,7 @@ items:
     - '&#c9d4ecSeason rewards and missions.'
     click_commands:
     - '[close]'
-    - '[player] bp'
+    - '[player] bp <delay=3>'
   rewards:
     material: PAPER
     model_data: 7300
@@ -135,7 +135,7 @@ items:
     - '&#c9d4ecplaytime and vote rewards.'
     click_commands:
     - '[close]'
-    - '[player] rewards'
+    - '[player] rewards <delay=3>'
   close:
     material: PAPER
     model_data: 7300
@@ -158,4 +158,4 @@ items:
     - '&#c9d4ecEvery trainer and your record.'
     click_commands:
     - '[close]'
-    - '[player] trainers'
+    - '[player] trainers <delay=3>'

@@ -145,7 +145,7 @@
             ],
             "click": [
               "[close]",
-              "[player] ah"
+              "[player] ah <delay=3>"
             ]
           }
         },
@@ -164,7 +164,7 @@
             ],
             "click": [
               "[close]",
-              "[player] pah"
+              "[player] pah <delay=3>"
             ]
           }
         },
@@ -183,7 +183,7 @@
             ],
             "click": [
               "[close]",
-              "[player] bp"
+              "[player] bp <delay=3>"
             ]
           }
         },
@@ -203,7 +203,7 @@
             ],
             "click": [
               "[close]",
-              "[player] rewards"
+              "[player] rewards <delay=3>"
             ]
           }
         },
@@ -237,7 +237,7 @@
             ],
             "click": [
               "[close]",
-              "[player] trainers"
+              "[player] trainers <delay=3>"
             ]
           }
         }
