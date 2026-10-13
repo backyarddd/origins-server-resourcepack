@@ -775,7 +775,7 @@ def selftest():
         assert home['slots'] == [11] and home['material'] == 'RED_BED' and 'model_data' not in home
         spawn = ymenu('menu')['items']['spawn']
         assert spawn['slots'] == [0, 1, 2, 9, 10, 11] and spawn['material'] == 'PAPER' and spawn['model_data'] == 7300
-        assert list(ymenu('gui_menus')['gui_menus']) == ['menu', 'homes', 'rtp_confirm', 'warps', 'spawn_cmd', 'rules_cmd']
+        assert list(ymenu('gui_menus')['gui_menus']) == ['menu', 'homes', 'rtp_confirm', 'warps', 'spawn_cmd', 'rules_cmd', 'discord_cmd', 'help_cmd']
         mod_ids = [m['id'] for m in real['menus'] if m.get('renderer') == 'mod']
         assert len(mod_ids) == 10
         assert not any(os.path.exists(os.path.join(dm, i + '.yml')) for i in mod_ids)
