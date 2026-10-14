@@ -951,6 +951,358 @@
       ]
     },
     {
+      "id": "arena",
+      "glyph": "E360",
+      "rows": 6,
+      "title": "Arena",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "trophy",
+          "label": "RANK",
+          "x": 0,
+          "y": 0,
+          "w": 3,
+          "h": 1,
+          "item": {
+            "key": "stats"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "icon": "pokeball",
+          "label": "TEAM",
+          "x": 3,
+          "y": 0,
+          "w": 3,
+          "h": 1,
+          "item": {
+            "key": "team"
+          }
+        },
+        {
+          "type": "button",
+          "color": "green",
+          "label": "TOP 10",
+          "x": 6,
+          "y": 0,
+          "w": 3,
+          "item": {
+            "key": "top"
+          }
+        },
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 1,
+          "w": 9,
+          "h": 4
+        },
+        {
+          "type": "text",
+          "label": "PICK A RIVAL",
+          "color": "gold",
+          "x": 0,
+          "y": 1,
+          "w": 9
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 1,
+          "y": 2,
+          "item": {
+            "key": "opponent"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 3,
+          "y": 2,
+          "item": {
+            "key": "opponent"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 5,
+          "y": 2,
+          "item": {
+            "key": "opponent"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 7,
+          "y": 2,
+          "item": {
+            "key": "opponent"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 1,
+          "y": 3,
+          "item": {
+            "key": "opponent"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 3,
+          "y": 3,
+          "item": {
+            "key": "opponent"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 5,
+          "y": 3,
+          "item": {
+            "key": "opponent"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 7,
+          "y": 3,
+          "item": {
+            "key": "opponent"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 1,
+          "y": 4,
+          "item": {
+            "key": "opponent"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 3,
+          "y": 4,
+          "item": {
+            "key": "opponent"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 5,
+          "y": 4,
+          "item": {
+            "key": "opponent"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 7,
+          "y": 4,
+          "item": {
+            "key": "opponent"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 5,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "navy",
+          "icon": "left",
+          "x": 1,
+          "y": 5,
+          "item": {
+            "key": "prev"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "x": 2,
+          "y": 5,
+          "w": 5,
+          "h": 1,
+          "item": {
+            "key": "info"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "navy",
+          "icon": "right",
+          "x": 7,
+          "y": 5,
+          "item": {
+            "key": "next"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 5,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "arena_top",
+      "glyph": "E361",
+      "rows": 6,
+      "title": "Arena",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "trophy",
+          "label": "LEADERBOARD",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 1,
+          "item": {
+            "key": "header"
+          }
+        },
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 1,
+          "w": 9,
+          "h": 3
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 4,
+          "y": 1,
+          "item": {
+            "key": "first"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 2,
+          "y": 2,
+          "item": {
+            "key": "second"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 6,
+          "y": 2,
+          "item": {
+            "key": "third"
+          }
+        },
+        {
+          "type": "slot",
+          "x": 1,
+          "y": 3,
+          "w": 7,
+          "h": 1,
+          "item": {
+            "key": "rank"
+          }
+        },
+        {
+          "type": "button",
+          "color": "navy",
+          "label": "DAILY",
+          "x": 0,
+          "y": 4,
+          "w": 3,
+          "item": {
+            "key": "daily"
+          }
+        },
+        {
+          "type": "button",
+          "color": "navy",
+          "label": "WEEKLY",
+          "x": 3,
+          "y": 4,
+          "w": 3,
+          "item": {
+            "key": "weekly"
+          }
+        },
+        {
+          "type": "button",
+          "color": "navy",
+          "label": "MONTHLY",
+          "x": 6,
+          "y": 4,
+          "w": 3,
+          "item": {
+            "key": "monthly"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 5,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "x": 2,
+          "y": 5,
+          "w": 5,
+          "h": 1,
+          "item": {
+            "key": "info"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 5,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
       "id": "pokemon_detail",
       "glyph": "E307",
       "rows": 6,
