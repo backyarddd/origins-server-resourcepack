@@ -90,6 +90,24 @@
     },
     {
       "type": "bitmap",
+      "file": "origins:menu/arena.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue360"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/arena_top.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue361"
+      ]
+    },
+    {
+      "type": "bitmap",
       "file": "origins:menu/pokemon_detail.png",
       "ascent": 13,
       "height": 125,
