@@ -3143,6 +3143,7 @@
         },
         {
           "type": "slot",
+          "style": "pedestal",
           "x": 4,
           "y": 1,
           "item": {
@@ -3568,6 +3569,797 @@
           "w": 3,
           "item": {
             "key": "done"
+          }
+        }
+      ]
+    },
+    {
+      "id": "store_ranks",
+      "glyph": "E330",
+      "rows": 5,
+      "title": "Ranks",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "crown",
+          "label": "RANKS",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 1,
+          "item": {
+            "key": "header"
+          }
+        },
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 1,
+          "w": 9,
+          "h": 3
+        },
+        {
+          "type": "text",
+          "label": "CHOOSE YOUR RANK",
+          "color": "gold",
+          "x": 0,
+          "y": 1,
+          "w": 9
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 0,
+          "y": 2,
+          "item": {
+            "key": "product"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 2,
+          "y": 2,
+          "item": {
+            "key": "product"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 4,
+          "y": 2,
+          "item": {
+            "key": "product"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 6,
+          "y": 2,
+          "item": {
+            "key": "product"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 8,
+          "y": 2,
+          "item": {
+            "key": "product"
+          }
+        },
+        {
+          "type": "text",
+          "label": "UPGRADES COST LESS",
+          "color": "cream",
+          "x": 0,
+          "y": 3,
+          "w": 9
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 4,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "icon": "coin",
+          "label": "FUNDS",
+          "x": 2,
+          "y": 4,
+          "w": 5,
+          "h": 1,
+          "item": {
+            "key": "balance"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 4,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "store_battlepass",
+      "glyph": "E331",
+      "rows": 5,
+      "title": "Battle Pass",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "trophy",
+          "label": "BATTLE PASS",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 1,
+          "item": {
+            "key": "header"
+          }
+        },
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 1,
+          "w": 9,
+          "h": 3
+        },
+        {
+          "type": "text",
+          "label": "PREMIUM TRACK",
+          "color": "gold",
+          "x": 0,
+          "y": 1,
+          "w": 9
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 4,
+          "y": 2,
+          "item": {
+            "key": "product"
+          }
+        },
+        {
+          "type": "text",
+          "label": "UNLOCK PREMIUM REWARDS",
+          "color": "cream",
+          "x": 0,
+          "y": 3,
+          "w": 9
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 4,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "icon": "coin",
+          "label": "FUNDS",
+          "x": 2,
+          "y": 4,
+          "w": 5,
+          "h": 1,
+          "item": {
+            "key": "balance"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 4,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "store_boosts",
+      "glyph": "E332",
+      "rows": 6,
+      "title": "Shiny Boosts",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "bolt",
+          "label": "SHINY BOOSTS",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 1,
+          "item": {
+            "key": "header"
+          }
+        },
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 1,
+          "w": 9,
+          "h": 4
+        },
+        {
+          "type": "text",
+          "label": "PERSONAL: JUST YOU",
+          "color": "gold",
+          "x": 0,
+          "y": 1,
+          "w": 9
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 2,
+          "y": 2,
+          "item": {
+            "key": "personal"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 4,
+          "y": 2,
+          "item": {
+            "key": "personal"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 6,
+          "y": 2,
+          "item": {
+            "key": "personal"
+          }
+        },
+        {
+          "type": "text",
+          "label": "GLOBAL: EVERYONE ONLINE",
+          "color": "gold",
+          "x": 0,
+          "y": 3,
+          "w": 9
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 2,
+          "y": 4,
+          "item": {
+            "key": "global"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 4,
+          "y": 4,
+          "item": {
+            "key": "global"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 6,
+          "y": 4,
+          "item": {
+            "key": "global"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 5,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "icon": "coin",
+          "label": "FUNDS",
+          "x": 2,
+          "y": 5,
+          "w": 5,
+          "h": 1,
+          "item": {
+            "key": "balance"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 5,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "store_tokens",
+      "glyph": "E333",
+      "rows": 5,
+      "title": "Shiny Tokens",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "gem",
+          "label": "SHINY TOKENS",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 1,
+          "item": {
+            "key": "header"
+          }
+        },
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 1,
+          "w": 9,
+          "h": 3
+        },
+        {
+          "type": "text",
+          "label": "PICK A BUNDLE",
+          "color": "gold",
+          "x": 0,
+          "y": 1,
+          "w": 9
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 2,
+          "y": 2,
+          "item": {
+            "key": "product"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 4,
+          "y": 2,
+          "item": {
+            "key": "product"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 6,
+          "y": 2,
+          "item": {
+            "key": "product"
+          }
+        },
+        {
+          "type": "text",
+          "label": "SENT TO YOUR LOCKER",
+          "color": "cream",
+          "x": 0,
+          "y": 3,
+          "w": 9
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 4,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "icon": "coin",
+          "label": "FUNDS",
+          "x": 2,
+          "y": 4,
+          "w": 5,
+          "h": 1,
+          "item": {
+            "key": "balance"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 4,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "store_crates",
+      "glyph": "E334",
+      "rows": 6,
+      "title": "Crate Keys",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "crate",
+          "label": "CRATE KEYS",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 1,
+          "item": {
+            "key": "header"
+          }
+        },
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 1,
+          "w": 9,
+          "h": 4
+        },
+        {
+          "type": "text",
+          "label": "SINGLE KEYS",
+          "color": "gold",
+          "x": 0,
+          "y": 1,
+          "w": 9
+        },
+        {
+          "type": "slot",
+          "x": 1,
+          "y": 2,
+          "w": 7,
+          "h": 1,
+          "item": {
+            "key": "single"
+          }
+        },
+        {
+          "type": "text",
+          "label": "KEY BUNDLES",
+          "color": "gold",
+          "x": 0,
+          "y": 3,
+          "w": 9
+        },
+        {
+          "type": "slot",
+          "x": 1,
+          "y": 4,
+          "w": 7,
+          "h": 1,
+          "item": {
+            "key": "bundle"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 5,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "icon": "coin",
+          "label": "FUNDS",
+          "x": 2,
+          "y": 5,
+          "w": 5,
+          "h": 1,
+          "item": {
+            "key": "balance"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 5,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "locker",
+      "glyph": "E335",
+      "rows": 6,
+      "title": "Locker",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "star",
+          "label": "YOUR LOCKER",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 1,
+          "item": {
+            "key": "status"
+          }
+        },
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 1,
+          "w": 9,
+          "h": 2
+        },
+        {
+          "type": "text",
+          "label": "CRATE KEYS",
+          "color": "gold",
+          "x": 0,
+          "y": 1,
+          "w": 9
+        },
+        {
+          "type": "slot",
+          "x": 0,
+          "y": 2,
+          "w": 9,
+          "h": 1,
+          "item": {
+            "key": "keys"
+          }
+        },
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 3,
+          "w": 3,
+          "h": 2
+        },
+        {
+          "type": "text",
+          "label": "TOKENS",
+          "color": "gold",
+          "x": 0,
+          "y": 3,
+          "w": 3
+        },
+        {
+          "type": "slot",
+          "x": 1,
+          "y": 4,
+          "item": {
+            "key": "tokens"
+          }
+        },
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 3,
+          "y": 3,
+          "w": 6,
+          "h": 2
+        },
+        {
+          "type": "text",
+          "label": "BOOSTS",
+          "color": "gold",
+          "x": 3,
+          "y": 3,
+          "w": 6
+        },
+        {
+          "type": "slot",
+          "x": 3,
+          "y": 4,
+          "w": 6,
+          "h": 1,
+          "item": {
+            "key": "boosts"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 5,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "button",
+          "color": "gold",
+          "label": "MONTHLY",
+          "x": 3,
+          "y": 5,
+          "w": 3,
+          "item": {
+            "key": "monthly"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 5,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "locker_tokens",
+      "glyph": "E336",
+      "rows": 5,
+      "title": "Shiny Token",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "gem",
+          "label": "SHINY TOKENS",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 1,
+          "item": {
+            "key": "header"
+          }
+        },
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 1,
+          "w": 9,
+          "h": 3
+        },
+        {
+          "type": "text",
+          "label": "PICK A PARTY POKEMON",
+          "color": "gold",
+          "x": 0,
+          "y": 1,
+          "w": 9
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 2,
+          "y": 2,
+          "item": {
+            "key": "party"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 4,
+          "y": 2,
+          "item": {
+            "key": "party"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 6,
+          "y": 2,
+          "item": {
+            "key": "party"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 2,
+          "y": 3,
+          "item": {
+            "key": "party"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 4,
+          "y": 3,
+          "item": {
+            "key": "party"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 6,
+          "y": 3,
+          "item": {
+            "key": "party"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 4,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 4,
+          "item": {
+            "key": "close"
           }
         }
       ]

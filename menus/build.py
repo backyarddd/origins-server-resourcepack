@@ -1,13 +1,16 @@
 """Build the DeluxeMenus chest-menu backgrounds for the Cobblemon Origins server pack.
 
-Run:  python -I menus/build.py <validate|figma|build|layouts|selftest>
+Run:  python -I menus/build.py <validate|figma [menu ids]|build|layouts|selftest>
 
 menus/spec.json is the source of truth: per menu its chest rows, title, font glyph and elements placed in chest cells
 (9 columns, cell (x, y) = slot y*9+x), plus the DeluxeMenus item (name, lore, click actions) of each clickable element.
 
   validate  check spec.json and print one line per menu and per command.
-  figma     concatenate menus/figma/{lib,kit,menus}.js into menus/figma/out/{kit,menus}.run.js (spec embedded), each
-            small enough for the Figma MCP use_figma tool. Run those scripts in Figma file thHX6Yp5pMOLrryrsSaITZ.
+  figma     concatenate menus/figma/{lib,kit,menus}.js into menus/figma/out/kit.run.js and menus.run.js (spec
+            embedded), each small enough for the Figma MCP use_figma tool; menus that do not fit one script are split
+            over menus.1.run.js, menus.2.run.js, ... Menu ids after "figma" limit the menus scripts to those menus.
+            Each menus script redraws only its own menus, at fixed places on the page, so the scripts can run alone or
+            in any order. Run them in Figma file thHX6Yp5pMOLrryrsSaITZ.
   build     take the page-level frame exports menus/export/menu_<id>.png (download_assets, png, scale 1), check them
             pixel-exactly against the spec (the page background #E5E5E5 is keyed out to transparency; transparent pixels
             must be exactly the chamfered corners plus the slot holes), then write into pack/: the menu textures,
@@ -476,15 +479,27 @@ FIGMA_MENU_KEYS = ('id', 'rows', 'title', 'open_command')
 FIGMA_ELEMENT_KEYS = ('type', 'x', 'y', 'w', 'h', 'style', 'color', 'icon', 'label')
 
 
-def figma_spec(spec):
-    return {'menus': [
-        {**{k: m[k] for k in FIGMA_MENU_KEYS if k in m},
-         'elements': [{k: e[k] for k in FIGMA_ELEMENT_KEYS if k in e} for e in m['elements']]}
-        for m in spec['menus']]}
+PREVIEW_STEP = WIDTH * 4 + 80  # menus.js lays the 4x previews side by side
 
 
-def figma(spec_path=SPEC, figma_dir=FIGMA, out_dir=FIGMA_OUT):
+def figma_menus(spec):
+    """Every menu reduced to what menus.js draws, plus its fixed place on the page: fy (export frame y), px (preview x)."""
+    out, fy = [], 0
+    for n, m in enumerate(spec['menus']):
+        out.append({**{k: m[k] for k in FIGMA_MENU_KEYS if k in m}, 'fy': fy, 'px': 40 + n * PREVIEW_STEP,
+                    'elements': [{k: e[k] for k in FIGMA_ELEMENT_KEYS if k in e} for e in m['elements']]})
+        fy += height(m['rows']) + 40
+    return out
+
+
+def figma(spec_path=SPEC, figma_dir=FIGMA, out_dir=FIGMA_OUT, ids=(), limit=FIGMA_MAX):
     spec = load_spec(spec_path)
+    menus = figma_menus(spec)
+    unknown = sorted(set(ids) - {m['id'] for m in menus})
+    if unknown:
+        raise SystemExit(f'figma: unknown menu ids {unknown}')
+    if ids:
+        menus = [m for m in menus if m['id'] in ids]
     src = {}
     for n in ('lib', 'kit', 'menus'):
         p = os.path.join(figma_dir, n + '.js')
@@ -493,15 +508,31 @@ def figma(spec_path=SPEC, figma_dir=FIGMA, out_dir=FIGMA_OUT):
         with open(p, encoding='utf-8') as f:
             # full-line // comments are for readers of the source; dropping them keeps the run scripts under FIGMA_MAX
             src[n] = ''.join(line for line in f if not line.lstrip().startswith('//'))
-    runs = {'kit.run.js': src['lib'] + '\n' + src['kit'],
-            'menus.run.js': src['lib'] + '\nconst SPEC = ' + json.dumps(figma_spec(spec), separators=(',', ':')) + ';\n' + src['menus']}
+    every = [m['id'] for m in spec['menus']]
+
+    def menus_run(part):
+        data = {'width': 40 + len(every) * PREVIEW_STEP, 'menus': part}  # width: the shared preview section
+        return src['lib'] + '\nconst SPEC = ' + json.dumps(data, separators=(',', ':')) + ';\n' + src['menus']
+
+    chunks = [[]]  # greedy in spec order; a menu too big for a script of its own fails the limit check below
+    for m in menus:
+        if chunks[-1] and len(menus_run(chunks[-1] + [m])) > limit:
+            chunks.append([])
+        chunks[-1].append(m)
+    names = ['menus.run.js'] if len(chunks) == 1 else [f'menus.{i}.run.js' for i in range(1, len(chunks) + 1)]
+    runs = {'kit.run.js': src['lib'] + '\n' + src['kit'], **{n: menus_run(c) for n, c in zip(names, chunks)}}
     for name, text in runs.items():
-        if len(text) > FIGMA_MAX:
-            raise SystemExit(f'{name}: {len(text)} characters, limit {FIGMA_MAX}')
+        if len(text) > limit:
+            raise SystemExit(f'{name}: {len(text)} characters, limit {limit}')
+    if os.path.isdir(out_dir):  # a menus.N.run.js left from an earlier run would redraw outdated menus
+        for name in os.listdir(out_dir):
+            if re.fullmatch(r'menus(\.\d+)?\.run\.js', name) and name not in runs:
+                os.remove(os.path.join(out_dir, name))
     for name, text in runs.items():
         p = os.path.join(out_dir, name)
         write_text(p, text)
-        print(f'{rel(p)} {len(text)} chars')
+        part = f' ({", ".join(m["id"] for m in chunks[names.index(name)])})' if name in names else ''
+        print(f'{rel(p)} {len(text)} chars{part}')
 
 
 def build(spec_path=SPEC, export_dir=EXPORT, pack=PACK, dm_out=DM_OUT, mod_out=MOD_OUT):
@@ -806,9 +837,9 @@ def selftest():
 
         fonts = _load(os.path.join(pack, 'assets', 'origins', 'font', 'menus.json'))['providers']
         assert fonts[0] == {'type': 'space', 'advances': {SHIFT_IN: -8, SHIFT_OUT: -169}}
-        assert [p['type'] for p in fonts[1:]] == ['bitmap'] * 28
+        assert [p['type'] for p in fonts[1:]] == ['bitmap'] * 35
         assert [p['height'] for p in fonts[1:]] == [125, 89, 71, 107, 125, 125, 89, 89, 89, 125, 125, 107, 125, *[125] * 7, 107, 89, 125,
-                                                    125, 89, 125, 125, 107]
+                                                    125, 89, 125, 125, 107, 107, 107, 125, 107, 125, 125, 107]
 
         def ymenu(name):
             with open(os.path.join(dm, name + '.yml'), encoding='utf-8') as f:
@@ -820,7 +851,7 @@ def selftest():
         assert spawn['slots'] == [0, 1, 2, 9, 10, 11] and spawn['material'] == 'PAPER' and spawn['model_data'] == 7300
         assert list(ymenu('gui_menus')['gui_menus']) == ['menu', 'rtp_confirm', 'warps', 'spawn_cmd', 'rules_cmd', 'discord_cmd', 'help_cmd']
         mod_ids = [m['id'] for m in real['menus'] if m.get('renderer') == 'mod']
-        assert len(mod_ids) == 25
+        assert len(mod_ids) == 32
         assert not any(os.path.exists(os.path.join(dm, i + '.yml')) for i in mod_ids)
         assert sorted(os.listdir(mod)) == sorted(i + '.json' for i in mod_ids), os.listdir(mod)
         market = _load(os.path.join(mod, 'market.json'))
@@ -828,6 +859,8 @@ def selftest():
         assert market['slots']['sell'] == [7, 8] and market['slots']['close'] == [53]
         assert list(market['slots'])[:3] == ['grid', 'sell', 'mine']
         assert _load(os.path.join(mod, 'crates.json'))['slots']['crate'] == [19, 21, 23, 25, 28, 30, 32, 34]
+        assert _load(os.path.join(mod, 'store_ranks.json'))['slots']['product'] == [18, 20, 22, 24, 26]
+        assert _load(os.path.join(mod, 'locker.json'))['slots']['boosts'] == [39, 40, 41, 42, 43, 44]
         assert 'warp_1' not in ymenu('warps')['items']  # the base page has no warp items; warps_sync adds them
         spawn_cmd = ymenu('spawn_cmd')
         assert spawn_cmd['register_command'] is True and spawn_cmd['open_command'] == ['spawn']
@@ -857,8 +890,22 @@ def selftest():
         with contextlib.redirect_stdout(io.StringIO()):
             figma(SPEC, fdir, odir)
         assert os.path.isfile(os.path.join(odir, 'kit.run.js'))
-        with open(os.path.join(odir, 'menus.run.js'), encoding='utf-8') as f:
-            assert 'const SPEC = ' in f.read()
+        def run_menus(name):
+            with open(os.path.join(odir, name), encoding='utf-8') as f:
+                return json.loads(f.read().split('const SPEC = ', 1)[1].split(';\n', 1)[0])['menus']
+
+        whole = run_menus('menus.run.js')
+        assert [m['id'] for m in whole] == [m['id'] for m in real['menus']]
+        with contextlib.redirect_stdout(io.StringIO()):
+            figma(SPEC, fdir, odir, limit=12000)
+        parts = sorted((n for n in os.listdir(odir) if n.startswith('menus.')), key=lambda n: int(n.split('.')[1]))
+        assert len(parts) > 1 and 'menus.run.js' not in parts, parts  # the single script was replaced, not kept
+        assert [m for n in parts for m in run_menus(n)] == whole  # same menus, same places
+        with contextlib.redirect_stdout(io.StringIO()):
+            figma(SPEC, fdir, odir, ids=['crates', 'store'])
+        assert sorted(n for n in os.listdir(odir) if n.startswith('menus')) == ['menus.run.js']
+        assert run_menus('menus.run.js') == [m for m in whole if m['id'] in ('store', 'crates')]
+        _rejects(lambda: figma(SPEC, fdir, odir, ids=['nope']), 'unknown menu ids')
         write_text(os.path.join(fdir, 'kit.js'), 'x' * 50001)
         _rejects(lambda: figma(SPEC, fdir, odir), 'limit')
         os.remove(os.path.join(fdir, 'menus.js'))
@@ -869,7 +916,11 @@ def selftest():
 COMMANDS = {'validate': report, 'figma': figma, 'build': build, 'layouts': layouts, 'selftest': selftest}
 
 if __name__ == '__main__':
-    if len(sys.argv) != 2 or sys.argv[1] not in COMMANDS:
-        print(f'usage: python -I menus/build.py <{"|".join(COMMANDS)}>', file=sys.stderr)
+    cmd, args = (sys.argv[1], sys.argv[2:]) if len(sys.argv) > 1 else (None, [])
+    if cmd not in COMMANDS or (args and cmd != 'figma'):
+        print(f'usage: python -I menus/build.py <{"|".join(COMMANDS)}>  (figma takes optional menu ids)', file=sys.stderr)
         sys.exit(2)
-    COMMANDS[sys.argv[1]]()
+    if cmd == 'figma':
+        figma(ids=args)
+    else:
+        COMMANDS[cmd]()

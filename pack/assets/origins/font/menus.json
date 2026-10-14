@@ -258,6 +258,69 @@
       "chars": [
         "\ue312"
       ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/store_ranks.png",
+      "ascent": 13,
+      "height": 107,
+      "chars": [
+        "\ue330"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/store_battlepass.png",
+      "ascent": 13,
+      "height": 107,
+      "chars": [
+        "\ue331"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/store_boosts.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue332"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/store_tokens.png",
+      "ascent": 13,
+      "height": 107,
+      "chars": [
+        "\ue333"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/store_crates.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue334"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/locker.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue335"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/locker_tokens.png",
+      "ascent": 13,
+      "height": 107,
+      "chars": [
+        "\ue336"
+      ]
     }
   ]
 }
