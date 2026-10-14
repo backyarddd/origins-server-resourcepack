@@ -331,13 +331,15 @@ function ring(r, x, y, w, h, tl, br) {  // 1 px frame, light top/left, dark bott
   r.rect(x, y, w, 1, tl); r.rect(x, y, 1, h, tl); r.rect(x + 1, y + h - 1, w - 1, 1, br); r.rect(x + w - 1, y + 1, 1, h - 1, br);
 }
 // Pedestal: a gold-rimmed well standing on a two-step gold plinth that is wider than the cell. It only grows sideways
-// (the rows above and below may hold pedestals too) and casts a shadow to its right.
+// (the rows above and below may hold pedestals too) and casts a shadow to its right. In the first and last column the
+// plinth is cut off at the shell's bevel (x 3..172), so it runs into the wall instead of over the rim.
 function pedestal(r, X, Y) {
+  const rect = (x, y, w, h, c) => { const a = Math.max(x, 3), b = Math.min(x + w, 173); if (b > a) r.rect(a, y, b - a, h, c); };
   for (const [y, h, e] of [[Y + 11, 4, 2], [Y + 14, 4, 4]]) {  // steps: top row, height, overhang per side
-    r.rect(X - 1 - e, y, CELL + 2 + 2 * e, h, C.O);
-    r.rect(X - e, y + 1, CELL + 2 * e, 1, C.goldHi); r.rect(X - e, y + 2, CELL + 2 * e, h - 3, C.gold);
-    r.rect(X - e, y + h - 2, CELL + 2 * e, 1, C.goldLo);
-    r.rect(X + CELL + 1 + e, y + 1, 1, h - 1, C.navyDeep);
+    rect(X - 1 - e, y, CELL + 2 + 2 * e, h, C.O);
+    rect(X - e, y + 1, CELL + 2 * e, 1, C.goldHi); rect(X - e, y + 2, CELL + 2 * e, h - 3, C.gold);
+    rect(X - e, y + h - 2, CELL + 2 * e, 1, C.goldLo);
+    rect(X + CELL + 1 + e, y + 1, 1, h - 1, C.navyDeep);
   }
   r.rect(X - 1, Y, 1, 11, C.O); r.rect(X + CELL, Y, 1, 11, C.O); r.rect(X + CELL + 1, Y + 1, 1, 10, C.navyDeep);
   ring(r, X, Y, CELL, CELL, C.goldHi, C.goldLo);

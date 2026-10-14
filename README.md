@@ -28,7 +28,10 @@ Chest-menu backgrounds for DeluxeMenus, drawn in the navy/gold Origins theme.
 
 Workflow:
 1. Edit `menus/spec.json`, run `python -I menus/build.py validate`.
-2. `python -I menus/build.py figma`, then run `menus/figma/out/menus.run.js` with the Figma MCP `use_figma` tool.
+2. `python -I menus/build.py figma [menu ids]`, then run `menus/figma/out/menus.run.js` with the Figma MCP `use_figma` tool.
+   A spec too big for one script is split into `menus.1.run.js`, `menus.2.run.js`, ...; each script redraws only its own
+   menus at fixed places, so pass the ids of the menus you changed to get one small script. Other menus' frames on the
+   page are never touched (delete a dropped menu's frames by hand).
 3. Export each page-level frame `menu_<id>` (download_assets, png, scale 1) to `menus/export/menu_<id>.png`.
 4. `python -I menus/build.py build` (validates every export pixel-exactly, writes the glyphs, fonts, item model and
    `menus/deluxemenus/*.yml`), then `python -I build.py` for the zip and SHA-1.

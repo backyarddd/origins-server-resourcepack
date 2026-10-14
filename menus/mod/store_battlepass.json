@@ -1,0 +1,34 @@
+{
+  "id": "store_battlepass",
+  "rows": 5,
+  "glyph": "E331",
+  "slots": {
+    "header": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "product": [
+      22
+    ],
+    "back": [
+      36
+    ],
+    "balance": [
+      38,
+      39,
+      40,
+      41,
+      42
+    ],
+    "close": [
+      44
+    ]
+  }
+}
