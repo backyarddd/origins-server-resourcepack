@@ -147,16 +147,16 @@ items:
     display_name: '&#f7d27aClose'
     click_commands:
     - '[close]'
-  trainers:
+  arena:
     material: PAPER
     model_data: 7300
     slots:
     - 51
     - 52
     - 53
-    display_name: '&#f7d27aTrainers'
+    display_name: '&#f7d27aArena'
     lore:
-    - '&#c9d4ecEvery trainer and your record.'
+    - '&#c9d4ecPvP ladder with weekly prizes.'
     click_commands:
     - '[close]'
-    - '[player] trainers <delay=3>'
+    - '[player] arena <delay=3>'

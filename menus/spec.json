@@ -226,19 +226,19 @@
         {
           "type": "button",
           "color": "navy",
-          "label": "TRAINER",
+          "label": "ARENA",
           "x": 6,
           "y": 5,
           "w": 3,
           "item": {
-            "key": "trainers",
-            "name": "&#f7d27aTrainers",
+            "key": "arena",
+            "name": "&#f7d27aArena",
             "lore": [
-              "&#c9d4ecEvery trainer and your record."
+              "&#c9d4ecPvP ladder with weekly prizes."
             ],
             "click": [
               "[close]",
-              "[player] trainers <delay=3>"
+              "[player] arena <delay=3>"
             ]
           }
         }
