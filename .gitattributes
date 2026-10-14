@@ -1,0 +1,4 @@
+# Release zips must be byte-identical on every checkout: resource-pack-sha1 in server.properties
+# is the SHA-1 of the zip, and a CRLF checkout (Windows core.autocrlf) zips to a different hash.
+* text=auto eol=lf
+*.png binary
