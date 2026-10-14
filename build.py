@@ -35,6 +35,9 @@ BADGES = [
     ('helper', 'HELPER', 0xE203), ('builder', 'BUILDER', 0xE204), ('gymleader', 'GYM LEADER', 0xE205),
     ('champion', 'CHAMPION', 0xE206), ('elite', 'ELITE', 0xE207), ('veteran', 'VETERAN', 0xE208),
     ('ace', 'ACE', 0xE209), ('challenger', 'CHALLENGER', 0xE20A), ('default', 'TRAINER', 0xE20B),
+    # paid ranks, shown before the role badge
+    ('vip', 'VIP', 0xE20C), ('vip_plus', 'VIP+', 0xE20D), ('mvp', 'MVP', 0xE20E), ('mvp_plus', 'MVP+', 0xE20F),
+    ('legend', 'LEGEND', 0xE210),
 ]
 
 

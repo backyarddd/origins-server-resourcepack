@@ -195,6 +195,51 @@
       "chars": [
         "\ue30d"
       ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/store.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue30e"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/store_product.png",
+      "ascent": 13,
+      "height": 89,
+      "chars": [
+        "\ue30f"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/crates.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue310"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/crate_preview.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue311"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/crate_spin.png",
+      "ascent": 13,
+      "height": 107,
+      "chars": [
+        "\ue312"
+      ]
     }
   ]
 }

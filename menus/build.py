@@ -59,11 +59,13 @@ SOLID_CLICK = {'card', 'button', 'icon_button', 'tab'}  # drawn buttons (holes m
 ACTIONS = {'click': 'click_commands', 'left': 'left_click_commands', 'right': 'right_click_commands',
            'shift_left': 'shift_left_click_commands', 'shift_right': 'shift_right_click_commands'}
 # tuples, not sets: spec values may be unhashable and `in` must not raise on them
-TYPES = ('panel', 'card', 'button', 'icon_button', 'tab', 'slot', 'text')
+TYPES = ('panel', 'card', 'button', 'icon_button', 'tab', 'slot', 'text', 'arrow')
 PANEL_STYLES = ('well', 'night', 'stripes')
 CARD_COLORS = ('navy', 'red', 'green', 'gold', 'violet')
 BTN_COLORS = ('red', 'green', 'gold', 'navy', 'done')
 TAB_ICONS = ('left', 'right', 'up', 'down')
+ARROW_ICONS = ('up', 'down')
+SLOT_STYLES = ('pedestal', 'reel')  # absent = plain vanilla slot rings
 TEXT_COLORS = ('cream', 'gold')
 LABEL_MAX = {2: 4, 3: 7, 4: 10}  # button width in cells -> max label characters
 # a typo such as "shift_rigth" must fail validation instead of silently dropping the action
@@ -138,7 +140,7 @@ def _check_elements(m, ids, mods):
         if not ok:
             raise SystemExit(f'{mid}: element {i} {msg}')
 
-    keys = set()
+    keys = {}  # item key -> element type
     for i, e in enumerate(els):
         need(i, isinstance(e, dict), 'must be an object')
         need(i, not set(e) - ELEMENT_KEYS, f'has unknown keys {sorted(set(e) - ELEMENT_KEYS)}')
@@ -176,6 +178,13 @@ def _check_elements(m, ids, mods):
             need(i, isinstance(e.get('label'), str) and e['label'], 'label is required')
             need(i, e.get('color') in TEXT_COLORS, f'color must be one of {TEXT_COLORS}')
             need(i, h == 1, 'h must be 1')
+        elif t == 'arrow':
+            need(i, e.get('icon') in ARROW_ICONS, f'icon must be one of {ARROW_ICONS}')
+            need(i, w == 1 and h == 1, 'w and h must be 1')
+        elif t == 'slot' and 'style' in e:
+            need(i, e['style'] in SLOT_STYLES, f'style must be one of {SLOT_STYLES}')
+            # the reel highlights its middle cell, so it needs one
+            need(i, e['style'] != 'reel' or (h == 1 and w % 2 == 1), 'a reel must be one row with an odd width')
         if 'item' not in e:
             continue
         need(i, t in CLICKABLE, f'type {t} cannot carry an item')
@@ -184,8 +193,9 @@ def _check_elements(m, ids, mods):
         need(i, not set(it) - ITEM_KEYS, f'item has unknown keys {sorted(set(it) - ITEM_KEYS)}')
         k = it.get('key')
         need(i, isinstance(k, str) and ID_RE.fullmatch(k), 'item key must match [a-z][a-z0-9_]*')
-        need(i, k not in keys, f'duplicate item key {k!r}')
-        keys.add(k)
+        # in a mod menu several slot elements may share a key: the mod gets the union of their cells as one group
+        need(i, k not in keys or (mod and t == 'slot' and keys[k] == 'slot'), f'duplicate item key {k!r}')
+        keys[k] = t
         if mod:  # the mod owns names, lore, materials and clicks; the spec only places the key
             need(i, set(it) == {'key'}, f'item of a mod menu must only have "key", found {sorted(set(it) - {"key"})}')
             continue
@@ -444,8 +454,12 @@ def write_layouts(menus, mod_out=MOD_OUT):
     paths = []
     for m in mods:
         path = os.path.join(mod_out, m['id'] + '.json')
+        groups = {}
+        for e in m['elements']:
+            if 'item' in e:
+                groups.setdefault(e['item']['key'], []).extend(slots(e))
         write_json(path, {'id': m['id'], 'rows': m['rows'], 'glyph': m['glyph'],
-                          'slots': {e['item']['key']: slots(e) for e in m['elements'] if 'item' in e}})
+                          'slots': {k: sorted(v) for k, v in groups.items()}})
         paths.append(path)
     _prune(mod_out, '.json', {m['id'] for m in mods})
     return paths
@@ -477,7 +491,8 @@ def figma(spec_path=SPEC, figma_dir=FIGMA, out_dir=FIGMA_OUT):
         if not os.path.isfile(p):
             raise SystemExit(f'missing {rel(p)}')
         with open(p, encoding='utf-8') as f:
-            src[n] = f.read()
+            # full-line // comments are for readers of the source; dropping them keeps the run scripts under FIGMA_MAX
+            src[n] = ''.join(line for line in f if not line.lstrip().startswith('//'))
     runs = {'kit.run.js': src['lib'] + '\n' + src['kit'],
             'menus.run.js': src['lib'] + '\nconst SPEC = ' + json.dumps(figma_spec(spec), separators=(',', ':')) + ';\n' + src['menus']}
     for name, text in runs.items():
@@ -655,6 +670,12 @@ def selftest():
     _rejects(mutated(lambda m: btn(m)['item'].update(click=['[openguimenu] nope'])), 'not in the spec')
     mutated(lambda m: btn(m)['item'].update(click=['[openguimenu] t']))()  # a menu may reopen itself
     _rejects(mutated(lambda m: m.update(renderer='other')), 'renderer')
+    _rejects(mutated(lambda m: m['elements'].append({'type': 'arrow', 'icon': 'left', 'x': 0, 'y': 0})), 'icon must be')
+    _rejects(mutated(lambda m: m['elements'].append({'type': 'slot', 'style': 'odd', 'x': 0, 'y': 0})), 'style must be')
+    _rejects(mutated(lambda m: m['elements'].append({'type': 'slot', 'style': 'reel', 'x': 0, 'y': 0, 'w': 4})), 'odd width')
+    _rejects(mutated(lambda m: m['elements'].extend([{'type': 'slot', 'x': 0, 'y': 0, 'item': {'key': 'g', 'name': 'n',
+             'material': 'STONE'}}, {'type': 'slot', 'x': 2, 'y': 0, 'item': {'key': 'g', 'name': 'n', 'material': 'STONE'}}])),
+             'duplicate item key')  # only mod menus may share a key
 
     def mini_mod():
         s = mini()
@@ -664,6 +685,12 @@ def selftest():
         return s
 
     validate(mini_mod())
+    shared = mini_mod()
+    shared['menus'][1]['elements'].append({'type': 'slot', 'x': 3, 'y': 0, 'item': {'key': 'grid'}})
+    validate(shared)
+    with tempfile.TemporaryDirectory() as tmp:
+        write_layouts(shared['menus'], tmp)
+        assert _load(os.path.join(tmp, 'mm.json'))['slots'] == {'grid': [0, 1, 3], 'ok': [9, 10]}
 
     def mod_mutated(fn):
         s = mini_mod()
@@ -673,6 +700,8 @@ def selftest():
     _rejects(mod_mutated(lambda s: s['menus'][1]['elements'][1]['item'].update(name='n')), 'must only have "key"')
     _rejects(mod_mutated(lambda s: s['menus'][1]['elements'][0]['item'].update(material='STONE')), 'must only have "key"')
     _rejects(mod_mutated(lambda s: s['menus'][1].update(open_command=['mm'])), 'mod menu cannot have open_command')
+    _rejects(mod_mutated(lambda s: s['menus'][1]['elements'].append(  # a shared key is for slots only
+        {'type': 'button', 'color': 'red', 'label': 'OK', 'x': 2, 'y': 1, 'w': 2, 'item': {'key': 'grid'}})), 'duplicate item key')
     _rejects(mod_mutated(lambda s: s['menus'][1].update(dynamic={})), 'mod menu cannot have dynamic')
     _rejects(mod_mutated(lambda s: btn(s['menus'][0])['item'].update(click=['[openguimenu] mm'])), 'mod menu')
     _rejects(mod_mutated(lambda s: s.update(commands=[{'id': 'c', 'command': 'c', 'actions': ['[openguimenu] mm']}])),
@@ -777,8 +806,9 @@ def selftest():
 
         fonts = _load(os.path.join(pack, 'assets', 'origins', 'font', 'menus.json'))['providers']
         assert fonts[0] == {'type': 'space', 'advances': {SHIFT_IN: -8, SHIFT_OUT: -169}}
-        assert [p['type'] for p in fonts[1:]] == ['bitmap'] * 21
-        assert [p['height'] for p in fonts[1:]] == [125, 89, 71, 107, 125, 125, 89, 125, 125, 107, 125, *[125] * 7, 107, 89, 125]
+        assert [p['type'] for p in fonts[1:]] == ['bitmap'] * 26
+        assert [p['height'] for p in fonts[1:]] == [125, 89, 71, 107, 125, 125, 89, 125, 125, 107, 125, *[125] * 7, 107, 89, 125,
+                                                    125, 89, 125, 125, 107]
 
         def ymenu(name):
             with open(os.path.join(dm, name + '.yml'), encoding='utf-8') as f:
@@ -790,13 +820,14 @@ def selftest():
         assert spawn['slots'] == [0, 1, 2, 9, 10, 11] and spawn['material'] == 'PAPER' and spawn['model_data'] == 7300
         assert list(ymenu('gui_menus')['gui_menus']) == ['menu', 'rtp_confirm', 'warps', 'spawn_cmd', 'rules_cmd', 'discord_cmd', 'help_cmd']
         mod_ids = [m['id'] for m in real['menus'] if m.get('renderer') == 'mod']
-        assert len(mod_ids) == 18
+        assert len(mod_ids) == 23
         assert not any(os.path.exists(os.path.join(dm, i + '.yml')) for i in mod_ids)
         assert sorted(os.listdir(mod)) == sorted(i + '.json' for i in mod_ids), os.listdir(mod)
         market = _load(os.path.join(mod, 'market.json'))
         assert market['id'] == 'market' and market['rows'] == 6 and market['glyph'] == 'E304'
         assert market['slots']['sell'] == [7, 8] and market['slots']['close'] == [53]
         assert list(market['slots'])[:3] == ['grid', 'sell', 'mine']
+        assert _load(os.path.join(mod, 'crates.json'))['slots']['crate'] == [19, 21, 23, 25, 28, 30, 32, 34]
         assert 'warp_1' not in ymenu('warps')['items']  # the base page has no warp items; warps_sync adds them
         spawn_cmd = ymenu('spawn_cmd')
         assert spawn_cmd['register_command'] is True and spawn_cmd['open_command'] == ['spawn']

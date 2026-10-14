@@ -130,5 +130,60 @@
       "fill": "8592AD",
       "text": "222838"
     }
+  },
+  {
+    "group": "vip",
+    "label": "VIP",
+    "char": "\ue20c",
+    "codepoint": "E20C",
+    "width": 17,
+    "hex": {
+      "fill": "33A35F",
+      "text": "0B2E18"
+    }
+  },
+  {
+    "group": "vip_plus",
+    "label": "VIP+",
+    "char": "\ue20d",
+    "codepoint": "E20D",
+    "width": 21,
+    "hex": {
+      "fill": "3A7BD5",
+      "text": "0A1F3D"
+    }
+  },
+  {
+    "group": "mvp",
+    "label": "MVP",
+    "char": "\ue20e",
+    "codepoint": "E20E",
+    "width": 19,
+    "hex": {
+      "fill": "8B5CF6",
+      "text": "22104A"
+    }
+  },
+  {
+    "group": "mvp_plus",
+    "label": "MVP+",
+    "char": "\ue20f",
+    "codepoint": "E20F",
+    "width": 23,
+    "hex": {
+      "fill": "F2C462",
+      "text": "4A3206"
+    }
+  },
+  {
+    "group": "legend",
+    "label": "LEGEND",
+    "char": "\ue210",
+    "codepoint": "E210",
+    "width": 30,
+    "hex": {
+      "fill": "FF7AC8",
+      "text": "4A0A2C"
+    }
   }
 ]

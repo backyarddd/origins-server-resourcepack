@@ -111,6 +111,12 @@ function buildControls() {
     items.push(cellComp(s, `Slots/${w}x${h}`, w, h, gx, gy, r => { slotRings(r, 0, 0, w, h); holes(r, 0, 0, w, h); }));
     gx += CELL * w + 20;
   }
+  // slot styles and reel arrows; pedestal and reel draw outside their cells, so their rasters get a margin
+  const sy = gy + 100;
+  items.push(caption(s, 'slot styles: pedestal (1 x 2 shown stacked), reel (middle cell picked); reel arrows', 30, sy));
+  items.push(comp(s, 'Slots/pedestal', CELL + 12, CELL * 2, 30, sy + 30, r => { slotRings(r, 0, 0, 1, 2, 'pedestal'); holes(r, 0, 0, 1, 2); }, GX - 6, GY));
+  items.push(comp(s, 'Slots/reel 9x1', CELL * 9, CELL + 4, 80, sy + 30, r => { slotRings(r, 0, 0, 9, 1, 'reel'); holes(r, 0, 0, 9, 1); }, GX, GY - 2));
+  ['down', 'up'].forEach((dir, i) => items.push(cellComp(s, `Arrow/${dir}`, 1, 1, 260 + i * 26, sy + 30, r => arrow(r, dir, 0, 0))));
   finish(s, items);
 }
 
@@ -132,6 +138,8 @@ function buildCards() {
   [['navy', 'pokeball', 'SPAWN'], ['navy', 'compass', 'RTP'], ['navy', 'house', 'HOMES'], ['red', 'back', 'BACK'], ['green', 'leave', 'LEAVE'],
     ['gold', 'trophy', 'REWARDS'], ['violet', 'star', 'EVENTS'], ['gold', 'coin', 'SHOP']].forEach(([color, icon, label], i) =>
     items.push(cellComp(s, `Card/example/${label}`, 3, 2, 30 + i * 70, sy + 30, r => card(r, color, icon, label, 0, 0, 3, 2))));
+  [['gold', 'coin', 'FUNDS'], ['violet', 'star', 'SALE']].forEach(([color, icon, label], i) =>  // one row: icon beside the label
+    items.push(cellComp(s, `Card/example/${label} 3x1`, 3, 1, 590 + i * 70, sy + 30, r => card(r, color, icon, label, 0, 0, 3, 1))));
   const py = sy + 110;
   items.push(caption(s, 'panels (backgrounds behind cards, slots and text)', 30, py));
   let x = 30;
