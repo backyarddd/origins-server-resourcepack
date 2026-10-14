@@ -247,7 +247,7 @@ function panel(r, style, cx, cy, cw, ch) {
     for (let j = 1; j < h - 1; j++) r.rect(x + 1, y + j, w - 2, 1, SKY[Math.min(SKY.length - 1, Math.floor((j - 1) / (h - 2) * SKY.length))]);
     for (let j = 3; j < h - 3; j++) for (let i = 3; i < w - 3; i++) {
       const n = (((x + i) * 73856093) ^ ((y + j) * 19349663)) >>> 0;
-      if (n % 61 === 0) r.set(x + i, y + j, n % 3 === 0 ? C.cream : n % 3 === 1 ? C.glow : C.slotLite);
+      if (n % 61 === 0) { const c = n % 3 === 0 ? C.cream : n % 3 === 1 ? C.glow : C.slotLite; r.set(x + i, y + j, c); (r.stars = r.stars || new Map()).set((x + i) + ',' + (y + j), c); }
     }
     well(r, x, y, w, h);
   } else if (style === 'stripes') {
@@ -304,13 +304,27 @@ function text(r, label, color, cx, cy, cw) {
   drawText(r, label, x, y, tc, C.O);
 }
 
+// A star the night panel placed and nothing has painted over since. Colour alone cannot tell it from the slot rings
+// (slotLite) or button text, so clearStarsAround only touches the stars panel() recorded.
+function liveStar(r, x, y) { return !!r.stars && r.stars.get(x + ',' + y) === r.get(x, y); }
+// Stars left in the 2px gaps around a drawn button/card/icon button (rect {x, y, w, h}): take the nearest colour to
+// the left that is neither a star nor part of the element itself.
+function clearStarsAround(r, x, y, w, h) {
+  const inEx = (i, j) => i >= x && i < x + w && j >= y && j < y + h;
+  for (let j = y - 2; j <= y + h + 1; j++) for (let i = x - 2; i <= x + w + 1; i++) {
+    if (inEx(i, j) || !liveStar(r, i, j)) continue;
+    let k = i - 1; while (liveStar(r, k, j) || inEx(k, j)) k--;
+    r.set(i, j, r.get(k, j)); r.stars.delete(i + ',' + j);
+  }
+}
+
 // One spec element (menus/spec.json) onto a raster; slot holes are punched after every element is drawn.
 function drawElement(r, e) {
   const w = e.w || 1, h = e.h || 1;
   if (e.type === 'panel') panel(r, e.style, e.x, e.y, w, h);
-  else if (e.type === 'card') card(r, e.color, e.icon, e.label, e.x, e.y, w, h);
-  else if (e.type === 'button') button(r, e.color, e.label, e.x, e.y, w);
-  else if (e.type === 'icon_button') iconButton(r, e.color, e.icon, e.x, e.y);
+  else if (e.type === 'card') { card(r, e.color, e.icon, e.label, e.x, e.y, w, h); clearStarsAround(r, cellX(e.x) + 1, cellY(e.y) + 1, CELL * w - 2, CELL * h - 2); }
+  else if (e.type === 'button') { button(r, e.color, e.label, e.x, e.y, w); clearStarsAround(r, cellX(e.x) + 1, cellY(e.y) + 1, CELL * w - 2, 16); }
+  else if (e.type === 'icon_button') { iconButton(r, e.color, e.icon, e.x, e.y); clearStarsAround(r, cellX(e.x) + 1, cellY(e.y) + 1, 16, 16); }
   else if (e.type === 'tab') tab(r, e.color, e.icon, e.x, e.y, h);
   else if (e.type === 'slot') slotRings(r, e.x, e.y, w, h);
   else if (e.type === 'text') text(r, e.label, e.color, e.x, e.y, w);
