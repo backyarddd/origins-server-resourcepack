@@ -789,6 +789,168 @@
       ]
     },
     {
+      "id": "arena_fight",
+      "glyph": "E31A",
+      "rows": 4,
+      "title": "Arena",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 3
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "icon": "star",
+          "label": "RIVAL",
+          "x": 0,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "details"
+          }
+        },
+        {
+          "type": "slot",
+          "x": 4,
+          "y": 1,
+          "item": {
+            "key": "preview"
+          }
+        },
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "trophy",
+          "label": "ELO",
+          "x": 6,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "price"
+          }
+        },
+        {
+          "type": "text",
+          "label": "READY TO BATTLE?",
+          "color": "cream",
+          "x": 0,
+          "y": 2,
+          "w": 9
+        },
+        {
+          "type": "button",
+          "color": "red",
+          "label": "CANCEL",
+          "x": 1,
+          "y": 3,
+          "w": 3,
+          "item": {
+            "key": "cancel"
+          }
+        },
+        {
+          "type": "button",
+          "color": "green",
+          "label": "FIGHT",
+          "x": 5,
+          "y": 3,
+          "w": 3,
+          "item": {
+            "key": "confirm"
+          }
+        }
+      ]
+    },
+    {
+      "id": "arena_submit",
+      "glyph": "E31B",
+      "rows": 4,
+      "title": "Arena",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 3
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "icon": "pokeball",
+          "label": "TEAM",
+          "x": 0,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "details"
+          }
+        },
+        {
+          "type": "slot",
+          "x": 4,
+          "y": 1,
+          "item": {
+            "key": "preview"
+          }
+        },
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "trophy",
+          "label": "ELO",
+          "x": 6,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "price"
+          }
+        },
+        {
+          "type": "text",
+          "label": "ENTER THIS TEAM?",
+          "color": "cream",
+          "x": 0,
+          "y": 2,
+          "w": 9
+        },
+        {
+          "type": "button",
+          "color": "red",
+          "label": "CANCEL",
+          "x": 1,
+          "y": 3,
+          "w": 3,
+          "item": {
+            "key": "cancel"
+          }
+        },
+        {
+          "type": "button",
+          "color": "green",
+          "label": "SUBMIT",
+          "x": 5,
+          "y": 3,
+          "w": 3,
+          "item": {
+            "key": "confirm"
+          }
+        }
+      ]
+    },
+    {
       "id": "pokemon_detail",
       "glyph": "E307",
       "rows": 6,

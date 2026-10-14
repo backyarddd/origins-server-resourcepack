@@ -72,6 +72,24 @@
     },
     {
       "type": "bitmap",
+      "file": "origins:menu/arena_fight.png",
+      "ascent": 13,
+      "height": 89,
+      "chars": [
+        "\ue31a"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/arena_submit.png",
+      "ascent": 13,
+      "height": 89,
+      "chars": [
+        "\ue31b"
+      ]
+    },
+    {
+      "type": "bitmap",
       "file": "origins:menu/pokemon_detail.png",
       "ascent": 13,
       "height": 125,
