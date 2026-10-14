@@ -76,7 +76,8 @@
               "&#c9d4ecyour homes."
             ],
             "click": [
-              "[openguimenu] homes"
+              "[close]",
+              "[player] homes <delay=3>"
             ]
           }
         },
@@ -267,273 +268,12 @@
         },
         {
           "type": "slot",
-          "x": 2,
+          "x": 0,
           "y": 1,
+          "w": 9,
+          "h": 2,
           "item": {
-            "key": "home_1",
-            "material": "RED_BED",
-            "name": "&#f7d27aHome 1",
-            "lore": [
-              "&#9aa6c4Your default /sethome home",
-              "&#c9d4ecLeft-click: teleport",
-              "&#c9d4ecRight-click: set here",
-              "&#c9d4ecShift + right-click: delete"
-            ],
-            "left": [
-              "[close]",
-              "[player] home home"
-            ],
-            "right": [
-              "[close]",
-              "[player] sethome home"
-            ],
-            "shift_right": [
-              "[close]",
-              "[player] delhome home"
-            ]
-          }
-        },
-        {
-          "type": "slot",
-          "x": 3,
-          "y": 1,
-          "item": {
-            "key": "home_2",
-            "material": "ORANGE_BED",
-            "name": "&#f7d27aHome 2",
-            "lore": [
-              "&#c9d4ecLeft-click: teleport",
-              "&#c9d4ecRight-click: set here",
-              "&#c9d4ecShift + right-click: delete"
-            ],
-            "left": [
-              "[close]",
-              "[player] home 2"
-            ],
-            "right": [
-              "[close]",
-              "[player] sethome 2"
-            ],
-            "shift_right": [
-              "[close]",
-              "[player] delhome 2"
-            ]
-          }
-        },
-        {
-          "type": "slot",
-          "x": 4,
-          "y": 1,
-          "item": {
-            "key": "home_3",
-            "material": "YELLOW_BED",
-            "name": "&#f7d27aHome 3",
-            "lore": [
-              "&#c9d4ecLeft-click: teleport",
-              "&#c9d4ecRight-click: set here",
-              "&#c9d4ecShift + right-click: delete"
-            ],
-            "left": [
-              "[close]",
-              "[player] home 3"
-            ],
-            "right": [
-              "[close]",
-              "[player] sethome 3"
-            ],
-            "shift_right": [
-              "[close]",
-              "[player] delhome 3"
-            ]
-          }
-        },
-        {
-          "type": "slot",
-          "x": 5,
-          "y": 1,
-          "item": {
-            "key": "home_4",
-            "material": "LIME_BED",
-            "name": "&#f7d27aHome 4",
-            "lore": [
-              "&#c9d4ecLeft-click: teleport",
-              "&#c9d4ecRight-click: set here",
-              "&#c9d4ecShift + right-click: delete"
-            ],
-            "left": [
-              "[close]",
-              "[player] home 4"
-            ],
-            "right": [
-              "[close]",
-              "[player] sethome 4"
-            ],
-            "shift_right": [
-              "[close]",
-              "[player] delhome 4"
-            ]
-          }
-        },
-        {
-          "type": "slot",
-          "x": 6,
-          "y": 1,
-          "item": {
-            "key": "home_5",
-            "material": "GREEN_BED",
-            "name": "&#f7d27aHome 5",
-            "lore": [
-              "&#c9d4ecLeft-click: teleport",
-              "&#c9d4ecRight-click: set here",
-              "&#c9d4ecShift + right-click: delete"
-            ],
-            "left": [
-              "[close]",
-              "[player] home 5"
-            ],
-            "right": [
-              "[close]",
-              "[player] sethome 5"
-            ],
-            "shift_right": [
-              "[close]",
-              "[player] delhome 5"
-            ]
-          }
-        },
-        {
-          "type": "slot",
-          "x": 2,
-          "y": 2,
-          "item": {
-            "key": "home_6",
-            "material": "CYAN_BED",
-            "name": "&#f7d27aHome 6",
-            "lore": [
-              "&#c9d4ecLeft-click: teleport",
-              "&#c9d4ecRight-click: set here",
-              "&#c9d4ecShift + right-click: delete"
-            ],
-            "left": [
-              "[close]",
-              "[player] home 6"
-            ],
-            "right": [
-              "[close]",
-              "[player] sethome 6"
-            ],
-            "shift_right": [
-              "[close]",
-              "[player] delhome 6"
-            ]
-          }
-        },
-        {
-          "type": "slot",
-          "x": 3,
-          "y": 2,
-          "item": {
-            "key": "home_7",
-            "material": "LIGHT_BLUE_BED",
-            "name": "&#f7d27aHome 7",
-            "lore": [
-              "&#c9d4ecLeft-click: teleport",
-              "&#c9d4ecRight-click: set here",
-              "&#c9d4ecShift + right-click: delete"
-            ],
-            "left": [
-              "[close]",
-              "[player] home 7"
-            ],
-            "right": [
-              "[close]",
-              "[player] sethome 7"
-            ],
-            "shift_right": [
-              "[close]",
-              "[player] delhome 7"
-            ]
-          }
-        },
-        {
-          "type": "slot",
-          "x": 4,
-          "y": 2,
-          "item": {
-            "key": "home_8",
-            "material": "BLUE_BED",
-            "name": "&#f7d27aHome 8",
-            "lore": [
-              "&#c9d4ecLeft-click: teleport",
-              "&#c9d4ecRight-click: set here",
-              "&#c9d4ecShift + right-click: delete"
-            ],
-            "left": [
-              "[close]",
-              "[player] home 8"
-            ],
-            "right": [
-              "[close]",
-              "[player] sethome 8"
-            ],
-            "shift_right": [
-              "[close]",
-              "[player] delhome 8"
-            ]
-          }
-        },
-        {
-          "type": "slot",
-          "x": 5,
-          "y": 2,
-          "item": {
-            "key": "home_9",
-            "material": "PURPLE_BED",
-            "name": "&#f7d27aHome 9",
-            "lore": [
-              "&#c9d4ecLeft-click: teleport",
-              "&#c9d4ecRight-click: set here",
-              "&#c9d4ecShift + right-click: delete"
-            ],
-            "left": [
-              "[close]",
-              "[player] home 9"
-            ],
-            "right": [
-              "[close]",
-              "[player] sethome 9"
-            ],
-            "shift_right": [
-              "[close]",
-              "[player] delhome 9"
-            ]
-          }
-        },
-        {
-          "type": "slot",
-          "x": 6,
-          "y": 2,
-          "item": {
-            "key": "home_10",
-            "material": "MAGENTA_BED",
-            "name": "&#f7d27aHome 10",
-            "lore": [
-              "&#c9d4ecLeft-click: teleport",
-              "&#c9d4ecRight-click: set here",
-              "&#c9d4ecShift + right-click: delete"
-            ],
-            "left": [
-              "[close]",
-              "[player] home 10"
-            ],
-            "right": [
-              "[close]",
-              "[player] sethome 10"
-            ],
-            "shift_right": [
-              "[close]",
-              "[player] delhome 10"
-            ]
+            "key": "grid"
           }
         },
         {
@@ -543,33 +283,32 @@
           "x": 0,
           "y": 3,
           "item": {
-            "key": "back",
-            "name": "&#f7d27aBack",
-            "lore": [
-              "&#c9d4ecBack to the menu."
-            ],
-            "click": [
-              "[openguimenu] menu"
-            ]
+            "key": "back"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "x": 2,
+          "y": 3,
+          "w": 5,
+          "h": 1,
+          "item": {
+            "key": "info"
           }
         },
         {
           "type": "icon_button",
-          "color": "navy",
-          "icon": "info",
+          "color": "red",
+          "icon": "close",
           "x": 8,
           "y": 3,
           "item": {
-            "key": "info",
-            "name": "&#f7d27aHome limits",
-            "lore": [
-              "&#c9d4ecYour rank sets how many homes",
-              "&#c9d4ecyou can save. Ranking up",
-              "&#c9d4ecunlocks more home slots."
-            ]
+            "key": "close"
           }
         }
-      ]
+      ],
+      "renderer": "mod"
     },
     {
       "id": "rtp_confirm",
@@ -648,6 +387,9 @@
       "glyph": "E303",
       "rows": 5,
       "title": "Warps",
+      "open_command": [
+        "warps"
+      ],
       "dynamic": {
         "source": "ftb_warps",
         "grid": {
@@ -1579,6 +1321,1084 @@
           "type": "button",
           "color": "navy",
           "label": "CLAIM",
+          "x": 6,
+          "y": 2,
+          "w": 3,
+          "item": {
+            "key": "claim_monthly"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "label": "STREAK",
+          "x": 0,
+          "y": 3,
+          "w": 9,
+          "h": 1,
+          "item": {
+            "key": "streak"
+          }
+        },
+        {
+          "type": "button",
+          "color": "navy",
+          "label": "PLAYTIME",
+          "x": 0,
+          "y": 4,
+          "w": 4,
+          "item": {
+            "key": "playtime"
+          }
+        },
+        {
+          "type": "button",
+          "color": "gold",
+          "label": "VOTE",
+          "x": 5,
+          "y": 4,
+          "w": 4,
+          "item": {
+            "key": "vote"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 5,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "x": 2,
+          "y": 5,
+          "w": 5,
+          "h": 1,
+          "item": {
+            "key": "info"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 5,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "rewards_c1",
+      "glyph": "E313",
+      "rows": 6,
+      "title": "Rewards",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 3
+        },
+        {
+          "type": "card",
+          "color": "green",
+          "icon": "coin",
+          "label": "DAILY",
+          "x": 0,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "daily"
+          }
+        },
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "star",
+          "label": "WEEKLY",
+          "x": 3,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "weekly"
+          }
+        },
+        {
+          "type": "card",
+          "color": "violet",
+          "icon": "trophy",
+          "label": "MONTHLY",
+          "x": 6,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "monthly"
+          }
+        },
+        {
+          "type": "button",
+          "color": "done",
+          "label": "CLAIMED",
+          "x": 0,
+          "y": 2,
+          "w": 3,
+          "item": {
+            "key": "claim_daily"
+          }
+        },
+        {
+          "type": "button",
+          "color": "gold",
+          "label": "CLAIM",
+          "x": 3,
+          "y": 2,
+          "w": 3,
+          "item": {
+            "key": "claim_weekly"
+          }
+        },
+        {
+          "type": "button",
+          "color": "navy",
+          "label": "CLAIM",
+          "x": 6,
+          "y": 2,
+          "w": 3,
+          "item": {
+            "key": "claim_monthly"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "label": "STREAK",
+          "x": 0,
+          "y": 3,
+          "w": 9,
+          "h": 1,
+          "item": {
+            "key": "streak"
+          }
+        },
+        {
+          "type": "button",
+          "color": "navy",
+          "label": "PLAYTIME",
+          "x": 0,
+          "y": 4,
+          "w": 4,
+          "item": {
+            "key": "playtime"
+          }
+        },
+        {
+          "type": "button",
+          "color": "gold",
+          "label": "VOTE",
+          "x": 5,
+          "y": 4,
+          "w": 4,
+          "item": {
+            "key": "vote"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 5,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "x": 2,
+          "y": 5,
+          "w": 5,
+          "h": 1,
+          "item": {
+            "key": "info"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 5,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "rewards_c2",
+      "glyph": "E314",
+      "rows": 6,
+      "title": "Rewards",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 3
+        },
+        {
+          "type": "card",
+          "color": "green",
+          "icon": "coin",
+          "label": "DAILY",
+          "x": 0,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "daily"
+          }
+        },
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "star",
+          "label": "WEEKLY",
+          "x": 3,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "weekly"
+          }
+        },
+        {
+          "type": "card",
+          "color": "violet",
+          "icon": "trophy",
+          "label": "MONTHLY",
+          "x": 6,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "monthly"
+          }
+        },
+        {
+          "type": "button",
+          "color": "green",
+          "label": "CLAIM",
+          "x": 0,
+          "y": 2,
+          "w": 3,
+          "item": {
+            "key": "claim_daily"
+          }
+        },
+        {
+          "type": "button",
+          "color": "done",
+          "label": "CLAIMED",
+          "x": 3,
+          "y": 2,
+          "w": 3,
+          "item": {
+            "key": "claim_weekly"
+          }
+        },
+        {
+          "type": "button",
+          "color": "navy",
+          "label": "CLAIM",
+          "x": 6,
+          "y": 2,
+          "w": 3,
+          "item": {
+            "key": "claim_monthly"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "label": "STREAK",
+          "x": 0,
+          "y": 3,
+          "w": 9,
+          "h": 1,
+          "item": {
+            "key": "streak"
+          }
+        },
+        {
+          "type": "button",
+          "color": "navy",
+          "label": "PLAYTIME",
+          "x": 0,
+          "y": 4,
+          "w": 4,
+          "item": {
+            "key": "playtime"
+          }
+        },
+        {
+          "type": "button",
+          "color": "gold",
+          "label": "VOTE",
+          "x": 5,
+          "y": 4,
+          "w": 4,
+          "item": {
+            "key": "vote"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 5,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "x": 2,
+          "y": 5,
+          "w": 5,
+          "h": 1,
+          "item": {
+            "key": "info"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 5,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "rewards_c3",
+      "glyph": "E315",
+      "rows": 6,
+      "title": "Rewards",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 3
+        },
+        {
+          "type": "card",
+          "color": "green",
+          "icon": "coin",
+          "label": "DAILY",
+          "x": 0,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "daily"
+          }
+        },
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "star",
+          "label": "WEEKLY",
+          "x": 3,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "weekly"
+          }
+        },
+        {
+          "type": "card",
+          "color": "violet",
+          "icon": "trophy",
+          "label": "MONTHLY",
+          "x": 6,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "monthly"
+          }
+        },
+        {
+          "type": "button",
+          "color": "done",
+          "label": "CLAIMED",
+          "x": 0,
+          "y": 2,
+          "w": 3,
+          "item": {
+            "key": "claim_daily"
+          }
+        },
+        {
+          "type": "button",
+          "color": "done",
+          "label": "CLAIMED",
+          "x": 3,
+          "y": 2,
+          "w": 3,
+          "item": {
+            "key": "claim_weekly"
+          }
+        },
+        {
+          "type": "button",
+          "color": "navy",
+          "label": "CLAIM",
+          "x": 6,
+          "y": 2,
+          "w": 3,
+          "item": {
+            "key": "claim_monthly"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "label": "STREAK",
+          "x": 0,
+          "y": 3,
+          "w": 9,
+          "h": 1,
+          "item": {
+            "key": "streak"
+          }
+        },
+        {
+          "type": "button",
+          "color": "navy",
+          "label": "PLAYTIME",
+          "x": 0,
+          "y": 4,
+          "w": 4,
+          "item": {
+            "key": "playtime"
+          }
+        },
+        {
+          "type": "button",
+          "color": "gold",
+          "label": "VOTE",
+          "x": 5,
+          "y": 4,
+          "w": 4,
+          "item": {
+            "key": "vote"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 5,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "x": 2,
+          "y": 5,
+          "w": 5,
+          "h": 1,
+          "item": {
+            "key": "info"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 5,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "rewards_c4",
+      "glyph": "E316",
+      "rows": 6,
+      "title": "Rewards",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 3
+        },
+        {
+          "type": "card",
+          "color": "green",
+          "icon": "coin",
+          "label": "DAILY",
+          "x": 0,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "daily"
+          }
+        },
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "star",
+          "label": "WEEKLY",
+          "x": 3,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "weekly"
+          }
+        },
+        {
+          "type": "card",
+          "color": "violet",
+          "icon": "trophy",
+          "label": "MONTHLY",
+          "x": 6,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "monthly"
+          }
+        },
+        {
+          "type": "button",
+          "color": "green",
+          "label": "CLAIM",
+          "x": 0,
+          "y": 2,
+          "w": 3,
+          "item": {
+            "key": "claim_daily"
+          }
+        },
+        {
+          "type": "button",
+          "color": "gold",
+          "label": "CLAIM",
+          "x": 3,
+          "y": 2,
+          "w": 3,
+          "item": {
+            "key": "claim_weekly"
+          }
+        },
+        {
+          "type": "button",
+          "color": "done",
+          "label": "CLAIMED",
+          "x": 6,
+          "y": 2,
+          "w": 3,
+          "item": {
+            "key": "claim_monthly"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "label": "STREAK",
+          "x": 0,
+          "y": 3,
+          "w": 9,
+          "h": 1,
+          "item": {
+            "key": "streak"
+          }
+        },
+        {
+          "type": "button",
+          "color": "navy",
+          "label": "PLAYTIME",
+          "x": 0,
+          "y": 4,
+          "w": 4,
+          "item": {
+            "key": "playtime"
+          }
+        },
+        {
+          "type": "button",
+          "color": "gold",
+          "label": "VOTE",
+          "x": 5,
+          "y": 4,
+          "w": 4,
+          "item": {
+            "key": "vote"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 5,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "x": 2,
+          "y": 5,
+          "w": 5,
+          "h": 1,
+          "item": {
+            "key": "info"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 5,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "rewards_c5",
+      "glyph": "E317",
+      "rows": 6,
+      "title": "Rewards",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 3
+        },
+        {
+          "type": "card",
+          "color": "green",
+          "icon": "coin",
+          "label": "DAILY",
+          "x": 0,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "daily"
+          }
+        },
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "star",
+          "label": "WEEKLY",
+          "x": 3,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "weekly"
+          }
+        },
+        {
+          "type": "card",
+          "color": "violet",
+          "icon": "trophy",
+          "label": "MONTHLY",
+          "x": 6,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "monthly"
+          }
+        },
+        {
+          "type": "button",
+          "color": "done",
+          "label": "CLAIMED",
+          "x": 0,
+          "y": 2,
+          "w": 3,
+          "item": {
+            "key": "claim_daily"
+          }
+        },
+        {
+          "type": "button",
+          "color": "gold",
+          "label": "CLAIM",
+          "x": 3,
+          "y": 2,
+          "w": 3,
+          "item": {
+            "key": "claim_weekly"
+          }
+        },
+        {
+          "type": "button",
+          "color": "done",
+          "label": "CLAIMED",
+          "x": 6,
+          "y": 2,
+          "w": 3,
+          "item": {
+            "key": "claim_monthly"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "label": "STREAK",
+          "x": 0,
+          "y": 3,
+          "w": 9,
+          "h": 1,
+          "item": {
+            "key": "streak"
+          }
+        },
+        {
+          "type": "button",
+          "color": "navy",
+          "label": "PLAYTIME",
+          "x": 0,
+          "y": 4,
+          "w": 4,
+          "item": {
+            "key": "playtime"
+          }
+        },
+        {
+          "type": "button",
+          "color": "gold",
+          "label": "VOTE",
+          "x": 5,
+          "y": 4,
+          "w": 4,
+          "item": {
+            "key": "vote"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 5,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "x": 2,
+          "y": 5,
+          "w": 5,
+          "h": 1,
+          "item": {
+            "key": "info"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 5,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "rewards_c6",
+      "glyph": "E318",
+      "rows": 6,
+      "title": "Rewards",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 3
+        },
+        {
+          "type": "card",
+          "color": "green",
+          "icon": "coin",
+          "label": "DAILY",
+          "x": 0,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "daily"
+          }
+        },
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "star",
+          "label": "WEEKLY",
+          "x": 3,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "weekly"
+          }
+        },
+        {
+          "type": "card",
+          "color": "violet",
+          "icon": "trophy",
+          "label": "MONTHLY",
+          "x": 6,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "monthly"
+          }
+        },
+        {
+          "type": "button",
+          "color": "green",
+          "label": "CLAIM",
+          "x": 0,
+          "y": 2,
+          "w": 3,
+          "item": {
+            "key": "claim_daily"
+          }
+        },
+        {
+          "type": "button",
+          "color": "done",
+          "label": "CLAIMED",
+          "x": 3,
+          "y": 2,
+          "w": 3,
+          "item": {
+            "key": "claim_weekly"
+          }
+        },
+        {
+          "type": "button",
+          "color": "done",
+          "label": "CLAIMED",
+          "x": 6,
+          "y": 2,
+          "w": 3,
+          "item": {
+            "key": "claim_monthly"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "label": "STREAK",
+          "x": 0,
+          "y": 3,
+          "w": 9,
+          "h": 1,
+          "item": {
+            "key": "streak"
+          }
+        },
+        {
+          "type": "button",
+          "color": "navy",
+          "label": "PLAYTIME",
+          "x": 0,
+          "y": 4,
+          "w": 4,
+          "item": {
+            "key": "playtime"
+          }
+        },
+        {
+          "type": "button",
+          "color": "gold",
+          "label": "VOTE",
+          "x": 5,
+          "y": 4,
+          "w": 4,
+          "item": {
+            "key": "vote"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 5,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "x": 2,
+          "y": 5,
+          "w": 5,
+          "h": 1,
+          "item": {
+            "key": "info"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 5,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "rewards_c7",
+      "glyph": "E319",
+      "rows": 6,
+      "title": "Rewards",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 3
+        },
+        {
+          "type": "card",
+          "color": "green",
+          "icon": "coin",
+          "label": "DAILY",
+          "x": 0,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "daily"
+          }
+        },
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "star",
+          "label": "WEEKLY",
+          "x": 3,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "weekly"
+          }
+        },
+        {
+          "type": "card",
+          "color": "violet",
+          "icon": "trophy",
+          "label": "MONTHLY",
+          "x": 6,
+          "y": 0,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "monthly"
+          }
+        },
+        {
+          "type": "button",
+          "color": "done",
+          "label": "CLAIMED",
+          "x": 0,
+          "y": 2,
+          "w": 3,
+          "item": {
+            "key": "claim_daily"
+          }
+        },
+        {
+          "type": "button",
+          "color": "done",
+          "label": "CLAIMED",
+          "x": 3,
+          "y": 2,
+          "w": 3,
+          "item": {
+            "key": "claim_weekly"
+          }
+        },
+        {
+          "type": "button",
+          "color": "done",
+          "label": "CLAIMED",
           "x": 6,
           "y": 2,
           "w": 3,

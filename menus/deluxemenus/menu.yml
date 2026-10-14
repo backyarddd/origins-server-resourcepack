@@ -51,7 +51,8 @@ items:
     - '&#c9d4ecTeleport to, set or delete'
     - '&#c9d4ecyour homes.'
     click_commands:
-    - '[openguimenu] homes'
+    - '[close]'
+    - '[player] homes <delay=3>'
   back:
     material: PAPER
     model_data: 7300
