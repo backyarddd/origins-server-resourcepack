@@ -62,7 +62,7 @@ items:
     - 27
     - 28
     - 29
-    display_name: '&#f7d27aBack'
+    display_name: '&#f7d27aGo Back'
     lore:
     - '&#c9d4ecReturn to your last location.'
     click_commands:
@@ -100,9 +100,9 @@ items:
     material: PAPER
     model_data: 7300
     slots:
-    - 39
-    - 40
-    - 41
+    - 42
+    - 43
+    - 44
     display_name: "&#f7d27aPok\xE9mon Market"
     lore:
     - "&#c9d4ecBuy and sell Pok\xE9mon."
@@ -113,9 +113,9 @@ items:
     material: PAPER
     model_data: 7300
     slots:
-    - 42
-    - 43
-    - 44
+    - 39
+    - 40
+    - 41
     display_name: '&#f7d27aBattle Pass'
     lore:
     - '&#c9d4ecSeason rewards and missions.'

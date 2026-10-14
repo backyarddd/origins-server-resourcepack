@@ -84,14 +84,14 @@
           "type": "card",
           "color": "navy",
           "icon": "back",
-          "label": "BACK",
+          "label": "GO BACK",
           "x": 0,
           "y": 2,
           "w": 3,
           "h": 2,
           "item": {
             "key": "back",
-            "name": "&#f7d27aBack",
+            "name": "&#f7d27aGo Back",
             "lore": [
               "&#c9d4ecReturn to your last location."
             ],
@@ -153,7 +153,7 @@
           "type": "button",
           "color": "gold",
           "label": "POKEMON",
-          "x": 3,
+          "x": 6,
           "y": 4,
           "w": 3,
           "item": {
@@ -172,7 +172,7 @@
           "type": "button",
           "color": "green",
           "label": "PASS",
-          "x": 6,
+          "x": 3,
           "y": 4,
           "w": 3,
           "item": {
