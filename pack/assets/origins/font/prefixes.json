@@ -107,6 +107,51 @@
       "chars": [
         "\ue20b"
       ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/vip.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue20c"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/vip_plus.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue20d"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/mvp.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue20e"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/mvp_plus.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue20f"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/legend.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue210"
+      ]
     }
   ]
 }

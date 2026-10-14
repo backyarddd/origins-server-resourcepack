@@ -182,6 +182,41 @@ ICONS.leave = (() => {
     (x, y, top, bottom) => top ? '78DB98' : bottom ? '26874D' : '33A35F');
   return door.map((row, y) => row.map((c, x) => arrow[y][x] || c));
 })();
+const inPoly = (pts, x, y) => {  // even-odd test of the texel centre
+  let inside = false;
+  for (let i = 0, j = pts.length - 1; i < pts.length; j = i++) {
+    const [xi, yi] = pts[i], [xj, yj] = pts[j], px = x + 0.5, py = y + 0.5;
+    if ((yi > py) !== (yj > py) && px < (xj - xi) * (py - yi) / (yj - yi) + xi) inside = !inside;
+  }
+  return inside;
+};
+// crown: three points over a band set with red and blue stones
+ICONS.crown = maskIcon((x, y) => x >= 2 && x <= 13 && y <= 13 && y >= Math.min(...[2, 7.5, 13].map(p => 3 + 1.3 * Math.abs(x - p))),
+  (x, y, top, bottom) => y === 11 && (x === 4 || x === 11) ? 'E8343F' : y === 11 && (x === 7 || x === 8) ? C.glow : y === 9 ? C.goldLo : goldShade(x, y, top, bottom));
+// bolt: a gold lightning bolt
+ICONS.bolt = maskIcon((x, y) => inPoly([[9.5, 0.5], [2.5, 9], [7, 9], [5, 15.5], [13.5, 6], [8.8, 6], [11.5, 0.5]], x, y),
+  (x, y, top, bottom) => top || x + y < 9 ? C.cream : bottom ? C.goldLo : x > 9 ? C.gold : C.goldHi);
+// gem: a cut blue token, light crown facets over darker pavilion facets
+ICONS.gem = maskIcon((x, y) => inPoly([[4, 1.5], [12, 1.5], [15, 6], [8, 15], [1, 6]], x, y),
+  (x, y) => (x === 4 || x === 5) && y === 3 ? C.cream : y <= 5 ? (x < 8 ? 'BFD3FF' : '8FB0F0') : x < 6 ? C.glow : x < 10 ? '4A74C8' : C.slotLite);
+// crate: a wooden loot crate with gold corner bands and a latch
+ICONS.crate = maskIcon((x, y) => x >= 1 && x <= 14 && y >= 3 && y <= 14 && !(y === 3 && (x === 1 || x === 14)), (x, y) => {
+  if ((x === 7 || x === 8) && y >= 7 && y <= 10) return y === 7 ? C.goldHi : y === 10 ? C.goldLo : C.gold;
+  if (x <= 2 || x >= 13) return x === 1 ? C.goldHi : x === 14 ? C.goldLo : C.gold;
+  if (y === 8) return '4A2A10';
+  if (y < 8) return y === 3 ? 'C8904E' : 'B5793A';
+  return y === 11 || y === 14 ? '6A3E18' : '8A5626';
+});
+// globe: a blue world with cream latitude and meridian lines
+ICONS.globe = maskIcon((x, y) => Math.hypot(x - 7.5, y - 7.5) <= 6.6, (x, y) => {
+  const dx = x - 7.5, dy = y - 7.5, e = (dx / 3.4) ** 2 + (dy / 6.6) ** 2;
+  if (Math.abs(dy) < 0.6 || Math.abs(dx) < 0.6 || (e > 0.7 && e < 1.25) || y === 3 || y === 12) return 'D6E2FA';
+  return dx + dy < -4 ? '8FB0F0' : dx + dy > 5 ? '2E5DC0' : '4A86F0';
+});
+// pointer arrows for a reel: a short gold shaft and a wide head (arrow_down points at the cell below)
+ICONS.arrow_down = maskIcon((x, y) => (x >= 6 && x <= 9 && y >= 2 && y <= 6) || (y >= 7 && y <= 12 && Math.abs(x - 7.5) <= 12.5 - y), goldShade);
+// flipped, with highlight and shade swapped so the light still falls from the top
+ICONS.arrow_up = [...ICONS.arrow_down].reverse().map(row => row.map(c => c === C.goldHi ? C.goldLo : c === C.goldLo ? C.goldHi : c));
 function drawIcon(r, name, x, y) {
   const ic = ICONS[name]; if (!ic) throw new Error('no icon ' + name);
   ic.forEach((row, j) => row.forEach((c, i) => { if (c) r.set(x + i, y + j, c); }));
@@ -260,7 +295,12 @@ function card(r, color, icon, label, cx, cy, cw, ch) {
   const p = CARD[color]; if (!p) throw new Error('card colour ' + color);
   const x = cellX(cx) + 1, y = cellY(cy) + 1, w = CELL * cw - 2, h = CELL * ch - 2;
   plate(r, x, y, w, h, p);
-  if (icon && label) {
+  if (icon && label && ch === 1) {  // one row: icon left of the label, the pair centred
+    const gw = 18 + textWidth(label), gx = x + Math.floor((w - gw) / 2);
+    if (gw > w - 4) throw new Error('icon + label too wide for ' + cw + ' cells: ' + label);
+    drawIcon(r, icon, gx, y);
+    drawText(r, label, gx + 18, y + 4, p.text, p.shadow);
+  } else if (icon && label) {
     drawIcon(r, icon, x + Math.floor((w - 16) / 2), y + Math.floor((h - 28) / 2));
     drawText(r, label, x + Math.floor((w - textWidth(label)) / 2), y + Math.floor((h - 28) / 2) + 20, p.text, p.shadow);
   } else if (icon) drawIcon(r, icon, x + Math.floor((w - 16) / 2), y + Math.floor((h - 16) / 2));
@@ -287,9 +327,38 @@ function tab(r, color, dir, cx, cy, ch) {
   framed(r, x, y, 16, h, p);
   drawMask(r, g, x + Math.floor((16 - g[0].length) / 2), y + Math.floor((h - g.length) / 2), p.text, p.shadow);
 }
-function slotRings(r, cx, cy, cw, ch) {  // vanilla slot borders; the 16x16 interiors are cleared by holes()
-  for (let j = 0; j < ch; j++) for (let i = 0; i < cw; i++) well(r, cellX(cx + i), cellY(cy + j), CELL, CELL, C.slotIn);
+function ring(r, x, y, w, h, tl, br) {  // 1 px frame, light top/left, dark bottom/right
+  r.rect(x, y, w, 1, tl); r.rect(x, y, 1, h, tl); r.rect(x + 1, y + h - 1, w - 1, 1, br); r.rect(x + w - 1, y + 1, 1, h - 1, br);
 }
+// Pedestal: a gold-rimmed well standing on a two-step gold plinth that is wider than the cell. It only grows sideways
+// (the rows above and below may hold pedestals too) and casts a shadow to its right.
+function pedestal(r, X, Y) {
+  for (const [y, h, e] of [[Y + 11, 4, 2], [Y + 14, 4, 4]]) {  // steps: top row, height, overhang per side
+    r.rect(X - 1 - e, y, CELL + 2 + 2 * e, h, C.O);
+    r.rect(X - e, y + 1, CELL + 2 * e, 1, C.goldHi); r.rect(X - e, y + 2, CELL + 2 * e, h - 3, C.gold);
+    r.rect(X - e, y + h - 2, CELL + 2 * e, 1, C.goldLo);
+    r.rect(X + CELL + 1 + e, y + 1, 1, h - 1, C.navyDeep);
+  }
+  r.rect(X - 1, Y, 1, 11, C.O); r.rect(X + CELL, Y, 1, 11, C.O); r.rect(X + CELL + 1, Y + 1, 1, 10, C.navyDeep);
+  ring(r, X, Y, CELL, CELL, C.goldHi, C.goldLo);
+}
+// Reel row: dim navy frames, the middle cell picked out with a bright gold double frame and a blue glow halo.
+function reel(r, cx, cy, cw) {
+  const mid = Math.floor(cw / 2);
+  for (let i = 0; i < cw; i++) if (i !== mid) ring(r, cellX(cx + i), cellY(cy), CELL, CELL, C.navyDeep, C.navyLite);
+  const X = cellX(cx + mid), Y = cellY(cy);
+  ring(r, X - 2, Y - 2, CELL + 4, CELL + 4, C.glow, C.glow);
+  ring(r, X - 1, Y - 1, CELL + 2, CELL + 2, C.gold, C.goldLo);
+  ring(r, X, Y, CELL, CELL, C.goldHi, C.gold);
+}
+function slotRings(r, cx, cy, cw, ch, style) {  // slot borders; the 16x16 interiors are cleared by holes()
+  if (style === 'reel') return reel(r, cx, cy, cw);
+  for (let j = 0; j < ch; j++) for (let i = 0; i < cw; i++) {
+    if (style === 'pedestal') pedestal(r, cellX(cx + i), cellY(cy + j));
+    else well(r, cellX(cx + i), cellY(cy + j), CELL, CELL, C.slotIn);
+  }
+}
+function arrow(r, dir, cx, cy) { drawIcon(r, 'arrow_' + dir, cellX(cx) + 1, cellY(cy) + 1); }
 function holes(r, cx, cy, cw, ch) {
   for (let j = 0; j < ch; j++) for (let i = 0; i < cw; i++) r.rect(cellX(cx + i) + 1, cellY(cy + j) + 1, 16, 16, null);
 }
@@ -327,7 +396,8 @@ function drawElement(r, e) {
   else if (e.type === 'button') { button(r, e.color, e.label, e.x, e.y, w); clearStarsAround(r, cellX(e.x) + 1, cellY(e.y) + 1, CELL * w - 2, 16); }
   else if (e.type === 'icon_button') { iconButton(r, e.color, e.icon, e.x, e.y); clearStarsAround(r, cellX(e.x) + 1, cellY(e.y) + 1, 16, 16); }
   else if (e.type === 'tab') tab(r, e.color, e.icon, e.x, e.y, h);
-  else if (e.type === 'slot') slotRings(r, e.x, e.y, w, h);
+  else if (e.type === 'slot') slotRings(r, e.x, e.y, w, h, e.style);
+  else if (e.type === 'arrow') { arrow(r, e.icon, e.x, e.y); clearStarsAround(r, cellX(e.x) + 1, cellY(e.y) + 1, 16, 16); }
   else if (e.type === 'text') text(r, e.label, e.color, e.x, e.y, w);
   else throw new Error('element type ' + e.type);
 }
