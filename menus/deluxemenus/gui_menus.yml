@@ -2,8 +2,6 @@
 gui_menus:
   menu:
     file: menu.yml
-  homes:
-    file: homes.yml
   rtp_confirm:
     file: rtp_confirm.yml
   warps:

@@ -108,6 +108,69 @@
     },
     {
       "type": "bitmap",
+      "file": "origins:menu/rewards_c1.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue313"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/rewards_c2.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue314"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/rewards_c3.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue315"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/rewards_c4.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue316"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/rewards_c5.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue317"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/rewards_c6.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue318"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/rewards_c7.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue319"
+      ]
+    },
+    {
+      "type": "bitmap",
       "file": "origins:menu/vote.png",
       "ascent": 13,
       "height": 107,

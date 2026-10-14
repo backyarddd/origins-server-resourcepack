@@ -62,7 +62,7 @@ ACTIONS = {'click': 'click_commands', 'left': 'left_click_commands', 'right': 'r
 TYPES = ('panel', 'card', 'button', 'icon_button', 'tab', 'slot', 'text')
 PANEL_STYLES = ('well', 'night', 'stripes')
 CARD_COLORS = ('navy', 'red', 'green', 'gold', 'violet')
-BTN_COLORS = ('red', 'green', 'gold', 'navy')
+BTN_COLORS = ('red', 'green', 'gold', 'navy', 'done')
 TAB_ICONS = ('left', 'right', 'up', 'down')
 TEXT_COLORS = ('cream', 'gold')
 LABEL_MAX = {2: 4, 3: 7, 4: 10}  # button width in cells -> max label characters
@@ -456,6 +456,19 @@ def layouts(spec_path=SPEC, mod_out=MOD_OUT):
         print(rel(p))
 
 
+# Only what lib.js/menus.js draw from: item names, lore, clicks, glyphs and commands never reach Figma, and embedding
+# them pushed menus.run.js past FIGMA_MAX.
+FIGMA_MENU_KEYS = ('id', 'rows', 'title', 'open_command')
+FIGMA_ELEMENT_KEYS = ('type', 'x', 'y', 'w', 'h', 'style', 'color', 'icon', 'label')
+
+
+def figma_spec(spec):
+    return {'menus': [
+        {**{k: m[k] for k in FIGMA_MENU_KEYS if k in m},
+         'elements': [{k: e[k] for k in FIGMA_ELEMENT_KEYS if k in e} for e in m['elements']]}
+        for m in spec['menus']]}
+
+
 def figma(spec_path=SPEC, figma_dir=FIGMA, out_dir=FIGMA_OUT):
     spec = load_spec(spec_path)
     src = {}
@@ -466,7 +479,7 @@ def figma(spec_path=SPEC, figma_dir=FIGMA, out_dir=FIGMA_OUT):
         with open(p, encoding='utf-8') as f:
             src[n] = f.read()
     runs = {'kit.run.js': src['lib'] + '\n' + src['kit'],
-            'menus.run.js': src['lib'] + '\nconst SPEC = ' + json.dumps(spec) + ';\n' + src['menus']}
+            'menus.run.js': src['lib'] + '\nconst SPEC = ' + json.dumps(figma_spec(spec), separators=(',', ':')) + ';\n' + src['menus']}
     for name, text in runs.items():
         if len(text) > FIGMA_MAX:
             raise SystemExit(f'{name}: {len(text)} characters, limit {FIGMA_MAX}')
@@ -694,7 +707,7 @@ def selftest():
     _rejects(real_mutated(lambda s: dyn(s)['grid'].update(w=9)), 'outside the 9 x 5 area')
 
     def second_dynamic(s):
-        menu_of(s, 'homes')['dynamic'] = json.loads(json.dumps(dyn(s)))
+        menu_of(s, 'rtp_confirm')['dynamic'] = json.loads(json.dumps(dyn(s)))
 
     _rejects(real_mutated(second_dynamic), 'only one menu')
     _rejects(real_mutated(lambda s: with_command(s, id='warps_2')), 'reserved for the pages')
@@ -764,20 +777,20 @@ def selftest():
 
         fonts = _load(os.path.join(pack, 'assets', 'origins', 'font', 'menus.json'))['providers']
         assert fonts[0] == {'type': 'space', 'advances': {SHIFT_IN: -8, SHIFT_OUT: -169}}
-        assert [p['type'] for p in fonts[1:]] == ['bitmap'] * 14
-        assert [p['height'] for p in fonts[1:]] == [125, 89, 71, 107, 125, 125, 89, 125, 125, 107, 125, 107, 89, 125]
+        assert [p['type'] for p in fonts[1:]] == ['bitmap'] * 21
+        assert [p['height'] for p in fonts[1:]] == [125, 89, 71, 107, 125, 125, 89, 125, 125, 107, 125, *[125] * 7, 107, 89, 125]
 
         def ymenu(name):
             with open(os.path.join(dm, name + '.yml'), encoding='utf-8') as f:
                 return yaml.safe_load(f)
 
-        home = ymenu('homes')['items']['home_1']
-        assert home['slots'] == [11] and home['material'] == 'RED_BED' and 'model_data' not in home
+        info = ymenu('rtp_confirm')['items']['info']
+        assert info['slots'] == [4] and info['material'] == 'COMPASS' and 'model_data' not in info
         spawn = ymenu('menu')['items']['spawn']
         assert spawn['slots'] == [0, 1, 2, 9, 10, 11] and spawn['material'] == 'PAPER' and spawn['model_data'] == 7300
-        assert list(ymenu('gui_menus')['gui_menus']) == ['menu', 'homes', 'rtp_confirm', 'warps', 'spawn_cmd', 'rules_cmd', 'discord_cmd', 'help_cmd']
+        assert list(ymenu('gui_menus')['gui_menus']) == ['menu', 'rtp_confirm', 'warps', 'spawn_cmd', 'rules_cmd', 'discord_cmd', 'help_cmd']
         mod_ids = [m['id'] for m in real['menus'] if m.get('renderer') == 'mod']
-        assert len(mod_ids) == 10
+        assert len(mod_ids) == 18
         assert not any(os.path.exists(os.path.join(dm, i + '.yml')) for i in mod_ids)
         assert sorted(os.listdir(mod)) == sorted(i + '.json' for i in mod_ids), os.listdir(mod)
         market = _load(os.path.join(mod, 'market.json'))

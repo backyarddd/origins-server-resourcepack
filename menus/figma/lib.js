@@ -218,6 +218,7 @@ const BUTTON = {  // framed() palettes; text + shadow drawn on the fill
   red: { rimHi: 'F7D27A', rimLo: 'B07A22', inHi: 'F0707E', inLo: '6E0F1F', top: 'CC3245', bottom: 'AE2236', text: C.cream, shadow: '4A0B14' },
   green: { rimHi: 'F7D27A', rimLo: 'B07A22', inHi: '78DB98', inLo: '135A2E', top: '33A35F', bottom: '26874D', text: C.cream, shadow: '0C3519' },
   gold: { rimHi: 'FFF1D0', rimLo: '8A5A12', inHi: 'FFE9A8', inLo: 'B07A22', top: 'F2C462', bottom: 'E2B04A', text: C.navy, shadow: null },
+  done: { rimHi: '9AA6C4', rimLo: '4A5576', inHi: '6B7799', inLo: '1E2640', top: '3A4566', bottom: '323C5A', text: '9AA6C4', shadow: C.O },
 };
 const CARD = {  // plate() palettes
   navy: { rimHi: C.rimHi, rimLo: C.rimLo, bevHi: '3A5A9C', bevLo: '142246', fill: C.navyLite, text: C.cream, shadow: C.O },
