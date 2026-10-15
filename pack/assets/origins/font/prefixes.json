@@ -56,6 +56,15 @@
     },
     {
       "type": "bitmap",
+      "file": "origins:font/prefix/league_champion.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue211"
+      ]
+    },
+    {
+      "type": "bitmap",
       "file": "origins:font/prefix/champion.png",
       "ascent": 8,
       "height": 9,
