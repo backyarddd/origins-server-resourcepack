@@ -66,6 +66,17 @@
     }
   },
   {
+    "group": "league_champion",
+    "label": "LEAGUE CHAMPION",
+    "char": "\ue211",
+    "codepoint": "E211",
+    "width": 67,
+    "hex": {
+      "fill": "1B2E5B",
+      "text": "F7D27A"
+    }
+  },
+  {
     "group": "champion",
     "label": "CHAMPION",
     "char": "\ue206",
