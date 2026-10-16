@@ -375,6 +375,24 @@
       "chars": [
         "\ue365"
       ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/shop.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue366"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/shop_items.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue367"
+      ]
     }
   ]
 }
