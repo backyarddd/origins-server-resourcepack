@@ -1,0 +1,298 @@
+{
+  "textures": {
+    "particle": "origins:cosmetic/front_pumpkin_pendant",
+    "skin": "origins:cosmetic/front_pumpkin_pendant"
+  },
+  "elements": [
+    {
+      "from": [
+        7,
+        -4.5,
+        5.5
+      ],
+      "to": [
+        7.5,
+        0,
+        5.75
+      ],
+      "rotation": {
+        "origin": [
+          7.25,
+          -4.5,
+          5.6
+        ],
+        "axis": "z",
+        "angle": 22.5
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            1,
+            9
+          ],
+          "texture": "#skin"
+        },
+        "south": {
+          "uv": [
+            1,
+            0,
+            2,
+            9
+          ],
+          "texture": "#skin"
+        },
+        "west": {
+          "uv": [
+            4,
+            0,
+            4.5,
+            9
+          ],
+          "texture": "#skin"
+        },
+        "east": {
+          "uv": [
+            4.5,
+            0,
+            5,
+            9
+          ],
+          "texture": "#skin"
+        },
+        "up": {
+          "uv": [
+            4,
+            13,
+            5,
+            13.5
+          ],
+          "texture": "#skin"
+        },
+        "down": {
+          "uv": [
+            5,
+            13,
+            6,
+            13.5
+          ],
+          "texture": "#skin"
+        }
+      }
+    },
+    {
+      "from": [
+        8.5,
+        -4.5,
+        5.5
+      ],
+      "to": [
+        9,
+        0,
+        5.75
+      ],
+      "rotation": {
+        "origin": [
+          8.75,
+          -4.5,
+          5.6
+        ],
+        "axis": "z",
+        "angle": -22.5
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            0,
+            3,
+            9
+          ],
+          "texture": "#skin"
+        },
+        "south": {
+          "uv": [
+            3,
+            0,
+            4,
+            9
+          ],
+          "texture": "#skin"
+        },
+        "west": {
+          "uv": [
+            5,
+            0,
+            5.5,
+            9
+          ],
+          "texture": "#skin"
+        },
+        "east": {
+          "uv": [
+            5.5,
+            0,
+            6,
+            9
+          ],
+          "texture": "#skin"
+        },
+        "up": {
+          "uv": [
+            6,
+            13,
+            7,
+            13.5
+          ],
+          "texture": "#skin"
+        },
+        "down": {
+          "uv": [
+            7,
+            13,
+            8,
+            13.5
+          ],
+          "texture": "#skin"
+        }
+      }
+    },
+    {
+      "from": [
+        6.75,
+        -7.5,
+        4.75
+      ],
+      "to": [
+        9.25,
+        -5.5,
+        5.75
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            6,
+            0,
+            11,
+            4
+          ],
+          "texture": "#skin"
+        },
+        "south": {
+          "uv": [
+            11,
+            0,
+            16,
+            4
+          ],
+          "texture": "#skin"
+        },
+        "west": {
+          "uv": [
+            0,
+            9,
+            2,
+            13
+          ],
+          "texture": "#skin"
+        },
+        "east": {
+          "uv": [
+            2,
+            9,
+            4,
+            13
+          ],
+          "texture": "#skin"
+        },
+        "up": {
+          "uv": [
+            4,
+            9,
+            9,
+            11
+          ],
+          "texture": "#skin"
+        },
+        "down": {
+          "uv": [
+            9,
+            9,
+            14,
+            11
+          ],
+          "texture": "#skin"
+        }
+      }
+    },
+    {
+      "from": [
+        7.75,
+        -5.5,
+        5
+      ],
+      "to": [
+        8.25,
+        -4.75,
+        5.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            14,
+            9,
+            15,
+            10.5
+          ],
+          "texture": "#skin"
+        },
+        "south": {
+          "uv": [
+            15,
+            9,
+            16,
+            10.5
+          ],
+          "texture": "#skin"
+        },
+        "west": {
+          "uv": [
+            0,
+            13,
+            1,
+            14.5
+          ],
+          "texture": "#skin"
+        },
+        "east": {
+          "uv": [
+            1,
+            13,
+            2,
+            14.5
+          ],
+          "texture": "#skin"
+        },
+        "up": {
+          "uv": [
+            2,
+            13,
+            3,
+            14
+          ],
+          "texture": "#skin"
+        },
+        "down": {
+          "uv": [
+            3,
+            13,
+            4,
+            14
+          ],
+          "texture": "#skin"
+        }
+      }
+    }
+  ]
+}

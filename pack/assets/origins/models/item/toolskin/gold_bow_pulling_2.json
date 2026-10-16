@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/bow",
+  "textures": {
+    "layer0": "origins:item/toolskin/gold_bow_pulling_2"
+  }
+}

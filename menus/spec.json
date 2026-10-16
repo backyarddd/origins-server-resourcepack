@@ -4715,6 +4715,445 @@
           }
         }
       ]
+    },
+    {
+      "id": "wardrobe",
+      "glyph": "E362",
+      "rows": 6,
+      "title": "Wardrobe",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "star",
+          "label": "WARDROBE",
+          "x": 0,
+          "y": 0,
+          "w": 6,
+          "h": 1,
+          "item": {
+            "key": "header"
+          }
+        },
+        {
+          "type": "button",
+          "color": "gold",
+          "label": "STORE",
+          "x": 6,
+          "y": 0,
+          "w": 3,
+          "item": {
+            "key": "store"
+          }
+        },
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 1,
+          "w": 9,
+          "h": 2
+        },
+        {
+          "type": "text",
+          "label": "EQUIPPED",
+          "color": "gold",
+          "x": 0,
+          "y": 1,
+          "w": 7
+        },
+        {
+          "type": "button",
+          "color": "navy",
+          "label": "HIDE",
+          "x": 7,
+          "y": 1,
+          "w": 2,
+          "item": {
+            "key": "hide"
+          }
+        },
+        {
+          "type": "slot",
+          "x": 0,
+          "y": 2,
+          "w": 8,
+          "h": 1,
+          "item": {
+            "key": "equipped"
+          }
+        },
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 3,
+          "w": 9,
+          "h": 3
+        },
+        {
+          "type": "text",
+          "label": "COLLECTION",
+          "color": "gold",
+          "x": 0,
+          "y": 3,
+          "w": 9
+        },
+        {
+          "type": "slot",
+          "x": 0,
+          "y": 4,
+          "w": 9,
+          "h": 1,
+          "item": {
+            "key": "categories"
+          }
+        },
+        {
+          "type": "slot",
+          "x": 1,
+          "y": 5,
+          "w": 7,
+          "h": 1,
+          "item": {
+            "key": "categories"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 5,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 5,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "wardrobe_list",
+      "glyph": "E363",
+      "rows": 6,
+      "title": "Collection",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "star",
+          "label": "COLLECTION",
+          "x": 0,
+          "y": 0,
+          "w": 6,
+          "h": 1,
+          "item": {
+            "key": "header"
+          }
+        },
+        {
+          "type": "button",
+          "color": "navy",
+          "label": "FILTER",
+          "x": 6,
+          "y": 0,
+          "w": 3,
+          "item": {
+            "key": "filter"
+          }
+        },
+        {
+          "type": "slot",
+          "x": 0,
+          "y": 1,
+          "w": 9,
+          "h": 4,
+          "item": {
+            "key": "grid"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 5,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "navy",
+          "icon": "left",
+          "x": 3,
+          "y": 5,
+          "item": {
+            "key": "prev"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "navy",
+          "icon": "right",
+          "x": 5,
+          "y": 5,
+          "item": {
+            "key": "next"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 5,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "wardrobe_item",
+      "glyph": "E364",
+      "rows": 6,
+      "title": "Cosmetic",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "star",
+          "label": "COSMETIC",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 1,
+          "item": {
+            "key": "header"
+          }
+        },
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 1,
+          "w": 9,
+          "h": 3
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "icon": "star",
+          "label": "DETAILS",
+          "x": 0,
+          "y": 1,
+          "w": 3,
+          "h": 3,
+          "item": {
+            "key": "details"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 4,
+          "y": 2,
+          "item": {
+            "key": "preview"
+          }
+        },
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "coin",
+          "label": "PRICE",
+          "x": 6,
+          "y": 1,
+          "w": 3,
+          "h": 3,
+          "item": {
+            "key": "price"
+          }
+        },
+        {
+          "type": "button",
+          "color": "green",
+          "label": "USE",
+          "x": 0,
+          "y": 4,
+          "w": 3,
+          "item": {
+            "key": "use"
+          }
+        },
+        {
+          "type": "button",
+          "color": "navy",
+          "label": "PREVIEW",
+          "x": 3,
+          "y": 4,
+          "w": 3,
+          "item": {
+            "key": "try"
+          }
+        },
+        {
+          "type": "button",
+          "color": "gold",
+          "label": "BUY",
+          "x": 6,
+          "y": 4,
+          "w": 3,
+          "item": {
+            "key": "buy"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 5,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 5,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "wardrobe_pokemon",
+      "glyph": "E365",
+      "rows": 6,
+      "title": "Choose a Pokemon",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "pokeball",
+          "label": "CHOOSE A POKEMON",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 1,
+          "item": {
+            "key": "header"
+          }
+        },
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 1,
+          "w": 9,
+          "h": 4
+        },
+        {
+          "type": "text",
+          "label": "YOUR PARTY",
+          "color": "gold",
+          "x": 0,
+          "y": 1,
+          "w": 9
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 2,
+          "y": 2,
+          "item": {
+            "key": "party"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 4,
+          "y": 2,
+          "item": {
+            "key": "party"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 6,
+          "y": 2,
+          "item": {
+            "key": "party"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 2,
+          "y": 4,
+          "item": {
+            "key": "party"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 4,
+          "y": 4,
+          "item": {
+            "key": "party"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 6,
+          "y": 4,
+          "item": {
+            "key": "party"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 5,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 5,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
     }
   ],
   "commands": [

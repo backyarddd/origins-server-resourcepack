@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "origins:item/toolskin/pumpkin_hoe"
+  }
+}

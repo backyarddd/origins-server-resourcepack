@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/bow",
+  "textures": {
+    "layer0": "origins:item/toolskin/frost_bow"
+  }
+}

@@ -1,0 +1,475 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "item/bow"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        -80,
+        260,
+        -40
+      ],
+      "translation": [
+        -1,
+        -2,
+        2.5
+      ],
+      "scale": [
+        0.9,
+        0.9,
+        0.9
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        -80,
+        -280,
+        40
+      ],
+      "translation": [
+        -1,
+        -2,
+        2.5
+      ],
+      "scale": [
+        0.9,
+        0.9,
+        0.9
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        -90,
+        25
+      ],
+      "translation": [
+        1.13,
+        3.2,
+        1.13
+      ],
+      "scale": [
+        0.68,
+        0.68,
+        0.68
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        90,
+        -25
+      ],
+      "translation": [
+        1.13,
+        3.2,
+        1.13
+      ],
+      "scale": [
+        0.68,
+        0.68,
+        0.68
+      ]
+    }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "pulling": 1
+      },
+      "model": "item/bow_pulling_0"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "item/bow_pulling_1"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "item/bow_pulling_2"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73101
+      },
+      "model": "origins:item/toolskin/crystal_bow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73101,
+        "pulling": 1
+      },
+      "model": "origins:item/toolskin/crystal_bow_pulling_0"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73101,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "origins:item/toolskin/crystal_bow_pulling_1"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73101,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "origins:item/toolskin/crystal_bow_pulling_2"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73102
+      },
+      "model": "origins:item/toolskin/ember_bow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73102,
+        "pulling": 1
+      },
+      "model": "origins:item/toolskin/ember_bow_pulling_0"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73102,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "origins:item/toolskin/ember_bow_pulling_1"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73102,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "origins:item/toolskin/ember_bow_pulling_2"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73103
+      },
+      "model": "origins:item/toolskin/gold_bow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73103,
+        "pulling": 1
+      },
+      "model": "origins:item/toolskin/gold_bow_pulling_0"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73103,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "origins:item/toolskin/gold_bow_pulling_1"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73103,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "origins:item/toolskin/gold_bow_pulling_2"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73104
+      },
+      "model": "origins:item/toolskin/tidal_bow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73104,
+        "pulling": 1
+      },
+      "model": "origins:item/toolskin/tidal_bow_pulling_0"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73104,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "origins:item/toolskin/tidal_bow_pulling_1"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73104,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "origins:item/toolskin/tidal_bow_pulling_2"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73105
+      },
+      "model": "origins:item/toolskin/verdant_bow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73105,
+        "pulling": 1
+      },
+      "model": "origins:item/toolskin/verdant_bow_pulling_0"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73105,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "origins:item/toolskin/verdant_bow_pulling_1"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73105,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "origins:item/toolskin/verdant_bow_pulling_2"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73106
+      },
+      "model": "origins:item/toolskin/volt_bow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73106,
+        "pulling": 1
+      },
+      "model": "origins:item/toolskin/volt_bow_pulling_0"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73106,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "origins:item/toolskin/volt_bow_pulling_1"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73106,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "origins:item/toolskin/volt_bow_pulling_2"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73107
+      },
+      "model": "origins:item/toolskin/frost_bow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73107,
+        "pulling": 1
+      },
+      "model": "origins:item/toolskin/frost_bow_pulling_0"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73107,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "origins:item/toolskin/frost_bow_pulling_1"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73107,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "origins:item/toolskin/frost_bow_pulling_2"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73108
+      },
+      "model": "origins:item/toolskin/shadow_bow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73108,
+        "pulling": 1
+      },
+      "model": "origins:item/toolskin/shadow_bow_pulling_0"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73108,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "origins:item/toolskin/shadow_bow_pulling_1"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73108,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "origins:item/toolskin/shadow_bow_pulling_2"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73109
+      },
+      "model": "origins:item/toolskin/mystic_bow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73109,
+        "pulling": 1
+      },
+      "model": "origins:item/toolskin/mystic_bow_pulling_0"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73109,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "origins:item/toolskin/mystic_bow_pulling_1"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73109,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "origins:item/toolskin/mystic_bow_pulling_2"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73110
+      },
+      "model": "origins:item/toolskin/dragon_bow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73110,
+        "pulling": 1
+      },
+      "model": "origins:item/toolskin/dragon_bow_pulling_0"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73110,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "origins:item/toolskin/dragon_bow_pulling_1"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73110,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "origins:item/toolskin/dragon_bow_pulling_2"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73111
+      },
+      "model": "origins:item/toolskin/celestial_bow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73111,
+        "pulling": 1
+      },
+      "model": "origins:item/toolskin/celestial_bow_pulling_0"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73111,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "origins:item/toolskin/celestial_bow_pulling_1"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73111,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "origins:item/toolskin/celestial_bow_pulling_2"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73112
+      },
+      "model": "origins:item/toolskin/pumpkin_bow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73112,
+        "pulling": 1
+      },
+      "model": "origins:item/toolskin/pumpkin_bow_pulling_0"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73112,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "origins:item/toolskin/pumpkin_bow_pulling_1"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73112,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "origins:item/toolskin/pumpkin_bow_pulling_2"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73113
+      },
+      "model": "origins:item/toolskin/vanilla/bow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73113,
+        "pulling": 1
+      },
+      "model": "item/bow_pulling_0"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73113,
+        "pulling": 1,
+        "pull": 0.65
+      },
+      "model": "item/bow_pulling_1"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73113,
+        "pulling": 1,
+        "pull": 0.9
+      },
+      "model": "item/bow_pulling_2"
+    }
+  ]
+}

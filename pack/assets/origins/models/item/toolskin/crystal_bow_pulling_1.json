@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/bow",
+  "textures": {
+    "layer0": "origins:item/toolskin/crystal_bow_pulling_1"
+  }
+}

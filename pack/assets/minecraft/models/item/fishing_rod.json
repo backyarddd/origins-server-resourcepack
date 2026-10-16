@@ -1,0 +1,183 @@
+{
+  "parent": "item/handheld_rod",
+  "textures": {
+    "layer0": "item/fishing_rod"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "cast": 1
+      },
+      "model": "item/fishing_rod_cast"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73101
+      },
+      "model": "origins:item/toolskin/crystal_fishing_rod"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73101,
+        "cast": 1
+      },
+      "model": "origins:item/toolskin/crystal_fishing_rod_cast"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73102
+      },
+      "model": "origins:item/toolskin/ember_fishing_rod"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73102,
+        "cast": 1
+      },
+      "model": "origins:item/toolskin/ember_fishing_rod_cast"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73103
+      },
+      "model": "origins:item/toolskin/gold_fishing_rod"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73103,
+        "cast": 1
+      },
+      "model": "origins:item/toolskin/gold_fishing_rod_cast"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73104
+      },
+      "model": "origins:item/toolskin/tidal_fishing_rod"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73104,
+        "cast": 1
+      },
+      "model": "origins:item/toolskin/tidal_fishing_rod_cast"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73105
+      },
+      "model": "origins:item/toolskin/verdant_fishing_rod"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73105,
+        "cast": 1
+      },
+      "model": "origins:item/toolskin/verdant_fishing_rod_cast"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73106
+      },
+      "model": "origins:item/toolskin/volt_fishing_rod"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73106,
+        "cast": 1
+      },
+      "model": "origins:item/toolskin/volt_fishing_rod_cast"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73107
+      },
+      "model": "origins:item/toolskin/frost_fishing_rod"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73107,
+        "cast": 1
+      },
+      "model": "origins:item/toolskin/frost_fishing_rod_cast"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73108
+      },
+      "model": "origins:item/toolskin/shadow_fishing_rod"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73108,
+        "cast": 1
+      },
+      "model": "origins:item/toolskin/shadow_fishing_rod_cast"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73109
+      },
+      "model": "origins:item/toolskin/mystic_fishing_rod"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73109,
+        "cast": 1
+      },
+      "model": "origins:item/toolskin/mystic_fishing_rod_cast"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73110
+      },
+      "model": "origins:item/toolskin/dragon_fishing_rod"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73110,
+        "cast": 1
+      },
+      "model": "origins:item/toolskin/dragon_fishing_rod_cast"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73111
+      },
+      "model": "origins:item/toolskin/celestial_fishing_rod"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73111,
+        "cast": 1
+      },
+      "model": "origins:item/toolskin/celestial_fishing_rod_cast"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73112
+      },
+      "model": "origins:item/toolskin/pumpkin_fishing_rod"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73112,
+        "cast": 1
+      },
+      "model": "origins:item/toolskin/pumpkin_fishing_rod_cast"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73113
+      },
+      "model": "origins:item/toolskin/vanilla/fishing_rod"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73113,
+        "cast": 1
+      },
+      "model": "item/fishing_rod_cast"
+    }
+  ]
+}
