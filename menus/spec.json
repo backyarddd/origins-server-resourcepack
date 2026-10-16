@@ -5154,6 +5154,289 @@
           }
         }
       ]
+    },
+    {
+      "id": "shop",
+      "glyph": "E366",
+      "rows": 6,
+      "title": "Shop",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "coin",
+          "label": "FUNDS",
+          "x": 0,
+          "y": 0,
+          "w": 6,
+          "h": 1,
+          "item": {
+            "key": "balance"
+          }
+        },
+        {
+          "type": "button",
+          "color": "green",
+          "label": "SELL",
+          "x": 6,
+          "y": 0,
+          "w": 3,
+          "item": {
+            "key": "sell"
+          }
+        },
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 1,
+          "w": 9,
+          "h": 4
+        },
+        {
+          "type": "text",
+          "label": "CATEGORIES",
+          "color": "gold",
+          "x": 0,
+          "y": 1,
+          "w": 9
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 0,
+          "y": 2,
+          "item": {
+            "key": "category"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 2,
+          "y": 2,
+          "item": {
+            "key": "category"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 4,
+          "y": 2,
+          "item": {
+            "key": "category"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 6,
+          "y": 2,
+          "item": {
+            "key": "category"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 8,
+          "y": 2,
+          "item": {
+            "key": "category"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 1,
+          "y": 4,
+          "item": {
+            "key": "category"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 3,
+          "y": 4,
+          "item": {
+            "key": "category"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 5,
+          "y": 4,
+          "item": {
+            "key": "category"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 7,
+          "y": 4,
+          "item": {
+            "key": "category"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 5,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "navy",
+          "icon": "left",
+          "x": 1,
+          "y": 5,
+          "item": {
+            "key": "prev"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "x": 2,
+          "y": 5,
+          "w": 5,
+          "h": 1,
+          "item": {
+            "key": "info"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "navy",
+          "icon": "right",
+          "x": 7,
+          "y": 5,
+          "item": {
+            "key": "next"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 5,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "shop_items",
+      "glyph": "E367",
+      "rows": 6,
+      "title": "Shop",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "coin",
+          "label": "FUNDS",
+          "x": 0,
+          "y": 0,
+          "w": 6,
+          "h": 1,
+          "item": {
+            "key": "balance"
+          }
+        },
+        {
+          "type": "button",
+          "color": "green",
+          "label": "SELL",
+          "x": 6,
+          "y": 0,
+          "w": 3,
+          "item": {
+            "key": "sell"
+          }
+        },
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 1,
+          "w": 9,
+          "h": 4
+        },
+        {
+          "type": "slot",
+          "x": 0,
+          "y": 1,
+          "w": 9,
+          "h": 4,
+          "item": {
+            "key": "grid"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 5,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "navy",
+          "icon": "left",
+          "x": 1,
+          "y": 5,
+          "item": {
+            "key": "prev"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "x": 2,
+          "y": 5,
+          "w": 5,
+          "h": 1,
+          "item": {
+            "key": "info"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "navy",
+          "icon": "right",
+          "x": 7,
+          "y": 5,
+          "item": {
+            "key": "next"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 5,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
     }
   ],
   "commands": [
