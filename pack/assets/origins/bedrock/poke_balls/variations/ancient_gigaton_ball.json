@@ -1,0 +1,60 @@
+{
+  "pokeball": "cobblemon:ancient_gigaton_ball",
+  "order": 100,
+  "variations": [
+    {
+      "aspects": [
+        "origins_ball_ball_galaxy"
+      ],
+      "layers": [],
+      "model": "cobblemon:ancient_poke_ball.geo",
+      "poser": "cobblemon:ancient_poke_ball",
+      "texture": "origins:textures/poke_balls/cosmetic/ball_galaxy/ancient_poke_ball.png"
+    },
+    {
+      "aspects": [
+        "origins_ball_ball_gilded"
+      ],
+      "layers": [],
+      "model": "cobblemon:ancient_poke_ball.geo",
+      "poser": "cobblemon:ancient_poke_ball",
+      "texture": "origins:textures/poke_balls/cosmetic/ball_gilded/ancient_poke_ball.png"
+    },
+    {
+      "aspects": [
+        "origins_ball_ball_crystal"
+      ],
+      "layers": [],
+      "model": "cobblemon:ancient_poke_ball.geo",
+      "poser": "cobblemon:ancient_poke_ball",
+      "texture": "origins:textures/poke_balls/cosmetic/ball_crystal/ancient_poke_ball.png"
+    },
+    {
+      "aspects": [
+        "origins_ball_ball_ember"
+      ],
+      "layers": [],
+      "model": "cobblemon:ancient_poke_ball.geo",
+      "poser": "cobblemon:ancient_poke_ball",
+      "texture": "origins:textures/poke_balls/cosmetic/ball_ember/ancient_poke_ball.png"
+    },
+    {
+      "aspects": [
+        "origins_ball_ball_sakura"
+      ],
+      "layers": [],
+      "model": "cobblemon:ancient_poke_ball.geo",
+      "poser": "cobblemon:ancient_poke_ball",
+      "texture": "origins:textures/poke_balls/cosmetic/ball_sakura/ancient_poke_ball.png"
+    },
+    {
+      "aspects": [
+        "origins_ball_ball_pumpkin"
+      ],
+      "layers": [],
+      "model": "cobblemon:ancient_poke_ball.geo",
+      "poser": "cobblemon:ancient_poke_ball",
+      "texture": "origins:textures/poke_balls/cosmetic/ball_pumpkin/ancient_poke_ball.png"
+    }
+  ]
+}

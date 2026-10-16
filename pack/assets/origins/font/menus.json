@@ -339,6 +339,42 @@
       "chars": [
         "\ue336"
       ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/wardrobe.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue362"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/wardrobe_list.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue363"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/wardrobe_item.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue364"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/wardrobe_pokemon.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue365"
+      ]
     }
   ]
 }

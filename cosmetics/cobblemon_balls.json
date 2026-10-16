@@ -1,0 +1,460 @@
+{
+ "balls": {
+  "cobblemon:ancient_azure_ball": {
+   "model": "cobblemon:ancient_poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:ancient_poke_ball"
+  },
+  "cobblemon:ancient_citrine_ball": {
+   "model": "cobblemon:ancient_poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:ancient_poke_ball"
+  },
+  "cobblemon:ancient_feather_ball": {
+   "model": "cobblemon:ancient_poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:ancient_poke_ball"
+  },
+  "cobblemon:ancient_gigaton_ball": {
+   "model": "cobblemon:ancient_poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:ancient_poke_ball"
+  },
+  "cobblemon:ancient_great_ball": {
+   "model": "cobblemon:ancient_poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:ancient_poke_ball"
+  },
+  "cobblemon:ancient_heavy_ball": {
+   "model": "cobblemon:ancient_poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:ancient_poke_ball"
+  },
+  "cobblemon:ancient_ivory_ball": {
+   "model": "cobblemon:ancient_poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:ancient_poke_ball"
+  },
+  "cobblemon:ancient_jet_ball": {
+   "model": "cobblemon:ancient_poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:ancient_poke_ball"
+  },
+  "cobblemon:ancient_leaden_ball": {
+   "model": "cobblemon:ancient_poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:ancient_poke_ball"
+  },
+  "cobblemon:ancient_origin_ball": {
+   "model": "cobblemon:ancient_poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:ancient_poke_ball"
+  },
+  "cobblemon:ancient_poke_ball": {
+   "model": "cobblemon:ancient_poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:ancient_poke_ball"
+  },
+  "cobblemon:ancient_roseate_ball": {
+   "model": "cobblemon:ancient_poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:ancient_poke_ball"
+  },
+  "cobblemon:ancient_slate_ball": {
+   "model": "cobblemon:ancient_poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:ancient_poke_ball"
+  },
+  "cobblemon:ancient_ultra_ball": {
+   "model": "cobblemon:ancient_poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:ancient_poke_ball"
+  },
+  "cobblemon:ancient_verdant_ball": {
+   "model": "cobblemon:ancient_poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:ancient_poke_ball"
+  },
+  "cobblemon:ancient_wing_ball": {
+   "model": "cobblemon:ancient_poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:ancient_poke_ball"
+  },
+  "cobblemon:azure_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:beast_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:beast_ball"
+  },
+  "cobblemon:cherish_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:citrine_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:dive_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:dream_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:dusk_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:fast_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:friend_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:great_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:heal_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:heavy_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:level_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:love_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:lure_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:luxury_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:master_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:moon_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:nest_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:net_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:park_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:poke_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:premier_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:quick_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:repeat_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:roseate_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:safari_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:slate_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:sport_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:strange_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:timer_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:ultra_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  },
+  "cobblemon:verdant_ball": {
+   "model": "cobblemon:poke_ball.geo",
+   "order": 0,
+   "poser": "cobblemon:poke_ball"
+  }
+ },
+ "models": {
+  "cobblemon:ancient_poke_ball.geo": {
+   "cubes": [
+    {
+     "bone": "bottom",
+     "inflate": 0.25,
+     "size": [
+      8,
+      4,
+      8
+     ],
+     "uv": [
+      32,
+      20
+     ]
+    },
+    {
+     "bone": "bottom",
+     "size": [
+      8,
+      4,
+      8
+     ],
+     "uv": [
+      32,
+      0
+     ]
+    },
+    {
+     "bone": "bottom",
+     "size": [
+      5,
+      3,
+      0
+     ],
+     "uv": [
+      0,
+      15
+     ]
+    },
+    {
+     "bone": "lid",
+     "size": [
+      8,
+      4,
+      8
+     ],
+     "uv": [
+      0,
+      0
+     ]
+    },
+    {
+     "bone": "lid",
+     "inflate": 0.26,
+     "size": [
+      8,
+      4,
+      8
+     ],
+     "uv": [
+      0,
+      20
+     ]
+    },
+    {
+     "bone": "lid",
+     "size": [
+      5,
+      3,
+      0
+     ],
+     "uv": [
+      0,
+      12
+     ]
+    },
+    {
+     "bone": "lid",
+     "size": [
+      3,
+      1,
+      3
+     ],
+     "uv": [
+      24,
+      0
+     ]
+    },
+    {
+     "bone": "lid",
+     "size": [
+      3,
+      3,
+      3
+     ],
+     "uv": [
+      10,
+      12
+     ]
+    },
+    {
+     "bone": "lid",
+     "size": [
+      3,
+      3,
+      3
+     ],
+     "uv": [
+      22,
+      12
+     ]
+    },
+    {
+     "bone": "latch",
+     "size": [
+      2,
+      3,
+      0
+     ],
+     "uv": [
+      0,
+      0
+     ]
+    }
+   ],
+   "texture": [
+    64,
+    32
+   ]
+  },
+  "cobblemon:poke_ball.geo": {
+   "cubes": [
+    {
+     "bone": "bottom",
+     "inflate": 0.25,
+     "size": [
+      8,
+      4,
+      8
+     ],
+     "uv": [
+      32,
+      20
+     ]
+    },
+    {
+     "bone": "bottom",
+     "size": [
+      8,
+      4,
+      8
+     ],
+     "uv": [
+      32,
+      0
+     ]
+    },
+    {
+     "bone": "lid",
+     "size": [
+      8,
+      4,
+      8
+     ],
+     "uv": [
+      0,
+      0
+     ]
+    },
+    {
+     "bone": "lid",
+     "size": [
+      2,
+      2,
+      0
+     ],
+     "uv": [
+      0,
+      0
+     ]
+    },
+    {
+     "bone": "lid",
+     "inflate": 0.26,
+     "size": [
+      8,
+      4,
+      8
+     ],
+     "uv": [
+      0,
+      20
+     ]
+    }
+   ],
+   "texture": [
+    64,
+    32
+   ]
+  }
+ },
+ "posers": {
+  "cobblemon:ancient_poke_ball": "inbuilt",
+  "cobblemon:beast_ball": "inbuilt",
+  "cobblemon:poke_ball": "inbuilt"
+ },
+ "source": {
+  "jar": "Cobblemon-fabric-1.8.1+1.21.1.jar",
+  "sha1": "ebbf2dad130391cd39c51ffcf83a1b157951e919"
+ }
+}

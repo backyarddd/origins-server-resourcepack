@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/crossbow",
+  "textures": {
+    "layer0": "origins:item/toolskin/verdant_crossbow_pulling_0"
+  }
+}

@@ -1,0 +1,683 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "item/crossbow_standby"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        -90,
+        0,
+        -60
+      ],
+      "translation": [
+        2,
+        0.1,
+        -3
+      ],
+      "scale": [
+        0.9,
+        0.9,
+        0.9
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        -90,
+        0,
+        30
+      ],
+      "translation": [
+        2,
+        0.1,
+        -3
+      ],
+      "scale": [
+        0.9,
+        0.9,
+        0.9
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        -90,
+        0,
+        -55
+      ],
+      "translation": [
+        1.13,
+        3.2,
+        1.13
+      ],
+      "scale": [
+        0.68,
+        0.68,
+        0.68
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        -90,
+        0,
+        35
+      ],
+      "translation": [
+        1.13,
+        3.2,
+        1.13
+      ],
+      "scale": [
+        0.68,
+        0.68,
+        0.68
+      ]
+    }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "pulling": 1
+      },
+      "model": "item/crossbow_pulling_0"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.58
+      },
+      "model": "item/crossbow_pulling_1"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 1.0
+      },
+      "model": "item/crossbow_pulling_2"
+    },
+    {
+      "predicate": {
+        "charged": 1
+      },
+      "model": "item/crossbow_arrow"
+    },
+    {
+      "predicate": {
+        "charged": 1,
+        "firework": 1
+      },
+      "model": "item/crossbow_firework"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73101
+      },
+      "model": "origins:item/toolskin/crystal_crossbow_standby"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73101,
+        "pulling": 1
+      },
+      "model": "origins:item/toolskin/crystal_crossbow_pulling_0"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73101,
+        "pulling": 1,
+        "pull": 0.58
+      },
+      "model": "origins:item/toolskin/crystal_crossbow_pulling_1"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73101,
+        "pulling": 1,
+        "pull": 1.0
+      },
+      "model": "origins:item/toolskin/crystal_crossbow_pulling_2"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73101,
+        "charged": 1
+      },
+      "model": "origins:item/toolskin/crystal_crossbow_arrow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73101,
+        "charged": 1,
+        "firework": 1
+      },
+      "model": "origins:item/toolskin/crystal_crossbow_firework"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73102
+      },
+      "model": "origins:item/toolskin/ember_crossbow_standby"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73102,
+        "pulling": 1
+      },
+      "model": "origins:item/toolskin/ember_crossbow_pulling_0"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73102,
+        "pulling": 1,
+        "pull": 0.58
+      },
+      "model": "origins:item/toolskin/ember_crossbow_pulling_1"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73102,
+        "pulling": 1,
+        "pull": 1.0
+      },
+      "model": "origins:item/toolskin/ember_crossbow_pulling_2"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73102,
+        "charged": 1
+      },
+      "model": "origins:item/toolskin/ember_crossbow_arrow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73102,
+        "charged": 1,
+        "firework": 1
+      },
+      "model": "origins:item/toolskin/ember_crossbow_firework"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73103
+      },
+      "model": "origins:item/toolskin/gold_crossbow_standby"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73103,
+        "pulling": 1
+      },
+      "model": "origins:item/toolskin/gold_crossbow_pulling_0"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73103,
+        "pulling": 1,
+        "pull": 0.58
+      },
+      "model": "origins:item/toolskin/gold_crossbow_pulling_1"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73103,
+        "pulling": 1,
+        "pull": 1.0
+      },
+      "model": "origins:item/toolskin/gold_crossbow_pulling_2"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73103,
+        "charged": 1
+      },
+      "model": "origins:item/toolskin/gold_crossbow_arrow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73103,
+        "charged": 1,
+        "firework": 1
+      },
+      "model": "origins:item/toolskin/gold_crossbow_firework"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73104
+      },
+      "model": "origins:item/toolskin/tidal_crossbow_standby"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73104,
+        "pulling": 1
+      },
+      "model": "origins:item/toolskin/tidal_crossbow_pulling_0"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73104,
+        "pulling": 1,
+        "pull": 0.58
+      },
+      "model": "origins:item/toolskin/tidal_crossbow_pulling_1"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73104,
+        "pulling": 1,
+        "pull": 1.0
+      },
+      "model": "origins:item/toolskin/tidal_crossbow_pulling_2"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73104,
+        "charged": 1
+      },
+      "model": "origins:item/toolskin/tidal_crossbow_arrow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73104,
+        "charged": 1,
+        "firework": 1
+      },
+      "model": "origins:item/toolskin/tidal_crossbow_firework"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73105
+      },
+      "model": "origins:item/toolskin/verdant_crossbow_standby"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73105,
+        "pulling": 1
+      },
+      "model": "origins:item/toolskin/verdant_crossbow_pulling_0"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73105,
+        "pulling": 1,
+        "pull": 0.58
+      },
+      "model": "origins:item/toolskin/verdant_crossbow_pulling_1"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73105,
+        "pulling": 1,
+        "pull": 1.0
+      },
+      "model": "origins:item/toolskin/verdant_crossbow_pulling_2"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73105,
+        "charged": 1
+      },
+      "model": "origins:item/toolskin/verdant_crossbow_arrow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73105,
+        "charged": 1,
+        "firework": 1
+      },
+      "model": "origins:item/toolskin/verdant_crossbow_firework"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73106
+      },
+      "model": "origins:item/toolskin/volt_crossbow_standby"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73106,
+        "pulling": 1
+      },
+      "model": "origins:item/toolskin/volt_crossbow_pulling_0"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73106,
+        "pulling": 1,
+        "pull": 0.58
+      },
+      "model": "origins:item/toolskin/volt_crossbow_pulling_1"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73106,
+        "pulling": 1,
+        "pull": 1.0
+      },
+      "model": "origins:item/toolskin/volt_crossbow_pulling_2"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73106,
+        "charged": 1
+      },
+      "model": "origins:item/toolskin/volt_crossbow_arrow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73106,
+        "charged": 1,
+        "firework": 1
+      },
+      "model": "origins:item/toolskin/volt_crossbow_firework"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73107
+      },
+      "model": "origins:item/toolskin/frost_crossbow_standby"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73107,
+        "pulling": 1
+      },
+      "model": "origins:item/toolskin/frost_crossbow_pulling_0"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73107,
+        "pulling": 1,
+        "pull": 0.58
+      },
+      "model": "origins:item/toolskin/frost_crossbow_pulling_1"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73107,
+        "pulling": 1,
+        "pull": 1.0
+      },
+      "model": "origins:item/toolskin/frost_crossbow_pulling_2"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73107,
+        "charged": 1
+      },
+      "model": "origins:item/toolskin/frost_crossbow_arrow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73107,
+        "charged": 1,
+        "firework": 1
+      },
+      "model": "origins:item/toolskin/frost_crossbow_firework"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73108
+      },
+      "model": "origins:item/toolskin/shadow_crossbow_standby"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73108,
+        "pulling": 1
+      },
+      "model": "origins:item/toolskin/shadow_crossbow_pulling_0"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73108,
+        "pulling": 1,
+        "pull": 0.58
+      },
+      "model": "origins:item/toolskin/shadow_crossbow_pulling_1"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73108,
+        "pulling": 1,
+        "pull": 1.0
+      },
+      "model": "origins:item/toolskin/shadow_crossbow_pulling_2"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73108,
+        "charged": 1
+      },
+      "model": "origins:item/toolskin/shadow_crossbow_arrow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73108,
+        "charged": 1,
+        "firework": 1
+      },
+      "model": "origins:item/toolskin/shadow_crossbow_firework"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73109
+      },
+      "model": "origins:item/toolskin/mystic_crossbow_standby"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73109,
+        "pulling": 1
+      },
+      "model": "origins:item/toolskin/mystic_crossbow_pulling_0"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73109,
+        "pulling": 1,
+        "pull": 0.58
+      },
+      "model": "origins:item/toolskin/mystic_crossbow_pulling_1"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73109,
+        "pulling": 1,
+        "pull": 1.0
+      },
+      "model": "origins:item/toolskin/mystic_crossbow_pulling_2"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73109,
+        "charged": 1
+      },
+      "model": "origins:item/toolskin/mystic_crossbow_arrow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73109,
+        "charged": 1,
+        "firework": 1
+      },
+      "model": "origins:item/toolskin/mystic_crossbow_firework"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73110
+      },
+      "model": "origins:item/toolskin/dragon_crossbow_standby"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73110,
+        "pulling": 1
+      },
+      "model": "origins:item/toolskin/dragon_crossbow_pulling_0"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73110,
+        "pulling": 1,
+        "pull": 0.58
+      },
+      "model": "origins:item/toolskin/dragon_crossbow_pulling_1"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73110,
+        "pulling": 1,
+        "pull": 1.0
+      },
+      "model": "origins:item/toolskin/dragon_crossbow_pulling_2"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73110,
+        "charged": 1
+      },
+      "model": "origins:item/toolskin/dragon_crossbow_arrow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73110,
+        "charged": 1,
+        "firework": 1
+      },
+      "model": "origins:item/toolskin/dragon_crossbow_firework"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73111
+      },
+      "model": "origins:item/toolskin/celestial_crossbow_standby"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73111,
+        "pulling": 1
+      },
+      "model": "origins:item/toolskin/celestial_crossbow_pulling_0"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73111,
+        "pulling": 1,
+        "pull": 0.58
+      },
+      "model": "origins:item/toolskin/celestial_crossbow_pulling_1"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73111,
+        "pulling": 1,
+        "pull": 1.0
+      },
+      "model": "origins:item/toolskin/celestial_crossbow_pulling_2"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73111,
+        "charged": 1
+      },
+      "model": "origins:item/toolskin/celestial_crossbow_arrow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73111,
+        "charged": 1,
+        "firework": 1
+      },
+      "model": "origins:item/toolskin/celestial_crossbow_firework"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73112
+      },
+      "model": "origins:item/toolskin/pumpkin_crossbow_standby"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73112,
+        "pulling": 1
+      },
+      "model": "origins:item/toolskin/pumpkin_crossbow_pulling_0"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73112,
+        "pulling": 1,
+        "pull": 0.58
+      },
+      "model": "origins:item/toolskin/pumpkin_crossbow_pulling_1"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73112,
+        "pulling": 1,
+        "pull": 1.0
+      },
+      "model": "origins:item/toolskin/pumpkin_crossbow_pulling_2"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73112,
+        "charged": 1
+      },
+      "model": "origins:item/toolskin/pumpkin_crossbow_arrow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73112,
+        "charged": 1,
+        "firework": 1
+      },
+      "model": "origins:item/toolskin/pumpkin_crossbow_firework"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73113
+      },
+      "model": "origins:item/toolskin/vanilla/crossbow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73113,
+        "pulling": 1
+      },
+      "model": "item/crossbow_pulling_0"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73113,
+        "pulling": 1,
+        "pull": 0.58
+      },
+      "model": "item/crossbow_pulling_1"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73113,
+        "pulling": 1,
+        "pull": 1.0
+      },
+      "model": "item/crossbow_pulling_2"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73113,
+        "charged": 1
+      },
+      "model": "item/crossbow_arrow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73113,
+        "charged": 1,
+        "firework": 1
+      },
+      "model": "item/crossbow_firework"
+    }
+  ]
+}

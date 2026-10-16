@@ -6,10 +6,11 @@ Source art: Figma file thHX6Yp5pMOLrryrsSaITZ, page "Prefixes", script packdev/g
 page-level frame prefix_<group> (download_assets, png, scale 1) to src/<group>.png. The export draws the frame over the
 page background (#E5E5E5, never used in a badge), which is keyed out to transparency here (in src/, idempotent).
 
-Writes into pack/: the prefix textures, assets/origins/font/prefixes.json (one bitmap provider per rank) and a reference
-to it in assets/minecraft/font/default.json (other providers already there are kept). Also writes prefixes.json (the
-group -> glyph table for LuckPerms), runs check.py, then zips pack/ deterministically into dist/origins-server-pack.zip
-and prints its SHA-1 for server.properties (resource-pack-sha1).
+Writes into pack/: the cosmetics assets (cosmetics/build.py, see README "Cosmetics"), the prefix textures,
+assets/origins/font/prefixes.json (one bitmap provider per rank) and a reference to it in
+assets/minecraft/font/default.json (other providers already there are kept). Also writes prefixes.json (the group ->
+glyph table for LuckPerms), runs check.py and cosmetics/check.py, then zips pack/ deterministically into
+dist/origins-server-pack.zip and prints its SHA-1 for server.properties (resource-pack-sha1).
 """
 import hashlib
 import json
@@ -23,6 +24,7 @@ from PIL import Image
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import check  # noqa: E402
+from cosmetics import build as cosmetics_build, check as cosmetics_check  # noqa: E402
 
 SRC = os.path.join(HERE, 'src')
 PACK = os.path.join(HERE, 'pack')
@@ -117,6 +119,11 @@ def zip_pack():
 
 if __name__ == '__main__':
     build()
-    check.check(PACK)
+    cosmetics_build.build(PACK, write_json)
+    try:
+        check.check(PACK)
+        cosmetics_check.check(PACK)
+    except AssertionError as e:
+        sys.exit(f'FAIL: {e}')
     sha1, size, n = zip_pack()
     print(f'{DIST}\n{n} files, {size} bytes\nsha1 {sha1}')

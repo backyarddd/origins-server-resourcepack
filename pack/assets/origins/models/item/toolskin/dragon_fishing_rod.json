@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld_rod",
+  "textures": {
+    "layer0": "origins:item/toolskin/dragon_fishing_rod"
+  }
+}

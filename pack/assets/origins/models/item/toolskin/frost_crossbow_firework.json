@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/crossbow",
+  "textures": {
+    "layer0": "origins:item/toolskin/frost_crossbow_firework"
+  }
+}
