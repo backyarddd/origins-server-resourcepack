@@ -837,9 +837,9 @@ def selftest():
 
         fonts = _load(os.path.join(pack, 'assets', 'origins', 'font', 'menus.json'))['providers']
         assert fonts[0] == {'type': 'space', 'advances': {SHIFT_IN: -8, SHIFT_OUT: -169}}
-        assert [p['type'] for p in fonts[1:]] == ['bitmap'] * 43
+        assert [p['type'] for p in fonts[1:]] == ['bitmap'] * 45
         assert [p['height'] for p in fonts[1:]] == [125, 89, 71, 107, 125, 125, 89, 89, 89, 125, 125, 125, 125, 107, 125, *[125] * 7, 107, 89, 125,
-                                                    125, 89, 125, 125, 107, 107, 107, 125, 107, 125, 125, 107, *[125] * 6]
+                                                    125, 89, 125, 125, 107, 107, 107, 125, 107, 125, 125, 107, *[125] * 8]
 
         def ymenu(name):
             with open(os.path.join(dm, name + '.yml'), encoding='utf-8') as f:
@@ -851,7 +851,7 @@ def selftest():
         assert spawn['slots'] == [0, 1, 2, 9, 10, 11] and spawn['material'] == 'PAPER' and spawn['model_data'] == 7300
         assert list(ymenu('gui_menus')['gui_menus']) == ['menu', 'rtp_confirm', 'warps', 'spawn_cmd', 'rules_cmd', 'discord_cmd', 'help_cmd']
         mod_ids = [m['id'] for m in real['menus'] if m.get('renderer') == 'mod']
-        assert len(mod_ids) == 40
+        assert len(mod_ids) == 42
         assert not any(os.path.exists(os.path.join(dm, i + '.yml')) for i in mod_ids)
         assert sorted(os.listdir(mod)) == sorted(i + '.json' for i in mod_ids), os.listdir(mod)
         market = _load(os.path.join(mod, 'market.json'))
