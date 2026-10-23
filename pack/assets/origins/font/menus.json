@@ -393,6 +393,24 @@
       "chars": [
         "\ue367"
       ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/trade.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue368"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/trade_review.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue369"
+      ]
     }
   ]
 }
