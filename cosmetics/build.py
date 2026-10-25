@@ -226,8 +226,11 @@ def effect_json(eid, kind, sheet, n, p):
     comps = {}
     if kind == 'aura':
         comps['cobblemon:emitter_space'] = {'scaling': 'entity'}
-        # active_time 1 with no sleep: restarts every second for as long as the Pokemon exists
-        comps['minecraft:emitter_lifetime_looping'] = {'active_time': 1}
+        # One finite burst per packet: the server resends every 2 s to whoever tracks the Pokemon, so an unequip or a
+        # packet the client dropped (Pokemon mid send-out or not yet rendered) heals within one round. The extra 0.5 s
+        # overlaps consecutive bursts so tick jitter leaves no gap. A looping emitter with no sleep_time stops after one
+        # cycle in Cobblemon 1.8.2, and an endless one could never be cleared.
+        comps['minecraft:emitter_lifetime_once'] = {'active_time': 2.5}
         comps['minecraft:emitter_rate_steady'] = {'spawn_rate': p['rate'], 'max_particles': p.get('max', 20)}
     else:
         comps['minecraft:emitter_lifetime_once'] = {'active_time': life[1]}
