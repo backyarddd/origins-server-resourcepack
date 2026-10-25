@@ -12,8 +12,8 @@
       "cobblemon:emitter_space": {
         "scaling": "entity"
       },
-      "minecraft:emitter_lifetime_looping": {
-        "active_time": 1
+      "minecraft:emitter_lifetime_once": {
+        "active_time": 2.5
       },
       "minecraft:emitter_rate_steady": {
         "spawn_rate": 7,
