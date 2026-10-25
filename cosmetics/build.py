@@ -131,7 +131,7 @@ EFFECTS = {
     'aura_ghost_flames': dict(frames=frames((art.FLAME, P_CYAN_FIRE), (art.FLAME, P_CYAN_FIRE2)), rate=7,
                               shape=box([0.5, 0.5, 0.5], 0.5, [0, 1, 0]), life=(1.0, 1.4), size=shrink(0.2),
                               speed=0.2, accel=[0, 0.7, 0], drag=0.5),
-    # one lap per emitter loop (active_time 1 s), so the ring keeps turning seamlessly
+    # one lap per second; each 2.5 s burst restarts the lap, hidden by the 1.6-2 s particle life
     'aura_season_halo': dict(frames=frames((art.STAR, P_GOLD_STAR), (art.SPARK, P_GOLD_STAR)), rate=10, max=24,
                              shape=point(['math.sin(v.emitter_age * 360) * 0.6', 1.45,
                                           'math.cos(v.emitter_age * 360) * 0.6']),
@@ -220,6 +220,38 @@ PARTS = {
 }
 
 
+# Aura numbers are tuned on a Pikachu, whose hitbox is 0.35 wide and 0.65 tall. Cobblemon exposes the attached entity's
+# hitbox to MoLang as q.entity_width / q.entity_height, so every aura stretches with the Pokemon: horizontal sizes by
+# AURA_KX, heights by AURA_KY (both 1 on the reference Pikachu). The offsets keep a small Pokemon's aura from collapsing
+# onto it. Sprites grow more slowly and the particle count grows with the covered area, capped so a Wailord stays cheap.
+AURA_KX = '((q.entity_width + 0.8) / 1.15)'
+AURA_KY = '((q.entity_height + 0.6) / 1.25)'
+AURA_KSIZE = f'math.clamp(math.sqrt({AURA_KX} * {AURA_KY}), 0.75, 3)'
+AURA_KRATE = f'math.clamp({AURA_KX} * {AURA_KY}, 1, 6)'
+
+
+def scaled(value, factor):
+    """[value] (a number or MoLang text) times the MoLang [factor]; 0 stays 0."""
+    return 0 if value == 0 else f'({value}) * {factor}'
+
+
+def fit_aura(comps):
+    """Scales an aura's emitter shape, sprite size and rate by the attached Pokemon's hitbox (see AURA_KX)."""
+    for key, shape in comps.items():
+        if not key.startswith('minecraft:emitter_shape_'):
+            continue
+        x, y, z = shape['offset']
+        shape['offset'] = [scaled(x, AURA_KX), scaled(y, AURA_KY), scaled(z, AURA_KX)]
+        if 'half_dimensions' in shape:
+            hx, hy, hz = shape['half_dimensions']
+            shape['half_dimensions'] = [scaled(hx, AURA_KX), scaled(hy, AURA_KY), scaled(hz, AURA_KX)]
+    rate = comps['minecraft:emitter_rate_steady']
+    rate['spawn_rate'] = scaled(rate['spawn_rate'], AURA_KRATE)
+    rate['max_particles'] = scaled(rate['max_particles'], AURA_KRATE)
+    board = comps['minecraft:particle_appearance_billboard']
+    board['size'] = [scaled(v, AURA_KSIZE) for v in board['size']]
+
+
 def effect_json(eid, kind, sheet, n, p):
     w, h = sheet.size[0] // n, sheet.size[1]
     life = p['life']
@@ -252,6 +284,8 @@ def effect_json(eid, kind, sheet, n, p):
         'max_lifetime': life[0] if life[0] == life[1] else f'math.random({life[0]}, {life[1]})'}
     comps['minecraft:particle_motion_dynamic'] = {'linear_acceleration': p.get('accel', [0, 0, 0]),
                                                   'linear_drag_coefficient': p.get('drag', 0)}
+    if kind == 'aura':
+        fit_aura(comps)
     effect = {'description': {'identifier': f'{NS}:{eid}',
                               'basic_render_parameters': {'material': 'particles_blend',
                                                           'texture': f'{NS}:{eid}'}},

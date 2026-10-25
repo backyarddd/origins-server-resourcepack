@@ -16,26 +16,26 @@
         "active_time": 2.5
       },
       "minecraft:emitter_rate_steady": {
-        "spawn_rate": 5,
-        "max_particles": 20
+        "spawn_rate": "(5) * math.clamp(((q.entity_width + 0.8) / 1.15) * ((q.entity_height + 0.6) / 1.25), 1, 6)",
+        "max_particles": "(20) * math.clamp(((q.entity_width + 0.8) / 1.15) * ((q.entity_height + 0.6) / 1.25), 1, 6)"
       },
       "minecraft:emitter_shape_box": {
         "offset": [
           0,
-          0.6,
+          "(0.6) * ((q.entity_height + 0.6) / 1.25)",
           0
         ],
         "half_dimensions": [
-          0.55,
-          0.55,
-          0.55
+          "(0.55) * ((q.entity_width + 0.8) / 1.15)",
+          "(0.55) * ((q.entity_height + 0.6) / 1.25)",
+          "(0.55) * ((q.entity_width + 0.8) / 1.15)"
         ],
         "direction": "outwards"
       },
       "minecraft:particle_appearance_billboard": {
         "size": [
-          0.16,
-          0.16
+          "(0.16) * math.clamp(math.sqrt(((q.entity_width + 0.8) / 1.15) * ((q.entity_height + 0.6) / 1.25)), 0.75, 3)",
+          "(0.16) * math.clamp(math.sqrt(((q.entity_width + 0.8) / 1.15) * ((q.entity_height + 0.6) / 1.25)), 0.75, 3)"
         ],
         "facing_camera_mode": "rotate_xyz",
         "uv": {
