@@ -67,10 +67,10 @@
   },
   {
     "group": "league_champion",
-    "label": "LEAGUE CHAMPION",
+    "label": "CHAMPION",
     "char": "\ue211",
     "codepoint": "E211",
-    "width": 67,
+    "width": 40,
     "hex": {
       "fill": "1B2E5B",
       "text": "F7D27A"
@@ -89,10 +89,10 @@
   },
   {
     "group": "champion_iii",
-    "label": "CHAMPION III",
+    "label": "PARAGON III",
     "char": "\ue220",
     "codepoint": "E220",
-    "width": 49,
+    "width": 43,
     "hex": {
       "fill": "FFCF33",
       "text": "5A3A05"
@@ -100,10 +100,10 @@
   },
   {
     "group": "champion_ii",
-    "label": "CHAMPION II",
+    "label": "PARAGON II",
     "char": "\ue21f",
     "codepoint": "E21F",
-    "width": 47,
+    "width": 41,
     "hex": {
       "fill": "FFCF33",
       "text": "5A3A05"
@@ -111,10 +111,10 @@
   },
   {
     "group": "champion_i",
-    "label": "CHAMPION I",
+    "label": "PARAGON I",
     "char": "\ue21e",
     "codepoint": "E21E",
-    "width": 45,
+    "width": 39,
     "hex": {
       "fill": "FFCF33",
       "text": "5A3A05"
@@ -254,10 +254,10 @@
   },
   {
     "group": "champion",
-    "label": "CHAMPION",
+    "label": "PARAGON",
     "char": "\ue206",
     "codepoint": "E206",
-    "width": 40,
+    "width": 34,
     "hex": {
       "fill": "FFCF33",
       "text": "5A3A05"
