@@ -35,6 +35,15 @@ REF = 'origins:prefixes'
 BADGES = [
     ('owner', 'OWNER', 0xE200), ('admin', 'ADMIN', 0xE201), ('moderator', 'MOD', 0xE202),
     ('helper', 'HELPER', 0xE203), ('builder', 'BUILDER', 0xE204), ('gymleader', 'GYM LEADER', 0xE205), ('league_champion', 'LEAGUE CHAMPION', 0xE211),
+    # tiered ranks (numerals drawn as 1 px strokes)
+    ('master', 'MASTER', 0xE221),
+    ('champion_iii', 'CHAMPION III', 0xE220), ('champion_ii', 'CHAMPION II', 0xE21F), ('champion_i', 'CHAMPION I', 0xE21E),
+    ('elite_iii', 'ELITE III', 0xE21D), ('elite_ii', 'ELITE II', 0xE21C), ('elite_i', 'ELITE I', 0xE21B),
+    ('veteran_iii', 'VETERAN III', 0xE21A), ('veteran_ii', 'VETERAN II', 0xE219), ('veteran_i', 'VETERAN I', 0xE218),
+    ('challenger_iii', 'CHALLENGER III', 0xE217), ('challenger_ii', 'CHALLENGER II', 0xE216),
+    ('challenger_i', 'CHALLENGER I', 0xE215),
+    ('ace_iii', 'ACE III', 0xE214), ('ace_ii', 'ACE II', 0xE213), ('ace_i', 'ACE I', 0xE212),
+    # legacy single-tier badges
     ('champion', 'CHAMPION', 0xE206), ('elite', 'ELITE', 0xE207), ('veteran', 'VETERAN', 0xE208),
     ('ace', 'ACE', 0xE209), ('challenger', 'CHALLENGER', 0xE20A), ('default', 'TRAINER', 0xE20B),
     # paid ranks, shown before the role badge
