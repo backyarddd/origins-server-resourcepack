@@ -77,6 +77,182 @@
     }
   },
   {
+    "group": "master",
+    "label": "MASTER",
+    "char": "\ue221",
+    "codepoint": "E221",
+    "width": 31,
+    "hex": {
+      "fill": "7B3FBF",
+      "text": "FFFFFF"
+    }
+  },
+  {
+    "group": "champion_iii",
+    "label": "CHAMPION III",
+    "char": "\ue220",
+    "codepoint": "E220",
+    "width": 49,
+    "hex": {
+      "fill": "FFCF33",
+      "text": "5A3A05"
+    }
+  },
+  {
+    "group": "champion_ii",
+    "label": "CHAMPION II",
+    "char": "\ue21f",
+    "codepoint": "E21F",
+    "width": 47,
+    "hex": {
+      "fill": "FFCF33",
+      "text": "5A3A05"
+    }
+  },
+  {
+    "group": "champion_i",
+    "label": "CHAMPION I",
+    "char": "\ue21e",
+    "codepoint": "E21E",
+    "width": 45,
+    "hex": {
+      "fill": "FFCF33",
+      "text": "5A3A05"
+    }
+  },
+  {
+    "group": "elite_iii",
+    "label": "ELITE III",
+    "char": "\ue21d",
+    "codepoint": "E21D",
+    "width": 34,
+    "hex": {
+      "fill": "F26CB0",
+      "text": "5A1034"
+    }
+  },
+  {
+    "group": "elite_ii",
+    "label": "ELITE II",
+    "char": "\ue21c",
+    "codepoint": "E21C",
+    "width": 32,
+    "hex": {
+      "fill": "F26CB0",
+      "text": "5A1034"
+    }
+  },
+  {
+    "group": "elite_i",
+    "label": "ELITE I",
+    "char": "\ue21b",
+    "codepoint": "E21B",
+    "width": 30,
+    "hex": {
+      "fill": "F26CB0",
+      "text": "5A1034"
+    }
+  },
+  {
+    "group": "veteran_iii",
+    "label": "VETERAN III",
+    "char": "\ue21a",
+    "codepoint": "E21A",
+    "width": 43,
+    "hex": {
+      "fill": "3AA04A",
+      "text": "0A2B10"
+    }
+  },
+  {
+    "group": "veteran_ii",
+    "label": "VETERAN II",
+    "char": "\ue219",
+    "codepoint": "E219",
+    "width": 41,
+    "hex": {
+      "fill": "3AA04A",
+      "text": "0A2B10"
+    }
+  },
+  {
+    "group": "veteran_i",
+    "label": "VETERAN I",
+    "char": "\ue218",
+    "codepoint": "E218",
+    "width": 39,
+    "hex": {
+      "fill": "3AA04A",
+      "text": "0A2B10"
+    }
+  },
+  {
+    "group": "challenger_iii",
+    "label": "CHALLENGER III",
+    "char": "\ue217",
+    "codepoint": "E217",
+    "width": 55,
+    "hex": {
+      "fill": "7FC4F5",
+      "text": "143F63"
+    }
+  },
+  {
+    "group": "challenger_ii",
+    "label": "CHALLENGER II",
+    "char": "\ue216",
+    "codepoint": "E216",
+    "width": 53,
+    "hex": {
+      "fill": "7FC4F5",
+      "text": "143F63"
+    }
+  },
+  {
+    "group": "challenger_i",
+    "label": "CHALLENGER I",
+    "char": "\ue215",
+    "codepoint": "E215",
+    "width": 51,
+    "hex": {
+      "fill": "7FC4F5",
+      "text": "143F63"
+    }
+  },
+  {
+    "group": "ace_iii",
+    "label": "ACE III",
+    "char": "\ue214",
+    "codepoint": "E214",
+    "width": 26,
+    "hex": {
+      "fill": "3DD3E8",
+      "text": "08404A"
+    }
+  },
+  {
+    "group": "ace_ii",
+    "label": "ACE II",
+    "char": "\ue213",
+    "codepoint": "E213",
+    "width": 24,
+    "hex": {
+      "fill": "3DD3E8",
+      "text": "08404A"
+    }
+  },
+  {
+    "group": "ace_i",
+    "label": "ACE I",
+    "char": "\ue212",
+    "codepoint": "E212",
+    "width": 22,
+    "hex": {
+      "fill": "3DD3E8",
+      "text": "08404A"
+    }
+  },
+  {
     "group": "champion",
     "label": "CHAMPION",
     "char": "\ue206",

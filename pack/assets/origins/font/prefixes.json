@@ -65,6 +65,150 @@
     },
     {
       "type": "bitmap",
+      "file": "origins:font/prefix/master.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue221"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/champion_iii.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue220"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/champion_ii.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue21f"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/champion_i.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue21e"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/elite_iii.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue21d"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/elite_ii.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue21c"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/elite_i.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue21b"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/veteran_iii.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue21a"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/veteran_ii.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue219"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/veteran_i.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue218"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/challenger_iii.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue217"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/challenger_ii.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue216"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/challenger_i.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue215"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/ace_iii.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue214"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/ace_ii.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue213"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:font/prefix/ace_i.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue212"
+      ]
+    },
+    {
+      "type": "bitmap",
       "file": "origins:font/prefix/champion.png",
       "ascent": 8,
       "height": 9,
