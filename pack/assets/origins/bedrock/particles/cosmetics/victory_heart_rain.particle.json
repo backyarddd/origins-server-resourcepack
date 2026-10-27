@@ -1,0 +1,73 @@
+{
+  "format_version": "1.10.0",
+  "particle_effect": {
+    "description": {
+      "identifier": "origins:cosmetics/victory_heart_rain",
+      "basic_render_parameters": {
+        "material": "particles_blend",
+        "texture": "origins:cosmetics/victory_heart_rain"
+      }
+    },
+    "components": {
+      "minecraft:emitter_lifetime_once": {
+        "active_time": 1.6
+      },
+      "minecraft:emitter_rate_instant": {
+        "num_particles": 18
+      },
+      "minecraft:emitter_shape_disc": {
+        "offset": [
+          0,
+          3.2,
+          0
+        ],
+        "radius": 1.3,
+        "surface_only": false,
+        "direction": [
+          0,
+          -1,
+          0
+        ]
+      },
+      "minecraft:particle_appearance_billboard": {
+        "size": [
+          0.17,
+          0.17
+        ],
+        "facing_camera_mode": "rotate_xyz",
+        "uv": {
+          "texture_width": 16,
+          "texture_height": 8,
+          "uv_size": [
+            8,
+            8
+          ],
+          "uv": [
+            "math.floor(v.particle_random_1 * 2) * 8",
+            0
+          ]
+        }
+      },
+      "minecraft:particle_appearance_tinting": {
+        "color": [
+          1,
+          1,
+          1,
+          "1 - math.pow(v.particle_age / v.particle_lifetime, 2)"
+        ]
+      },
+      "minecraft:particle_initial_speed": 0.8,
+      "minecraft:particle_lifetime_expression": {
+        "max_lifetime": "math.random(1.2, 1.6)"
+      },
+      "minecraft:particle_motion_dynamic": {
+        "linear_acceleration": [
+          "math.sin(v.particle_age * 200 + v.particle_random_3 * 360) * 0.5",
+          -2,
+          0
+        ],
+        "linear_drag_coefficient": 0.5
+      }
+    }
+  }
+}

@@ -1055,3 +1055,11 @@ if __name__ == '__main__':
     assert a.tobytes() == b.tobytes()
     assert set(a.getchannel('A').tobytes()) <= {0, 255}
     print('art ok')
+
+
+if __name__ != '__main__':  # the drop 2 art imports this module's helpers, so it is merged in last
+    from cosmetics.art_drop2 import BALL_SKINS_ART2, FRONTS2, WEARABLES2  # noqa: E402
+
+    WEARABLES.update(WEARABLES2)
+    FRONTS.update(FRONTS2)
+    BALL_SKINS_ART.update(BALL_SKINS_ART2)

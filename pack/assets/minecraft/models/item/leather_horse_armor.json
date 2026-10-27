@@ -1,0 +1,1832 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "minecraft:item/leather_horse_armor"
+  },
+  "overrides": [
+    {
+      "model": "origins:item/standin/leather_helmet",
+      "predicate": {
+        "custom_model_data": 7400001
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_helmet_quartz_trim",
+      "predicate": {
+        "custom_model_data": 7400001,
+        "trim_type": 0.1
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_helmet_iron_trim",
+      "predicate": {
+        "custom_model_data": 7400001,
+        "trim_type": 0.2
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_helmet_netherite_trim",
+      "predicate": {
+        "custom_model_data": 7400001,
+        "trim_type": 0.3
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_helmet_redstone_trim",
+      "predicate": {
+        "custom_model_data": 7400001,
+        "trim_type": 0.4
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_helmet_copper_trim",
+      "predicate": {
+        "custom_model_data": 7400001,
+        "trim_type": 0.5
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_helmet_gold_trim",
+      "predicate": {
+        "custom_model_data": 7400001,
+        "trim_type": 0.6
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_helmet_emerald_trim",
+      "predicate": {
+        "custom_model_data": 7400001,
+        "trim_type": 0.7
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_helmet_diamond_trim",
+      "predicate": {
+        "custom_model_data": 7400001,
+        "trim_type": 0.8
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_helmet_lapis_trim",
+      "predicate": {
+        "custom_model_data": 7400001,
+        "trim_type": 0.9
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_helmet_amethyst_trim",
+      "predicate": {
+        "custom_model_data": 7400001,
+        "trim_type": 1.0
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_chestplate",
+      "predicate": {
+        "custom_model_data": 7400002
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_chestplate_quartz_trim",
+      "predicate": {
+        "custom_model_data": 7400002,
+        "trim_type": 0.1
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_chestplate_iron_trim",
+      "predicate": {
+        "custom_model_data": 7400002,
+        "trim_type": 0.2
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_chestplate_netherite_trim",
+      "predicate": {
+        "custom_model_data": 7400002,
+        "trim_type": 0.3
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_chestplate_redstone_trim",
+      "predicate": {
+        "custom_model_data": 7400002,
+        "trim_type": 0.4
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_chestplate_copper_trim",
+      "predicate": {
+        "custom_model_data": 7400002,
+        "trim_type": 0.5
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_chestplate_gold_trim",
+      "predicate": {
+        "custom_model_data": 7400002,
+        "trim_type": 0.6
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_chestplate_emerald_trim",
+      "predicate": {
+        "custom_model_data": 7400002,
+        "trim_type": 0.7
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_chestplate_diamond_trim",
+      "predicate": {
+        "custom_model_data": 7400002,
+        "trim_type": 0.8
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_chestplate_lapis_trim",
+      "predicate": {
+        "custom_model_data": 7400002,
+        "trim_type": 0.9
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_chestplate_amethyst_trim",
+      "predicate": {
+        "custom_model_data": 7400002,
+        "trim_type": 1.0
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_leggings",
+      "predicate": {
+        "custom_model_data": 7400003
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_leggings_quartz_trim",
+      "predicate": {
+        "custom_model_data": 7400003,
+        "trim_type": 0.1
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_leggings_iron_trim",
+      "predicate": {
+        "custom_model_data": 7400003,
+        "trim_type": 0.2
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_leggings_netherite_trim",
+      "predicate": {
+        "custom_model_data": 7400003,
+        "trim_type": 0.3
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_leggings_redstone_trim",
+      "predicate": {
+        "custom_model_data": 7400003,
+        "trim_type": 0.4
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_leggings_copper_trim",
+      "predicate": {
+        "custom_model_data": 7400003,
+        "trim_type": 0.5
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_leggings_gold_trim",
+      "predicate": {
+        "custom_model_data": 7400003,
+        "trim_type": 0.6
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_leggings_emerald_trim",
+      "predicate": {
+        "custom_model_data": 7400003,
+        "trim_type": 0.7
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_leggings_diamond_trim",
+      "predicate": {
+        "custom_model_data": 7400003,
+        "trim_type": 0.8
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_leggings_lapis_trim",
+      "predicate": {
+        "custom_model_data": 7400003,
+        "trim_type": 0.9
+      }
+    },
+    {
+      "model": "origins:item/standin/leather_leggings_amethyst_trim",
+      "predicate": {
+        "custom_model_data": 7400003,
+        "trim_type": 1.0
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_helmet",
+      "predicate": {
+        "custom_model_data": 7400004
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_helmet_quartz_trim",
+      "predicate": {
+        "custom_model_data": 7400004,
+        "trim_type": 0.1
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_helmet_iron_trim",
+      "predicate": {
+        "custom_model_data": 7400004,
+        "trim_type": 0.2
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_helmet_netherite_trim",
+      "predicate": {
+        "custom_model_data": 7400004,
+        "trim_type": 0.3
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_helmet_redstone_trim",
+      "predicate": {
+        "custom_model_data": 7400004,
+        "trim_type": 0.4
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_helmet_copper_trim",
+      "predicate": {
+        "custom_model_data": 7400004,
+        "trim_type": 0.5
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_helmet_gold_trim",
+      "predicate": {
+        "custom_model_data": 7400004,
+        "trim_type": 0.6
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_helmet_emerald_trim",
+      "predicate": {
+        "custom_model_data": 7400004,
+        "trim_type": 0.7
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_helmet_diamond_trim",
+      "predicate": {
+        "custom_model_data": 7400004,
+        "trim_type": 0.8
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_helmet_lapis_trim",
+      "predicate": {
+        "custom_model_data": 7400004,
+        "trim_type": 0.9
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_helmet_amethyst_trim",
+      "predicate": {
+        "custom_model_data": 7400004,
+        "trim_type": 1.0
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_chestplate",
+      "predicate": {
+        "custom_model_data": 7400005
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_chestplate_quartz_trim",
+      "predicate": {
+        "custom_model_data": 7400005,
+        "trim_type": 0.1
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_chestplate_iron_trim",
+      "predicate": {
+        "custom_model_data": 7400005,
+        "trim_type": 0.2
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_chestplate_netherite_trim",
+      "predicate": {
+        "custom_model_data": 7400005,
+        "trim_type": 0.3
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_chestplate_redstone_trim",
+      "predicate": {
+        "custom_model_data": 7400005,
+        "trim_type": 0.4
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_chestplate_copper_trim",
+      "predicate": {
+        "custom_model_data": 7400005,
+        "trim_type": 0.5
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_chestplate_gold_trim",
+      "predicate": {
+        "custom_model_data": 7400005,
+        "trim_type": 0.6
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_chestplate_emerald_trim",
+      "predicate": {
+        "custom_model_data": 7400005,
+        "trim_type": 0.7
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_chestplate_diamond_trim",
+      "predicate": {
+        "custom_model_data": 7400005,
+        "trim_type": 0.8
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_chestplate_lapis_trim",
+      "predicate": {
+        "custom_model_data": 7400005,
+        "trim_type": 0.9
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_chestplate_amethyst_trim",
+      "predicate": {
+        "custom_model_data": 7400005,
+        "trim_type": 1.0
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_leggings",
+      "predicate": {
+        "custom_model_data": 7400006
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_leggings_quartz_trim",
+      "predicate": {
+        "custom_model_data": 7400006,
+        "trim_type": 0.1
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_leggings_iron_trim",
+      "predicate": {
+        "custom_model_data": 7400006,
+        "trim_type": 0.2
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_leggings_netherite_trim",
+      "predicate": {
+        "custom_model_data": 7400006,
+        "trim_type": 0.3
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_leggings_redstone_trim",
+      "predicate": {
+        "custom_model_data": 7400006,
+        "trim_type": 0.4
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_leggings_copper_trim",
+      "predicate": {
+        "custom_model_data": 7400006,
+        "trim_type": 0.5
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_leggings_gold_trim",
+      "predicate": {
+        "custom_model_data": 7400006,
+        "trim_type": 0.6
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_leggings_emerald_trim",
+      "predicate": {
+        "custom_model_data": 7400006,
+        "trim_type": 0.7
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_leggings_diamond_trim",
+      "predicate": {
+        "custom_model_data": 7400006,
+        "trim_type": 0.8
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_leggings_lapis_trim",
+      "predicate": {
+        "custom_model_data": 7400006,
+        "trim_type": 0.9
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_leggings_amethyst_trim",
+      "predicate": {
+        "custom_model_data": 7400006,
+        "trim_type": 1.0
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_boots",
+      "predicate": {
+        "custom_model_data": 7400007
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_boots_quartz_trim",
+      "predicate": {
+        "custom_model_data": 7400007,
+        "trim_type": 0.1
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_boots_iron_trim",
+      "predicate": {
+        "custom_model_data": 7400007,
+        "trim_type": 0.2
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_boots_netherite_trim",
+      "predicate": {
+        "custom_model_data": 7400007,
+        "trim_type": 0.3
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_boots_redstone_trim",
+      "predicate": {
+        "custom_model_data": 7400007,
+        "trim_type": 0.4
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_boots_copper_trim",
+      "predicate": {
+        "custom_model_data": 7400007,
+        "trim_type": 0.5
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_boots_gold_trim",
+      "predicate": {
+        "custom_model_data": 7400007,
+        "trim_type": 0.6
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_boots_emerald_trim",
+      "predicate": {
+        "custom_model_data": 7400007,
+        "trim_type": 0.7
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_boots_diamond_trim",
+      "predicate": {
+        "custom_model_data": 7400007,
+        "trim_type": 0.8
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_boots_lapis_trim",
+      "predicate": {
+        "custom_model_data": 7400007,
+        "trim_type": 0.9
+      }
+    },
+    {
+      "model": "origins:item/standin/chainmail_boots_amethyst_trim",
+      "predicate": {
+        "custom_model_data": 7400007,
+        "trim_type": 1.0
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_helmet",
+      "predicate": {
+        "custom_model_data": 7400008
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_helmet_quartz_trim",
+      "predicate": {
+        "custom_model_data": 7400008,
+        "trim_type": 0.1
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_helmet_iron_darker_trim",
+      "predicate": {
+        "custom_model_data": 7400008,
+        "trim_type": 0.2
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_helmet_netherite_trim",
+      "predicate": {
+        "custom_model_data": 7400008,
+        "trim_type": 0.3
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_helmet_redstone_trim",
+      "predicate": {
+        "custom_model_data": 7400008,
+        "trim_type": 0.4
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_helmet_copper_trim",
+      "predicate": {
+        "custom_model_data": 7400008,
+        "trim_type": 0.5
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_helmet_gold_trim",
+      "predicate": {
+        "custom_model_data": 7400008,
+        "trim_type": 0.6
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_helmet_emerald_trim",
+      "predicate": {
+        "custom_model_data": 7400008,
+        "trim_type": 0.7
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_helmet_diamond_trim",
+      "predicate": {
+        "custom_model_data": 7400008,
+        "trim_type": 0.8
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_helmet_lapis_trim",
+      "predicate": {
+        "custom_model_data": 7400008,
+        "trim_type": 0.9
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_helmet_amethyst_trim",
+      "predicate": {
+        "custom_model_data": 7400008,
+        "trim_type": 1.0
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_chestplate",
+      "predicate": {
+        "custom_model_data": 7400009
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_chestplate_quartz_trim",
+      "predicate": {
+        "custom_model_data": 7400009,
+        "trim_type": 0.1
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_chestplate_iron_darker_trim",
+      "predicate": {
+        "custom_model_data": 7400009,
+        "trim_type": 0.2
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_chestplate_netherite_trim",
+      "predicate": {
+        "custom_model_data": 7400009,
+        "trim_type": 0.3
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_chestplate_redstone_trim",
+      "predicate": {
+        "custom_model_data": 7400009,
+        "trim_type": 0.4
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_chestplate_copper_trim",
+      "predicate": {
+        "custom_model_data": 7400009,
+        "trim_type": 0.5
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_chestplate_gold_trim",
+      "predicate": {
+        "custom_model_data": 7400009,
+        "trim_type": 0.6
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_chestplate_emerald_trim",
+      "predicate": {
+        "custom_model_data": 7400009,
+        "trim_type": 0.7
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_chestplate_diamond_trim",
+      "predicate": {
+        "custom_model_data": 7400009,
+        "trim_type": 0.8
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_chestplate_lapis_trim",
+      "predicate": {
+        "custom_model_data": 7400009,
+        "trim_type": 0.9
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_chestplate_amethyst_trim",
+      "predicate": {
+        "custom_model_data": 7400009,
+        "trim_type": 1.0
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_leggings",
+      "predicate": {
+        "custom_model_data": 7400010
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_leggings_quartz_trim",
+      "predicate": {
+        "custom_model_data": 7400010,
+        "trim_type": 0.1
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_leggings_iron_darker_trim",
+      "predicate": {
+        "custom_model_data": 7400010,
+        "trim_type": 0.2
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_leggings_netherite_trim",
+      "predicate": {
+        "custom_model_data": 7400010,
+        "trim_type": 0.3
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_leggings_redstone_trim",
+      "predicate": {
+        "custom_model_data": 7400010,
+        "trim_type": 0.4
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_leggings_copper_trim",
+      "predicate": {
+        "custom_model_data": 7400010,
+        "trim_type": 0.5
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_leggings_gold_trim",
+      "predicate": {
+        "custom_model_data": 7400010,
+        "trim_type": 0.6
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_leggings_emerald_trim",
+      "predicate": {
+        "custom_model_data": 7400010,
+        "trim_type": 0.7
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_leggings_diamond_trim",
+      "predicate": {
+        "custom_model_data": 7400010,
+        "trim_type": 0.8
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_leggings_lapis_trim",
+      "predicate": {
+        "custom_model_data": 7400010,
+        "trim_type": 0.9
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_leggings_amethyst_trim",
+      "predicate": {
+        "custom_model_data": 7400010,
+        "trim_type": 1.0
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_boots",
+      "predicate": {
+        "custom_model_data": 7400011
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_boots_quartz_trim",
+      "predicate": {
+        "custom_model_data": 7400011,
+        "trim_type": 0.1
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_boots_iron_darker_trim",
+      "predicate": {
+        "custom_model_data": 7400011,
+        "trim_type": 0.2
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_boots_netherite_trim",
+      "predicate": {
+        "custom_model_data": 7400011,
+        "trim_type": 0.3
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_boots_redstone_trim",
+      "predicate": {
+        "custom_model_data": 7400011,
+        "trim_type": 0.4
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_boots_copper_trim",
+      "predicate": {
+        "custom_model_data": 7400011,
+        "trim_type": 0.5
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_boots_gold_trim",
+      "predicate": {
+        "custom_model_data": 7400011,
+        "trim_type": 0.6
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_boots_emerald_trim",
+      "predicate": {
+        "custom_model_data": 7400011,
+        "trim_type": 0.7
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_boots_diamond_trim",
+      "predicate": {
+        "custom_model_data": 7400011,
+        "trim_type": 0.8
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_boots_lapis_trim",
+      "predicate": {
+        "custom_model_data": 7400011,
+        "trim_type": 0.9
+      }
+    },
+    {
+      "model": "origins:item/standin/iron_boots_amethyst_trim",
+      "predicate": {
+        "custom_model_data": 7400011,
+        "trim_type": 1.0
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_helmet",
+      "predicate": {
+        "custom_model_data": 7400012
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_helmet_quartz_trim",
+      "predicate": {
+        "custom_model_data": 7400012,
+        "trim_type": 0.1
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_helmet_iron_trim",
+      "predicate": {
+        "custom_model_data": 7400012,
+        "trim_type": 0.2
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_helmet_netherite_trim",
+      "predicate": {
+        "custom_model_data": 7400012,
+        "trim_type": 0.3
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_helmet_redstone_trim",
+      "predicate": {
+        "custom_model_data": 7400012,
+        "trim_type": 0.4
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_helmet_copper_trim",
+      "predicate": {
+        "custom_model_data": 7400012,
+        "trim_type": 0.5
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_helmet_gold_darker_trim",
+      "predicate": {
+        "custom_model_data": 7400012,
+        "trim_type": 0.6
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_helmet_emerald_trim",
+      "predicate": {
+        "custom_model_data": 7400012,
+        "trim_type": 0.7
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_helmet_diamond_trim",
+      "predicate": {
+        "custom_model_data": 7400012,
+        "trim_type": 0.8
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_helmet_lapis_trim",
+      "predicate": {
+        "custom_model_data": 7400012,
+        "trim_type": 0.9
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_helmet_amethyst_trim",
+      "predicate": {
+        "custom_model_data": 7400012,
+        "trim_type": 1.0
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_chestplate",
+      "predicate": {
+        "custom_model_data": 7400013
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_chestplate_quartz_trim",
+      "predicate": {
+        "custom_model_data": 7400013,
+        "trim_type": 0.1
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_chestplate_iron_trim",
+      "predicate": {
+        "custom_model_data": 7400013,
+        "trim_type": 0.2
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_chestplate_netherite_trim",
+      "predicate": {
+        "custom_model_data": 7400013,
+        "trim_type": 0.3
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_chestplate_redstone_trim",
+      "predicate": {
+        "custom_model_data": 7400013,
+        "trim_type": 0.4
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_chestplate_copper_trim",
+      "predicate": {
+        "custom_model_data": 7400013,
+        "trim_type": 0.5
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_chestplate_gold_darker_trim",
+      "predicate": {
+        "custom_model_data": 7400013,
+        "trim_type": 0.6
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_chestplate_emerald_trim",
+      "predicate": {
+        "custom_model_data": 7400013,
+        "trim_type": 0.7
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_chestplate_diamond_trim",
+      "predicate": {
+        "custom_model_data": 7400013,
+        "trim_type": 0.8
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_chestplate_lapis_trim",
+      "predicate": {
+        "custom_model_data": 7400013,
+        "trim_type": 0.9
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_chestplate_amethyst_trim",
+      "predicate": {
+        "custom_model_data": 7400013,
+        "trim_type": 1.0
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_leggings",
+      "predicate": {
+        "custom_model_data": 7400014
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_leggings_quartz_trim",
+      "predicate": {
+        "custom_model_data": 7400014,
+        "trim_type": 0.1
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_leggings_iron_trim",
+      "predicate": {
+        "custom_model_data": 7400014,
+        "trim_type": 0.2
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_leggings_netherite_trim",
+      "predicate": {
+        "custom_model_data": 7400014,
+        "trim_type": 0.3
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_leggings_redstone_trim",
+      "predicate": {
+        "custom_model_data": 7400014,
+        "trim_type": 0.4
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_leggings_copper_trim",
+      "predicate": {
+        "custom_model_data": 7400014,
+        "trim_type": 0.5
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_leggings_gold_darker_trim",
+      "predicate": {
+        "custom_model_data": 7400014,
+        "trim_type": 0.6
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_leggings_emerald_trim",
+      "predicate": {
+        "custom_model_data": 7400014,
+        "trim_type": 0.7
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_leggings_diamond_trim",
+      "predicate": {
+        "custom_model_data": 7400014,
+        "trim_type": 0.8
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_leggings_lapis_trim",
+      "predicate": {
+        "custom_model_data": 7400014,
+        "trim_type": 0.9
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_leggings_amethyst_trim",
+      "predicate": {
+        "custom_model_data": 7400014,
+        "trim_type": 1.0
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_boots",
+      "predicate": {
+        "custom_model_data": 7400015
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_boots_quartz_trim",
+      "predicate": {
+        "custom_model_data": 7400015,
+        "trim_type": 0.1
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_boots_iron_trim",
+      "predicate": {
+        "custom_model_data": 7400015,
+        "trim_type": 0.2
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_boots_netherite_trim",
+      "predicate": {
+        "custom_model_data": 7400015,
+        "trim_type": 0.3
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_boots_redstone_trim",
+      "predicate": {
+        "custom_model_data": 7400015,
+        "trim_type": 0.4
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_boots_copper_trim",
+      "predicate": {
+        "custom_model_data": 7400015,
+        "trim_type": 0.5
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_boots_gold_darker_trim",
+      "predicate": {
+        "custom_model_data": 7400015,
+        "trim_type": 0.6
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_boots_emerald_trim",
+      "predicate": {
+        "custom_model_data": 7400015,
+        "trim_type": 0.7
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_boots_diamond_trim",
+      "predicate": {
+        "custom_model_data": 7400015,
+        "trim_type": 0.8
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_boots_lapis_trim",
+      "predicate": {
+        "custom_model_data": 7400015,
+        "trim_type": 0.9
+      }
+    },
+    {
+      "model": "origins:item/standin/golden_boots_amethyst_trim",
+      "predicate": {
+        "custom_model_data": 7400015,
+        "trim_type": 1.0
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_helmet",
+      "predicate": {
+        "custom_model_data": 7400016
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_helmet_quartz_trim",
+      "predicate": {
+        "custom_model_data": 7400016,
+        "trim_type": 0.1
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_helmet_iron_trim",
+      "predicate": {
+        "custom_model_data": 7400016,
+        "trim_type": 0.2
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_helmet_netherite_trim",
+      "predicate": {
+        "custom_model_data": 7400016,
+        "trim_type": 0.3
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_helmet_redstone_trim",
+      "predicate": {
+        "custom_model_data": 7400016,
+        "trim_type": 0.4
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_helmet_copper_trim",
+      "predicate": {
+        "custom_model_data": 7400016,
+        "trim_type": 0.5
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_helmet_gold_trim",
+      "predicate": {
+        "custom_model_data": 7400016,
+        "trim_type": 0.6
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_helmet_emerald_trim",
+      "predicate": {
+        "custom_model_data": 7400016,
+        "trim_type": 0.7
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_helmet_diamond_darker_trim",
+      "predicate": {
+        "custom_model_data": 7400016,
+        "trim_type": 0.8
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_helmet_lapis_trim",
+      "predicate": {
+        "custom_model_data": 7400016,
+        "trim_type": 0.9
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_helmet_amethyst_trim",
+      "predicate": {
+        "custom_model_data": 7400016,
+        "trim_type": 1.0
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_chestplate",
+      "predicate": {
+        "custom_model_data": 7400017
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_chestplate_quartz_trim",
+      "predicate": {
+        "custom_model_data": 7400017,
+        "trim_type": 0.1
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_chestplate_iron_trim",
+      "predicate": {
+        "custom_model_data": 7400017,
+        "trim_type": 0.2
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_chestplate_netherite_trim",
+      "predicate": {
+        "custom_model_data": 7400017,
+        "trim_type": 0.3
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_chestplate_redstone_trim",
+      "predicate": {
+        "custom_model_data": 7400017,
+        "trim_type": 0.4
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_chestplate_copper_trim",
+      "predicate": {
+        "custom_model_data": 7400017,
+        "trim_type": 0.5
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_chestplate_gold_trim",
+      "predicate": {
+        "custom_model_data": 7400017,
+        "trim_type": 0.6
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_chestplate_emerald_trim",
+      "predicate": {
+        "custom_model_data": 7400017,
+        "trim_type": 0.7
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_chestplate_diamond_darker_trim",
+      "predicate": {
+        "custom_model_data": 7400017,
+        "trim_type": 0.8
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_chestplate_lapis_trim",
+      "predicate": {
+        "custom_model_data": 7400017,
+        "trim_type": 0.9
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_chestplate_amethyst_trim",
+      "predicate": {
+        "custom_model_data": 7400017,
+        "trim_type": 1.0
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_leggings",
+      "predicate": {
+        "custom_model_data": 7400018
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_leggings_quartz_trim",
+      "predicate": {
+        "custom_model_data": 7400018,
+        "trim_type": 0.1
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_leggings_iron_trim",
+      "predicate": {
+        "custom_model_data": 7400018,
+        "trim_type": 0.2
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_leggings_netherite_trim",
+      "predicate": {
+        "custom_model_data": 7400018,
+        "trim_type": 0.3
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_leggings_redstone_trim",
+      "predicate": {
+        "custom_model_data": 7400018,
+        "trim_type": 0.4
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_leggings_copper_trim",
+      "predicate": {
+        "custom_model_data": 7400018,
+        "trim_type": 0.5
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_leggings_gold_trim",
+      "predicate": {
+        "custom_model_data": 7400018,
+        "trim_type": 0.6
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_leggings_emerald_trim",
+      "predicate": {
+        "custom_model_data": 7400018,
+        "trim_type": 0.7
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_leggings_diamond_darker_trim",
+      "predicate": {
+        "custom_model_data": 7400018,
+        "trim_type": 0.8
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_leggings_lapis_trim",
+      "predicate": {
+        "custom_model_data": 7400018,
+        "trim_type": 0.9
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_leggings_amethyst_trim",
+      "predicate": {
+        "custom_model_data": 7400018,
+        "trim_type": 1.0
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_boots",
+      "predicate": {
+        "custom_model_data": 7400019
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_boots_quartz_trim",
+      "predicate": {
+        "custom_model_data": 7400019,
+        "trim_type": 0.1
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_boots_iron_trim",
+      "predicate": {
+        "custom_model_data": 7400019,
+        "trim_type": 0.2
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_boots_netherite_trim",
+      "predicate": {
+        "custom_model_data": 7400019,
+        "trim_type": 0.3
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_boots_redstone_trim",
+      "predicate": {
+        "custom_model_data": 7400019,
+        "trim_type": 0.4
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_boots_copper_trim",
+      "predicate": {
+        "custom_model_data": 7400019,
+        "trim_type": 0.5
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_boots_gold_trim",
+      "predicate": {
+        "custom_model_data": 7400019,
+        "trim_type": 0.6
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_boots_emerald_trim",
+      "predicate": {
+        "custom_model_data": 7400019,
+        "trim_type": 0.7
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_boots_diamond_darker_trim",
+      "predicate": {
+        "custom_model_data": 7400019,
+        "trim_type": 0.8
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_boots_lapis_trim",
+      "predicate": {
+        "custom_model_data": 7400019,
+        "trim_type": 0.9
+      }
+    },
+    {
+      "model": "origins:item/standin/diamond_boots_amethyst_trim",
+      "predicate": {
+        "custom_model_data": 7400019,
+        "trim_type": 1.0
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_helmet",
+      "predicate": {
+        "custom_model_data": 7400020
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_helmet_quartz_trim",
+      "predicate": {
+        "custom_model_data": 7400020,
+        "trim_type": 0.1
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_helmet_iron_trim",
+      "predicate": {
+        "custom_model_data": 7400020,
+        "trim_type": 0.2
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_helmet_netherite_darker_trim",
+      "predicate": {
+        "custom_model_data": 7400020,
+        "trim_type": 0.3
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_helmet_redstone_trim",
+      "predicate": {
+        "custom_model_data": 7400020,
+        "trim_type": 0.4
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_helmet_copper_trim",
+      "predicate": {
+        "custom_model_data": 7400020,
+        "trim_type": 0.5
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_helmet_gold_trim",
+      "predicate": {
+        "custom_model_data": 7400020,
+        "trim_type": 0.6
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_helmet_emerald_trim",
+      "predicate": {
+        "custom_model_data": 7400020,
+        "trim_type": 0.7
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_helmet_diamond_trim",
+      "predicate": {
+        "custom_model_data": 7400020,
+        "trim_type": 0.8
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_helmet_lapis_trim",
+      "predicate": {
+        "custom_model_data": 7400020,
+        "trim_type": 0.9
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_helmet_amethyst_trim",
+      "predicate": {
+        "custom_model_data": 7400020,
+        "trim_type": 1.0
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_chestplate",
+      "predicate": {
+        "custom_model_data": 7400021
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_chestplate_quartz_trim",
+      "predicate": {
+        "custom_model_data": 7400021,
+        "trim_type": 0.1
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_chestplate_iron_trim",
+      "predicate": {
+        "custom_model_data": 7400021,
+        "trim_type": 0.2
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_chestplate_netherite_darker_trim",
+      "predicate": {
+        "custom_model_data": 7400021,
+        "trim_type": 0.3
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_chestplate_redstone_trim",
+      "predicate": {
+        "custom_model_data": 7400021,
+        "trim_type": 0.4
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_chestplate_copper_trim",
+      "predicate": {
+        "custom_model_data": 7400021,
+        "trim_type": 0.5
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_chestplate_gold_trim",
+      "predicate": {
+        "custom_model_data": 7400021,
+        "trim_type": 0.6
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_chestplate_emerald_trim",
+      "predicate": {
+        "custom_model_data": 7400021,
+        "trim_type": 0.7
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_chestplate_diamond_trim",
+      "predicate": {
+        "custom_model_data": 7400021,
+        "trim_type": 0.8
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_chestplate_lapis_trim",
+      "predicate": {
+        "custom_model_data": 7400021,
+        "trim_type": 0.9
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_chestplate_amethyst_trim",
+      "predicate": {
+        "custom_model_data": 7400021,
+        "trim_type": 1.0
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_leggings",
+      "predicate": {
+        "custom_model_data": 7400022
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_leggings_quartz_trim",
+      "predicate": {
+        "custom_model_data": 7400022,
+        "trim_type": 0.1
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_leggings_iron_trim",
+      "predicate": {
+        "custom_model_data": 7400022,
+        "trim_type": 0.2
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_leggings_netherite_darker_trim",
+      "predicate": {
+        "custom_model_data": 7400022,
+        "trim_type": 0.3
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_leggings_redstone_trim",
+      "predicate": {
+        "custom_model_data": 7400022,
+        "trim_type": 0.4
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_leggings_copper_trim",
+      "predicate": {
+        "custom_model_data": 7400022,
+        "trim_type": 0.5
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_leggings_gold_trim",
+      "predicate": {
+        "custom_model_data": 7400022,
+        "trim_type": 0.6
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_leggings_emerald_trim",
+      "predicate": {
+        "custom_model_data": 7400022,
+        "trim_type": 0.7
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_leggings_diamond_trim",
+      "predicate": {
+        "custom_model_data": 7400022,
+        "trim_type": 0.8
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_leggings_lapis_trim",
+      "predicate": {
+        "custom_model_data": 7400022,
+        "trim_type": 0.9
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_leggings_amethyst_trim",
+      "predicate": {
+        "custom_model_data": 7400022,
+        "trim_type": 1.0
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_boots",
+      "predicate": {
+        "custom_model_data": 7400023
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_boots_quartz_trim",
+      "predicate": {
+        "custom_model_data": 7400023,
+        "trim_type": 0.1
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_boots_iron_trim",
+      "predicate": {
+        "custom_model_data": 7400023,
+        "trim_type": 0.2
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_boots_netherite_darker_trim",
+      "predicate": {
+        "custom_model_data": 7400023,
+        "trim_type": 0.3
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_boots_redstone_trim",
+      "predicate": {
+        "custom_model_data": 7400023,
+        "trim_type": 0.4
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_boots_copper_trim",
+      "predicate": {
+        "custom_model_data": 7400023,
+        "trim_type": 0.5
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_boots_gold_trim",
+      "predicate": {
+        "custom_model_data": 7400023,
+        "trim_type": 0.6
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_boots_emerald_trim",
+      "predicate": {
+        "custom_model_data": 7400023,
+        "trim_type": 0.7
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_boots_diamond_trim",
+      "predicate": {
+        "custom_model_data": 7400023,
+        "trim_type": 0.8
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_boots_lapis_trim",
+      "predicate": {
+        "custom_model_data": 7400023,
+        "trim_type": 0.9
+      }
+    },
+    {
+      "model": "origins:item/standin/netherite_boots_amethyst_trim",
+      "predicate": {
+        "custom_model_data": 7400023,
+        "trim_type": 1.0
+      }
+    },
+    {
+      "model": "origins:item/standin/turtle_helmet",
+      "predicate": {
+        "custom_model_data": 7400024
+      }
+    },
+    {
+      "model": "origins:item/standin/turtle_helmet_quartz_trim",
+      "predicate": {
+        "custom_model_data": 7400024,
+        "trim_type": 0.1
+      }
+    },
+    {
+      "model": "origins:item/standin/turtle_helmet_iron_trim",
+      "predicate": {
+        "custom_model_data": 7400024,
+        "trim_type": 0.2
+      }
+    },
+    {
+      "model": "origins:item/standin/turtle_helmet_netherite_trim",
+      "predicate": {
+        "custom_model_data": 7400024,
+        "trim_type": 0.3
+      }
+    },
+    {
+      "model": "origins:item/standin/turtle_helmet_redstone_trim",
+      "predicate": {
+        "custom_model_data": 7400024,
+        "trim_type": 0.4
+      }
+    },
+    {
+      "model": "origins:item/standin/turtle_helmet_copper_trim",
+      "predicate": {
+        "custom_model_data": 7400024,
+        "trim_type": 0.5
+      }
+    },
+    {
+      "model": "origins:item/standin/turtle_helmet_gold_trim",
+      "predicate": {
+        "custom_model_data": 7400024,
+        "trim_type": 0.6
+      }
+    },
+    {
+      "model": "origins:item/standin/turtle_helmet_emerald_trim",
+      "predicate": {
+        "custom_model_data": 7400024,
+        "trim_type": 0.7
+      }
+    },
+    {
+      "model": "origins:item/standin/turtle_helmet_diamond_trim",
+      "predicate": {
+        "custom_model_data": 7400024,
+        "trim_type": 0.8
+      }
+    },
+    {
+      "model": "origins:item/standin/turtle_helmet_lapis_trim",
+      "predicate": {
+        "custom_model_data": 7400024,
+        "trim_type": 0.9
+      }
+    },
+    {
+      "model": "origins:item/standin/turtle_helmet_amethyst_trim",
+      "predicate": {
+        "custom_model_data": 7400024,
+        "trim_type": 1.0
+      }
+    }
+  ]
+}
