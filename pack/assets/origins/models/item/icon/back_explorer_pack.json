@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/back_explorer_pack",
+  "display": {
+    "gui": {
+      "rotation": [
+        15,
+        20,
+        0
+      ],
+      "translation": [
+        -1.67,
+        18.48,
+        0
+      ],
+      "scale": [
+        1.32,
+        1.32,
+        1.32
+      ]
+    }
+  }
+}

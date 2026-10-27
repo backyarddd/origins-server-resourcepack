@@ -22,7 +22,7 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
-from cosmetics import art, art_fx2, standins, toolsets  # noqa: E402
+from cosmetics import art, art_fx2, icons, standins, toolsets  # noqa: E402
 from cosmetics.art import CREAM, GOLD, LIGHT_GOLD, NAVY, hexrgb, shades  # noqa: E402
 from cosmetics.check import (BACKS, BALL_ASPECT, BALL_SKINS, CATCH_ALL, COBBLEMON_BALLS, FRONTS, HATS,  # noqa: E402
                              ITEM_STATES, TOOL_ITEMS, TOOL_SETS, TOOLSET_PARENT, TOOLSET_TEXTURES, load_cobblemon,
@@ -131,11 +131,9 @@ EFFECTS = {
     'aura_ghost_flames': dict(frames=frames((art.FLAME, P_CYAN_FIRE), (art.FLAME, P_CYAN_FIRE2)), rate=7,
                               shape=box([0.5, 0.5, 0.5], 0.5, [0, 1, 0]), life=(1.0, 1.4), size=shrink(0.2),
                               speed=0.2, accel=[0, 0.7, 0], drag=0.5),
-    # one lap per second; each 2.5 s burst restarts the lap, hidden by the 1.6-2 s particle life
+    # owner 2026-10-27: spread over the body like the other auras instead of one spinning ring over the head
     'aura_season_halo': dict(frames=frames((art.STAR, P_GOLD_STAR), (art.SPARK, P_GOLD_STAR)), rate=10, max=24,
-                             shape=point(['math.sin(v.emitter_age * 360) * 0.6', 1.45,
-                                          'math.cos(v.emitter_age * 360) * 0.6']),
-                             life=(1.6, 2.0), size=twinkle(0.16), speed=0),
+                             shape=box([0.6, 0.6, 0.6], 0.6), life=(1.6, 2.0), size=twinkle(0.16), speed=0.05),
 
     'sendout_thunderclap': dict(frames=frames((art.ZAP, P_YELLOW), (art.SPARK, P_YELLOW)), rate=28,
                                 shape=sphere(0.25, 0.5), life=(0.4, 0.8), size=0.22, speed=5, drag=4,
@@ -737,6 +735,8 @@ def build(pack, write_json):
           f'{len(TOOLSET_TEXTURES)} textures, {len(TOOL_ITEMS)} item models with overrides')
     print(f'cosmetics: {len(HATS)} hats + {len(BACKS)} back items + {len(FRONTS)} front items, {len(BALL_SKINS)} '
           f'ball skins x {n_balls} balls')
+    # menu icons last: the hat / back / front and tool skin icons are the models written above
+    icons.build(pack, write_json)
 
 
 if __name__ == '__main__':

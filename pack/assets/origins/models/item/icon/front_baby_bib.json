@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/front_baby_bib",
+  "display": {
+    "gui": {
+      "rotation": [
+        10,
+        200,
+        0
+      ],
+      "translation": [
+        -1.09,
+        17.48,
+        0
+      ],
+      "scale": [
+        1.28,
+        1.28,
+        1.28
+      ]
+    }
+  }
+}

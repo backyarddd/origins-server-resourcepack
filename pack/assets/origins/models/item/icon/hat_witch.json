@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/hat_witch",
+  "display": {
+    "gui": {
+      "rotation": [
+        25,
+        225,
+        0
+      ],
+      "translation": [
+        -0.0,
+        -2.96,
+        0
+      ],
+      "scale": [
+        0.78,
+        0.78,
+        0.78
+      ]
+    }
+  }
+}

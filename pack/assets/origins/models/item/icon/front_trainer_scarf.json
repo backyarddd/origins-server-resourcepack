@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/front_trainer_scarf",
+  "display": {
+    "gui": {
+      "rotation": [
+        10,
+        200,
+        0
+      ],
+      "translation": [
+        -1.35,
+        19.76,
+        0
+      ],
+      "scale": [
+        1.58,
+        1.58,
+        1.58
+      ]
+    }
+  }
+}

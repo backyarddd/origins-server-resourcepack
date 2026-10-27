@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/back_ball_bandolier",
+  "display": {
+    "gui": {
+      "rotation": [
+        15,
+        20,
+        0
+      ],
+      "translation": [
+        -1.05,
+        16.25,
+        0
+      ],
+      "scale": [
+        1.15,
+        1.15,
+        1.15
+      ]
+    }
+  }
+}

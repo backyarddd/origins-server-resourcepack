@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/front_gold_bow_tie",
+  "display": {
+    "gui": {
+      "rotation": [
+        10,
+        200,
+        0
+      ],
+      "translation": [
+        -2.06,
+        24.34,
+        0
+      ],
+      "scale": [
+        2.53,
+        2.53,
+        2.53
+      ]
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/hat_viking",
+  "display": {
+    "gui": {
+      "rotation": [
+        25,
+        225,
+        0
+      ],
+      "translation": [
+        0.0,
+        -0.35,
+        0
+      ],
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    }
+  }
+}

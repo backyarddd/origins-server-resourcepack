@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/front_flower_lei",
+  "display": {
+    "gui": {
+      "rotation": [
+        10,
+        200,
+        0
+      ],
+      "translation": [
+        -0.83,
+        14.77,
+        0
+      ],
+      "scale": [
+        1.38,
+        1.38,
+        1.38
+      ]
+    }
+  }
+}

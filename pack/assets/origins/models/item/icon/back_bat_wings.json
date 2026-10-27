@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/back_bat_wings",
+  "display": {
+    "gui": {
+      "rotation": [
+        15,
+        20,
+        0
+      ],
+      "translation": [
+        -1.98,
+        15.77,
+        0
+      ],
+      "scale": [
+        1.26,
+        1.26,
+        1.26
+      ]
+    }
+  }
+}

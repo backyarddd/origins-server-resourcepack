@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/front_capsule_pendant",
+  "display": {
+    "gui": {
+      "rotation": [
+        10,
+        200,
+        0
+      ],
+      "translation": [
+        -1.28,
+        17.25,
+        0
+      ],
+      "scale": [
+        1.36,
+        1.36,
+        1.36
+      ]
+    }
+  }
+}

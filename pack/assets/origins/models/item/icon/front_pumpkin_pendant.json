@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/front_pumpkin_pendant",
+  "display": {
+    "gui": {
+      "rotation": [
+        10,
+        200,
+        0
+      ],
+      "translation": [
+        -1.56,
+        23.26,
+        0
+      ],
+      "scale": [
+        1.92,
+        1.92,
+        1.92
+      ]
+    }
+  }
+}

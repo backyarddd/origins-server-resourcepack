@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/hat_beanie",
+  "display": {
+    "gui": {
+      "rotation": [
+        25,
+        225,
+        0
+      ],
+      "translation": [
+        -0.0,
+        -1.48,
+        0
+      ],
+      "scale": [
+        1.02,
+        1.02,
+        1.02
+      ]
+    }
+  }
+}

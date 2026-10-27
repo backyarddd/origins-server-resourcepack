@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/front_champion_medal",
+  "display": {
+    "gui": {
+      "rotation": [
+        10,
+        200,
+        0
+      ],
+      "translation": [
+        -1.33,
+        21.48,
+        0
+      ],
+      "scale": [
+        1.73,
+        1.73,
+        1.73
+      ]
+    }
+  }
+}

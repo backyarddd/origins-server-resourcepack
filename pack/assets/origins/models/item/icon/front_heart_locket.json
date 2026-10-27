@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/front_heart_locket",
+  "display": {
+    "gui": {
+      "rotation": [
+        10,
+        200,
+        0
+      ],
+      "translation": [
+        -1.35,
+        19.81,
+        0
+      ],
+      "scale": [
+        1.44,
+        1.44,
+        1.44
+      ]
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/back_dragon_wings",
+  "display": {
+    "gui": {
+      "rotation": [
+        15,
+        20,
+        0
+      ],
+      "translation": [
+        -1.61,
+        8.1,
+        0
+      ],
+      "scale": [
+        0.72,
+        0.72,
+        0.72
+      ]
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/back_feather_wings",
+  "display": {
+    "gui": {
+      "rotation": [
+        15,
+        20,
+        0
+      ],
+      "translation": [
+        -2.17,
+        19.2,
+        0
+      ],
+      "scale": [
+        1.38,
+        1.38,
+        1.38
+      ]
+    }
+  }
+}

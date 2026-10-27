@@ -1,0 +1,1124 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "minecraft:item/knowledge_book"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "custom_model_data": 7500001
+      },
+      "model": "origins:item/icon/aura_ember_wisps"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500002
+      },
+      "model": "origins:item/icon/aura_frost_motes"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500003
+      },
+      "model": "origins:item/icon/aura_static_field"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500004
+      },
+      "model": "origins:item/icon/aura_petal_drift"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500005
+      },
+      "model": "origins:item/icon/aura_shadow_smoke"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500006
+      },
+      "model": "origins:item/icon/aura_starlight"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500007
+      },
+      "model": "origins:item/icon/aura_ghost_flames"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500008
+      },
+      "model": "origins:item/icon/aura_season_halo"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500009
+      },
+      "model": "origins:item/icon/sendout_thunderclap"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500010
+      },
+      "model": "origins:item/icon/sendout_petal_burst"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500011
+      },
+      "model": "origins:item/icon/sendout_snow_flurry"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500012
+      },
+      "model": "origins:item/icon/sendout_confetti_pop"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500013
+      },
+      "model": "origins:item/icon/sendout_void_rift"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500014
+      },
+      "model": "origins:item/icon/sendout_gold_rush"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500015
+      },
+      "model": "origins:item/icon/sendout_bat_swarm"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500016
+      },
+      "model": "origins:item/icon/victory_fireworks"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500017
+      },
+      "model": "origins:item/icon/victory_crown_rain"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500018
+      },
+      "model": "origins:item/icon/victory_lightning_strike"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500019
+      },
+      "model": "origins:item/icon/victory_coin_shower"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500020
+      },
+      "model": "origins:item/icon/victory_champions_crown"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500021
+      },
+      "model": "origins:item/icon/trail_ember_steps"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500022
+      },
+      "model": "origins:item/icon/trail_leaf_steps"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500023
+      },
+      "model": "origins:item/icon/trail_rainbow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500024
+      },
+      "model": "origins:item/icon/trail_music_notes"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500025
+      },
+      "model": "origins:item/icon/trail_hearts"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500026
+      },
+      "model": "origins:item/icon/trail_sparkles"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500027
+      },
+      "model": "origins:item/icon/trail_snowfall"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500028
+      },
+      "model": "origins:item/icon/trail_bubbles"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500029
+      },
+      "model": "origins:item/icon/trail_pumpkin_steps"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500030
+      },
+      "model": "origins:item/icon/trail_arena_flame"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500031
+      },
+      "model": "origins:item/icon/trail_supporter_sparkles"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500032
+      },
+      "model": "origins:item/icon/nick_red"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500033
+      },
+      "model": "origins:item/icon/nick_orange"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500034
+      },
+      "model": "origins:item/icon/nick_yellow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500035
+      },
+      "model": "origins:item/icon/nick_green"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500036
+      },
+      "model": "origins:item/icon/nick_aqua"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500037
+      },
+      "model": "origins:item/icon/nick_blue"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500038
+      },
+      "model": "origins:item/icon/nick_purple"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500039
+      },
+      "model": "origins:item/icon/nick_pink"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500040
+      },
+      "model": "origins:item/icon/nick_sunset"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500041
+      },
+      "model": "origins:item/icon/nick_ocean"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500042
+      },
+      "model": "origins:item/icon/nick_aurora"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500043
+      },
+      "model": "origins:item/icon/nick_champion_gold"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500044
+      },
+      "model": "origins:item/icon/ts_crystal"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500045
+      },
+      "model": "origins:item/icon/ts_ember"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500046
+      },
+      "model": "origins:item/icon/ts_gold"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500047
+      },
+      "model": "origins:item/icon/ts_tidal"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500048
+      },
+      "model": "origins:item/icon/ts_verdant"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500049
+      },
+      "model": "origins:item/icon/ts_volt"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500050
+      },
+      "model": "origins:item/icon/ts_frost"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500051
+      },
+      "model": "origins:item/icon/ts_shadow"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500052
+      },
+      "model": "origins:item/icon/ts_mystic"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500053
+      },
+      "model": "origins:item/icon/ts_dragon"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500054
+      },
+      "model": "origins:item/icon/ts_celestial"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500055
+      },
+      "model": "origins:item/icon/ts_pumpkin"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500056
+      },
+      "model": "origins:item/icon/ball_galaxy"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500057
+      },
+      "model": "origins:item/icon/ball_gilded"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500058
+      },
+      "model": "origins:item/icon/ball_crystal"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500059
+      },
+      "model": "origins:item/icon/ball_ember"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500060
+      },
+      "model": "origins:item/icon/ball_sakura"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500061
+      },
+      "model": "origins:item/icon/ball_pumpkin"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500062
+      },
+      "model": "origins:item/icon/hat_royal_crown"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500063
+      },
+      "model": "origins:item/icon/hat_top_hat"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500064
+      },
+      "model": "origins:item/icon/hat_origins_cap"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500065
+      },
+      "model": "origins:item/icon/hat_flower_crown"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500066
+      },
+      "model": "origins:item/icon/hat_golden_halo"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500067
+      },
+      "model": "origins:item/icon/hat_witch"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500068
+      },
+      "model": "origins:item/icon/back_explorer_pack"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500069
+      },
+      "model": "origins:item/icon/back_feather_wings"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500070
+      },
+      "model": "origins:item/icon/back_ball_bandolier"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500071
+      },
+      "model": "origins:item/icon/back_bat_wings"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500072
+      },
+      "model": "origins:item/icon/front_trainer_scarf"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500073
+      },
+      "model": "origins:item/icon/front_champion_medal"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500074
+      },
+      "model": "origins:item/icon/front_badge_sash"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500075
+      },
+      "model": "origins:item/icon/front_crystal_amulet"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500076
+      },
+      "model": "origins:item/icon/front_ember_scarf"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500077
+      },
+      "model": "origins:item/icon/front_gold_bow_tie"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500078
+      },
+      "model": "origins:item/icon/front_pumpkin_pendant"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500079
+      },
+      "model": "origins:item/icon/emote_laugh"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500080
+      },
+      "model": "origins:item/icon/emote_skull"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500081
+      },
+      "model": "origins:item/icon/emote_cry"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500082
+      },
+      "model": "origins:item/icon/emote_heart_eyes"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500083
+      },
+      "model": "origins:item/icon/emote_cool"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500084
+      },
+      "model": "origins:item/icon/emote_angry"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500085
+      },
+      "model": "origins:item/icon/emote_clown"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500086
+      },
+      "model": "origins:item/icon/emote_thinking"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500087
+      },
+      "model": "origins:item/icon/emote_shock"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500088
+      },
+      "model": "origins:item/icon/emote_sleep"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500089
+      },
+      "model": "origins:item/icon/emote_fire"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500090
+      },
+      "model": "origins:item/icon/emote_hundred"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500091
+      },
+      "model": "origins:item/icon/emote_gg"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500092
+      },
+      "model": "origins:item/icon/emote_w"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500093
+      },
+      "model": "origins:item/icon/emote_l"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500094
+      },
+      "model": "origins:item/icon/emote_question"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500095
+      },
+      "model": "origins:item/icon/emote_exclaim"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500096
+      },
+      "model": "origins:item/icon/emote_thumbs_up"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500097
+      },
+      "model": "origins:item/icon/emote_sweat"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500098
+      },
+      "model": "origins:item/icon/emote_party"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500099
+      },
+      "model": "origins:item/icon/aura_bubble_ring"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500100
+      },
+      "model": "origins:item/icon/aura_rainbow_halo"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500101
+      },
+      "model": "origins:item/icon/aura_melody"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500102
+      },
+      "model": "origins:item/icon/aura_toxic_fumes"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500103
+      },
+      "model": "origins:item/icon/aura_autumn_leaves"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500104
+      },
+      "model": "origins:item/icon/aura_lovestruck"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500105
+      },
+      "model": "origins:item/icon/aura_galaxy_dust"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500106
+      },
+      "model": "origins:item/icon/aura_sandstorm"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500107
+      },
+      "model": "origins:item/icon/sendout_bubble_pop"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500108
+      },
+      "model": "origins:item/icon/sendout_leaf_tornado"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500109
+      },
+      "model": "origins:item/icon/sendout_lava_splash"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500110
+      },
+      "model": "origins:item/icon/sendout_ice_shatter"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500111
+      },
+      "model": "origins:item/icon/sendout_heart_burst"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500112
+      },
+      "model": "origins:item/icon/sendout_star_burst"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500113
+      },
+      "model": "origins:item/icon/sendout_smoke_bomb"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500114
+      },
+      "model": "origins:item/icon/sendout_rainbow_arc"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500115
+      },
+      "model": "origins:item/icon/sendout_glitch"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500116
+      },
+      "model": "origins:item/icon/sendout_emoji_party"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500117
+      },
+      "model": "origins:item/icon/victory_trophy"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500118
+      },
+      "model": "origins:item/icon/victory_confetti_cannon"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500119
+      },
+      "model": "origins:item/icon/victory_laugh_rain"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500120
+      },
+      "model": "origins:item/icon/victory_gg_rain"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500121
+      },
+      "model": "origins:item/icon/victory_fanfare"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500122
+      },
+      "model": "origins:item/icon/victory_heart_rain"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500123
+      },
+      "model": "origins:item/icon/victory_star_shower"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500124
+      },
+      "model": "origins:item/icon/victory_rainbow_burst"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500125
+      },
+      "model": "origins:item/icon/trail_paw_prints"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500126
+      },
+      "model": "origins:item/icon/trail_soul_steps"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500127
+      },
+      "model": "origins:item/icon/trail_cherry_petals"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500128
+      },
+      "model": "origins:item/icon/trail_stars"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500129
+      },
+      "model": "origins:item/icon/trail_coins"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500130
+      },
+      "model": "origins:item/icon/trail_sparks"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500131
+      },
+      "model": "origins:item/icon/trail_ink_drops"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500132
+      },
+      "model": "origins:item/icon/trail_clouds"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500133
+      },
+      "model": "origins:item/icon/trail_slime"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500134
+      },
+      "model": "origins:item/icon/trail_laugh"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500135
+      },
+      "model": "origins:item/icon/trail_pixel_dust"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500136
+      },
+      "model": "origins:item/icon/trail_toxic"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500137
+      },
+      "model": "origins:item/icon/hat_party_hat"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500138
+      },
+      "model": "origins:item/icon/hat_propeller_cap"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500139
+      },
+      "model": "origins:item/icon/hat_cowboy"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500140
+      },
+      "model": "origins:item/icon/hat_chef"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500141
+      },
+      "model": "origins:item/icon/hat_viking"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500142
+      },
+      "model": "origins:item/icon/hat_wizard"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500143
+      },
+      "model": "origins:item/icon/hat_pirate"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500144
+      },
+      "model": "origins:item/icon/hat_bunny_ears"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500145
+      },
+      "model": "origins:item/icon/hat_cat_ears"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500146
+      },
+      "model": "origins:item/icon/hat_traffic_cone"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500147
+      },
+      "model": "origins:item/icon/hat_beanie"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500148
+      },
+      "model": "origins:item/icon/hat_capsule_helmet"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500149
+      },
+      "model": "origins:item/icon/back_angel_wings"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500150
+      },
+      "model": "origins:item/icon/back_dragon_wings"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500151
+      },
+      "model": "origins:item/icon/back_jetpack"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500152
+      },
+      "model": "origins:item/icon/back_guitar"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500153
+      },
+      "model": "origins:item/icon/back_capsule_pack"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500154
+      },
+      "model": "origins:item/icon/back_sword_sheath"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500155
+      },
+      "model": "origins:item/icon/front_gold_chain"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500156
+      },
+      "model": "origins:item/icon/front_baby_bib"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500157
+      },
+      "model": "origins:item/icon/front_capsule_pendant"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500158
+      },
+      "model": "origins:item/icon/front_heart_locket"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500159
+      },
+      "model": "origins:item/icon/front_star_medal"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500160
+      },
+      "model": "origins:item/icon/front_flower_lei"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500161
+      },
+      "model": "origins:item/icon/ball_neon"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500162
+      },
+      "model": "origins:item/icon/ball_lava"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500163
+      },
+      "model": "origins:item/icon/ball_ocean"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500164
+      },
+      "model": "origins:item/icon/ball_camo"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500165
+      },
+      "model": "origins:item/icon/ball_checker"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500166
+      },
+      "model": "origins:item/icon/ball_candy"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500167
+      },
+      "model": "origins:item/icon/ball_marble"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500168
+      },
+      "model": "origins:item/icon/ball_toxic"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500169
+      },
+      "model": "origins:item/icon/ball_holo"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500170
+      },
+      "model": "origins:item/icon/ball_watermelon"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500171
+      },
+      "model": "origins:item/icon/nick_lime"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500172
+      },
+      "model": "origins:item/icon/nick_gold"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500173
+      },
+      "model": "origins:item/icon/nick_crimson"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500174
+      },
+      "model": "origins:item/icon/nick_lavender"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500175
+      },
+      "model": "origins:item/icon/nick_fire"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500176
+      },
+      "model": "origins:item/icon/nick_toxic"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500177
+      },
+      "model": "origins:item/icon/nick_candy"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500178
+      },
+      "model": "origins:item/icon/nick_galaxy"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500179
+      },
+      "model": "origins:item/icon/aura_laughing_fit"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500180
+      },
+      "model": "origins:item/icon/aura_dead_inside"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500181
+      },
+      "model": "origins:item/icon/aura_smitten"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500182
+      },
+      "model": "origins:item/icon/aura_on_fire"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500183
+      },
+      "model": "origins:item/icon/sendout_skull_pop"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500184
+      },
+      "model": "origins:item/icon/victory_hundred_rain"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500185
+      },
+      "model": "origins:item/icon/trail_skulls"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500186
+      },
+      "model": "origins:item/icon/plain_knowledge_book"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/hat_top_hat",
+  "display": {
+    "gui": {
+      "rotation": [
+        25,
+        225,
+        0
+      ],
+      "translation": [
+        -0.0,
+        -2.45,
+        0
+      ],
+      "scale": [
+        0.85,
+        0.85,
+        0.85
+      ]
+    }
+  }
+}

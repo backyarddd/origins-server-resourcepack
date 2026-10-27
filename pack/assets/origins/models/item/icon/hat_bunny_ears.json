@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/hat_bunny_ears",
+  "display": {
+    "gui": {
+      "rotation": [
+        25,
+        225,
+        0
+      ],
+      "translation": [
+        -0.86,
+        -5.24,
+        0
+      ],
+      "scale": [
+        1.62,
+        1.62,
+        1.62
+      ]
+    }
+  }
+}

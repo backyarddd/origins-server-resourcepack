@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/hat_capsule_helmet",
+  "display": {
+    "gui": {
+      "rotation": [
+        25,
+        225,
+        0
+      ],
+      "translation": [
+        -0.0,
+        1.82,
+        0
+      ],
+      "scale": [
+        0.97,
+        0.97,
+        0.97
+      ]
+    }
+  }
+}
