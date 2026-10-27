@@ -455,6 +455,19 @@ def swirl(amp, lift):
     return [f'{c} * {amp}', lift, f'{s} * {amp}']
 
 
+# Neutral greyscale star: particle tinting multiplies the sprite, so a coloured sprite would wash the tint out.
+P_NEUTRAL_STAR = pal(O='#C8C8C8', M='#EEEEEE', L='#FFFFFF', W='#FFFFFF', X='#FFFFFF')
+
+
+def rainbow_tint(cycles):
+    """Particle colour [r, g, b, a] (MoLang): fully saturated hue that starts at a random point of the wheel per particle
+    and turns [cycles] times over its life. Each channel is a cosine 120 degrees apart (red at hue 0),
+    clamped (0.5 + cos swings -0.5..1.5), so one channel is always 1 and one 0 (pure colours, no pastel)."""
+    hue = f'360 * (v.particle_random_1 + {cycles} * {AGE})'
+    chan = [f'math.clamp(0.5 + math.cos({hue} - {d}), 0, 1)' for d in (0, 120, 240)]
+    return chan + [f'1 - math.pow({AGE}, 2)']  # same fade as build.FADE
+
+
 COIN_W = '0.11 * math.abs(math.cos(v.particle_age * 540 + v.particle_random_3 * 360))'
 
 EFFECTS2 = {eid: emote_fx(eid) for eid in EMOTE_IDS}
@@ -467,9 +480,9 @@ EFFECTS2.update({
                      'math.cos(v.emitter_age * 300) * 0.55']),
         life=(1.4, 1.8), size=pop(0.17), speed=0.05, accel=[0, 0.3, 0], alpha=POP_ALPHA),
     'aura_rainbow_halo': dict(
-        frames=fr(*[(STAR4, shades(c, light='#FFFFFF')) for c in RAINBOW]), rate=10, max=24,
+        frames=fr((STAR4, P_NEUTRAL_STAR)), rate=10, max=24,
         shape=point(['math.sin(v.emitter_age * 360) * 0.6', 1.45, 'math.cos(v.emitter_age * 360) * 0.6']),
-        life=(1.6, 2.0), size=twinkle(0.16), speed=0),
+        life=(1.6, 2.0), size=twinkle(0.16), speed=0, tint=rainbow_tint(1.5)),
     'aura_melody': dict(
         frames=fr((NOTE, P_GOLD_NOTE), (NOTE2, P_BLUE_NOTE), (NOTE, P_PINK_NOTE), (NOTE2, P_GREEN_NOTE)), rate=4,
         shape=box([0.5, 0.3, 0.5], 0.3, [0, 1, 0]), life=(1.4, 1.8), size=0.18, speed=0.3, drag=0.5,

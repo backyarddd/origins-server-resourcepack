@@ -33,23 +33,23 @@
         ],
         "facing_camera_mode": "rotate_xyz",
         "uv": {
-          "texture_width": 48,
+          "texture_width": 8,
           "texture_height": 8,
           "uv_size": [
             8,
             8
           ],
           "uv": [
-            "math.floor(v.particle_random_1 * 6) * 8",
+            0,
             0
           ]
         }
       },
       "minecraft:particle_appearance_tinting": {
         "color": [
-          1,
-          1,
-          1,
+          "math.clamp(0.5 + math.cos(360 * (v.particle_random_1 + 1.5 * v.particle_age / v.particle_lifetime) - 0), 0, 1)",
+          "math.clamp(0.5 + math.cos(360 * (v.particle_random_1 + 1.5 * v.particle_age / v.particle_lifetime) - 120), 0, 1)",
+          "math.clamp(0.5 + math.cos(360 * (v.particle_random_1 + 1.5 * v.particle_age / v.particle_lifetime) - 240), 0, 1)",
           "1 - math.pow(v.particle_age / v.particle_lifetime, 2)"
         ]
       },

@@ -278,7 +278,7 @@ def effect_json(eid, kind, sheet, n, p):
     comps['minecraft:particle_appearance_billboard'] = {'size': size, 'facing_camera_mode': p.get('facing',
                                                                                                     'rotate_xyz'),
                                                         'uv': uv}
-    comps['minecraft:particle_appearance_tinting'] = {'color': [1, 1, 1, p.get('alpha', FADE)]}
+    comps['minecraft:particle_appearance_tinting'] = {'color': p.get('tint') or [1, 1, 1, p.get('alpha', FADE)]}
     comps['minecraft:particle_initial_speed'] = p.get('speed', 0)
     if 'spin' in p:
         comps['minecraft:particle_initial_spin'] = {'rotation': p['spin'][0], 'rotation_rate': p['spin'][1]}
