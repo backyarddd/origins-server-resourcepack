@@ -36,6 +36,9 @@ import sys
 
 from PIL import Image
 
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from cosmetics import standins  # noqa: E402
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 PACK = os.path.join(os.path.dirname(HERE), 'pack')
 COBBLEMON_BALLS = os.path.join(HERE, 'cobblemon_balls.json')
@@ -81,19 +84,31 @@ def vanilla_texture(item, state):
 
 VANILLA_TEXTURES = {'minecraft:item/paper'} | {vanilla_texture(i, st) for i, (base, states) in ITEM_STATES.items()
                                                for st in [base] + [s for _, s in states]}
+# The armor stand-in models (standins.py) parent vanilla armor models and use the horse armor texture.
+VANILLA_MODELS |= standins.vanilla_models()
+VANILLA_TEXTURES |= standins.VANILLA_TEXTURES
 RATES = ('minecraft:emitter_rate_instant', 'minecraft:emitter_rate_steady', 'minecraft:emitter_rate_manual')
 LIFETIMES = ('minecraft:emitter_lifetime_once', 'minecraft:emitter_lifetime_looping',
              'minecraft:emitter_lifetime_expression')
 MATERIALS = {'particles_alpha', 'particles_blend', 'particles_add', 'particles_opaque'}
 # v1.1 client-mod cosmetics (catalog.md "v1.1"); the client draws origins:cosmetic/<id> / adds aspect BALL_ASPECT
-HATS = ('hat_royal_crown', 'hat_top_hat', 'hat_origins_cap', 'hat_flower_crown', 'hat_golden_halo', 'hat_witch')
-BACKS = ('back_explorer_pack', 'back_feather_wings', 'back_ball_bandolier', 'back_bat_wings')
+HATS = ('hat_royal_crown', 'hat_top_hat', 'hat_origins_cap', 'hat_flower_crown', 'hat_golden_halo', 'hat_witch',
+        # drop 2 (catalog-v2.md)
+        'hat_party_hat', 'hat_propeller_cap', 'hat_cowboy', 'hat_chef', 'hat_viking', 'hat_wizard', 'hat_pirate',
+        'hat_bunny_ears', 'hat_cat_ears', 'hat_traffic_cone', 'hat_beanie', 'hat_capsule_helmet')
+BACKS = ('back_explorer_pack', 'back_feather_wings', 'back_ball_bandolier', 'back_bat_wings',
+         'back_angel_wings', 'back_dragon_wings', 'back_jetpack', 'back_guitar', 'back_capsule_pack',
+         'back_sword_sheath')
 FRONTS = ('front_trainer_scarf', 'front_champion_medal', 'front_badge_sash', 'front_crystal_amulet',
-          'front_ember_scarf', 'front_gold_bow_tie', 'front_pumpkin_pendant')
+          'front_ember_scarf', 'front_gold_bow_tie', 'front_pumpkin_pendant',
+          'front_gold_chain', 'front_baby_bib', 'front_capsule_pendant', 'front_heart_locket', 'front_star_medal',
+          'front_flower_lei')
 # front items sit on the chest: the torso's front face is z = 6 (contract), a model may sink into it by 0.5 at most
 FRONT_MAX_Z = 6.5
 FRONT_BOX = ((2, 14), (-14, 1), (2, FRONT_MAX_Z))  # x, y, z range every (rotated) corner must stay inside
-BALL_SKINS = ('ball_galaxy', 'ball_gilded', 'ball_crystal', 'ball_ember', 'ball_sakura', 'ball_pumpkin')
+BALL_SKINS = ('ball_galaxy', 'ball_gilded', 'ball_crystal', 'ball_ember', 'ball_sakura', 'ball_pumpkin',
+              'ball_neon', 'ball_lava', 'ball_ocean', 'ball_camo', 'ball_checker', 'ball_candy', 'ball_marble',
+              'ball_toxic', 'ball_holo', 'ball_watermelon')
 BALL_ASPECT = 'origins_ball_{}'
 VANILLA_BLOCK_ATLAS_DIRS = ('block/', 'item/')  # directory sources of the 1.21.1 minecraft:blocks atlas we rely on
 ANGLES = (-45, -22.5, 0, 22.5, 45)
@@ -444,6 +459,8 @@ def check(pack=PACK):
         for ball in sorted(cob['balls']):
             assert (ball, (BALL_ASPECT.format(skin),)) in covered, \
                 f'ball skin {skin}: no variation for {ball} on aspect {BALL_ASPECT.format(skin)}'
+    errs = standins.check(pack)
+    assert not errs, '; '.join(errs)
     print(f'ok  {n_json} json files, {len(effects)} particle effects, {len(models)} models, '
           f'{len(textures)} model textures, {len(TOOL_SETS)} tool sets ({cases} override cases), '
           f'{len(variations)} ball variation sets ({len(covered)} skin x ball)')

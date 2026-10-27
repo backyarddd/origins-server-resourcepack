@@ -22,7 +22,7 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
-from cosmetics import art, toolsets  # noqa: E402
+from cosmetics import art, art_fx2, standins, toolsets  # noqa: E402
 from cosmetics.art import CREAM, GOLD, LIGHT_GOLD, NAVY, hexrgb, shades  # noqa: E402
 from cosmetics.check import (BACKS, BALL_ASPECT, BALL_SKINS, CATCH_ALL, COBBLEMON_BALLS, FRONTS, HATS,  # noqa: E402
                              ITEM_STATES, TOOL_ITEMS, TOOL_SETS, TOOLSET_PARENT, TOOLSET_TEXTURES, load_cobblemon,
@@ -205,7 +205,8 @@ EFFECTS = {
     'trail_supporter_sparkles': dict(frames=frames((art.STAR, P_GREEN_STAR), (art.STAR, P_GOLD_STAR)), rate=2,
                                      life=(0.6, 1.0), size=twinkle(0.16), speed=0.05),
 }
-assert len(EFFECTS) == 31
+EFFECTS.update(art_fx2.EFFECTS2)  # drop 2: 20 emotes (kind emote: one 16x16 sprite, see art_fx2) + 45 other effects
+assert len(EFFECTS) == 31 + 65
 # second emitters for looks one particle sheet cannot give (spawned by the parent's creation_event);
 # cosmetics/parts/<parent>_<name>, not cosmetic ids
 PARTS = {
@@ -218,6 +219,7 @@ PARTS = {
         size='0.6 * math.min(1, v.particle_age * 4)', speed=3.2, drag=1.6, facing='rotate_y',
         alpha='v.particle_age < 1.3 ? 1 : 1 - (v.particle_age - 1.3) / 0.5'),
 }
+PARTS.update(art_fx2.PARTS2)
 
 
 # Aura numbers are tuned on a Pikachu, whose hitbox is 0.35 wide and 0.65 tall. Cobblemon exposes the attached entity's
@@ -276,7 +278,7 @@ def effect_json(eid, kind, sheet, n, p):
     comps['minecraft:particle_appearance_billboard'] = {'size': size, 'facing_camera_mode': p.get('facing',
                                                                                                     'rotate_xyz'),
                                                         'uv': uv}
-    comps['minecraft:particle_appearance_tinting'] = {'color': [1, 1, 1, p.get('alpha', FADE)]}
+    comps['minecraft:particle_appearance_tinting'] = {'color': p.get('tint') or [1, 1, 1, p.get('alpha', FADE)]}
     comps['minecraft:particle_initial_speed'] = p.get('speed', 0)
     if 'spin' in p:
         comps['minecraft:particle_initial_spin'] = {'rotation': p['spin'][0], 'rotation_rate': p['spin'][1]}
@@ -727,6 +729,7 @@ def build(pack, write_json):
     toolsets_closeup(tools, os.path.join(PREVIEW, 'toolsets_x10.png'))
     wearables = build_wearables(pack, write_json)
     balls, n_balls = build_balls(pack, write_json)
+    standins.build(pack)
     wearables_preview({k: v for k, v in wearables.items() if k in HATS + BACKS}, balls,
                       os.path.join(PREVIEW, 'wearables.png'))
     wearables_preview({k: v for k, v in wearables.items() if k in FRONTS}, [], os.path.join(PREVIEW, 'fronts.png'))

@@ -1,0 +1,22 @@
+{
+  "parent": "minecraft:item/netherite_leggings_amethyst_trim",
+  "display": {
+    "head": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0,
+        0,
+        0
+      ]
+    }
+  }
+}

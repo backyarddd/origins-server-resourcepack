@@ -55,6 +55,96 @@
       "model": "cobblemon:ancient_poke_ball.geo",
       "poser": "cobblemon:ancient_poke_ball",
       "texture": "origins:textures/poke_balls/cosmetic/ball_pumpkin/ancient_poke_ball.png"
+    },
+    {
+      "aspects": [
+        "origins_ball_ball_neon"
+      ],
+      "layers": [],
+      "model": "cobblemon:ancient_poke_ball.geo",
+      "poser": "cobblemon:ancient_poke_ball",
+      "texture": "origins:textures/poke_balls/cosmetic/ball_neon/ancient_poke_ball.png"
+    },
+    {
+      "aspects": [
+        "origins_ball_ball_lava"
+      ],
+      "layers": [],
+      "model": "cobblemon:ancient_poke_ball.geo",
+      "poser": "cobblemon:ancient_poke_ball",
+      "texture": "origins:textures/poke_balls/cosmetic/ball_lava/ancient_poke_ball.png"
+    },
+    {
+      "aspects": [
+        "origins_ball_ball_ocean"
+      ],
+      "layers": [],
+      "model": "cobblemon:ancient_poke_ball.geo",
+      "poser": "cobblemon:ancient_poke_ball",
+      "texture": "origins:textures/poke_balls/cosmetic/ball_ocean/ancient_poke_ball.png"
+    },
+    {
+      "aspects": [
+        "origins_ball_ball_camo"
+      ],
+      "layers": [],
+      "model": "cobblemon:ancient_poke_ball.geo",
+      "poser": "cobblemon:ancient_poke_ball",
+      "texture": "origins:textures/poke_balls/cosmetic/ball_camo/ancient_poke_ball.png"
+    },
+    {
+      "aspects": [
+        "origins_ball_ball_checker"
+      ],
+      "layers": [],
+      "model": "cobblemon:ancient_poke_ball.geo",
+      "poser": "cobblemon:ancient_poke_ball",
+      "texture": "origins:textures/poke_balls/cosmetic/ball_checker/ancient_poke_ball.png"
+    },
+    {
+      "aspects": [
+        "origins_ball_ball_candy"
+      ],
+      "layers": [],
+      "model": "cobblemon:ancient_poke_ball.geo",
+      "poser": "cobblemon:ancient_poke_ball",
+      "texture": "origins:textures/poke_balls/cosmetic/ball_candy/ancient_poke_ball.png"
+    },
+    {
+      "aspects": [
+        "origins_ball_ball_marble"
+      ],
+      "layers": [],
+      "model": "cobblemon:ancient_poke_ball.geo",
+      "poser": "cobblemon:ancient_poke_ball",
+      "texture": "origins:textures/poke_balls/cosmetic/ball_marble/ancient_poke_ball.png"
+    },
+    {
+      "aspects": [
+        "origins_ball_ball_toxic"
+      ],
+      "layers": [],
+      "model": "cobblemon:ancient_poke_ball.geo",
+      "poser": "cobblemon:ancient_poke_ball",
+      "texture": "origins:textures/poke_balls/cosmetic/ball_toxic/ancient_poke_ball.png"
+    },
+    {
+      "aspects": [
+        "origins_ball_ball_holo"
+      ],
+      "layers": [],
+      "model": "cobblemon:ancient_poke_ball.geo",
+      "poser": "cobblemon:ancient_poke_ball",
+      "texture": "origins:textures/poke_balls/cosmetic/ball_holo/ancient_poke_ball.png"
+    },
+    {
+      "aspects": [
+        "origins_ball_ball_watermelon"
+      ],
+      "layers": [],
+      "model": "cobblemon:ancient_poke_ball.geo",
+      "poser": "cobblemon:ancient_poke_ball",
+      "texture": "origins:textures/poke_balls/cosmetic/ball_watermelon/ancient_poke_ball.png"
     }
   ]
 }
