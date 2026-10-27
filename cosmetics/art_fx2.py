@@ -475,14 +475,14 @@ EFFECTS2 = {eid: emote_fx(eid) for eid in EMOTE_IDS}
 EFFECTS2.update({
     # ---- auras (rate = particles/s over a 2.5 s emission, tuned on a Pikachu; build.py scales them to the Pokemon) ----
     'aura_bubble_ring': dict(
+        # owner 2026-10-27: spread over the body like the other auras instead of one spinning ring
         frames=fr((BUBBLE, P_BLUE_BUBBLE), (BUBBLE, P_BLUE_BUBBLE2)), rate=6, max=14,
-        shape=point(['math.sin(v.emitter_age * 300) * 0.55', '0.45 + 0.25 * math.sin(v.emitter_age * 540)',
-                     'math.cos(v.emitter_age * 300) * 0.55']),
+        shape=box([0.5, 0.3, 0.5], 0.3, [0, 1, 0]),
         life=(1.4, 1.8), size=pop(0.17), speed=0.05, accel=[0, 0.3, 0], alpha=POP_ALPHA),
     'aura_rainbow_halo': dict(
-        frames=fr((STAR4, P_NEUTRAL_STAR)), rate=10, max=24,
-        shape=point(['math.sin(v.emitter_age * 360) * 0.6', 1.45, 'math.cos(v.emitter_age * 360) * 0.6']),
-        life=(1.6, 2.0), size=twinkle(0.16), speed=0, tint=rainbow_tint(1.5)),
+        # owner 2026-10-27: spread over the body like the other auras instead of one spinning ring over the head
+        frames=fr((STAR4, P_NEUTRAL_STAR)), rate=10, max=24, shape=box([0.6, 0.6, 0.6], 0.6),
+        life=(1.6, 2.0), size=twinkle(0.16), speed=0.04, tint=rainbow_tint(1.5)),
     'aura_melody': dict(
         frames=fr((NOTE, P_GOLD_NOTE), (NOTE2, P_BLUE_NOTE), (NOTE, P_PINK_NOTE), (NOTE2, P_GREEN_NOTE)), rate=4,
         shape=box([0.5, 0.3, 0.5], 0.3, [0, 1, 0]), life=(1.4, 1.8), size=0.18, speed=0.3, drag=0.5,
@@ -607,11 +607,11 @@ EFFECTS2.update({
         size=0.13, speed=0.2, accel=[0, 0.4, 0], direction=[0, 1, 0]),
 
     # ---- emoji effects (16x16 emote sprites) ----
-    # laughing faces circle the Pokemon: the emitter walks a ring (0.8 laps/s), each face stays where it spawned
+    # laughing faces pop up all over the body and drift up a little (owner 2026-10-27: spread out like the other
+    # auras, no spinning ring)
     'aura_laughing_fit': dict(
-        frames=[emote('emote_laugh')], rate=5, max=12,
-        shape=point(['math.sin(v.emitter_age * 290) * 0.6', 0.55, 'math.cos(v.emitter_age * 290) * 0.6']),
-        life=(1.3, 1.6), size=0.27, speed=0),
+        frames=[emote('emote_laugh')], rate=5, max=12, shape=box([0.55, 0.35, 0.55], 0.5),
+        life=(1.3, 1.6), size=0.27, speed=0.05, drag=0.8, accel=[0, 0.2, 0]),
     # skulls rise slowly and fade out
     'aura_dead_inside': dict(
         frames=[emote('emote_skull')], rate=2.5, max=8, shape=box([0.5, 0.2, 0.5], 0.2, [0, 1, 0]),

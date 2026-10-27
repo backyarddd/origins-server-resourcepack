@@ -19,11 +19,21 @@
         "spawn_rate": "(6) * math.clamp(((q.entity_width + 0.8) / 1.15) * ((q.entity_height + 0.6) / 1.25), 1, 6)",
         "max_particles": "(14) * math.clamp(((q.entity_width + 0.8) / 1.15) * ((q.entity_height + 0.6) / 1.25), 1, 6)"
       },
-      "minecraft:emitter_shape_point": {
+      "minecraft:emitter_shape_box": {
         "offset": [
-          "(math.sin(v.emitter_age * 300) * 0.55) * ((q.entity_width + 0.8) / 1.15)",
-          "(0.45 + 0.25 * math.sin(v.emitter_age * 540)) * ((q.entity_height + 0.6) / 1.25)",
-          "(math.cos(v.emitter_age * 300) * 0.55) * ((q.entity_width + 0.8) / 1.15)"
+          0,
+          "(0.3) * ((q.entity_height + 0.6) / 1.25)",
+          0
+        ],
+        "half_dimensions": [
+          "(0.5) * ((q.entity_width + 0.8) / 1.15)",
+          "(0.3) * ((q.entity_height + 0.6) / 1.25)",
+          "(0.5) * ((q.entity_width + 0.8) / 1.15)"
+        ],
+        "direction": [
+          0,
+          1,
+          0
         ]
       },
       "minecraft:particle_appearance_billboard": {
