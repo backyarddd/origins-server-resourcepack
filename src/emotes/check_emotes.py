@@ -20,7 +20,8 @@ EMOTE_IDS = [
 
 def main() -> int:
     errors: list[str] = []
-    found = sorted(p.stem for p in HERE.glob("*.png"))
+    # Only PNGs are checked; other files in the folder (CREDITS.md, this script) are ignored.
+    found = sorted(p.stem for p in HERE.iterdir() if p.is_file() and p.suffix.lower() == ".png")
     for missing in sorted(set(EMOTE_IDS) - set(found)):
         errors.append(f"missing: {missing}.png")
     for extra in sorted(set(found) - set(EMOTE_IDS)):
