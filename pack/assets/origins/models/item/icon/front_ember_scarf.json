@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/front_ember_scarf",
+  "display": {
+    "gui": {
+      "rotation": [
+        10,
+        200,
+        0
+      ],
+      "translation": [
+        -1.38,
+        20.01,
+        0
+      ],
+      "scale": [
+        1.61,
+        1.61,
+        1.61
+      ]
+    }
+  }
+}

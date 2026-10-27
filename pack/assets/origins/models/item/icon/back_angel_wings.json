@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/back_angel_wings",
+  "display": {
+    "gui": {
+      "rotation": [
+        15,
+        20,
+        0
+      ],
+      "translation": [
+        -1.71,
+        9.79,
+        0
+      ],
+      "scale": [
+        0.79,
+        0.79,
+        0.79
+      ]
+    }
+  }
+}

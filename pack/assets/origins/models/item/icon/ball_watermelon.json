@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "origins:item/icon/ball_watermelon"
+  }
+}

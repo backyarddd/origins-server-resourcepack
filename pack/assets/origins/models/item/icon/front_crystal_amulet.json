@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/front_crystal_amulet",
+  "display": {
+    "gui": {
+      "rotation": [
+        10,
+        200,
+        0
+      ],
+      "translation": [
+        -1.58,
+        23.44,
+        0
+      ],
+      "scale": [
+        1.94,
+        1.94,
+        1.94
+      ]
+    }
+  }
+}

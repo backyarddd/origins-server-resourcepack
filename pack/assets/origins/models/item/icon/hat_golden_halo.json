@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/hat_golden_halo",
+  "display": {
+    "gui": {
+      "rotation": [
+        25,
+        225,
+        0
+      ],
+      "translation": [
+        -0.0,
+        -4.24,
+        0
+      ],
+      "scale": [
+        1.44,
+        1.44,
+        1.44
+      ]
+    }
+  }
+}

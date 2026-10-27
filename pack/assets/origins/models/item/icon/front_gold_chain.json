@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/front_gold_chain",
+  "display": {
+    "gui": {
+      "rotation": [
+        10,
+        200,
+        0
+      ],
+      "translation": [
+        -1.34,
+        18.99,
+        0
+      ],
+      "scale": [
+        1.43,
+        1.43,
+        1.43
+      ]
+    }
+  }
+}

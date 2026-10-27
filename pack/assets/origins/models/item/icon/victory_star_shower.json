@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "origins:item/icon/victory_star_shower"
+  }
+}

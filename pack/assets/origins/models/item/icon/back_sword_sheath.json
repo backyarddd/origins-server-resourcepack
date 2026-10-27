@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/back_sword_sheath",
+  "display": {
+    "gui": {
+      "rotation": [
+        15,
+        20,
+        0
+      ],
+      "translation": [
+        -1.33,
+        14.73,
+        0
+      ],
+      "scale": [
+        1.11,
+        1.11,
+        1.11
+      ]
+    }
+  }
+}

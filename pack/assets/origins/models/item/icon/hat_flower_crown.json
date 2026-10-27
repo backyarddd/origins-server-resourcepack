@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/hat_flower_crown",
+  "display": {
+    "gui": {
+      "rotation": [
+        25,
+        225,
+        0
+      ],
+      "translation": [
+        -0.0,
+        -0.6,
+        0
+      ],
+      "scale": [
+        0.89,
+        0.89,
+        0.89
+      ]
+    }
+  }
+}

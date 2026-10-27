@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/hat_pirate",
+  "display": {
+    "gui": {
+      "rotation": [
+        25,
+        225,
+        0
+      ],
+      "translation": [
+        -0.72,
+        -1.73,
+        0
+      ],
+      "scale": [
+        0.98,
+        0.98,
+        0.98
+      ]
+    }
+  }
+}

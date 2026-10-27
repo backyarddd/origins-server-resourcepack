@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/back_jetpack",
+  "display": {
+    "gui": {
+      "rotation": [
+        15,
+        20,
+        0
+      ],
+      "translation": [
+        -1.83,
+        18.72,
+        0
+      ],
+      "scale": [
+        1.34,
+        1.34,
+        1.34
+      ]
+    }
+  }
+}

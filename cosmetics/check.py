@@ -25,7 +25,12 @@ Checks, each failing with a readable AssertionError:
   keyed on at least one aspect (an aspect-less variation would reskin the ball for everyone), its texture a PNG in the
   pack sized like its model's texture, its model and poser ids known to Cobblemon (cosmetics/cobblemon_balls.json,
   read from the Cobblemon jar by `python -I cosmetics/build.py --refresh-cobblemon <jar>`) or shipped in the pack;
-  and every ball skin in BALL_SKINS has a variation on aspect origins_ball_<skin id> for every Cobblemon ball.
+  and every ball skin in BALL_SKINS has a variation on aspect origins_ball_<skin id> for every Cobblemon ball;
+- menu icons (cosmetics/icons.py, check_icons): every icon_catalog.json id numbered in icons.json, numbers unique and
+  contiguous from 7500001, one model origins:item/icon/<id> per id (flat types: item/generated + a 16x16 binary-alpha
+  texture; tool skins: the set's pickaxe; hats / back / front items: the wearable model with a display.gui inside
+  the client's clamps), and minecraft:item/knowledge_book with one override per id ascending then the catch-all to
+  the plain look, every number resolving to its own icon.
 
 Run:  python -I cosmetics/check.py [pack dir]   (default: pack/ next to this folder)
 """
@@ -87,6 +92,14 @@ VANILLA_TEXTURES = {'minecraft:item/paper'} | {vanilla_texture(i, st) for i, (ba
 # The armor stand-in models (standins.py) parent vanilla armor models and use the horse armor texture.
 VANILLA_MODELS |= standins.vanilla_models()
 VANILLA_TEXTURES |= standins.VANILLA_TEXTURES
+# menu icons (cosmetics/icons.py): the base item and its plain look
+ICON_ITEM = 'knowledge_book'
+ICONS_JSON = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'icons.json')
+ICON_CATALOG_JSON = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'icon_catalog.json')
+ICON_FIRST_CMD = 7500001
+ICON_MODEL_PARENTS = {'tool_skin': 'origins:item/toolskin/{set}_pickaxe', 'hat': 'origins:cosmetic/{id}',
+                      'back': 'origins:cosmetic/{id}', 'front': 'origins:cosmetic/{id}'}
+VANILLA_TEXTURES.add('minecraft:item/' + ICON_ITEM)
 RATES = ('minecraft:emitter_rate_instant', 'minecraft:emitter_rate_steady', 'minecraft:emitter_rate_manual')
 LIFETIMES = ('minecraft:emitter_lifetime_once', 'minecraft:emitter_lifetime_looping',
              'minecraft:emitter_lifetime_expression')
@@ -436,6 +449,53 @@ def front_model(mid, data):
                     f'(front items sit on the torso front, z <= {FRONT_MAX_Z})')
 
 
+def check_icons(pack, models):
+    """Menu icons: icons.json numbering (contiguous from ICON_FIRST_CMD, unique, every catalog id present), one model
+    per id (flat types: item/generated + a 16x16 binary-alpha texture origins:item/icon/<id>; tool skins: the set's
+    pickaxe; hats / back / front items: the wearable model with a display.gui), and the knowledge_book overrides: one
+    per id in ascending custom_model_data, then the catch-all to the plain look; every number resolves to its icon."""
+    with open(ICONS_JSON, encoding='utf-8') as f:
+        icons = json.load(f)
+    with open(ICON_CATALOG_JSON, encoding='utf-8') as f:
+        catalog = json.load(f)
+    missing = sorted(set(catalog) - set(icons))
+    assert not missing, f'icons.json: no number for {", ".join(missing)} (run cosmetics/icons.py --refresh-catalog)'
+    cmds = sorted(e['cmd'] for e in icons.values())
+    assert cmds == list(range(ICON_FIRST_CMD, ICON_FIRST_CMD + len(icons))),         f'icons.json: custom_model_data must be unique and contiguous from {ICON_FIRST_CMD}'
+    sets = {v: k for k, v in TOOL_SETS.items()}
+    for cid, e in icons.items():
+        mid = f'origins:item/icon/{cid}'
+        assert mid in models, f'icon {cid}: missing model {mid}'
+        data = load(models[mid], pack)
+        kind = e['type']
+        assert catalog[cid]['type'] == kind, f'icon {cid}: type {kind} differs from the catalog'
+        if kind in ICON_MODEL_PARENTS:
+            want = ICON_MODEL_PARENTS[kind].format(id=cid, set=sets.get(catalog[cid].get('custom_model_data')))
+            assert data.get('parent') == want and want in models, f'icon {cid}: parent must be {want}'
+            if kind != 'tool_skin':
+                gui = data['display']['gui']
+                assert all(len(gui[k]) == 3 for k in ('rotation', 'translation', 'scale')), f'icon {cid}: bad gui'
+                assert all(-80 <= v <= 80 for v in gui['translation']) and all(0 < v <= 4 for v in gui['scale']),                     f'icon {cid}: gui translation / scale outside the client clamp'
+        else:
+            assert data == {'parent': 'minecraft:item/generated', 'textures': {'layer0': mid}},                 f'icon {cid}: must be item/generated with layer0 {mid}'
+            png(res(pack, mid, 'textures', '.png'), pack, (16, 16), f'icon {cid}')
+    base = f'minecraft:item/{ICON_ITEM}'
+    assert base in models, f'missing assets/minecraft/models/item/{ICON_ITEM}.json'
+    data = load(models[base], pack)
+    assert data.get('parent') == 'minecraft:item/generated' and data.get('textures') == {'layer0': base},         f'{base}: must keep the vanilla parent and texture'
+    order = sorted(icons, key=lambda c: icons[c]['cmd'])
+    plain = f'origins:item/icon/plain_{ICON_ITEM}'
+    want = [{'predicate': {'custom_model_data': icons[c]['cmd']}, 'model': f'origins:item/icon/{c}'} for c in order]
+    want.append({'predicate': {'custom_model_data': cmds[-1] + 1}, 'model': plain})
+    assert data.get('overrides') == want, f'{base}: overrides must be one per icon ascending, then the catch-all'
+    assert layer0(plain, pack) == base, f'{plain}: must show the vanilla {ICON_ITEM}'
+    for c in order:  # replay the client: each number resolves to its own icon, neighbours and the catch-all too
+        assert resolve(want, {'custom_model_data': icons[c]['cmd']}) == f'origins:item/icon/{c}', c
+    assert resolve(want, {'custom_model_data': ICON_FIRST_CMD - 1}) is None
+    assert resolve(want, {'custom_model_data': cmds[-1] + 50}) == plain
+    return len(icons)
+
+
 def check(pack=PACK):
     n_json = check_json(pack)
     effects = collect(pack, 'bedrock/particles', '.particle.json')
@@ -459,11 +519,12 @@ def check(pack=PACK):
         for ball in sorted(cob['balls']):
             assert (ball, (BALL_ASPECT.format(skin),)) in covered, \
                 f'ball skin {skin}: no variation for {ball} on aspect {BALL_ASPECT.format(skin)}'
+    n_icons = check_icons(pack, models)
     errs = standins.check(pack)
     assert not errs, '; '.join(errs)
     print(f'ok  {n_json} json files, {len(effects)} particle effects, {len(models)} models, '
           f'{len(textures)} model textures, {len(TOOL_SETS)} tool sets ({cases} override cases), '
-          f'{len(variations)} ball variation sets ({len(covered)} skin x ball)')
+          f'{len(variations)} ball variation sets ({len(covered)} skin x ball), {n_icons} menu icons')
 
 
 if __name__ == '__main__':

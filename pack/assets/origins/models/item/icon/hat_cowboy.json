@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/hat_cowboy",
+  "display": {
+    "gui": {
+      "rotation": [
+        25,
+        225,
+        0
+      ],
+      "translation": [
+        -0.0,
+        -1.29,
+        0
+      ],
+      "scale": [
+        0.71,
+        0.71,
+        0.71
+      ]
+    }
+  }
+}

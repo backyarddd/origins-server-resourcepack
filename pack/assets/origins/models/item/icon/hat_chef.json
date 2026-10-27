@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/hat_chef",
+  "display": {
+    "gui": {
+      "rotation": [
+        25,
+        225,
+        0
+      ],
+      "translation": [
+        -0.0,
+        -4.01,
+        0
+      ],
+      "scale": [
+        1.02,
+        1.02,
+        1.02
+      ]
+    }
+  }
+}

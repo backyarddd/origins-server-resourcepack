@@ -1,0 +1,22 @@
+{
+  "parent": "origins:cosmetic/front_star_medal",
+  "display": {
+    "gui": {
+      "rotation": [
+        10,
+        200,
+        0
+      ],
+      "translation": [
+        -0.95,
+        15.39,
+        0
+      ],
+      "scale": [
+        1.06,
+        1.06,
+        1.06
+      ]
+    }
+  }
+}

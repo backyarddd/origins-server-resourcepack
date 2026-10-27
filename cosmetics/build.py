@@ -22,7 +22,7 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
-from cosmetics import art, art_fx2, standins, toolsets  # noqa: E402
+from cosmetics import art, art_fx2, icons, standins, toolsets  # noqa: E402
 from cosmetics.art import CREAM, GOLD, LIGHT_GOLD, NAVY, hexrgb, shades  # noqa: E402
 from cosmetics.check import (BACKS, BALL_ASPECT, BALL_SKINS, CATCH_ALL, COBBLEMON_BALLS, FRONTS, HATS,  # noqa: E402
                              ITEM_STATES, TOOL_ITEMS, TOOL_SETS, TOOLSET_PARENT, TOOLSET_TEXTURES, load_cobblemon,
@@ -735,6 +735,8 @@ def build(pack, write_json):
           f'{len(TOOLSET_TEXTURES)} textures, {len(TOOL_ITEMS)} item models with overrides')
     print(f'cosmetics: {len(HATS)} hats + {len(BACKS)} back items + {len(FRONTS)} front items, {len(BALL_SKINS)} '
           f'ball skins x {n_balls} balls')
+    # menu icons last: the hat / back / front and tool skin icons are the models written above
+    icons.build(pack, write_json)
 
 
 if __name__ == '__main__':
