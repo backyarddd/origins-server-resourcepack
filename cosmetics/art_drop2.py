@@ -483,24 +483,86 @@ def _nozzle(face, i, j, w, h, p):
     return 'n' if j == h - 1 else 'N' if j > 0 else 'b'
 
 
-def _guitar_body(face, i, j, w, h, p):
-    if face == 'south':
-        if p[0] < 6 and p[1] < -9:
-            return 'q'
-        return 'r' if i in (0, w - 1) else 'R'
-    return 'r' if face != 'up' else 'R'
+# Acoustic guitar, drawn upright before GUITAR_ROT: neck up along x = 8, soundboard = the south face at z = GTR_TOP.
+# The body is 0.5-tall rows whose widths trace two bouts (lower wide, upper narrower, a waist between); every
+# soundboard detail (binding, amber edge, rosette, grain) is painted from the texel's model position, so the rows
+# read as one surface. The strap crosses the back the other way, from behind the left shoulder to the right side.
+GTR_BOUTS = ((-10.9, 3.75, 2.6), (-7.6, 3.0, 1.8))  # (centre y, half width, half height) of the lower / upper bout
+GTR_Y0, GTR_Y1, GTR_TOP = -13.5, -6.0, 12.5
+GTR_HOLE = -8.4  # sound hole centre y (x = 8)
 
 
-def _fingerboard(face, i, j, w, h, p):
+def _gtr_half(y):
+    """Body half width at height y, snapped down to the 0.25 px texel grid (density 4)."""
+    hw = max(a * math.sqrt(1 - ((y - c) / b) ** 2) if abs(y - c) < b else 0 for c, a, b in GTR_BOUTS)
+    return math.floor(hw * 4) / 4
+
+
+GTR_ROWS = [_gtr_half(GTR_Y0 + 0.5 * k + 0.25) for k in range(int((GTR_Y1 - GTR_Y0) / 0.5))]
+
+
+def _gtr_in(x, y):
+    return GTR_Y0 <= y < GTR_Y1 and abs(x - 8) < GTR_ROWS[int((y - GTR_Y0) // 0.5)]
+
+
+def _gtr_edge(x, y, r):
+    return any(not _gtr_in(x + dx, y + dy) for dx, dy in ((r, 0), (-r, 0), (0, r), (0, -r)))
+
+
+def _gtr_body(face, i, j, w, h, p):
+    x, y, z = p
+    if face == 'north':
+        return 'k'  # back wood
     if face != 'south':
+        return 'B' if z > GTR_TOP - 0.25 else 'S'  # sides, binding along the soundboard edge
+    if _gtr_edge(x, y, 0.25):
+        return 'B'
+    d = math.hypot(x - 8, y - GTR_HOLE)
+    if d < 1.0:
+        return 'O'
+    if d < 1.25:
+        return 'R'  # rosette
+    if d < 1.5:
+        return 'r'
+    if _gtr_edge(x, y, 0.5):
+        return 'E'  # amber shading just inside the binding
+    return 'G' if h32(int((x - 4) * 4), 7) % 7 == 0 else 'T'  # a few grain lines
+
+
+def _gtr_neck(face, i, j, w, h, p):
+    x, y, z = p
+    if face == 'south':
+        if y > -1.25:
+            return 'W'  # nut
+        k = (-1.25 - y) / 0.75  # a fret every 3 texels below the nut
+        if 0 < i < w - 1 and k % 1 > 2 / 3 and y > -6:
+            return 'f'
+        if i in (2, 3) and int(k) in (2, 4) and 1 / 3 < k % 1 < 2 / 3:
+            return 'W'  # dot inlays
         return 'F'
+    if face in ('east', 'west'):
+        return 'F' if z > 12.75 else 'N'
+    return 'N'
+
+
+def _gtr_head(face, i, j, w, h, p):
+    if face == 'south':
+        return 'N' if i in (0, w - 1) or j == 0 else 'F'
+    return 'N'
+
+
+def _gtr_bridge(face, i, j, w, h, p):
+    if face == 'south' and 1 < i < w - 2:
+        return 'W' if j == 0 else ('w' if j == 2 and i % 2 else 'D')  # saddle, bridge pins
+    return 'D'
+
+
+def _gtr_strap(face, i, j, w, h, p):
+    if face != 'south':
+        return 'x'
     if i in (0, w - 1):
-        return 'F'
-    return 'S' if j % 4 == 0 else ('W' if (i, j) == (w // 2, 9) else 'f')  # frets, one inlay
-
-
-def _pickup(face, i, j, w, h, p):
-    return 'S' if face == 'south' and j == h // 2 and i % 3 == 1 else 'K'
+        return 'x'
+    return 'Y' if i == 1 and j % 3 == 0 else 'X'  # stitching
 
 
 def _sheath(face, i, j, w, h, p):
@@ -522,32 +584,86 @@ def _solid_o(face, i, j, w, h, p):
     return 'O'
 
 
-def _bridge(face, i, j, w, h, p):
-    return 'S'
-
-
 GUITAR_ROT = ('z', -45, [8, -6, 11])  # neck over the wearer's right shoulder
 SWORD_ROT = ('z', -45, [8, -5, 11])  # hilt over the right shoulder
 
 
-def _pack_row(k):
-    if k == 3:
-        return lambda face, i, j, w, h, p: 'K' if face != 'up' else 'k'
-    red = k > 3
+# Capsule pack: a slim pill-shaped shell hugging the back, drawn in three stacked layers (each inset a little more, so
+# the edge steps down like a rounded bevel); every layer is 0.25-tall rows whose widths trace a rounded rectangle, rows
+# of equal width merged. Red top half, white bottom half, a dark seam band and a raised button; every texel is painted
+# from its model position, so the rows read as one surface.
+CAP_X, CAP_Y = 8, -6.5  # centre of the back face
+CAP_HW, CAP_HH, CAP_R = 3.0, 4.0, 2.5  # half width, half height, corner radius of the outer layer
+CAP_LAYERS = ((0, 10.25, 11.5), (0.25, 11.5, 12.25), (0.75, 12.25, 12.75))  # (inset, z from, z to)
+CAP_TOP = CAP_LAYERS[-1][2]
 
-    def paint(face, i, j, w, h, p):
-        if face == 'up':
-            return 'R' if red else 'W'
+
+def _cap_half(y, inset):
+    """Half width of the inset rounded rectangle at height y, snapped down to the 0.25 px texel grid."""
+    hw, hh, r = CAP_HW - inset, CAP_HH - inset, CAP_R - inset
+    dy = abs(y - CAP_Y)
+    if dy >= hh:
+        return 0
+    over = dy - (hh - r)
+    if over > 0:
+        hw -= r - math.sqrt(r * r - over * over)
+    return math.floor(hw * 4) / 4
+
+
+def _cap_rows(half, y0, y1, z0, z1, paint):
+    """Rows of cubes 0.25 tall from y0 to y1, x = CAP_X +- half(y), equal rows merged; hidden faces skipped."""
+    runs = []
+    for k in range(round((y1 - y0) * 4)):
+        hw = half(y0 + 0.25 * k + 0.125)
+        if runs and runs[-1][2] == hw:
+            runs[-1][1] += 0.25
+        elif hw:
+            runs.append([y0 + 0.25 * k, y0 + 0.25 * k + 0.25, hw])
+    out = []
+    for n, (a, b, hw) in enumerate(runs):
+        skip = {'north'}
+        if n + 1 < len(runs) and runs[n + 1][2] >= hw and runs[n + 1][0] == b:
+            skip.add('up')
+        if n and runs[n - 1][2] >= hw and runs[n - 1][1] == a:
+            skip.add('down')
+        out.append(el((CAP_X - hw, a, z0), (CAP_X + hw, b, z1), paint, skip=skip))
+    return out
+
+
+def _cap(face, i, j, w, h, p):
+    x, y, z = p
+    dy = y - CAP_Y
+    ring = math.hypot(x - CAP_X, dy) < 1.3
+    if abs(dy) < 0.5:
+        return 'k' if face == 'south' and dy > 0.25 and not ring else 'K'  # seam band, lit along its top edge
+    if face == 'south' and ring:
+        return 'K'  # the dark ring round the button
+    if dy > 0:
         if face == 'down':
-            return 'r' if red else 'g'
-        if red:
-            return 'q' if face == 'west' and j == 0 else ('r' if face in ('east', 'south') else 'R')
-        return 'g' if face in ('east', 'south') else 'W'
-    return paint
+            return 'r'
+        if face == 'south' and z > CAP_TOP - 0.1 and (abs(x - 6.5) < 0.25 and abs(y + 4.0) < 0.5 or
+                                                      abs(x - 6.75) < 0.5 and abs(y + 3.75) < 0.25):
+            return 'q'  # glint on the dome
+        return 'R'
+    if face == 'down':
+        return 'g'
+    return 'g' if face == 'south' and dy < -3.0 else 'W'  # the white rounds off underneath
 
 
-def _strap_dark(face, i, j, w, h, p):
-    return 'k' if face != 'north' and j % 4 == 0 else 'K'
+def _cap_button(face, i, j, w, h, p):
+    x, y, z = p
+    d = math.hypot(x - CAP_X, y - CAP_Y)
+    if face != 'south' or d > 0.55:  # a 4 x 4 texel face in a round dark rim
+        return 'K'
+    return 'g' if x - CAP_X + CAP_Y - y > 0.45 else 'W'
+
+
+def _cap_strap(face, i, j, w, h, p):
+    return 'X' if face == 'south' and 0 < i < w - 1 else 'x'
+
+
+def _cap_handle(face, i, j, w, h, p):
+    return 'X' if face == 'up' else 'x'
 
 
 BACKS2 = {
@@ -569,22 +685,36 @@ BACKS2 = {
                        el((8.75, -9.5, 10.75), (11.25, -9, 13.25), _box('O', 'O', 'O'))])
         + [el((7.5, -7.5, 10.5), (8.5, -2.5, 12), _box('D', 'M', 'O'))]),
     'back_guitar': dict(
-        palette={'R': (0xD8, 0x2A, 0x2A), 'r': (0x8A, 0x16, 0x1A), 'q': (0xFF, 0x7A, 0x66), 'F': (0x3B, 0x24, 0x14),
-                 'f': (0x5A, 0x38, 0x1E), 'S': (0xC9, 0xD3, 0xDE), 'W': (0xFF, 0xF1, 0xD0), 'K': (0x14, 0x14, 0x18)},
-        elements=[el((x0, y, 10.5), (x1, y + 1, 12), _guitar_body, rot=GUITAR_ROT)
-                  for y, x0, x1 in ((-13, 6, 10), (-12, 5, 11), (-11, 4.5, 11.5), (-10, 4.5, 11.5), (-9, 5.5, 10.5),
-                                    (-8, 5, 11), (-7, 6, 10))]
-        + [el((7.25, -7, 11.5), (8.75, -1, 12.5), _fingerboard, rot=GUITAR_ROT),
-           el((6.75, -1, 11.5), (9.25, 1, 12.5), bevel(m='F', light='f', dark='F'), rot=GUITAR_ROT),
-           el((6.5, -9.5, 12), (9.5, -9, 12.5), _pickup, rot=GUITAR_ROT),
-           el((6.5, -10.5, 12), (9.5, -10, 12.5), _pickup, rot=GUITAR_ROT),
-           el((6.5, -12, 12), (9.5, -11.5, 12.5), _bridge, rot=GUITAR_ROT)]),
+        density=4,
+        palette={'T': (0xDE, 0x9E, 0x52), 'G': (0xCE, 0x8C, 0x44), 'E': (0xB0, 0x6A, 0x2C), 'B': (0x4A, 0x28, 0x12),
+                 'S': (0x8C, 0x4E, 0x22), 'k': (0x74, 0x40, 0x1C), 'O': (0x1C, 0x10, 0x08), 'R': (0xF2, 0xDC, 0xA8),
+                 'r': (0x6A, 0x3A, 0x18), 'D': (0x3A, 0x20, 0x10), 'W': (0xFF, 0xF1, 0xD0), 'w': (0xD6, 0xD8, 0xDC),
+                 'F': (0x34, 0x20, 0x12), 'f': (0xB8, 0xA8, 0x8C), 'N': (0x6E, 0x3C, 0x1A), 'P': (0xC9, 0xD3, 0xDE),
+                 'p': (0xF0, 0xF4, 0xF8), 'X': (0x2A, 0x2A, 0x30), 'x': (0x16, 0x16, 0x1A), 'Y': GOLD},
+        elements=[el((8 - hw, GTR_Y0 + 0.5 * k, 10.5), (8 + hw, GTR_Y0 + 0.5 * k + 0.5, GTR_TOP), _gtr_body,
+                     rot=GUITAR_ROT) for k, hw in enumerate(GTR_ROWS) if hw]
+        + [el((7.25, -6.75, 11.5), (8.75, -1, 13), _gtr_neck, rot=GUITAR_ROT),
+           el((6.75, -1, 11.5), (9.25, 1, 12.5), _gtr_head, rot=GUITAR_ROT),
+           el((6.5, -11.5, GTR_TOP), (9.5, -10.75, GTR_TOP + 0.25), _gtr_bridge, rot=GUITAR_ROT),
+           el((7.75, -13.75, 11.25), (8.25, -13.5, 11.75), bevel(m='P', light='p', dark='P'), rot=GUITAR_ROT)]
+        + [el((x, y, 11.75), (x + 0.5, y + 0.5, 12.25), bevel(m='P', light='p', dark='P'), rot=GUITAR_ROT)
+           for x in (6.25, 9.25) for y in (-0.75, 0)]  # tuning pegs; the top left one ends at y = -0.17, under the head
+        + [el((8, -8.5, 10.25), (9, 1, 10.5), _gtr_strap, rot=('z', 45, [8.5, -3.75, 10.5]))]),  # on the torso overlay
     'back_capsule_pack': dict(
+        density=4,
         palette={'R': (0xE3, 0x41, 0x2F), 'r': (0xA3, 0x20, 0x14), 'q': (0xFF, 0x7A, 0x66), 'W': WHITE,
-                 'g': (0xD6, 0xDC, 0xE4), 'K': (0x1A, 0x1A, 0x1E), 'k': (0x2E, 0x2E, 0x36)},
-        elements=stack(-9.5, [(3, 1), (5, 1), (7, 1), (7, 1), (7, 1), (5, 1), (3, 1)], _pack_row, cz=13.75)
-        + [el((7, -6.75, 17.25), (9, -5.25, 17.75), _button('K', 'W', 'g'), skip=('north',))]
-        + pair([el((5, -11, 10.25), (6, -0.5, 10.75), _strap_dark)])),
+                 'g': (0xD6, 0xDC, 0xE4), 'K': (0x1A, 0x1A, 0x1E), 'k': (0x3A, 0x3A, 0x44),
+                 'X': (0x2A, 0x2A, 0x30), 'x': (0x16, 0x16, 0x1A), 'Y': GOLD, 'y': LIGHT_GOLD, 'd': DARK_GOLD},
+        elements=[e for inset, z0, z1 in CAP_LAYERS
+                  for e in _cap_rows(lambda y, i=inset: _cap_half(y, i), CAP_Y - CAP_HH + inset,
+                                     CAP_Y + CAP_HH - inset, z0, z1, _cap)]
+        + _cap_rows(lambda y: math.floor(math.sqrt(max(0, 1 - (y - CAP_Y) ** 2)) * 4) / 4, CAP_Y - 1, CAP_Y + 1,
+                    CAP_TOP, CAP_TOP + 0.25, _cap_button)
+        + [el((7, -2.25, 10.75), (9, -1.75, 11.25), _cap_handle),  # carry loop on top
+           el((7, -2.5, 10.75), (7.5, -2.25, 11.25), _cap_handle),
+           el((8.5, -2.5, 10.75), (9, -2.25, 11.25), _cap_handle)]
+        + pair([el((5.5, -11, 10.25), (6.5, 0, 10.5), _cap_strap),  # shoulder straps on the torso overlay
+                el((5.25, -1.5, 10.25), (6.75, -1, 10.75), bevel(m='Y', light='y', dark='d'))])),  # gold slider
     'back_sword_sheath': dict(
         palette={'N': (0x7A, 0x4A, 0x26), 'M': (0x5C, 0x35, 0x19), 'D': (0x3E, 0x26, 0x14), 'S': (0xC9, 0xA2, 0x7A),
                  'g': GOLD, 'd': DARK_GOLD, 'L': LIGHT_GOLD, 'B': (0x1B, 0x2E, 0x5B), 'k': (0x0E, 0x18, 0x30)},
