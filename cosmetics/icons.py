@@ -41,7 +41,7 @@ NS = 'origins'
 FIRST_CMD = 7500001
 BASE_ITEM = 'knowledge_book'
 PLAIN = f'{NS}:item/icon/plain_{BASE_ITEM}'
-CATALOG_FIELDS = ('type', 'name', 'rarity', 'colors', 'effect', 'custom_model_data')
+CATALOG_FIELDS = ('type', 'name', 'rarity', 'colors', 'marker', 'effect', 'custom_model_data')
 MODEL_TYPES = ('tool_skin', 'hat', 'back', 'front')  # no texture of their own: the icon is an existing model
 TYPE_ORDER = ('aura', 'trail', 'sendout', 'victory', 'nickname', 'emote', 'ball_skin', 'tool_skin', 'hat', 'back',
               'front')
