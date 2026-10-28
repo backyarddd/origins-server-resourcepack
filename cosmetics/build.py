@@ -203,8 +203,8 @@ EFFECTS = {
     'trail_supporter_sparkles': dict(frames=frames((art.STAR, P_GREEN_STAR), (art.STAR, P_GOLD_STAR)), rate=2,
                                      life=(0.6, 1.0), size=twinkle(0.16), speed=0.05),
 }
-EFFECTS.update(art_fx2.EFFECTS2)  # drop 2: 20 emotes (kind emote: one 16x16 sprite, see art_fx2) + 45 other effects
-assert len(EFFECTS) == 31 + 65
+EFFECTS.update(art_fx2.EFFECTS2)  # drop 2: 21 emotes (kind emote: one 16x16 sprite, see art_fx2) + 47 other effects
+assert len(EFFECTS) == 31 + 68
 # second emitters for looks one particle sheet cannot give (spawned by the parent's creation_event);
 # cosmetics/parts/<parent>_<name>, not cosmetic ids
 PARTS = {
@@ -228,6 +228,7 @@ AURA_KX = '((q.entity_width + 0.8) / 1.15)'
 AURA_KY = '((q.entity_height + 0.6) / 1.25)'
 AURA_KSIZE = f'math.clamp(math.sqrt({AURA_KX} * {AURA_KY}), 0.75, 3)'
 AURA_KRATE = f'math.clamp({AURA_KX} * {AURA_KY}, 1, 6)'
+AURA_DENSITY = 0.5  # every aura's spawn rate and particle cap (owner 2026-10-28: they hid the Pokemon)
 
 
 def scaled(value, factor):
@@ -236,7 +237,8 @@ def scaled(value, factor):
 
 
 def fit_aura(comps):
-    """Scales an aura's emitter shape, sprite size and rate by the attached Pokemon's hitbox (see AURA_KX)."""
+    """Scales an aura's emitter shape, sprite size and rate by the attached Pokemon's hitbox (see AURA_KX); the rate also by
+    AURA_DENSITY."""
     for key, shape in comps.items():
         if not key.startswith('minecraft:emitter_shape_'):
             continue
@@ -246,8 +248,8 @@ def fit_aura(comps):
             hx, hy, hz = shape['half_dimensions']
             shape['half_dimensions'] = [scaled(hx, AURA_KX), scaled(hy, AURA_KY), scaled(hz, AURA_KX)]
     rate = comps['minecraft:emitter_rate_steady']
-    rate['spawn_rate'] = scaled(rate['spawn_rate'], AURA_KRATE)
-    rate['max_particles'] = scaled(rate['max_particles'], AURA_KRATE)
+    rate['spawn_rate'] = scaled(rate['spawn_rate'], f'{AURA_KRATE} * {AURA_DENSITY}')
+    rate['max_particles'] = scaled(rate['max_particles'], f'{AURA_KRATE} * {AURA_DENSITY}')
     board = comps['minecraft:particle_appearance_billboard']
     board['size'] = [scaled(v, AURA_KSIZE) for v in board['size']]
 

@@ -1118,6 +1118,24 @@
       "predicate": {
         "custom_model_data": 7500186
       },
+      "model": "origins:item/icon/emote_wet"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500187
+      },
+      "model": "origins:item/icon/sendout_splash"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500188
+      },
+      "model": "origins:item/icon/aura_soaked"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500189
+      },
       "model": "origins:item/icon/plain_knowledge_book"
     }
   ]
