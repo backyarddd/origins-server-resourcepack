@@ -10,12 +10,8 @@ never changed or reused: the configs on the server point at them.
 
 Art, all at one texel per icon pixel (nothing upscaled), light from the top-left, binary alpha, deterministic, and the
 same outer outline (INK, 4-neighbour) round every flat icon:
-- aura: a small navy critter wrapped in a 1 px glow of the effect's colours, its own particle sprites round it
-  (halo effects: a ring of those colours over its head);
-- trail: the effect's sprites in a diagonal streak, large at the head (top right) to small at the tail;
-- sendout: an Origins ball (navy / cream, gold-ringed button) with the effect's sprites fanning out above it;
-- victory: rays in the effect's colours behind its hero sprite (the part sprite when it has one: trophy, crown, bolt);
-- nickname: a name tag filled with the style's colours (a left-to-right gradient for several);
+- aura, trail, sendout, victory, nickname: hand-drawn 16x16 templates in cosmetics/icon_art_*.py (icon_art.py has the
+  rules); a new cosmetic of these types fails the build until its template is drawn;
 - ball_skin: a ball drawn as a lit sphere, its surface sampled from the skin's own art (art.BALL_SKINS_ART);
 - emote: the emote's own 16x16 sprite (src/emotes, see CREDITS.md there);
 - tool_skin: the set's pickaxe model; hat / back / front: the wearable model itself with a display.gui transform fitted
@@ -34,7 +30,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 from cosmetics import art  # noqa: E402
-from cosmetics.art import CREAM, GOLD, LIGHT_GOLD, NAVY, hexrgb  # noqa: E402
+from cosmetics.art import CREAM, LIGHT_GOLD, hexrgb  # noqa: E402
 from cosmetics.check import TOOL_SETS  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -127,80 +123,12 @@ def canvas():
     return Image.new('RGBA', (16, 16), (0, 0, 0, 0))
 
 
-def crop(im):
-    box = im.getchannel('A').getbbox()
-    return im.crop(box) if box else im
-
-
 def lum(c):
     return 0.299 * c[0] + 0.587 * c[1] + 0.114 * c[2]
 
 
 def mix(a, b, f):
     return tuple(round(x + (y - x) * f) for x, y in zip(a[:3], b[:3]))
-
-
-def colours(im):
-    px = im.convert('RGBA').getdata()
-    return [p[:3] for p in px if p[3]]
-
-
-def tones(im):
-    """(dark, mid, light) of a sprite: its opaque colours by luminance at 15 / 50 / 85 %."""
-    cs = sorted(colours(im), key=lum)
-    return cs[int(len(cs) * 0.15)], cs[len(cs) // 2], cs[min(len(cs) - 1, int(len(cs) * 0.85))]
-
-
-def halve(im):
-    """Exact 2:1 reduction for the 16x16 emote sprites: each 2x2 block becomes its most common opaque colour (ties: the
-    darker one, which keeps outlines and features), opaque when at least two of the four are."""
-    w, h = (im.width + 1) // 2, (im.height + 1) // 2
-    src, out = im.load(), Image.new('RGBA', (w, h), (0, 0, 0, 0))
-    px = out.load()
-    for y in range(h):
-        for x in range(w):
-            block = [src[i, j][:3] for i in (2 * x, 2 * x + 1) for j in (2 * y, 2 * y + 1)
-                     if i < im.width and j < im.height and src[i, j][3]]
-            if len(block) >= 2:
-                px[x, y] = min(set(block), key=lambda c: (-block.count(c), lum(c))) + (255,)
-    return out
-
-
-def fit(im, n, halving=True):
-    """The sprite cropped to its pixels, kept at its own size when its longer side is at most n; a 16x16 sprite is
-    halved exactly when that fits (halve, unless halving=False); anything else is shrunk with a box filter, alpha
-    >= 50 % and its colours snapped back to the sprite's own."""
-    im = crop(im.convert('RGBA'))
-    if max(im.size) <= n:
-        return im
-    if halving and max(im.size) > 8 and max((im.width + 1) // 2, (im.height + 1) // 2) <= max(n, 8):
-        return crop(halve(im))
-    k = n / max(im.size)
-    size = (max(1, round(im.width * k)), max(1, round(im.height * k)))
-    small = im.convert('RGBa').resize(size, Image.BOX).convert('RGBA')
-    pal = sorted(set(colours(im)))
-    out = Image.new('RGBA', size, (0, 0, 0, 0))
-    spx, opx = small.load(), out.load()
-    for y in range(size[1]):
-        for x in range(size[0]):
-            r, g, b, a = spx[x, y]
-            if a >= 128:
-                opx[x, y] = min(pal, key=lambda c: (c[0] - r) ** 2 + (c[1] - g) ** 2 + (c[2] - b) ** 2) + (255,)
-    return out
-
-
-def put(cv, im, x, y):
-    """Paste an opaque-or-clear sprite with its top-left at (x, y); parts outside the 16x16 are dropped."""
-    px, cp = im.load(), cv.load()
-    for j in range(im.height):
-        for i in range(im.width):
-            if px[i, j][3] and 0 <= x + i < 16 and 0 <= y + j < 16:
-                cp[x + i, y + j] = px[i, j]
-
-
-def put_c(cv, im, cx, cy):
-    """Paste centred on (cx, cy) (pixel-centre coordinates)."""
-    put(cv, im, round(cx - im.width / 2 + 0.01), round(cy - im.height / 2 + 0.01))
 
 
 def dark_patch(px, x, y):
@@ -227,199 +155,6 @@ def outline(cv):
     for p, c in edge.items():
         px[p] = c + (255,)
     return cv
-
-
-def tinted(im, colour):
-    """A neutral sprite multiplied by a colour (what particle tinting does in game)."""
-    out = im.copy()
-    px = out.load()
-    for y in range(out.height):
-        for x in range(out.width):
-            r, g, b, a = px[x, y]
-            if a:
-                px[x, y] = (r * colour[0] // 255, g * colour[1] // 255, b * colour[2] // 255, 255)
-    return out
-
-
-# --- effect icons ----------------------------------------------------------------------------------------------------
-
-CRITTER = [  # the aura wearer: a small original eared critter, lit from the top-left
-    ".O..O.",
-    "OLOOMO",
-    "OWLLMO",
-    "OXLMXO",
-    "OLMMMO",
-    ".OOOO.",
-]
-P_CRITTER = {'O': INK, 'M': (0x24, 0x36, 0x66), 'L': (0x34, 0x4D, 0x8C), 'W': (0x4E, 0x69, 0xAE), 'X': CREAM}
-BALL9 = [  # the send-out ball: Origins navy top, cream bottom, dark band, gold-ringed white button
-    "...OOO...",
-    ".OOnnNOO.",
-    ".OnNNNNO.",
-    "OnNNGNNNO",
-    "OOOGWGOOO",
-    "OCCCGCCcO",
-    ".OCCCCcO.",
-    ".OOCccOO.",
-    "...OOO...",
-]
-# the navy is lifted a step (brand navy vanishes on a dark menu slot)
-P_BALL9 = {'O': INK, 'N': (0x2E, 0x4A, 0x8C), 'n': (0x5A, 0x7C, 0xC8), 'G': GOLD, 'W': (0xFF, 0xFF, 0xFF), 'C': CREAM,
-           'c': (0xD9, 0xC6, 0x9C)}
-
-
-def effect_frames(eid):
-    """The effect's own particle sprites (rainbow-tinted effects: their neutral sprite in the rainbow colours) and its
-    hero sprite (the part sprite, e.g. trophy / crown / bolt) or None."""
-    from cosmetics import build as cb  # lazy: cosmetics/build.py imports this module
-    p = cb.EFFECTS[eid]
-    frames = p['frames']
-    if 'tint' in p:
-        frames = [tinted(f, hexrgb(c)) for f in frames for c in cb.RAINBOW]
-    hero = None
-    if 'part' in p:
-        hero = cb.PARTS[f'{eid}_{p["part"]}']['frames'][0]
-    return [f.convert('RGBA') for f in frames], hero
-
-
-def ring(cv, cx, cy, rx, ry, frames, front):
-    """An ellipse ring, coloured by the frames' light tones in turn round it; front=True draws only its lower half."""
-    cols = [tones(f)[2] for f in frames]
-    px = cv.load()
-    pts = {}
-    for k in range(720):
-        a = math.radians(k / 2)
-        x, y = round(cx + rx * math.cos(a)), round(cy + ry * math.sin(a))
-        pts.setdefault((x, y), k)
-    for (x, y), k in pts.items():
-        if 0 <= x < 16 and 0 <= y < 16 and (y > cy) == front:
-            px[x, y] = cols[(k * len(cols)) // 720] + (255,)
-
-
-def glow(cv, frames):
-    """The aura itself: a 1 px rim round everything drawn so far, in the effect's light tones (they alternate round
-    the rim from the top-left, one colour per 3 pixels)."""
-    cols = [tones(f)[2] for f in frames]
-    px = cv.load()
-    rim = sorted({(x + dx, y + dy) for y in range(16) for x in range(16) if px[x, y][3]
-                  for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))
-                  if 0 <= x + dx < 16 and 0 <= y + dy < 16 and not px[x + dx, y + dy][3]},
-                 key=lambda p: math.atan2(p[1] - 10, p[0] - 7.5))
-    for k, p in enumerate(rim):
-        px[p] = cols[(k // 3) % len(cols)] + (255,)
-
-
-def icon_aura(eid):
-    frames, _ = effect_frames(eid)
-    cv = canvas()
-    put(cv, art.sprite(CRITTER, P_CRITTER), 5, 9)
-    glow(cv, frames)
-    if 'halo' in eid:  # the name promises a halo: a ring of its colours over the critter's head
-        ring(cv, 7.5, 6, 4.5, 1.5, frames, front=False)
-        ring(cv, 7.5, 6, 4.5, 1.5, frames, front=True)
-        put_c(cv, fit(frames[0], 5), 2.5, 2.5)
-        put_c(cv, fit(frames[-1], 5), 13, 2.5)
-    else:
-        put_c(cv, fit(frames[0], 7), 3.5, 3.5)
-        put_c(cv, fit(frames[1 % len(frames)], 6), 12.5, 3.5)
-        put_c(cv, fit(frames[2 % len(frames)], 4), 1.5 if len(frames) % 2 else 14, 12.5)
-    return outline(cv)
-
-
-def icon_trail(eid):
-    frames, _ = effect_frames(eid)
-    cv = canvas()
-    cols = [tones(f)[1] for f in frames]
-    px = cv.load()
-    for k, (x, y) in enumerate(((2, 14), (3, 13), (5, 12), (6, 11), (8, 10), (9, 8))):  # the dotted streak
-        if k % 2 == 0:
-            px[x, y] = cols[k % len(cols)] + (255,)
-    put_c(cv, fit(frames[-1], 4), 4, 11.5)
-    put_c(cv, fit(frames[1 % len(frames)], 5), 7.5, 7.5)
-    put_c(cv, fit(frames[0], 7), 11.5, 4)
-    return outline(cv)
-
-
-def icon_sendout(eid):
-    frames, _ = effect_frames(eid)
-    cv = canvas()
-    for k, (x, y) in enumerate(((2.5, 5.5), (7.5, 2.5), (12.5, 5.5))):  # the burst fans out over the ball
-        put_c(cv, fit(frames[k % len(frames)], 5), x, y)
-    tick = [tones(f)[2] for f in frames]
-    px = cv.load()
-    for k, pts in enumerate((((2, 9), (1, 10)), ((7, 5), (7, 6)), ((12, 9), (13, 10)))):
-        for p in pts:
-            if not px[p][3]:
-                px[p] = tick[k % len(tick)] + (255,)
-    put(cv, art.sprite(BALL9, P_BALL9), 3, 7)
-    return outline(cv)
-
-
-def icon_victory(eid):
-    frames, hero = effect_frames(eid)
-    cv = canvas()
-    px = cv.load()
-    # rays in the effect's own light / mid tones; a dark tone (an emote's outline) falls back to the Origins golds
-    light = [c if lum(c) >= 100 else LIGHT_GOLD for c in (tones(f)[2] for f in frames)]
-    mid = [c if lum(c) >= 100 else GOLD for c in (tones(f)[1] for f in frames)]
-    for k in range(8):  # rays: long on the axes, short on the diagonals
-        a = math.radians(k * 45 - 90)
-        r1 = 7.6 if k % 2 == 0 else 6.2
-        for s in range(8):
-            r = 3 + (r1 - 3) * s / 7
-            x, y = math.floor(7.5 + r * math.cos(a) + 0.5), math.floor(7.5 + r * math.sin(a) + 0.5)
-            if 0 <= x < 16 and 0 <= y < 16:
-                px[x, y] = (light if r < r1 - 1.5 else mid)[k % len(light)] + (255,)
-    if hero is not None:  # a 16x16 part sprite (trophy, crown, bolt): shrunk to 12, the hero fills the burst
-        art_ = fit(hero, 12, halving=False)
-    else:  # an emote of 13 px or less (GG, 100) stays legible at its own size; a full face is halved
-        art_ = fit(frames[0], 13)
-    put_c(cv, art_, 7.5, 7.5)
-    return outline(cv)
-
-
-# --- nickname tag ----------------------------------------------------------------------------------------------------
-
-TAG = [
-    "....OOOOOOOOOOOO",
-    "...OHHHHHHHHHHHO",
-    "..OHBBBBBBBBBBBO",
-    ".OHBkkBBBBBBBBSO",
-    "OHBBkkBTTTBTTBSO",
-    "OBBBBBBBBBBBBBSO",
-    ".OBBBBBTTBTTTBSO",
-    "..OBBBBBBBBBBBSO",
-    "...OSSSSSSSSSSSO",
-    "....OOOOOOOOOOOO",
-]
-# the tag's string: up out of the hole into a small loop (light gold on the lit left side)
-STRING = [(4, 5), (4, 4), (4, 3), (3, 2), (3, 1), (4, 0), (5, 0), (6, 1), (6, 2), (5, 3)]
-
-
-def gradient(colors, t):
-    cs = [hexrgb(c) for c in colors]
-    if len(cs) == 1:
-        return cs[0]
-    t *= len(cs) - 1
-    k = min(int(t), len(cs) - 2)
-    return mix(cs[k], cs[k + 1], t - k)
-
-
-def icon_nickname(colors):
-    cv = canvas()
-    px = cv.load()
-    y0 = 4
-    for j, row in enumerate(TAG):
-        for i, ch in enumerate(row):
-            if ch == '.':
-                continue
-            base = gradient(colors, max(0, min(1, (i - 2) / 12)))
-            c = {'O': INK, 'B': base, 'H': mix(base, (255, 255, 255), 0.45), 'S': mix(base, (0, 0, 0), 0.3),
-                 'k': INK, 'T': mix(base, (0, 0, 0), 0.5) if lum(base) > 110 else mix(base, (255, 255, 255), 0.6)}[ch]
-            px[i, y0 + j] = c + (255,)
-    for x, y in STRING:
-        px[x, y + 1] = (LIGHT_GOLD if x < 5 else GOLD) + (255,)
-    return outline(cv)
 
 
 # --- ball skin -------------------------------------------------------------------------------------------------------
@@ -482,6 +217,20 @@ def icon_ball(skin):
 
 GUI_VIEW = {'hat': (25, 225, 0), 'back': (15, 20, 0), 'front': (10, 200, 0)}  # display.gui rotation per kind
 MARGIN = 0.75  # px kept free round the fitted model in the 16x16 slot
+# Per-wearable framing where the kind's default view reads badly (too thin, edge-on or dark): rotation replaces
+# GUI_VIEW[kind], margin replaces MARGIN. Only display.gui changes; the models and textures stay as they are.
+GUI_OVERRIDE: dict[str, dict] = {
+    'hat_flower_crown': {'rotation': [50, 180, 0], 'margin': 0.4},  # square-on: the ring of flowers, not a thin diamond
+    'hat_golden_halo': {'rotation': [40, 180, 0], 'margin': 0.4},  # tipped up so the ring opens
+    'hat_pirate': {'rotation': [10, 200, 0], 'margin': 0.4},  # low 3/4: gold brim and the skull, not the top's frame
+    'hat_bunny_ears': {'rotation': [10, 180, 0], 'margin': 0.4},  # front: both ears side by side, pink inside
+    'hat_cat_ears': {'rotation': [0, 210, 0], 'margin': 0.4},  # level 3/4: pink inner ears, not the stepped tops
+    'back_bat_wings': {'rotation': [10, 0, 0], 'margin': 0.4},  # flat from behind: the full scalloped wing span
+    'back_ball_bandolier': {'rotation': [10, 20, -25], 'margin': 0.4},  # strap corner to corner: bigger balls
+    'back_capsule_pack': {'rotation': [-30, 20, 0], 'margin': 0.4},  # from below: the pill, strap tops lie flat
+    'front_gold_chain': {'margin': 0.4},
+    'front_capsule_pendant': {'rotation': [15, 200, 0], 'margin': 0.4},
+}
 
 
 def rot_xyz(p, r):
@@ -512,13 +261,13 @@ def element_corners(model):
     return out
 
 
-def fit_gui(model, rotation):
-    """display.gui for the model: the rotation, the largest scale (<= 4) that keeps every projected corner MARGIN px
+def fit_gui(model, rotation, margin=MARGIN):
+    """display.gui for the model: the rotation, the largest scale (<= 4) that keeps every projected corner margin px
     inside the 16x16 slot, and the translation that centres it. ItemTransform order: translate, rotate, scale."""
     pts = [rot_xyz((x - 8, y - 8, z - 8), rotation) for x, y, z in element_corners(model)]
     x0, x1 = min(p[0] for p in pts), max(p[0] for p in pts)
     y0, y1 = min(p[1] for p in pts), max(p[1] for p in pts)
-    s = min((16 - 2 * MARGIN) / (x1 - x0), (16 - 2 * MARGIN) / (y1 - y0), 4)
+    s = min((16 - 2 * margin) / (x1 - x0), (16 - 2 * margin) / (y1 - y0), 4)
     s = math.floor(s * 100) / 100
     t = [round(-s * (x0 + x1) / 2, 2), round(-s * (y0 + y1) / 2, 2), 0]
     return {'rotation': list(rotation), 'translation': t, 'scale': [s, s, s]}
@@ -565,16 +314,16 @@ def tool_set(entry, cid):
 # --- build -----------------------------------------------------------------------------------------------------------
 
 def flat_icon(cid, entry):
+    from cosmetics import icon_art  # lazy: icon_art and its type files import this module
+    if cid in icon_art.ICONS:
+        return icon_art.ICONS[cid]()
     kind = entry['type']
-    if kind == 'nickname':
-        return icon_nickname(entry['colors'])
     if kind == 'ball_skin':
         return icon_ball(art.BALL_SKINS_ART[cid])
     if kind == 'emote':
         with Image.open(os.path.join(EMOTES, cid + '.png')) as im:
             return im.convert('RGBA')
-    eid = entry['effect'].split(':', 1)[1].rsplit('/', 1)[1]
-    return {'aura': icon_aura, 'trail': icon_trail, 'sendout': icon_sendout, 'victory': icon_victory}[kind](eid)
+    raise AssertionError(f'icon {cid}: no hand-drawn {kind} icon in cosmetics/icon_art*.py')
 
 
 def build(pack, write_json):
@@ -600,7 +349,8 @@ def build(pack, write_json):
             shown[cid] = (kind, img, None)
         elif kind in ('hat', 'back', 'front'):
             model, tex = wearable(pack, cid)
-            gui = fit_gui(model, GUI_VIEW[kind])
+            o = GUI_OVERRIDE.get(cid, {})
+            gui = fit_gui(model, o.get('rotation', GUI_VIEW[kind]), o.get('margin', MARGIN))
             write_json(os.path.join(models, cid + '.json'), {'parent': f'{NS}:cosmetic/{cid}', 'display': {'gui': gui}})
             shown[cid] = (kind, None, (model, tex, gui))
         else:

@@ -1,4 +1,4 @@
-"""Validate the emote sprites: exactly the 20 catalog ids, each 16x16 RGBA with binary alpha.
+"""Validate the emote sprites: exactly the 21 catalog ids, each 16x16 RGBA with binary alpha.
 
 Run: python -I check_emotes.py
 """
@@ -15,6 +15,7 @@ EMOTE_IDS = [
     "emote_angry", "emote_clown", "emote_thinking", "emote_shock", "emote_sleep",
     "emote_fire", "emote_hundred", "emote_gg", "emote_w", "emote_l",
     "emote_question", "emote_exclaim", "emote_thumbs_up", "emote_sweat", "emote_party",
+    "emote_wet",
 ]
 
 

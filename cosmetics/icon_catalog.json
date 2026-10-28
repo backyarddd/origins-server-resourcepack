@@ -183,5 +183,8 @@
   "aura_on_fire": {"type": "aura", "name": "On Fire", "rarity": "epic", "effect": "origins:cosmetics/aura_on_fire"},
   "sendout_skull_pop": {"type": "sendout", "name": "Skull Pop", "rarity": "rare", "effect": "origins:cosmetics/sendout_skull_pop"},
   "victory_hundred_rain": {"type": "victory", "name": "Hundred Rain", "rarity": "rare", "effect": "origins:cosmetics/victory_hundred_rain"},
-  "trail_skulls": {"type": "trail", "name": "Skull Steps", "rarity": "uncommon", "effect": "origins:cosmetics/trail_skulls"}
+  "trail_skulls": {"type": "trail", "name": "Skull Steps", "rarity": "uncommon", "effect": "origins:cosmetics/trail_skulls"},
+  "emote_wet": {"type": "emote", "name": "Wet", "rarity": "uncommon", "effect": "origins:cosmetics/emote_wet"},
+  "sendout_splash": {"type": "sendout", "name": "Splash", "rarity": "rare", "effect": "origins:cosmetics/sendout_splash"},
+  "aura_soaked": {"type": "aura", "name": "Soaked", "rarity": "epic", "effect": "origins:cosmetics/aura_soaked"}
 }

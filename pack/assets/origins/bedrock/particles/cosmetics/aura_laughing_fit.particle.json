@@ -16,8 +16,8 @@
         "active_time": 2.5
       },
       "minecraft:emitter_rate_steady": {
-        "spawn_rate": "(5) * math.clamp(((q.entity_width + 0.8) / 1.15) * ((q.entity_height + 0.6) / 1.25), 1, 6)",
-        "max_particles": "(12) * math.clamp(((q.entity_width + 0.8) / 1.15) * ((q.entity_height + 0.6) / 1.25), 1, 6)"
+        "spawn_rate": "(5) * math.clamp(((q.entity_width + 0.8) / 1.15) * ((q.entity_height + 0.6) / 1.25), 1, 6) * 0.5",
+        "max_particles": "(12) * math.clamp(((q.entity_width + 0.8) / 1.15) * ((q.entity_height + 0.6) / 1.25), 1, 6) * 0.5"
       },
       "minecraft:emitter_shape_box": {
         "offset": [

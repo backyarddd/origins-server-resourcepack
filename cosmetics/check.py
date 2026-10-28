@@ -31,6 +31,8 @@ Checks, each failing with a readable AssertionError:
   texture; tool skins: the set's pickaxe; hats / back / front items: the wearable model with a display.gui inside
   the client's clamps), and minecraft:item/knowledge_book with one override per id ascending then the catch-all to
   the plain look, every number resolving to its own icon.
+  Aura / trail / sendout / victory icons: art at least 12 px, and no two of a type within 24 pixels of each other;
+  every hand-drawn template (cosmetics/icon_art.ICONS) has its id in icons.json (no orphan templates).
 
 Run:  python -I cosmetics/check.py [pack dir]   (default: pack/ next to this folder)
 """
@@ -96,6 +98,8 @@ VANILLA_TEXTURES |= standins.VANILLA_TEXTURES
 ICON_ITEM = 'knowledge_book'
 ICONS_JSON = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'icons.json')
 ICON_CATALOG_JSON = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'icon_catalog.json')
+ICON_DISTINCT_TYPES = ('aura', 'trail', 'sendout', 'victory')
+ICON_MIN_MASK_DIFF = 24  # pixels two icons of one effect type must differ by
 ICON_FIRST_CMD = 7500001
 ICON_MODEL_PARENTS = {'tool_skin': 'origins:item/toolskin/{set}_pickaxe', 'hat': 'origins:cosmetic/{id}',
                       'back': 'origins:cosmetic/{id}', 'front': 'origins:cosmetic/{id}'}
@@ -460,9 +464,13 @@ def check_icons(pack, models):
         catalog = json.load(f)
     missing = sorted(set(catalog) - set(icons))
     assert not missing, f'icons.json: no number for {", ".join(missing)} (run cosmetics/icons.py --refresh-catalog)'
+    from cosmetics import icon_art  # lazy: icon_art -> icons -> this module
+    orphans = sorted(set(icon_art.ICONS) - set(icons))
+    assert not orphans, f'cosmetics/icon_art*.py: templates for ids not in icons.json: {", ".join(orphans)}'
     cmds = sorted(e['cmd'] for e in icons.values())
     assert cmds == list(range(ICON_FIRST_CMD, ICON_FIRST_CMD + len(icons))),         f'icons.json: custom_model_data must be unique and contiguous from {ICON_FIRST_CMD}'
     sets = {v: k for k, v in TOOL_SETS.items()}
+    masks = {}
     for cid, e in icons.items():
         mid = f'origins:item/icon/{cid}'
         assert mid in models, f'icon {cid}: missing model {mid}'
@@ -479,6 +487,16 @@ def check_icons(pack, models):
         else:
             assert data == {'parent': 'minecraft:item/generated', 'textures': {'layer0': mid}},                 f'icon {cid}: must be item/generated with layer0 {mid}'
             png(res(pack, mid, 'textures', '.png'), pack, (16, 16), f'icon {cid}')
+            if kind in ICON_DISTINCT_TYPES:  # hand-drawn effect icons: readable, and no two of a type alike
+                with Image.open(res(pack, mid, 'textures', '.png')) as im:
+                    alpha = im.convert('RGBA').getchannel('A')
+                box = alpha.getbbox()
+                assert box and max(box[2] - box[0], box[3] - box[1]) >= 12, f'icon {cid}: art smaller than 12 px'
+                masks.setdefault(kind, []).append((cid, {i for i, a in enumerate(alpha.tobytes()) if a}))
+    for kind, ms in masks.items():
+        for i, (a, ma) in enumerate(ms):
+            for b, mb in ms[i + 1:]:
+                assert len(ma ^ mb) >= ICON_MIN_MASK_DIFF, f'icons {a} and {b}: shapes too alike (same layout)'
     base = f'minecraft:item/{ICON_ITEM}'
     assert base in models, f'missing assets/minecraft/models/item/{ICON_ITEM}.json'
     data = load(models[base], pack)

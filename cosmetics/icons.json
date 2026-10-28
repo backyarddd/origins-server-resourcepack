@@ -183,5 +183,8 @@
   "aura_on_fire": {"cmd": 7500182, "type": "aura"},
   "sendout_skull_pop": {"cmd": 7500183, "type": "sendout"},
   "victory_hundred_rain": {"cmd": 7500184, "type": "victory"},
-  "trail_skulls": {"cmd": 7500185, "type": "trail"}
+  "trail_skulls": {"cmd": 7500185, "type": "trail"},
+  "emote_wet": {"cmd": 7500186, "type": "emote"},
+  "sendout_splash": {"cmd": 7500187, "type": "sendout"},
+  "aura_soaked": {"cmd": 7500188, "type": "aura"}
 }

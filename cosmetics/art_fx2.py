@@ -1,4 +1,4 @@
-"""Cosmetics drop 2 particle effects (catalog-v2.md): 20 emotes, 8 auras, 10 send-outs, 8 victory, 12 trails and 7 emoji
+"""Cosmetics drop 2 particle effects (catalog-v2.md): 21 emotes, 8 auras, 10 send-outs, 8 victory, 12 trails and 9 emoji
 effects. EFFECTS2 / PARTS2 are merged into cosmetics/build.py's EFFECTS / PARTS and use the same keys (frames, rate, shape,
 life, size, speed, accel, drag, spin, alpha, part, max, facing). Sprites are original 8x8 ASCII templates coloured by
 palettes (roles O outline, M mid, L light, W highlight, X accent, see art.py); the emote and emoji sprites are the
@@ -331,13 +331,34 @@ TROPHY = [
     "...OLLXXXXMMO...",
     "...OOOOOOOOOO...",
 ]
+# 16x16 single water drop at the pixel scale of src/emotes/emote_wet.png (one of its three drops on its own, upright),
+# so it can share a sheet with the emote: it shows about half the emote's size. X is the shade (P_WET)
+WET_DROP = [
+    "................",
+    "................",
+    "................",
+    ".......O........",
+    "......OLO.......",
+    "......OLO.......",
+    ".....OLWMO......",
+    "....OLWLMMO.....",
+    "....OLLMMMO.....",
+    "....OLMMMXO.....",
+    "....OMMMXXO.....",
+    ".....OMXXO......",
+    "......OOO.......",
+    "................",
+    "................",
+    "................",
+]
 
 TEMPLATES_8 = {k: v for k, v in dict(globals()).items()
                if k.isupper() and isinstance(v, list) and v and all(isinstance(r, str) and set(r) <= set('.OMLWX')
-                                                                    for r in v) and k != 'TROPHY'}
+                                                                    for r in v) and k not in ('TROPHY', 'WET_DROP')}
 for _name, _t in TEMPLATES_8.items():
     assert len(_t) == 8 and all(len(r) == 8 for r in _t), f'{_name}: 8x8 template expected'
-assert len(TROPHY) == 16 and all(len(r) == 16 for r in TROPHY), 'TROPHY: 16x16 template expected'
+for _name, _t in (('TROPHY', TROPHY), ('WET_DROP', WET_DROP)):
+    assert len(_t) == 16 and all(len(r) == 16 for r in _t), f'{_name}: 16x16 template expected'
 
 # --- palettes ------------------------------------------------------------------------------------------------------
 P_BROWN = shades('#8A5A2B', light='#B98350', dark='#4A2C12')
@@ -390,6 +411,8 @@ P_GREEN_LEAF3 = shades('#7ACB4A', light='#B5EE86', dark='#3A7A24')
 P_GOLD_CUP = pal(O='#7A5313', M='#E2B04A', L='#F7D27A', W='#FFF1D0', X='#1B2E5B')
 P_GOLD_COIN = pal(O='#7A5313', M='#E2B04A', L='#F7D27A', W='#FFF1D0', X='#FFF1D0')
 P_GOLD_COIN2 = pal(O='#B07A22', M='#F7D27A', L='#FFF1D0', W='#FFFFFF', X='#FFFFFF')
+# src/emotes/emote_wet.png's own colours (the emotes' shared dark outline, X its shade)
+P_WET = pal(O='#2B1D0E', M='#4FB3FF', L='#BFE6FF', W='#FFFFFF', X='#2A7FD6')
 
 
 def rgb(c):
@@ -427,7 +450,8 @@ def emote_fx(eid):
 
 EMOTE_IDS = ['emote_laugh', 'emote_skull', 'emote_cry', 'emote_heart_eyes', 'emote_cool', 'emote_angry', 'emote_clown',
              'emote_thinking', 'emote_shock', 'emote_sleep', 'emote_fire', 'emote_hundred', 'emote_gg', 'emote_w',
-             'emote_l', 'emote_question', 'emote_exclaim', 'emote_thumbs_up', 'emote_sweat', 'emote_party']
+             'emote_l', 'emote_question', 'emote_exclaim', 'emote_thumbs_up', 'emote_sweat', 'emote_party',
+             'emote_wet']
 
 # rain from above the player: the same shape the existing victory_crown_rain uses
 RAIN = disc(1.3, 3.2, [0, -1, 0])
@@ -469,6 +493,16 @@ def rainbow_tint(cycles):
 
 
 COIN_W = '0.11 * math.abs(math.cos(v.particle_age * 540 + v.particle_random_3 * 360))'
+
+
+def splash(s):
+    """A water drop popping into view: it bursts in from 60 % over 0.12 s with a 15 % overshoot that settles by 0.24 s."""
+    return (f'{s} * ((0.6 + 0.4 * math.min(1, v.particle_age / 0.12)) '
+            f'+ 0.15 * math.sin(180 * math.min(1, v.particle_age / 0.24)))')
+
+
+# emote_wet (the three-drop splash) and one of its drops on its own, half as big on the same sheet
+WET_FRAMES = [emote('emote_wet'), sprite(WET_DROP, P_WET)]
 
 EFFECTS2 = {eid: emote_fx(eid) for eid in EMOTE_IDS}
 
@@ -636,8 +670,21 @@ EFFECTS2.update({
         accel=[0, -2.5, 0], drag=0.5),
     'trail_skulls': dict(
         frames=[emote('emote_skull')], rate=1, life=(0.8, 1.1), size=0.12, speed=0.4, drag=1, direction=[0, 1, 0]),
+    # splashes and single drops pop up all over the body (spread like aura_laughing_fit): each bursts in, hops up
+    # (speed 1.5, a little sideways) and falls back under gravity (accel -4: peak about 0.27 blocks after 0.36 s), gone
+    # before it drops more than 0.2 blocks below where it appeared, so the lowest ones stay out of the ground
+    'aura_soaked': dict(
+        frames=WET_FRAMES, rate=8, max=12,
+        shape=box([0.55, 0.35, 0.55], 0.5, ['math.random(-0.35, 0.35)', 1, 'math.random(-0.35, 0.35)']),
+        life=(0.7, 0.85), size=splash(0.26), speed=1.5, accel=[0, -4, 0], drag=0.3),
+    # a fountain: splashes and single drops flung up and out from the ball (speed 4.5), arcing over and raining back
+    # down (accel -7) round it
+    'sendout_splash': dict(
+        frames=WET_FRAMES, rate=18,
+        shape=sphere(0.25, 0.5, ['math.random(-1, 1)', 'math.random(0.7, 1.5)', 'math.random(-1, 1)']),
+        life=(1.0, 1.3), size=splash(0.28), speed=4.5, accel=[0, -7, 0], drag=1.5),
 })
-assert len(EFFECTS2) == 65, len(EFFECTS2)
+assert len(EFFECTS2) == 68, len(EFFECTS2)
 
 # second emitters (see build.py PARTS): the trophy that rises over the winner
 PARTS2 = {
