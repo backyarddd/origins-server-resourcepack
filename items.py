@@ -6,8 +6,9 @@ shiny_reroll_stone   echo_shard    7600001            origins_store recipe data/
 
 Numbers are never changed or reused once released: crafted items keep the number they were made with.
 
-The art is a 16x16 pixel-art template (one char per texel, binary alpha, same INK outline as the cosmetic icons):
-a faceted crystal whose facets carry the shiny tier colours (radiant gold, prismatic teal, cosmic violet, aurora pink).
+The art is a 16x16 pixel-art grid (one char per texel, binary alpha, same INK outline as the cosmetic icons), generated:
+a round gem (a true 14x14 circle) whose facets carry the shiny tier colours (radiant gold, prismatic teal, cosmic
+violet, aurora pink).
 build() writes the texture, the item model and the base item's model with its override; check() asserts them.
 """
 import json
@@ -35,25 +36,50 @@ PALETTE = {
     'P': (0xFF, 0x7B, 0xD0),  # aurora pink
 }
 
+# Row widths of a 14x14 circle centred in the 16x16 canvas (1 px transparent margin all round).
+CIRCLE_WIDTHS = (6, 10, 12, 12, 14, 14, 14, 14, 14, 14, 12, 12, 10, 6)
+# The glint on the upper-left crown facet.
+HIGHLIGHT = {(4, 6), (5, 5), (6, 4)}
+
+
+def round_gem():
+    """A round brilliant-cut gem seen from above: a teal table, gold crown facets on the left, violet on the right,
+    a pink pavilion facet below the table, a white highlight top-left and a 4-neighbour INK outline."""
+    inside = set()
+    for row, w in enumerate(CIRCLE_WIDTHS):
+        y = row + 1
+        for x in range(8 - w // 2, 8 + w // 2):
+            inside.add((x, y))
+    rows = []
+    for y in range(16):
+        line = ''
+        for x in range(16):
+            if (x, y) not in inside:
+                line += '.'
+                continue
+            if any(n not in inside for n in ((x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1))):
+                line += 'K'
+                continue
+            u, v = x - 7.5, y - 7.5
+            if (x, y) in HIGHLIGHT:
+                ch = 'W'
+            elif abs(u) + abs(v) <= 3:
+                ch = 'T'
+            elif v > 0 and abs(u) < v - 1:
+                ch = 'P'
+            elif v < 0 and abs(u) < -v - 1:
+                ch = 'Y'
+            elif u < 0:
+                ch = 'G' if v < 0 else 'g'
+            else:
+                ch = 'V' if v < 0 else 'v'
+            line += ch
+        rows.append(line)
+    return rows
+
+
 ART = {
-    'shiny_reroll_stone': [
-        '......KKKK......',
-        '.....KWYTTK.....',
-        '....KWGWTTVK....',
-        '...KGGWTTTVVK...',
-        '..KGGGWTTTVVVK..',
-        '..KGGGWTTTVVWK..',
-        '.KgGGGWTTTVVVvK.',
-        '.KgGGWTTTTTVVvK.',
-        '.KggGTTTTTPVvvK.',
-        '.KggGTTTTPPVvvK.',
-        '..KggTTtPPPvvK..',
-        '..KggtttPPvvvK..',
-        '...KgtttPvvvK...',
-        '....KtttvvvK....',
-        '.....KttvvK.....',
-        '......KKKK......',
-    ],
+    'shiny_reroll_stone': round_gem(),
 }
 
 
