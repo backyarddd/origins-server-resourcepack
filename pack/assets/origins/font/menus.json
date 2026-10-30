@@ -308,7 +308,7 @@
       "type": "bitmap",
       "file": "origins:menu/store_tokens.png",
       "ascent": 13,
-      "height": 107,
+      "height": 125,
       "chars": [
         "\ue333"
       ]

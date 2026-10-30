@@ -4273,7 +4273,7 @@
     {
       "id": "store_tokens",
       "glyph": "E333",
-      "rows": 5,
+      "rows": 6,
       "title": "Shiny Tokens",
       "renderer": "mod",
       "elements": [
@@ -4296,7 +4296,7 @@
           "x": 0,
           "y": 1,
           "w": 9,
-          "h": 3
+          "h": 4
         },
         {
           "type": "text",
@@ -4334,11 +4334,38 @@
           }
         },
         {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 2,
+          "y": 3,
+          "item": {
+            "key": "product"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 4,
+          "y": 3,
+          "item": {
+            "key": "product"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 6,
+          "y": 3,
+          "item": {
+            "key": "product"
+          }
+        },
+        {
           "type": "text",
-          "label": "SENT TO YOUR LOCKER",
+          "label": "TOKENS: LOCKER  STONES: INV",
           "color": "cream",
           "x": 0,
-          "y": 3,
+          "y": 4,
           "w": 9
         },
         {
@@ -4346,7 +4373,7 @@
           "color": "red",
           "icon": "return",
           "x": 0,
-          "y": 4,
+          "y": 5,
           "item": {
             "key": "back"
           }
@@ -4357,7 +4384,7 @@
           "icon": "coin",
           "label": "FUNDS",
           "x": 2,
-          "y": 4,
+          "y": 5,
           "w": 5,
           "h": 1,
           "item": {
@@ -4369,7 +4396,7 @@
           "color": "red",
           "icon": "close",
           "x": 8,
-          "y": 4,
+          "y": 5,
           "item": {
             "key": "close"
           }
