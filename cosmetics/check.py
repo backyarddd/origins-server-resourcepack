@@ -44,6 +44,7 @@ import sys
 from PIL import Image
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import items as server_items  # noqa: E402
 from cosmetics import standins  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -104,6 +105,8 @@ ICON_FIRST_CMD = 7500001
 ICON_MODEL_PARENTS = {'tool_skin': 'origins:item/toolskin/{set}_pickaxe', 'hat': 'origins:cosmetic/{id}',
                       'back': 'origins:cosmetic/{id}', 'front': 'origins:cosmetic/{id}'}
 VANILLA_TEXTURES.add('minecraft:item/' + ICON_ITEM)
+# server-only items (items.py): the plain look of each base item
+VANILLA_TEXTURES |= {'minecraft:item/' + base for _, base, _ in server_items.ITEMS}
 RATES = ('minecraft:emitter_rate_instant', 'minecraft:emitter_rate_steady', 'minecraft:emitter_rate_manual')
 LIFETIMES = ('minecraft:emitter_lifetime_once', 'minecraft:emitter_lifetime_looping',
              'minecraft:emitter_lifetime_expression')
