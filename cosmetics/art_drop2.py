@@ -585,6 +585,16 @@ def _solid_o(face, i, j, w, h, p):
 
 
 GUITAR_ROT = ('z', -45, [8, -6, 11])  # neck over the wearer's right shoulder
+GTR_LIFT = 2  # the whole guitar sits this many px higher on the back; the strap stays put
+
+
+def _lifted(e, dy):
+    """[e] moved up by [dy] px, painted as if it had not moved (the paint reads model positions)."""
+    paint, rot = e['paint'], e['rot']
+    if rot:
+        rot = (rot[0], rot[1], [rot[2][0], rot[2][1] + dy, rot[2][2]])
+    return {**e, 'frm': [e['frm'][0], e['frm'][1] + dy, e['frm'][2]], 'to': [e['to'][0], e['to'][1] + dy, e['to'][2]],
+            'rot': rot, 'paint': lambda face, i, j, w, h, p: paint(face, i, j, w, h, (p[0], p[1] - dy, p[2]))}
 SWORD_ROT = ('z', -45, [8, -5, 11])  # hilt over the right shoulder
 
 
@@ -691,14 +701,15 @@ BACKS2 = {
                  'r': (0x6A, 0x3A, 0x18), 'D': (0x3A, 0x20, 0x10), 'W': (0xFF, 0xF1, 0xD0), 'w': (0xD6, 0xD8, 0xDC),
                  'F': (0x34, 0x20, 0x12), 'f': (0xB8, 0xA8, 0x8C), 'N': (0x6E, 0x3C, 0x1A), 'P': (0xC9, 0xD3, 0xDE),
                  'p': (0xF0, 0xF4, 0xF8), 'X': (0x2A, 0x2A, 0x30), 'x': (0x16, 0x16, 0x1A), 'Y': GOLD},
-        elements=[el((8 - hw, GTR_Y0 + 0.5 * k, 10.5), (8 + hw, GTR_Y0 + 0.5 * k + 0.5, GTR_TOP), _gtr_body,
-                     rot=GUITAR_ROT) for k, hw in enumerate(GTR_ROWS) if hw]
+        elements=[_lifted(e, GTR_LIFT) for e in
+                  [el((8 - hw, GTR_Y0 + 0.5 * k, 10.5), (8 + hw, GTR_Y0 + 0.5 * k + 0.5, GTR_TOP), _gtr_body,
+                      rot=GUITAR_ROT) for k, hw in enumerate(GTR_ROWS) if hw]
         + [el((7.25, -6.75, 11.5), (8.75, -1, 13), _gtr_neck, rot=GUITAR_ROT),
            el((6.75, -1, 11.5), (9.25, 1, 12.5), _gtr_head, rot=GUITAR_ROT),
            el((6.5, -11.5, GTR_TOP), (9.5, -10.75, GTR_TOP + 0.25), _gtr_bridge, rot=GUITAR_ROT),
            el((7.75, -13.75, 11.25), (8.25, -13.5, 11.75), bevel(m='P', light='p', dark='P'), rot=GUITAR_ROT)]
         + [el((x, y, 11.75), (x + 0.5, y + 0.5, 12.25), bevel(m='P', light='p', dark='P'), rot=GUITAR_ROT)
-           for x in (6.25, 9.25) for y in (-0.75, 0)]  # tuning pegs; the top left one ends at y = -0.17, under the head
+           for x in (6.25, 9.25) for y in (-0.75, 0)]]  # tuning pegs; the top left one ends at y = -0.17, under the head
         + [el((8, -8.5, 10.25), (9, 1, 10.5), _gtr_strap, rot=('z', 45, [8.5, -3.75, 10.5]))]),  # on the torso overlay
     'back_capsule_pack': dict(
         density=4,
