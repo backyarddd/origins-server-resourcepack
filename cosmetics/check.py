@@ -15,8 +15,9 @@ Checks, each failing with a readable AssertionError:
   BACKS / FRONTS): elements only, every cube corner inside -16..32, from <= to, rotations on one axis by
   -45/-22.5/0/22.5/45, every face uv inside 0..16 and its texture a variable defined in the model; front items also
   keep every (rotated) corner inside FRONT_BOX: on the chest, z <= 6.5 (at most 0.5 into the torso's front face);
-- tool skin sets (TOOL_SETS): every set has all 17 TOOLSET_TEXTURES as a model origins:item/toolskin/<set>_<state>
-  with the parent that holds it like the vanilla item and a 16x16 texture; and for each of the 33 item models every
+- tool skin sets (TOOL_SETS): every set has all 19 TOOLSET_TEXTURES as a model origins:item/toolskin/<set>_<state>
+  with the parent that holds it like the vanilla item and a 16x16 texture; and for each of the 64 item models (33
+  vanilla + MOD_TOOL_ITEMS, 6 paxels and 25 hammers) every
   probe custom_model_data (none, below, each set, CATCH_ALL and above) x item properties (cast; pulling / pull at and
   between the vanilla thresholds; charged, firework) is resolved the way the 1.21.1 client does (last matching
   override wins, predicate values are >=) and must land on the set's texture for that state, or vanilla's;
@@ -54,6 +55,55 @@ PNG_SIG = b'\x89PNG\r\n\x1a\n'
 TIERS = ('wooden', 'stone', 'iron', 'golden', 'diamond', 'netherite')
 TOOL_ITEMS = [f'{t}_{k}' for k in ('sword', 'pickaxe', 'axe', 'shovel', 'hoe') for t in TIERS] + ['fishing_rod', 'bow',
                                                                                                 'crossbow']
+# Modded tools the sets also skin (pinned: paxels 0.1.3, justhammers 21.1.4; models read from those jars): full id
+NEW_STATES = ('paxel', 'hammer')
+HAMMER_KINDS = ('hammer', 'reinforced_hammer', 'impact_hammer', 'reinforced_impact_hammer', 'destructor_hammer')
+# Base shapes of the paxel and hammer textures ('#' opaque): the alpha outlines of paxels 0.1.3 diamond_paxel and
+# justhammers 21.1.4 diamond_hammer, used as base shapes on the owner's decision 2026-10-31 (shape only, no pixels).
+# Every set's texture fills the mask and adds at most MASK_ACCENTS opaque pixels outside it, each touching it.
+PAXEL_MASK = (
+    '................',
+    '.........##.....',
+    '........####....',
+    '.......#######..',
+    '......########..',
+    '......########..',
+    '.......########.',
+    '........#######.',
+    '.......###..###.',
+    '......###...###.',
+    '.....###....###.',
+    '....###......##.',
+    '..####..........',
+    '..###...........',
+    '...##...........',
+    '................',
+)
+HAMMER_MASK = (
+    '................',
+    '.........##.....',
+    '........#####...',
+    '.......#######..',
+    '.......#######..',
+    '........#######.',
+    '........#######.',
+    '.......#######..',
+    '......###..##...',
+    '.....###........',
+    '....###.........',
+    '...###..........',
+    '..###...........',
+    '..##............',
+    '................',
+    '................',
+)
+STATE_MASKS = {'paxel': PAXEL_MASK, 'hammer': HAMMER_MASK}
+MASK_ACCENTS = {'paxel': 2, 'hammer': 0}  # opaque pixels allowed outside the mask
+# The hammer's handle stair (x, y), from (2, 13) up to (6..8, 8); the rest of HAMMER_MASK is the head, which must be
+# painted symmetric under the mirror across the handle axis x + y = 15: (x, y) -> (15 - y, 15 - x)
+HAMMER_HANDLE = frozenset((x, y) for y in range(8, 14) for x in range(10) if HAMMER_MASK[y][x] == '#')
+MOD_TOOL_ITEMS = [f'paxels:{t}_paxel' for t in TIERS] + [
+    f'justhammers:{t}_{k}' for k in HAMMER_KINDS for t in ('stone', 'iron', 'gold', 'diamond', 'netherite')]
 # tool skin sets (catalog v1.2): id -> custom_model_data; CATCH_ALL and up render the vanilla look again
 TOOL_SETS = {'crystal': 73101, 'ember': 73102, 'gold': 73103, 'tidal': 73104, 'verdant': 73105, 'volt': 73106,
              'frost': 73107, 'shadow': 73108, 'mystic': 73109, 'dragon': 73110, 'celestial': 73111, 'pumpkin': 73112}
@@ -73,9 +123,12 @@ ITEM_STATES = {
 }
 for _item in TOOL_ITEMS[:30]:
     ITEM_STATES[_item] = (_item.split('_', 1)[1], [])
+for _item in MOD_TOOL_ITEMS:  # every hammer kind and tier shares one hammer design; the vanilla look is the item itself
+    ITEM_STATES[_item] = ('paxel' if _item.startswith('paxels:') else 'hammer', [])
 TOOLSET_TEXTURES = ('sword', 'pickaxe', 'axe', 'shovel', 'hoe') + tuple(
     s for item in ('fishing_rod', 'bow', 'crossbow') for s in [ITEM_STATES[item][0]] + [st for _, st in
-                                                                                       ITEM_STATES[item][1]])
+                                                                                       ITEM_STATES[item][1]]
+) + NEW_STATES
 # the parent each set model needs so it is held like the vanilla item (bow / crossbow carry their own display)
 TOOLSET_PARENT = {'fishing_rod': 'minecraft:item/handheld_rod', 'bow': 'minecraft:item/bow',
                   'crossbow': 'minecraft:item/crossbow'}
@@ -86,12 +139,17 @@ VANILLA_MODELS = {'minecraft:item/' + n for n in ['generated', 'handheld', 'hand
 
 
 def vanilla_texture(item, state):
-    """The vanilla texture of an item in a state (a tiered tool's base texture is the item itself)."""
+    """The vanilla texture of an item in a state (a tiered or modded tool's base texture is the item itself)."""
+    if ':' in item:
+        ns, name = item.split(':')
+        return f'{ns}:item/{name}'
     return 'minecraft:item/' + (item if state == ITEM_STATES[item][0] and item in TOOL_ITEMS[:30] else state)
 
 
 VANILLA_TEXTURES = {'minecraft:item/paper'} | {vanilla_texture(i, st) for i, (base, states) in ITEM_STATES.items()
                                                for st in [base] + [s for _, s in states]}
+# The modded tools' base models and textures ship in the pinned mod jars (paxels 0.1.3, justhammers 21.1.4), not here.
+VANILLA_MODELS |= {vanilla_texture(i, None) for i in MOD_TOOL_ITEMS}
 # The armor stand-in models (standins.py) parent vanilla armor models and use the horse armor texture.
 VANILLA_MODELS |= standins.vanilla_models()
 VANILLA_TEXTURES |= standins.VANILLA_TEXTURES
@@ -397,6 +455,30 @@ def expected_state(item, props):
     return picked
 
 
+def mask_shape(what, path, mask, accents):
+    """The texture covers every '#' of mask; at most accents opaque pixels lie outside it, each touching it."""
+    with Image.open(path) as im:
+        alpha = im.convert('RGBA').getchannel('A').load()
+    inside = {(x, y) for y in range(16) for x in range(16) if mask[y][x] == '#'}
+    holes = sorted((x, y) for x, y in inside if not alpha[x, y])
+    assert not holes, f'{what}: transparent where the base shape is opaque at (x, y) {holes}'
+    extra = sorted((x, y) for y in range(16) for x in range(16) if alpha[x, y] and (x, y) not in inside)
+    assert len(extra) <= accents, f'{what}: {len(extra)} pixels outside the base shape {extra}, max {accents}'
+    loose = [(x, y) for x, y in extra
+             if not any((x + dx, y + dy) in inside for dx in (-1, 0, 1) for dy in (-1, 0, 1))]
+    assert not loose, f'{what}: accent pixels {loose} do not touch the base shape'
+
+
+def hammer_symmetric(what, path):
+    """Every head pixel has the RGBA of its mirror across the handle axis. A head pixel whose mirror is a handle
+    pixel ((7, 7) <-> (8, 8), where the handle enters the head) is not compared: the handle keeps its grip shading."""
+    with Image.open(path) as im:
+        px = im.convert('RGBA').load()
+    head = {(x, y) for y in range(16) for x in range(16) if HAMMER_MASK[y][x] == '#'} - HAMMER_HANDLE
+    bad = sorted((x, y) for x, y in head if (15 - y, 15 - x) in head and px[x, y] != px[15 - y, 15 - x])
+    assert not bad, f'{what}: head not symmetric across the handle axis at (x, y) {bad}'
+
+
 def check_toolsets(pack, models):
     """Every set has all its models + 16x16 textures with the right parent; then every item model is resolved for
     every probe custom_model_data x item properties combination and must show the expected set or vanilla texture."""
@@ -411,11 +493,26 @@ def check_toolsets(pack, models):
             tex = f'origins:item/toolskin/{s}_{state}'
             assert rid(data.get('textures', {}).get('layer0', '')) == tex, f'model {mid}: layer0 must be {tex}'
             png(res(pack, tex, 'textures', '.png'), pack, (16, 16), f'tool set {s} texture {state}')
+            if state in STATE_MASKS:
+                mask_shape(f'tool set {s} {state}', res(pack, tex, 'textures', '.png'), STATE_MASKS[state],
+                           MASK_ACCENTS[state])
+            if state == 'hammer':
+                hammer_symmetric(f'tool set {s} hammer', res(pack, tex, 'textures', '.png'))
     cases = 0
-    for item in TOOL_ITEMS:
-        mid = f'minecraft:item/{item}'
-        assert mid in models, f'missing item model assets/minecraft/models/item/{item}.json'
-        overrides = load(models[mid], pack).get('overrides', [])
+    for item in TOOL_ITEMS + MOD_TOOL_ITEMS:
+        ns, name = rid(item).split(':')
+        mid = f'{ns}:item/{name}'
+        assert mid in models, f'missing item model assets/{ns}/models/item/{name}.json'
+        data = load(models[mid], pack)
+        overrides = data.get('overrides', [])
+        if ':' in item:  # modded: the pinned jar's base model exactly, here and in the catch-all copy
+            base = {'parent': 'minecraft:item/handheld',
+                    'textures': {'layer0': vanilla_texture(item, ITEM_STATES[item][0])}}
+            assert {k: v for k, v in data.items() if k != 'overrides'} == base, \
+                f'item model {mid}: must be the jar base model {base} plus overrides'
+            copy = f'origins:item/toolskin/vanilla/{ns}/{name}'
+            assert copy in models, f'item {item}: missing catch-all copy {copy}'
+            assert load(models[copy], pack) == base, f'model {copy}: must be exactly the jar base model {base}'
         for cmd in PROBE_CMD:
             for props in PROBE_PROPS.get(item, [{}]):
                 full = dict(props, **({} if cmd is None else {'custom_model_data': cmd}))

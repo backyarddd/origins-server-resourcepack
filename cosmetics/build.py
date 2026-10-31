@@ -1,7 +1,8 @@
-"""Generate the cosmetics assets into pack/: particle sprites + Snowstorm effects, the 12 tool skin sets (17 textures +
+"""Generate the cosmetics assets into pack/: particle sprites + Snowstorm effects, the 12 tool skin sets (19 textures +
 models each, art in cosmetics/toolsets.py), the 33 vanilla item models (30 tiered tools, fishing rod, bow, crossbow)
-with custom_model_data overrides, hat / back / front item models + textures (and the blocks atlas source they need),
-Poke Ball skin textures + one variation set per Cobblemon ball, and the preview sheets in cosmetics/preview/.
+and the 31 modded ones (6 paxels, 25 Just Hammers) with custom_model_data overrides, hat / back / front item models +
+textures (and the blocks atlas source they need), Poke Ball skin textures + one variation set per Cobblemon ball, and
+the preview sheets in cosmetics/preview/.
 
 Refresh the Cobblemon ball list after a Cobblemon update (writes cosmetics/cobblemon_balls.json):
     python -I cosmetics/build.py --refresh-cobblemon <path to Cobblemon-fabric-*.jar>
@@ -25,8 +26,8 @@ if ROOT not in sys.path:
 from cosmetics import art, art_fx2, icons, standins, toolsets  # noqa: E402
 from cosmetics.art import CREAM, GOLD, LIGHT_GOLD, NAVY, hexrgb, shades  # noqa: E402
 from cosmetics.check import (BACKS, BALL_ASPECT, BALL_SKINS, CATCH_ALL, COBBLEMON_BALLS, FRONTS, HATS,  # noqa: E402
-                             ITEM_STATES, TOOL_ITEMS, TOOL_SETS, TOOLSET_PARENT, TOOLSET_TEXTURES, load_cobblemon,
-                             vanilla_texture)
+                             ITEM_STATES, MOD_TOOL_ITEMS, TOOL_ITEMS, TOOL_SETS, TOOLSET_PARENT,
+                             TOOLSET_TEXTURES, load_cobblemon, vanilla_texture)
 
 PREVIEW = os.path.join(ROOT, 'cosmetics', 'preview')
 NS = 'origins'
@@ -345,7 +346,8 @@ def item_overrides(item):
         out += [{'predicate': {'custom_model_data': cmd, **p}, 'model': f'{NS}:item/toolskin/{s}_{st}'}
                 for p, st in states]
     # a copy of the vanilla model: an override may not point at the item model itself (the baker would recurse)
-    out.append({'predicate': {'custom_model_data': CATCH_ALL}, 'model': f'{NS}:item/toolskin/vanilla/{item}'})
+    copy = '/'.join(item.split(':')) if ':' in item else item
+    out.append({'predicate': {'custom_model_data': CATCH_ALL}, 'model': f'{NS}:item/toolskin/vanilla/{copy}'})
     out += [{'predicate': {'custom_model_data': CATCH_ALL, **p}, 'model': f'item/{st}'} for p, st in states]
     return out
 
@@ -366,11 +368,14 @@ def build_tools(pack, write_json):
                        {'parent': TOOLSET_PARENT.get(kind, 'minecraft:item/handheld'),
                         'textures': {'layer0': f'{NS}:item/toolskin/{name}'}})
         out[s] = images
-    for item in TOOL_ITEMS:
+    for item in TOOL_ITEMS + MOD_TOOL_ITEMS:
+        ns, name = item.split(':') if ':' in item else ('minecraft', item)
         base = VANILLA_BASE.get(item) or {'parent': 'minecraft:item/handheld',
                                           'textures': {'layer0': vanilla_texture(item, ITEM_STATES[item][0])}}
-        write_json(os.path.join(models, 'vanilla', item + '.json'), base)
-        write_json(os.path.join(pack, 'assets', 'minecraft', 'models', 'item', item + '.json'),
+        # modded copies sit under vanilla/<ns>/ so a mod item never collides with a vanilla one of the same name
+        copy = (item,) if ns == 'minecraft' else (ns, name)
+        write_json(os.path.join(models, 'vanilla', *copy) + '.json', base)
+        write_json(os.path.join(pack, 'assets', ns, 'models', 'item', name + '.json'),
                    {**base, 'overrides': item_overrides(item)})
     return out
 
@@ -720,13 +725,15 @@ def build(pack, write_json):
     for d in (('origins', 'bedrock', 'particles', 'cosmetics'), ('origins', 'textures', 'particle', 'cosmetics'),
               ('origins', 'models', 'item', 'toolskin'), ('origins', 'textures', 'item', 'toolskin'),
               ('origins', 'models', 'cosmetic'), ('origins', 'textures', 'cosmetic'),
-              ('origins', 'bedrock', 'poke_balls'), ('origins', 'textures', 'poke_balls')):
+              ('origins', 'bedrock', 'poke_balls'), ('origins', 'textures', 'poke_balls'),
+              ('paxels', 'models', 'item'), ('justhammers', 'models', 'item')):
         shutil.rmtree(os.path.join(pack, 'assets', *d), ignore_errors=True)  # drop stale generated files
     effects = build_effects(pack, write_json)
     tools = build_tools(pack, write_json)
     sheet_preview(effects, os.path.join(PREVIEW, 'particles.png'), cols=3)
     toolsets_preview(tools, os.path.join(PREVIEW, 'toolsets.png'))
     toolsets_closeup(tools, os.path.join(PREVIEW, 'toolsets_x10.png'))
+    toolsets_closeup(tools, os.path.join(PREVIEW, 'toolsets_new_x10.png'), states=('paxel', 'hammer', 'pickaxe'))
     wearables = build_wearables(pack, write_json)
     balls, n_balls = build_balls(pack, write_json)
     standins.build(pack)
@@ -734,7 +741,7 @@ def build(pack, write_json):
                       os.path.join(PREVIEW, 'wearables.png'))
     wearables_preview({k: v for k, v in wearables.items() if k in FRONTS}, [], os.path.join(PREVIEW, 'fronts.png'))
     print(f'cosmetics: {len(EFFECTS)} effects + {len(PARTS)} parts, {len(tools)} tool sets x '
-          f'{len(TOOLSET_TEXTURES)} textures, {len(TOOL_ITEMS)} item models with overrides')
+          f'{len(TOOLSET_TEXTURES)} textures, {len(TOOL_ITEMS) + len(MOD_TOOL_ITEMS)} item models with overrides')
     print(f'cosmetics: {len(HATS)} hats + {len(BACKS)} back items + {len(FRONTS)} front items, {len(BALL_SKINS)} '
           f'ball skins x {n_balls} balls')
     # menu icons last: the hat / back / front and tool skin icons are the models written above

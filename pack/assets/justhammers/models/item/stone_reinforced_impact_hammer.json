@@ -1,0 +1,86 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "justhammers:item/stone_reinforced_impact_hammer"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "custom_model_data": 73101
+      },
+      "model": "origins:item/toolskin/crystal_hammer"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73102
+      },
+      "model": "origins:item/toolskin/ember_hammer"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73103
+      },
+      "model": "origins:item/toolskin/gold_hammer"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73104
+      },
+      "model": "origins:item/toolskin/tidal_hammer"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73105
+      },
+      "model": "origins:item/toolskin/verdant_hammer"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73106
+      },
+      "model": "origins:item/toolskin/volt_hammer"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73107
+      },
+      "model": "origins:item/toolskin/frost_hammer"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73108
+      },
+      "model": "origins:item/toolskin/shadow_hammer"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73109
+      },
+      "model": "origins:item/toolskin/mystic_hammer"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73110
+      },
+      "model": "origins:item/toolskin/dragon_hammer"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73111
+      },
+      "model": "origins:item/toolskin/celestial_hammer"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73112
+      },
+      "model": "origins:item/toolskin/pumpkin_hammer"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73113
+      },
+      "model": "origins:item/toolskin/vanilla/justhammers/stone_reinforced_impact_hammer"
+    }
+  ]
+}

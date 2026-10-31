@@ -76,9 +76,14 @@ do not edit by hand:
 - `assets/origins/textures/particle/cosmetics/<id>.png`: the sprite sheet of each effect, texture string
   `origins:cosmetics/<id>`.
 - `assets/origins/models/item/toolskin/<set>_<state>.json` + `assets/origins/textures/item/toolskin/<set>_<state>.png`:
-  12 tool skin sets (catalog v1.2), 17 textures each: `sword`, `pickaxe`, `axe`, `shovel`, `hoe` (one design per tool
+  12 tool skin sets (catalog v1.2), 19 textures each: `sword`, `pickaxe`, `axe`, `shovel`, `hoe` (one design per tool
   type, shared by all 6 material tiers), `fishing_rod`, `fishing_rod_cast`, `bow`, `bow_pulling_0..2`,
-  `crossbow_standby`, `crossbow_pulling_0..2`, `crossbow_arrow`, `crossbow_firework`. Parents: tools
+  `crossbow_standby`, `crossbow_pulling_0..2`, `crossbow_arrow`, `crossbow_firework`, and for the modded tools
+  `paxel` (Paxels, all 6 tiers) and `hammer` (one design shared by all 25 Just Hammers items, every kind and tier).
+  Both are drawn on fixed base shapes, `PAXEL_MASK` / `HAMMER_MASK` in `cosmetics/check.py` (the outlines of the mods'
+  diamond textures, shape only; owner decision 2026-10-31): every set fills the mask in its own palette, a paxel adds at
+  most 2 accent pixels touching it, a hammer none, and the hammer head is painted symmetric across the handle axis
+  (`HAMMER_HANDLE` exempt); check.py asserts all of it on each texture. Parents: tools, paxel and hammer
   `minecraft:item/handheld`, rod `handheld_rod`, bow states `minecraft:item/bow`, crossbow states
   `minecraft:item/crossbow` (so they keep the vanilla hand / third-person transforms).
 
@@ -98,7 +103,8 @@ do not edit by hand:
   | pumpkin | 73112 | ribbed jack-o'-lantern orange, carved-face axe / shovel and pommels, vine-green grips |
   | (vanilla) | 73113 and up | the vanilla look again (catch-all) |
 
-  `cosmetics/toolsets.py`: each set is 8 ASCII templates (sword, pickaxe, axe, shovel, hoe, rod, bow, crossbow); head
+  `cosmetics/toolsets.py`: each set is 10 ASCII templates (sword, pickaxe, axe, shovel, hoe, rod, bow, crossbow,
+  paxel, hammer); head
   and trim pixels are auto-shaded (light from the top-left: lit edges, mid interior gradient, darkest shadow edge) with
   hand-placed facets, gems and glow on top; handles get a lit / mid / shadow cylinder plus the set's grip pattern. The
   rod line, bow string + arrow per draw state and crossbow string + bolt / rocket are drawn in code from the template's
@@ -114,6 +120,14 @@ do not edit by hand:
   and the vanilla state models. For any value the highest set threshold at or below it wins, and inside a set the most
   specific state; 73113 and up are vanilla again. `cosmetics/check.py` replays this for every item and every probe
   combination.
+- `assets/paxels/models/item/<tier>_paxel.json` (6) and `assets/justhammers/models/item/<tier>_<kind>.json` (25; tiers
+  stone, iron, gold, diamond, netherite; kinds hammer, reinforced_hammer, impact_hammer, reinforced_impact_hammer,
+  destructor_hammer; the 4 `*_core` crafting parts are not tools and are not listed): the mod's own base model
+  (`minecraft:item/handheld`, layer0 `<ns>:item/<name>`, as read from the pinned jars paxels 0.1.3 and justhammers
+  21.1.4) plus one override per set in ascending `custom_model_data` to `<set>_paxel` / `<set>_hammer`, then 73113 to
+  the catch-all copy `origins:item/toolskin/vanilla/<ns>/<name>` (the jar base model without overrides). The base
+  textures ship in the mod jars, not in this pack; re-read the jars' models after a mod update. On a client without
+  the mods these files are unused.
 - `assets/origins/models/cosmetic/<id>.json` + `assets/origins/textures/cosmetic/<id>.png`: hats (`hat_*`), back
   items (`back_*`) and front items (`front_*`, on the chest: body bone, every corner at z <= 6.5, so at most 0.5 into
   the torso's front face at z = 6), vanilla JSON element models the client mod (`origins_cosmetics_client`, see
@@ -136,8 +150,9 @@ do not edit by hand:
   the two geometries' texture size and box UV cubes, and the poser ids, read from the Cobblemon jar (name + SHA-1
   recorded). Regenerate after a Cobblemon update with
   `python -I cosmetics/build.py --refresh-cobblemon <path to Cobblemon-fabric-*.jar>`, then rebuild.
-- `cosmetics/preview/` (not in the pack): `particles.png` every sheet at x8; `toolsets.png` the 12 sets x 17 textures
+- `cosmetics/preview/` (not in the pack): `particles.png` every sheet at x8; `toolsets.png` the 12 sets x 19 textures
   at x6; `toolsets_x10.png` every set's sword / pickaxe / bow at x10 and at x2 on an inventory-slot grey;
+  `toolsets_new_x10.png` the same for paxel / hammer, with the set's pickaxe for comparison;
   `wearables.png` every hat / back item rendered from the shipped model + texture (front, side from the wearer's
   right, back) on a grey head / torso at its contract position plus every ball skin texture at x4; `fronts.png` the
   same views for the front items. `tools_v1.png` is the frozen v1 tool preview, kept for comparison.
