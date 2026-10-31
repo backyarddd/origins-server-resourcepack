@@ -58,6 +58,50 @@ TOOL_ITEMS = [f'{t}_{k}' for k in ('sword', 'pickaxe', 'axe', 'shovel', 'hoe') f
 # Modded tools the sets also skin (pinned: paxels 0.1.3, justhammers 21.1.4; models read from those jars): full id
 NEW_STATES = ('paxel', 'hammer')
 HAMMER_KINDS = ('hammer', 'reinforced_hammer', 'impact_hammer', 'reinforced_impact_hammer', 'destructor_hammer')
+# Base shapes of the paxel and hammer textures ('#' opaque): the alpha outlines of paxels 0.1.3 diamond_paxel and
+# justhammers 21.1.4 diamond_hammer, used as base shapes on the owner's decision 2026-10-31 (shape only, no pixels).
+# Every set's texture fills the mask and adds at most MASK_ACCENTS opaque pixels outside it, each touching it.
+PAXEL_MASK = (
+    '................',
+    '.........##.....',
+    '........####....',
+    '.......#######..',
+    '......########..',
+    '......########..',
+    '.......########.',
+    '........#######.',
+    '.......###..###.',
+    '......###...###.',
+    '.....###....###.',
+    '....###......##.',
+    '..####..........',
+    '..###...........',
+    '...##...........',
+    '................',
+)
+HAMMER_MASK = (
+    '................',
+    '.........##.....',
+    '........#####...',
+    '.......#######..',
+    '.......#######..',
+    '........#######.',
+    '........#######.',
+    '.......#######..',
+    '......###..##...',
+    '.....###........',
+    '....###.........',
+    '...###..........',
+    '..###...........',
+    '..##............',
+    '................',
+    '................',
+)
+STATE_MASKS = {'paxel': PAXEL_MASK, 'hammer': HAMMER_MASK}
+MASK_ACCENTS = {'paxel': 2, 'hammer': 0}  # opaque pixels allowed outside the mask
+# The hammer's handle stair (x, y), from (2, 13) up to (6..8, 8); the rest of HAMMER_MASK is the head, which must be
+# painted symmetric under the mirror across the handle axis x + y = 15: (x, y) -> (15 - y, 15 - x)
+HAMMER_HANDLE = frozenset((x, y) for y in range(8, 14) for x in range(10) if HAMMER_MASK[y][x] == '#')
 MOD_TOOL_ITEMS = [f'paxels:{t}_paxel' for t in TIERS] + [
     f'justhammers:{t}_{k}' for k in HAMMER_KINDS for t in ('stone', 'iron', 'gold', 'diamond', 'netherite')]
 # tool skin sets (catalog v1.2): id -> custom_model_data; CATCH_ALL and up render the vanilla look again
@@ -411,6 +455,30 @@ def expected_state(item, props):
     return picked
 
 
+def mask_shape(what, path, mask, accents):
+    """The texture covers every '#' of mask; at most accents opaque pixels lie outside it, each touching it."""
+    with Image.open(path) as im:
+        alpha = im.convert('RGBA').getchannel('A').load()
+    inside = {(x, y) for y in range(16) for x in range(16) if mask[y][x] == '#'}
+    holes = sorted((x, y) for x, y in inside if not alpha[x, y])
+    assert not holes, f'{what}: transparent where the base shape is opaque at (x, y) {holes}'
+    extra = sorted((x, y) for y in range(16) for x in range(16) if alpha[x, y] and (x, y) not in inside)
+    assert len(extra) <= accents, f'{what}: {len(extra)} pixels outside the base shape {extra}, max {accents}'
+    loose = [(x, y) for x, y in extra
+             if not any((x + dx, y + dy) in inside for dx in (-1, 0, 1) for dy in (-1, 0, 1))]
+    assert not loose, f'{what}: accent pixels {loose} do not touch the base shape'
+
+
+def hammer_symmetric(what, path):
+    """Every head pixel has the RGBA of its mirror across the handle axis. A head pixel whose mirror is a handle
+    pixel ((7, 7) <-> (8, 8), where the handle enters the head) is not compared: the handle keeps its grip shading."""
+    with Image.open(path) as im:
+        px = im.convert('RGBA').load()
+    head = {(x, y) for y in range(16) for x in range(16) if HAMMER_MASK[y][x] == '#'} - HAMMER_HANDLE
+    bad = sorted((x, y) for x, y in head if (15 - y, 15 - x) in head and px[x, y] != px[15 - y, 15 - x])
+    assert not bad, f'{what}: head not symmetric across the handle axis at (x, y) {bad}'
+
+
 def check_toolsets(pack, models):
     """Every set has all its models + 16x16 textures with the right parent; then every item model is resolved for
     every probe custom_model_data x item properties combination and must show the expected set or vanilla texture."""
@@ -425,6 +493,11 @@ def check_toolsets(pack, models):
             tex = f'origins:item/toolskin/{s}_{state}'
             assert rid(data.get('textures', {}).get('layer0', '')) == tex, f'model {mid}: layer0 must be {tex}'
             png(res(pack, tex, 'textures', '.png'), pack, (16, 16), f'tool set {s} texture {state}')
+            if state in STATE_MASKS:
+                mask_shape(f'tool set {s} {state}', res(pack, tex, 'textures', '.png'), STATE_MASKS[state],
+                           MASK_ACCENTS[state])
+            if state == 'hammer':
+                hammer_symmetric(f'tool set {s} hammer', res(pack, tex, 'textures', '.png'))
     cases = 0
     for item in TOOL_ITEMS + MOD_TOOL_ITEMS:
         ns, name = rid(item).split(':')

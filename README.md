@@ -79,10 +79,13 @@ do not edit by hand:
   12 tool skin sets (catalog v1.2), 19 textures each: `sword`, `pickaxe`, `axe`, `shovel`, `hoe` (one design per tool
   type, shared by all 6 material tiers), `fishing_rod`, `fishing_rod_cast`, `bow`, `bow_pulling_0..2`,
   `crossbow_standby`, `crossbow_pulling_0..2`, `crossbow_arrow`, `crossbow_firework`, and for the modded tools
-  `paxel` (Paxels, all 6 tiers) and `hammer` (one sledge design shared by all 25 Just Hammers items, every kind and
-  tier). Parents: tools, paxel and hammer `minecraft:item/handheld`, rod `handheld_rod`, bow states
-  `minecraft:item/bow`, crossbow states `minecraft:item/crossbow` (so they keep the vanilla hand / third-person
-  transforms).
+  `paxel` (Paxels, all 6 tiers) and `hammer` (one design shared by all 25 Just Hammers items, every kind and tier).
+  Both are drawn on fixed base shapes, `PAXEL_MASK` / `HAMMER_MASK` in `cosmetics/check.py` (the outlines of the mods'
+  diamond textures, shape only; owner decision 2026-10-31): every set fills the mask in its own palette, a paxel adds at
+  most 2 accent pixels touching it, a hammer none, and the hammer head is painted symmetric across the handle axis
+  (`HAMMER_HANDLE` exempt); check.py asserts all of it on each texture. Parents: tools, paxel and hammer
+  `minecraft:item/handheld`, rod `handheld_rod`, bow states `minecraft:item/bow`, crossbow states
+  `minecraft:item/crossbow` (so they keep the vanilla hand / third-person transforms).
 
   | set | custom_model_data | look |
   |---|---|---|
