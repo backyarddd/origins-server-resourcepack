@@ -9,6 +9,12 @@
         "custom_model_data": 7600001
       },
       "model": "origins:item/shiny_reroll_stone"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7600002
+      },
+      "model": "origins:item/advanced_shiny_reroll_stone"
     }
   ]
 }

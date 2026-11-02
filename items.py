@@ -1,14 +1,16 @@
 """Server-only items: a vanilla base item that the origins mods give components, drawn here through a custom_model_data
 override on that base item's model.
 
-Item                 base item     custom_model_data  set by
-shiny_reroll_stone   echo_shard    7600001            origins_store recipe data/origins_store/recipe/shiny_reroll_stone.json
+Item                          base item   custom_model_data  set by
+shiny_reroll_stone            echo_shard  7600001            origins_store recipe data/origins_store/recipe/shiny_reroll_stone.json
+advanced_shiny_reroll_stone   echo_shard  7600002            origins_store RerollStones.createAdvanced (bought, not crafted)
 
 Numbers are never changed or reused once released: crafted items keep the number they were made with.
 
 The art is a 16x16 pixel-art grid (one char per texel, binary alpha, same INK outline as the cosmetic icons), generated:
 a round gem (a true 14x14 circle) whose facets carry the shiny tier colours (radiant gold, prismatic teal, cosmic
 violet, aurora pink).
+The advanced stone is hand-drawn (Figma "Item Textures", variant A): the same gem set in a gold bezel.
 build() writes the texture, the item model and the base item's model with its override; check() asserts them.
 """
 import json
@@ -20,6 +22,7 @@ NS = 'origins'
 ITEMS = [
     # id, vanilla base item, custom_model_data
     ('shiny_reroll_stone', 'echo_shard', 7600001),
+    ('advanced_shiny_reroll_stone', 'echo_shard', 7600002),
 ]
 
 PALETTE = {
@@ -80,6 +83,24 @@ def round_gem():
 
 ART = {
     'shiny_reroll_stone': round_gem(),
+    'advanced_shiny_reroll_stone': [
+        '.......KK.......',
+        '.....KKYYKK.....',
+        '...KKYYYYGGKK...',
+        '..KYYYKggKGGGK..',
+        '..KYKKYYYYKKGK..',
+        '.KYYKGWYYYVKGgK.',
+        '.KYKGWGTTVVVKgK.',
+        'KGGYGGTTTTVVGggK',
+        'KGGYggTTTTvvGggK',
+        '.KGKgggTTvvvKgK.',
+        '.KGGKgPPPPvKggK.',
+        '..KGKKPPPPKKgK..',
+        '..KGGGKGGKgggK..',
+        '...KKggggggKK...',
+        '.....KKggKK.....',
+        '.......KK.......',
+    ],
 }
 
 
