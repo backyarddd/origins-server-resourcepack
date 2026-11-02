@@ -420,6 +420,15 @@
       "chars": [
         "\ue36a"
       ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/reroll_keep.png",
+      "ascent": 13,
+      "height": 107,
+      "chars": [
+        "\ue36b"
+      ]
     }
   ]
 }
