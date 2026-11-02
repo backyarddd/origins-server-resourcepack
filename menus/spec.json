@@ -5813,6 +5813,86 @@
           }
         }
       ]
+    },
+    {
+      "id": "reroll_choice",
+      "glyph": "E36A",
+      "rows": 5,
+      "title": "Reroll",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 4
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 4,
+          "y": 0,
+          "item": {
+            "key": "preview"
+          }
+        },
+        {
+          "type": "text",
+          "label": "WHAT DO YOU WANT TO REROLL?",
+          "color": "cream",
+          "x": 0,
+          "y": 1,
+          "w": 9
+        },
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "star",
+          "label": "RARITY",
+          "x": 0,
+          "y": 2,
+          "w": 4,
+          "h": 2,
+          "item": {
+            "key": "rarity"
+          }
+        },
+        {
+          "type": "card",
+          "color": "green",
+          "icon": "gem",
+          "label": "COLOR",
+          "x": 5,
+          "y": 2,
+          "w": 4,
+          "h": 2,
+          "item": {
+            "key": "color"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 4,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 4,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
     }
   ],
   "commands": [
