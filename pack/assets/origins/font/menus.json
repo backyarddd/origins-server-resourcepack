@@ -411,6 +411,15 @@
       "chars": [
         "\ue369"
       ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/reroll_choice.png",
+      "ascent": 13,
+      "height": 107,
+      "chars": [
+        "\ue36a"
+      ]
     }
   ]
 }
