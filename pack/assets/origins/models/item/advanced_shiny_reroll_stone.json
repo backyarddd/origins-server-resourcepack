@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "origins:item/advanced_shiny_reroll_stone"
+  }
+}

@@ -4361,12 +4361,31 @@
           }
         },
         {
-          "type": "text",
-          "label": "TOKENS: LOCKER  STONES: INV",
-          "color": "cream",
-          "x": 0,
+          "type": "slot",
+          "style": "pedestal",
+          "x": 2,
           "y": 4,
-          "w": 9
+          "item": {
+            "key": "product"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 4,
+          "y": 4,
+          "item": {
+            "key": "product"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 6,
+          "y": 4,
+          "item": {
+            "key": "product"
+          }
         },
         {
           "type": "icon_button",
@@ -5890,6 +5909,75 @@
           "y": 4,
           "item": {
             "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reroll_keep",
+      "glyph": "E36B",
+      "rows": 5,
+      "title": "Reroll",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 4
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 1,
+          "y": 0,
+          "item": {
+            "key": "old_preview"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 7,
+          "y": 0,
+          "item": {
+            "key": "new_preview"
+          }
+        },
+        {
+          "type": "text",
+          "label": "KEEP WHICH ROLL?",
+          "color": "cream",
+          "x": 0,
+          "y": 1,
+          "w": 9
+        },
+        {
+          "type": "card",
+          "color": "red",
+          "icon": "back",
+          "label": "KEEP OLD",
+          "x": 0,
+          "y": 2,
+          "w": 4,
+          "h": 2,
+          "item": {
+            "key": "keep_old"
+          }
+        },
+        {
+          "type": "card",
+          "color": "green",
+          "icon": "star",
+          "label": "TAKE NEW",
+          "x": 5,
+          "y": 2,
+          "w": 4,
+          "h": 2,
+          "item": {
+            "key": "take_new"
           }
         }
       ]
