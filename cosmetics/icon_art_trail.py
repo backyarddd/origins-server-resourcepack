@@ -517,6 +517,30 @@ P_RAINBOW = {k: v for i, ch in enumerate(('1Rr', '2Aa', '3Yy', '4Gg', '5Cc', '6V
 P_PIXEL = {k: v for c, ch in zip(('#FF3B3B', '#3BFF6B', '#3B7BFF'), ('Rrq', 'Ggh', 'Bbn'))
            for k, v in relabel(art_fx2.rgb(c), ch, 'MLW').items()}
 
+# STAR4 and GEM (neutral, tinted in game) in the six skill colours (art_fx2.SKILL_COLORS from Battling back to Mining,
+# upper case its light, lower case its mid tone): Battling 'A' the big star near, then Catching 'B' gem, Fishing 'C'
+# star, Farming 'D' gem, Woodcutting 'E' and Mining 'F' small and far up the path (the vivid colours near)
+GRANDMASTER = [
+    "................",
+    ".........E......",
+    "........EEe..F..",
+    "......C..e..FFf.",
+    "......C......f..",
+    "....CCCcc..D....",
+    "......c...DDd...",
+    "......c....d....",
+    "....A...........",
+    "....A......B....",
+    "...AAa....BBb...",
+    ".AAAAaaa.BBBbb..",
+    "...aaa....Bbb...",
+    "....a......b....",
+    "....a...........",
+    "................",
+]
+P_GRANDMASTER = {k: v for c, ch in zip(art_fx2.SKILL_COLORS[::-1], ('Aa', 'Bb', 'Cc', 'Dd', 'Ee', 'Ff'))
+                 for k, v in relabel(shades(c), ch, 'LM').items()}
+
 ICONS = {
     'trail_hearts': drawn(HEARTS, {**relabel(shades('#FF5577'), 'OMLW'), **relabel(shades('#FF8FB1'), 'omlw')}),
     'trail_paw_prints': drawn(PAW_PRINTS, {**relabel(art_fx2.P_BROWN, 'OMLW'), **relabel(art_fx2.P_BROWN2, 'omlw')}),
@@ -543,4 +567,5 @@ ICONS = {
     'trail_pixel_dust': drawn(PIXEL_DUST, P_PIXEL),
     'trail_toxic': drawn(TOXIC, {**art_fx2.P_LIME_BUBBLE, **relabel(art_fx2.P_LIME_BUBBLE2, 'omlw')}),
     'trail_skulls': drawn(SKULLS, relabel(P_SKULL, 'bcd', 'WGD')),
+    'trail_grandmaster': drawn(GRANDMASTER, P_GRANDMASTER),
 }

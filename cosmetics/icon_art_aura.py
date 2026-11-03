@@ -452,6 +452,29 @@ SOAKED = [
     "................",
 ]
 
+# MINI_BALL (hero) and BALL_STAR in P_BALL (upper case), STAR4 + SPARK in P_GOLD_STAR (g / G / h / H = O / M / L / W):
+# motes circling slowly all over the body (box emitter, slow swirl): a big red-and-white orb low left, a gold star high
+# right, a small red-and-white sparkle top left and a gold X-spark low right. The GLOW frame (drawn at 50 % alpha in
+# game) is left out: a binary-alpha icon cannot show it soft, and drawn opaque it would read as a coin
+COLLECTOR = [
+    "................",
+    "..L.........H...",
+    ".LWX........h...",
+    "..X........hHG..",
+    "........HhHHHGg.",
+    "...MMMM....HG...",
+    "..MLWMMM...G....",
+    ".MLWMMMMO..g....",
+    ".MMMMMMMO.......",
+    ".OOOXWOOO..h...h",
+    ".WWWWWWXX...G.G.",
+    "..WWWWXX.....H..",
+    "...XXXX.....G.G.",
+    "...........h...h",
+    "................",
+    "................",
+]
+
 ICONS = {
     'aura_ember_wisps': drawn(EMBER_WISPS, {**relabel(cb.P_ORANGE, 'OMLW'), **relabel(cb.P_RED_ORANGE, 'omlw')}),
     'aura_laughing_fit': drawn(LAUGHING_FIT, P_LAUGH),
@@ -481,4 +504,5 @@ ICONS = {
     'aura_smitten': drawn(SMITTEN, P_SMITTEN),
     'aura_on_fire': drawn(ON_FIRE, P_FIRE),
     'aura_soaked': drawn(SOAKED, fx.P_WET),
+    'aura_collector': drawn(COLLECTOR, {**fx.P_BALL, **relabel(fx.P_GOLD_STAR, 'gGhH')}),
 }

@@ -78,7 +78,13 @@
     },
     {
       "predicate": {
-        "custom_model_data": 73113
+        "custom_model_data": 73114
+      },
+      "model": "origins:item/toolskin/prospector_shovel"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73200
       },
       "model": "origins:item/toolskin/vanilla/iron_shovel"
     }

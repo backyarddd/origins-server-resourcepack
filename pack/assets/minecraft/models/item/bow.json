@@ -444,20 +444,20 @@
     },
     {
       "predicate": {
-        "custom_model_data": 73113
+        "custom_model_data": 73200
       },
       "model": "origins:item/toolskin/vanilla/bow"
     },
     {
       "predicate": {
-        "custom_model_data": 73113,
+        "custom_model_data": 73200,
         "pulling": 1
       },
       "model": "item/bow_pulling_0"
     },
     {
       "predicate": {
-        "custom_model_data": 73113,
+        "custom_model_data": 73200,
         "pulling": 1,
         "pull": 0.65
       },
@@ -465,7 +465,7 @@
     },
     {
       "predicate": {
-        "custom_model_data": 73113,
+        "custom_model_data": 73200,
         "pulling": 1,
         "pull": 0.9
       },

@@ -1,8 +1,8 @@
-"""Generate the cosmetics assets into pack/: particle sprites + Snowstorm effects, the 12 tool skin sets (19 textures +
-models each, art in cosmetics/toolsets.py), the 33 vanilla item models (30 tiered tools, fishing rod, bow, crossbow)
-and the 31 modded ones (6 paxels, 25 Just Hammers) with custom_model_data overrides, hat / back / front item models +
-textures (and the blocks atlas source they need), Poke Ball skin textures + one variation set per Cobblemon ball, and
-the preview sheets in cosmetics/preview/.
+"""Generate the cosmetics assets into pack/: particle sprites + Snowstorm effects, the 16 tool skin sets (19 textures +
+models each, or only their own tools' for the 4 partial skill sets; art in cosmetics/toolsets.py), the 33 vanilla item
+models (30 tiered tools, fishing rod, bow, crossbow) and the 31 modded ones (6 paxels, 25 Just Hammers) with
+custom_model_data overrides, hat / back / front item models + textures (and the blocks atlas source they need), Poke
+Ball skin textures + one variation set per Cobblemon ball, and the preview sheets in cosmetics/preview/.
 
 Refresh the Cobblemon ball list after a Cobblemon update (writes cosmetics/cobblemon_balls.json):
     python -I cosmetics/build.py --refresh-cobblemon <path to Cobblemon-fabric-*.jar>
@@ -26,8 +26,8 @@ if ROOT not in sys.path:
 from cosmetics import art, art_fx2, icons, standins, toolsets  # noqa: E402
 from cosmetics.art import CREAM, GOLD, LIGHT_GOLD, NAVY, hexrgb, shades  # noqa: E402
 from cosmetics.check import (BACKS, BALL_ASPECT, BALL_SKINS, CATCH_ALL, COBBLEMON_BALLS, FRONTS, HATS,  # noqa: E402
-                             ITEM_STATES, MOD_TOOL_ITEMS, TOOL_ITEMS, TOOL_SETS, TOOLSET_PARENT,
-                             TOOLSET_TEXTURES, load_cobblemon, vanilla_texture)
+                             ITEM_STATES, MASKED_FROM, MOD_TOOL_ITEMS, TOOL_ITEMS, TOOL_SETS, TOOLSET_PARENT,
+                             TOOLSET_TEXTURES, load_cobblemon, set_states, vanilla_texture)
 
 PREVIEW = os.path.join(ROOT, 'cosmetics', 'preview')
 NS = 'origins'
@@ -204,8 +204,8 @@ EFFECTS = {
     'trail_supporter_sparkles': dict(frames=frames((art.STAR, P_GREEN_STAR), (art.STAR, P_GOLD_STAR)), rate=2,
                                      life=(0.6, 1.0), size=twinkle(0.16), speed=0.05),
 }
-EFFECTS.update(art_fx2.EFFECTS2)  # drop 2: 21 emotes (kind emote: one 16x16 sprite, see art_fx2) + 47 other effects
-assert len(EFFECTS) == 31 + 68
+EFFECTS.update(art_fx2.EFFECTS2)  # drop 2: 21 emotes (one 16x16 sprite each, see art_fx2) + 47 others; phase 4: 3
+assert len(EFFECTS) == 31 + 71
 # second emitters for looks one particle sheet cannot give (spawned by the parent's creation_event);
 # cosmetics/parts/<parent>_<name>, not cosmetic ids
 PARTS = {
@@ -335,13 +335,16 @@ VANILLA_BASE = {
 }
 
 
-def item_overrides(item):
-    """Vanilla's own overrides first, then per set (ascending custom_model_data) its base state followed by its
-    states in vanilla order, then the same block at CATCH_ALL pointing back at vanilla. Overrides are tested last to
-    first, so for any value the highest set threshold <= value wins and, inside it, the most specific state."""
+def item_overrides(item, covers):
+    """Vanilla's own overrides first, then per set (ascending custom_model_data) that covers the item its base state
+    followed by its states in vanilla order, then the same block at CATCH_ALL pointing back at vanilla. Overrides are
+    tested last to first, so for any value the highest set threshold <= value wins and, inside it, the most specific
+    state. A partial set adds nothing to the items it does not cover (covers: check.set_states())."""
     base, states = ITEM_STATES[item]
     out = [{'predicate': p, 'model': f'item/{st}'} for p, st in states]
     for s, cmd in sorted(TOOL_SETS.items(), key=lambda kv: kv[1]):
+        if base not in covers[s]:
+            continue
         out.append({'predicate': {'custom_model_data': cmd}, 'model': f'{NS}:item/toolskin/{s}_{base}'})
         out += [{'predicate': {'custom_model_data': cmd, **p}, 'model': f'{NS}:item/toolskin/{s}_{st}'}
                 for p, st in states]
@@ -357,10 +360,11 @@ def build_tools(pack, write_json):
     textures = os.path.join(pack, 'assets', NS, 'textures', 'item', 'toolskin')
     os.makedirs(textures, exist_ok=True)
     out = {}
+    covers = set_states()
     for s in TOOL_SETS:
         images = toolsets.textures(toolsets.SETS[s])
-        assert set(images) == set(TOOLSET_TEXTURES), f'tool set {s}: textures {sorted(images)}'
-        for state in TOOLSET_TEXTURES:
+        assert set(images) == set(covers[s]), f'tool set {s}: textures {sorted(images)}'
+        for state in covers[s]:
             name = f'{s}_{state}'
             images[state].save(os.path.join(textures, name + '.png'), optimize=True)
             kind = next((k for k in TOOLSET_PARENT if state.startswith(k)), None)
@@ -376,12 +380,13 @@ def build_tools(pack, write_json):
         copy = (item,) if ns == 'minecraft' else (ns, name)
         write_json(os.path.join(models, 'vanilla', *copy) + '.json', base)
         write_json(os.path.join(pack, 'assets', ns, 'models', 'item', name + '.json'),
-                   {**base, 'overrides': item_overrides(item)})
+                   {**base, 'overrides': item_overrides(item, covers)})
     return out
 
 
 def toolsets_preview(sets, path, scale=6):
-    """12 rows x 17 textures (TOOLSET_TEXTURES order), set ids down the left, state names across the top."""
+    """One row per set x 19 textures (TOOLSET_TEXTURES order; a partial set leaves the others empty), set ids down the
+    left, state names across the top."""
     font = ImageFont.load_default()
     pad, label_w, head_h = 8, 64, 30
     cell = 16 * scale + pad
@@ -398,6 +403,8 @@ def toolsets_preview(sets, path, scale=6):
         y = head_h + r * cell
         draw.text((pad, y + 16 * scale // 2 - 6), s, fill=CREAM + (255,), font=font)
         for k, state in enumerate(TOOLSET_TEXTURES):
+            if state not in images:
+                continue
             im = images[state]
             sheet.alpha_composite(im.resize((16 * scale, 16 * scale), Image.NEAREST), (label_w + k * cell, y))
     os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -405,10 +412,12 @@ def toolsets_preview(sets, path, scale=6):
 
 
 def toolsets_closeup(sets, path, states=('sword', 'pickaxe', 'bow'), scale=10):
-    """Sword / pickaxe / bow of every set at x10, two sets per row, plus each at x2 on an inventory-slot grey."""
+    """Sword / pickaxe / bow (states) of every set at x10, two sets per row, plus each at x2 on an inventory-slot grey;
+    a set shows only the states it has, and a set with none of them is left out."""
     font = ImageFont.load_default()
+    sets = {s: images for s, images in sets.items() if any(st in images for st in states)}
     pad, label_h = 10, 14
-    block = len(states) * (16 * scale + pad)
+    block = max(sum(st in images for st in states) for images in sets.values()) * (16 * scale + pad)
     cols, rows = 2, (len(sets) + 1) // 2
     row_h = label_h + 16 * scale + pad + 36 + pad
     sheet = Image.new('RGBA', (pad + cols * (block + 2 * pad), pad + rows * row_h), (0x1E, 0x22, 0x2C, 255))
@@ -416,7 +425,7 @@ def toolsets_closeup(sets, path, states=('sword', 'pickaxe', 'bow'), scale=10):
     for n, (s, images) in enumerate(sets.items()):
         x0, y0 = pad + (n % cols) * (block + 2 * pad), pad + (n // cols) * row_h
         draw.text((x0, y0), f'{s} ({TOOL_SETS[s]})', fill=CREAM + (255,), font=font)
-        for k, state in enumerate(states):
+        for k, state in enumerate(st for st in states if st in images):
             x = x0 + k * (16 * scale + pad)
             sheet.alpha_composite(images[state].resize((16 * scale, 16 * scale), Image.NEAREST), (x, y0 + label_h))
             slot = Image.new('RGBA', (36, 36), (0x8B, 0x8B, 0x8B, 255))
@@ -734,14 +743,18 @@ def build(pack, write_json):
     toolsets_preview(tools, os.path.join(PREVIEW, 'toolsets.png'))
     toolsets_closeup(tools, os.path.join(PREVIEW, 'toolsets_x10.png'))
     toolsets_closeup(tools, os.path.join(PREVIEW, 'toolsets_new_x10.png'), states=('paxel', 'hammer', 'pickaxe'))
+    toolsets_closeup({s: tools[s] for s in TOOL_SETS if TOOL_SETS[s] >= MASKED_FROM},
+                     os.path.join(PREVIEW, 'toolsets_skill_x10.png'),
+                     states=('pickaxe', 'shovel', 'paxel', 'hammer', 'axe', 'hoe', 'fishing_rod', 'fishing_rod_cast'))
     wearables = build_wearables(pack, write_json)
     balls, n_balls = build_balls(pack, write_json)
     standins.build(pack)
     wearables_preview({k: v for k, v in wearables.items() if k in HATS + BACKS}, balls,
                       os.path.join(PREVIEW, 'wearables.png'))
     wearables_preview({k: v for k, v in wearables.items() if k in FRONTS}, [], os.path.join(PREVIEW, 'fronts.png'))
-    print(f'cosmetics: {len(EFFECTS)} effects + {len(PARTS)} parts, {len(tools)} tool sets x '
-          f'{len(TOOLSET_TEXTURES)} textures, {len(TOOL_ITEMS) + len(MOD_TOOL_ITEMS)} item models with overrides')
+    print(f'cosmetics: {len(EFFECTS)} effects + {len(PARTS)} parts, {len(tools)} tool sets '
+          f'({sum(map(len, tools.values()))} textures), {len(TOOL_ITEMS) + len(MOD_TOOL_ITEMS)} item models with '
+          f'overrides')
     print(f'cosmetics: {len(HATS)} hats + {len(BACKS)} back items + {len(FRONTS)} front items, {len(BALL_SKINS)} '
           f'ball skins x {n_balls} balls')
     # menu icons last: the hat / back / front and tool skin icons are the models written above

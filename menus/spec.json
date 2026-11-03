@@ -5981,6 +5981,389 @@
           }
         }
       ]
+    },
+    {
+      "id": "skills",
+      "glyph": "E36C",
+      "rows": 6,
+      "title": "Skills",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "star",
+          "label": "SKILLS",
+          "x": 0,
+          "y": 0,
+          "w": 9,
+          "h": 1,
+          "item": {
+            "key": "info"
+          }
+        },
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 1,
+          "w": 9,
+          "h": 4
+        },
+        {
+          "type": "text",
+          "label": "MINING",
+          "color": "cream",
+          "x": 0,
+          "y": 1,
+          "w": 3
+        },
+        {
+          "type": "text",
+          "label": "WOODCUT",
+          "color": "cream",
+          "x": 3,
+          "y": 1,
+          "w": 3
+        },
+        {
+          "type": "text",
+          "label": "FARMING",
+          "color": "cream",
+          "x": 6,
+          "y": 1,
+          "w": 3
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 1,
+          "y": 2,
+          "item": {
+            "key": "mining"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 4,
+          "y": 2,
+          "item": {
+            "key": "woodcutting"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 7,
+          "y": 2,
+          "item": {
+            "key": "farming"
+          }
+        },
+        {
+          "type": "text",
+          "label": "FISHING",
+          "color": "cream",
+          "x": 0,
+          "y": 3,
+          "w": 3
+        },
+        {
+          "type": "text",
+          "label": "CATCHING",
+          "color": "cream",
+          "x": 3,
+          "y": 3,
+          "w": 3
+        },
+        {
+          "type": "text",
+          "label": "BATTLING",
+          "color": "cream",
+          "x": 6,
+          "y": 3,
+          "w": 3
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 1,
+          "y": 4,
+          "item": {
+            "key": "fishing"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 4,
+          "y": 4,
+          "item": {
+            "key": "catching"
+          }
+        },
+        {
+          "type": "slot",
+          "style": "pedestal",
+          "x": 7,
+          "y": 4,
+          "item": {
+            "key": "battling"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 5,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "slot",
+          "x": 2,
+          "y": 5,
+          "item": {
+            "key": "rested"
+          }
+        },
+        {
+          "type": "slot",
+          "x": 3,
+          "y": 5,
+          "item": {
+            "key": "nightvision"
+          }
+        },
+        {
+          "type": "slot",
+          "x": 4,
+          "y": 5,
+          "item": {
+            "key": "heal"
+          }
+        },
+        {
+          "type": "slot",
+          "x": 5,
+          "y": 5,
+          "item": {
+            "key": "popups"
+          }
+        },
+        {
+          "type": "button",
+          "color": "gold",
+          "label": "TOP",
+          "x": 6,
+          "y": 5,
+          "w": 2,
+          "item": {
+            "key": "top"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 5,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "skills_detail",
+      "glyph": "E36D",
+      "rows": 6,
+      "title": "Skill",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "star",
+          "label": "LEVELS",
+          "x": 0,
+          "y": 0,
+          "w": 6,
+          "h": 1,
+          "item": {
+            "key": "header"
+          }
+        },
+        {
+          "type": "button",
+          "color": "green",
+          "label": "EARN XP",
+          "x": 6,
+          "y": 0,
+          "w": 3,
+          "item": {
+            "key": "sources"
+          }
+        },
+        {
+          "type": "slot",
+          "x": 0,
+          "y": 1,
+          "w": 9,
+          "h": 4,
+          "item": {
+            "key": "levels"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 5,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "navy",
+          "icon": "left",
+          "x": 1,
+          "y": 5,
+          "item": {
+            "key": "prev"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "x": 2,
+          "y": 5,
+          "w": 5,
+          "h": 1,
+          "item": {
+            "key": "info"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "navy",
+          "icon": "right",
+          "x": 7,
+          "y": 5,
+          "item": {
+            "key": "next"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 5,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "skills_top",
+      "glyph": "E36E",
+      "rows": 6,
+      "title": "Skills leaderboard",
+      "renderer": "mod",
+      "elements": [
+        {
+          "type": "card",
+          "color": "gold",
+          "icon": "trophy",
+          "label": "LEADERBOARD",
+          "x": 0,
+          "y": 0,
+          "w": 6,
+          "h": 1,
+          "item": {
+            "key": "header"
+          }
+        },
+        {
+          "type": "button",
+          "color": "navy",
+          "label": "FILTER",
+          "x": 6,
+          "y": 0,
+          "w": 3,
+          "item": {
+            "key": "filter"
+          }
+        },
+        {
+          "type": "slot",
+          "x": 0,
+          "y": 1,
+          "w": 9,
+          "h": 4,
+          "item": {
+            "key": "entries"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "return",
+          "x": 0,
+          "y": 5,
+          "item": {
+            "key": "back"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "navy",
+          "icon": "left",
+          "x": 1,
+          "y": 5,
+          "item": {
+            "key": "prev"
+          }
+        },
+        {
+          "type": "card",
+          "color": "navy",
+          "x": 2,
+          "y": 5,
+          "w": 5,
+          "h": 1,
+          "item": {
+            "key": "info"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "navy",
+          "icon": "right",
+          "x": 7,
+          "y": 5,
+          "item": {
+            "key": "next"
+          }
+        },
+        {
+          "type": "icon_button",
+          "color": "red",
+          "icon": "close",
+          "x": 8,
+          "y": 5,
+          "item": {
+            "key": "close"
+          }
+        }
+      ]
     }
   ],
   "commands": [

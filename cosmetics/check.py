@@ -15,12 +15,16 @@ Checks, each failing with a readable AssertionError:
   BACKS / FRONTS): elements only, every cube corner inside -16..32, from <= to, rotations on one axis by
   -45/-22.5/0/22.5/45, every face uv inside 0..16 and its texture a variable defined in the model; front items also
   keep every (rotated) corner inside FRONT_BOX: on the chest, z <= 6.5 (at most 0.5 into the torso's front face);
-- tool skin sets (TOOL_SETS): every set has all 19 TOOLSET_TEXTURES as a model origins:item/toolskin/<set>_<state>
-  with the parent that holds it like the vanilla item and a 16x16 texture; and for each of the 64 item models (33
-  vanilla + MOD_TOOL_ITEMS, 6 paxels and 25 hammers) every
-  probe custom_model_data (none, below, each set, CATCH_ALL and above) x item properties (cast; pulling / pull at and
-  between the vanilla thresholds; charged, firework) is resolved the way the 1.21.1 client does (last matching
-  override wins, predicate values are >=) and must land on the set's texture for that state, or vanilla's;
+- tool skin sets (TOOL_SETS): every set has all 19 TOOLSET_TEXTURES (a partial set: exactly the states of its templates,
+  nothing else) as a model origins:item/toolskin/<set>_<state> with the parent that holds it like the vanilla item and a
+  16x16 texture; paxel / hammer textures on their base masks (hammer head colour-symmetric), every set also
+  pickaxe / axe / shovel / hoe / cast rod on the vanilla outlines (pickaxe / shovel outline symmetric) and every texture
+  in one 8-connected piece, plus cosmetics/shape_rules.py rules 1-4 on every set x state; and for each of the 64 item
+  models (33 vanilla + MOD_TOOL_ITEMS, 6 paxels and 25 hammers)
+  every probe custom_model_data (none, below, each set, gaps, CATCH_ALL and above) x item properties (cast; pulling /
+  pull at and between the vanilla thresholds; charged, firework) is resolved the way the 1.21.1 client does (last
+  matching override wins, predicate values are >=) and must land on the texture of the highest set at or below it that
+  covers the item, for that state, or vanilla's;
 - every Poke Ball variation file assets/<ns>/bedrock/poke_balls/variations/*.json: a ball Cobblemon ships, an order
   above Cobblemon's own set for that ball (later in the resolver's list wins, see README "Cosmetics"), every variation
   keyed on at least one aspect (an aspect-less variation would reskin the ball for everyone), its texture a PNG in the
@@ -29,9 +33,9 @@ Checks, each failing with a readable AssertionError:
   and every ball skin in BALL_SKINS has a variation on aspect origins_ball_<skin id> for every Cobblemon ball;
 - menu icons (cosmetics/icons.py, check_icons): every icon_catalog.json id numbered in icons.json, numbers unique and
   contiguous from 7500001, one model origins:item/icon/<id> per id (flat types: item/generated + a 16x16 binary-alpha
-  texture; tool skins: the set's pickaxe; hats / back / front items: the wearable model with a display.gui inside
-  the client's clamps), and minecraft:item/knowledge_book with one override per id ascending then the catch-all to
-  the plain look, every number resolving to its own icon.
+  texture; tool skins: the set's pickaxe, or its first tool for a set without one; hats / back / front items: the
+  wearable model with a display.gui inside the client's clamps), and minecraft:item/knowledge_book with one override per
+  id ascending then the catch-all to the plain look, every number resolving to its own icon.
   Aura / trail / sendout / victory icons: art at least 12 px, and no two of a type within 24 pixels of each other;
   every hand-drawn template (cosmetics/icon_art.ICONS) has its id in icons.json (no orphan templates).
 
@@ -97,17 +101,120 @@ HAMMER_MASK = (
     '................',
     '................',
 )
+# Base shapes of the vanilla tools: the alpha outlines of the 1.21.1 iron_<tool> / fishing_rod_cast textures (the
+# same for every tier; shape only, no pixels). They bind all 16 sets (owner rule 2026-11-03).
+PICKAXE_MASK = (
+    '................',
+    '................',
+    '......#####.....',
+    '.....#########..',
+    '......########..',
+    '..........####..',
+    '.........######.',
+    '........###.###.',
+    '.......###..###.',
+    '......###...###.',
+    '.....###....###.',
+    '....###......#..',
+    '...###..........',
+    '..###...........',
+    '..##............',
+    '................',
+)
+AXE_MASK = (
+    '................',
+    '.........##.....',
+    '........####....',
+    '.......#####....',
+    '......#######...',
+    '......#######...',
+    '.......#######..',
+    '........######..',
+    '.......###.##...',
+    '......###.......',
+    '.....###........',
+    '....###.........',
+    '...###..........',
+    '..###...........',
+    '..##............',
+    '................',
+)
+SHOVEL_MASK = (
+    '................',
+    '................',
+    '...........###..',
+    '..........#####.',
+    '.........######.',
+    '........#######.',
+    '.........#####..',
+    '........#####...',
+    '.......###.#....',
+    '......###.......',
+    '.....###........',
+    '....###.........',
+    '..####..........',
+    '..###...........',
+    '...##...........',
+    '................',
+)
+HOE_MASK = (
+    '................',
+    '.......###......',
+    '......#####.....',
+    '.......#######..',
+    '.........#####..',
+    '..........####..',
+    '.........####...',
+    '........###.....',
+    '.......###......',
+    '......###.......',
+    '.....###........',
+    '....###.........',
+    '...###..........',
+    '..###...........',
+    '..##............',
+    '................',
+)
+ROD_MASK = (  # cast; the uncast rod adds the line and lure toolsets.textures() draws from the '@' tip
+    '................',
+    '.............##.',
+    '............###.',
+    '...........####.',
+    '..........####..',
+    '.........####...',
+    '........####....',
+    '.......####.....',
+    '......####......',
+    '.....####.......',
+    '.....###........',
+    '....#####.......',
+    '...######.......',
+    '..###.##........',
+    '..##............',
+    '................',
+)
 STATE_MASKS = {'paxel': PAXEL_MASK, 'hammer': HAMMER_MASK}
-MASK_ACCENTS = {'paxel': 2, 'hammer': 0}  # opaque pixels allowed outside the mask
+VANILLA_MASKS = {'pickaxe': PICKAXE_MASK, 'axe': AXE_MASK, 'shovel': SHOVEL_MASK, 'hoe': HOE_MASK,
+                 'fishing_rod_cast': ROD_MASK}
+MASKED_FROM = 73114  # the first partial (skill) set: cosmetics/build.py picks the skill sets' preview with it
+MASK_ACCENTS = {'paxel': 2, 'hammer': 0, 'pickaxe': 2, 'axe': 2, 'shovel': 2, 'hoe': 2,
+                'fishing_rod_cast': 2}  # opaque pixels allowed outside the mask
+# The vanilla pickaxe and shovel outlines are symmetric across their handle axis x + y = 16: (x, y) -> (16 - y, 16 - x);
+# a masked set keeps that symmetry of the outline (accents come in mirrored pairs). Shading stays lit from the top-left.
+SYMMETRIC_OUTLINES = ('pickaxe', 'shovel')
 # The hammer's handle stair (x, y), from (2, 13) up to (6..8, 8); the rest of HAMMER_MASK is the head, which must be
 # painted symmetric under the mirror across the handle axis x + y = 15: (x, y) -> (15 - y, 15 - x)
 HAMMER_HANDLE = frozenset((x, y) for y in range(8, 14) for x in range(10) if HAMMER_MASK[y][x] == '#')
 MOD_TOOL_ITEMS = [f'paxels:{t}_paxel' for t in TIERS] + [
     f'justhammers:{t}_{k}' for k in HAMMER_KINDS for t in ('stone', 'iron', 'gold', 'diamond', 'netherite')]
 # tool skin sets (catalog v1.2): id -> custom_model_data; CATCH_ALL and up render the vanilla look again
+# (the phase 4 earn-only sets from 73114 are partial: toolsets.SETS[set]['tools'] names their templates)
 TOOL_SETS = {'crystal': 73101, 'ember': 73102, 'gold': 73103, 'tidal': 73104, 'verdant': 73105, 'volt': 73106,
-             'frost': 73107, 'shadow': 73108, 'mystic': 73109, 'dragon': 73110, 'celestial': 73111, 'pumpkin': 73112}
-CATCH_ALL = 73113
+             'frost': 73107, 'shadow': 73108, 'mystic': 73109, 'dragon': 73110, 'celestial': 73111, 'pumpkin': 73112,
+             'prospector': 73114, 'timber': 73115, 'harvest': 73116, 'angler': 73117}
+CATCH_ALL = 73200  # was 73113 until phase 4 (no live item carries it); room for more sets below it
+# the templates a set may draw (toolsets.py), and the template each texture state comes from
+TEMPLATES = ('sword', 'pickaxe', 'axe', 'shovel', 'hoe', 'rod', 'bow', 'crossbow') + NEW_STATES
 # per item: its base state, then the vanilla 1.21.1 overrides in their vanilla order as (predicate, state). A state
 # names the vanilla model and texture minecraft:item/<state> and a set's texture origins:item/toolskin/<set>_<state>
 # (the tiered tools' base state is the tool type; their vanilla texture is the item itself)
@@ -129,6 +236,27 @@ TOOLSET_TEXTURES = ('sword', 'pickaxe', 'axe', 'shovel', 'hoe') + tuple(
     s for item in ('fishing_rod', 'bow', 'crossbow') for s in [ITEM_STATES[item][0]] + [st for _, st in
                                                                                        ITEM_STATES[item][1]]
 ) + NEW_STATES
+
+
+def state_template(state):
+    """The template a texture state is drawn from (fishing_rod_cast -> rod, bow_pulling_1 -> bow, ...)."""
+    return next((t for p, t in (('fishing_rod', 'rod'), ('bow', 'bow'), ('crossbow', 'crossbow')) if
+                 state.startswith(p)), state)
+
+
+def set_states():
+    """{set: its texture states in TOOLSET_TEXTURES order}: all 19 for a full set, only those of its templates for a
+    partial one (toolsets.SETS[set]['tools'])."""
+    from cosmetics import toolsets  # lazy: toolsets imports this module
+    assert set(toolsets.SETS) == set(TOOL_SETS), 'toolsets.SETS and check.TOOL_SETS must name the same sets'
+    return {s: toolsets.states(toolsets.SETS[s]) for s in TOOL_SETS}
+
+
+def icon_state(states):
+    """The texture a set's menu icon shows: its pickaxe, else its first tool (timber axe, harvest hoe, angler rod)."""
+    return 'pickaxe' if 'pickaxe' in states else states[0]
+
+
 # the parent each set model needs so it is held like the vanilla item (bow / crossbow carry their own display)
 TOOLSET_PARENT = {'fishing_rod': 'minecraft:item/handheld_rod', 'bow': 'minecraft:item/bow',
                   'crossbow': 'minecraft:item/crossbow'}
@@ -160,7 +288,7 @@ ICON_CATALOG_JSON = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ic
 ICON_DISTINCT_TYPES = ('aura', 'trail', 'sendout', 'victory')
 ICON_MIN_MASK_DIFF = 24  # pixels two icons of one effect type must differ by
 ICON_FIRST_CMD = 7500001
-ICON_MODEL_PARENTS = {'tool_skin': 'origins:item/toolskin/{set}_pickaxe', 'hat': 'origins:cosmetic/{id}',
+ICON_MODEL_PARENTS = {'tool_skin': 'origins:item/toolskin/{set}_{state}', 'hat': 'origins:cosmetic/{id}',
                       'back': 'origins:cosmetic/{id}', 'front': 'origins:cosmetic/{id}'}
 VANILLA_TEXTURES.add('minecraft:item/' + ICON_ITEM)
 # server-only items (items.py): the plain look of each base item
@@ -410,7 +538,10 @@ def ball_variations(vid, path, pack, cob, models, posers, covered):
 
 
 # tool skins: every (custom_model_data, item property) combination the client can see must pick the right texture
-PROBE_CMD = [None, 1, TOOL_SETS['crystal'] - 1] + sorted(TOOL_SETS.values()) + [CATCH_ALL, CATCH_ALL + 7]
+# (73113, the old catch-all, and the gap up to CATCH_ALL belong to the highest set below them that covers the item)
+PROBE_CMD = sorted({1, TOOL_SETS['crystal'] - 1, 73113, max(TOOL_SETS.values()) + 1, CATCH_ALL - 1, CATCH_ALL,
+                    CATCH_ALL + 7} | set(TOOL_SETS.values()))
+PROBE_CMD.insert(0, None)
 PROBE_PROPS = {
     'fishing_rod': [{}, {'cast': 1}],
     'bow': [{}, {'pull': 0.95}] + [{'pulling': 1, 'pull': p} for p in (0, 0.3, 0.65, 0.7, 0.9, 0.95, 1)],
@@ -479,13 +610,47 @@ def hammer_symmetric(what, path):
     assert not bad, f'{what}: head not symmetric across the handle axis at (x, y) {bad}'
 
 
+# Accent pixels the owner approved by eye even though they break the outline mirror (2026-11-03: frost's icicles).
+OUTLINE_SYMMETRY_EXCEPTIONS = {('frost', 'pickaxe'): frozenset({(6, 5), (8, 5)})}
+
+
+def outline_symmetric(what, path, allowed=frozenset()):
+    """The opaque outline mirrors onto itself across the vanilla handle axis x + y = 16 (pickaxe, shovel); [allowed]
+    pixels (owner-approved accents) are not counted."""
+    with Image.open(path) as im:
+        alpha = im.convert('RGBA').getchannel('A').load()
+    opaque = {(x, y) for y in range(16) for x in range(16) if alpha[x, y]}
+    bad = sorted((x, y) for x, y in opaque if (16 - y, 16 - x) not in opaque and (x, y) not in allowed)
+    assert not bad, f'{what}: outline not symmetric across the handle axis x + y = 16 at (x, y) {bad}'
+
+
+def one_piece(what, path):
+    """Every opaque pixel is 8-connected to every other: one piece, no stray or isolated pixel."""
+    with Image.open(path) as im:
+        alpha = im.convert('RGBA').getchannel('A').load()
+    opaque = {(x, y) for y in range(16) for x in range(16) if alpha[x, y]}
+    seen, todo = set(), [min(opaque)] if opaque else []
+    while todo:
+        x, y = todo.pop()
+        if (x, y) in seen:
+            continue
+        seen.add((x, y))
+        todo += [(x + dx, y + dy) for dx in (-1, 0, 1) for dy in (-1, 0, 1) if (x + dx, y + dy) in opaque]
+    assert seen == opaque, f'{what}: pixels not connected to the tool (8-neighbour) at (x, y) {sorted(opaque - seen)}'
+
+
 def check_toolsets(pack, models):
     """Every set has all its models + 16x16 textures with the right parent; then every item model is resolved for
     every probe custom_model_data x item properties combination and must show the expected set or vanilla texture."""
+    covers = set_states()
     for s in TOOL_SETS:
         for state in TOOLSET_TEXTURES:
             mid = f'origins:item/toolskin/{s}_{state}'
-            assert mid in models, f'tool set {s}: missing model {mid} (every set needs all {len(TOOLSET_TEXTURES)})'
+            if state not in covers[s]:  # a partial set ships only the states of its own templates
+                assert mid not in models, f'tool set {s}: {mid} exists but {state} is not one of its tools'
+                assert not os.path.exists(res(pack, mid, 'textures', '.png')), f'tool set {s}: stray texture {mid}'
+                continue
+            assert mid in models, f'tool set {s}: missing model {mid} (the set needs all {len(covers[s])} states)'
             data = load(models[mid], pack)
             kind = next((k for k in TOOLSET_PARENT if state.startswith(k)), None)
             want = TOOLSET_PARENT.get(kind, 'minecraft:item/handheld')
@@ -498,6 +663,22 @@ def check_toolsets(pack, models):
                            MASK_ACCENTS[state])
             if state == 'hammer':
                 hammer_symmetric(f'tool set {s} hammer', res(pack, tex, 'textures', '.png'))
+            one_piece(f'tool set {s} {state}', res(pack, tex, 'textures', '.png'))
+            if state in VANILLA_MASKS:
+                mask_shape(f'tool set {s} {state}', res(pack, tex, 'textures', '.png'), VANILLA_MASKS[state],
+                           MASK_ACCENTS[state])
+                if state in SYMMETRIC_OUTLINES:
+                    outline_symmetric(f'tool set {s} {state}', res(pack, tex, 'textures', '.png'),
+                                      OUTLINE_SYMMETRY_EXCEPTIONS.get((s, state), frozenset()))
+    from cosmetics import shape_rules, toolsets  # lazy, like set_states()
+
+    def rgba(path):
+        with Image.open(path) as im:
+            return im.convert('RGBA')
+    fails = shape_rules.check_all({s: ({st: rgba(res(pack, f'origins:item/toolskin/{s}_{st}', 'textures', '.png'))
+                                         for st in covers[s]}, shape_rules.set_roles(toolsets.SETS[s]))
+                                    for s in TOOL_SETS})
+    assert not fails, 'tool skin shape rules:\n' + '\n'.join(fails)
     cases = 0
     for item in TOOL_ITEMS + MOD_TOOL_ITEMS:
         ns, name = rid(item).split(':')
@@ -517,7 +698,8 @@ def check_toolsets(pack, models):
             for props in PROBE_PROPS.get(item, [{}]):
                 full = dict(props, **({} if cmd is None else {'custom_model_data': cmd}))
                 state = expected_state(item, props)
-                owner = [k for k, v in TOOL_SETS.items() if cmd is not None and v <= cmd < CATCH_ALL]
+                owner = [k for k, v in TOOL_SETS.items() if cmd is not None and v <= cmd < CATCH_ALL
+                         and ITEM_STATES[item][0] in covers[k]]
                 want = (f'origins:item/toolskin/{max(owner, key=TOOL_SETS.get)}_{state}' if owner
                         else vanilla_texture(item, state))
                 got_model = resolve(overrides, full) or mid
@@ -556,8 +738,9 @@ def front_model(mid, data):
 def check_icons(pack, models):
     """Menu icons: icons.json numbering (contiguous from ICON_FIRST_CMD, unique, every catalog id present), one model
     per id (flat types: item/generated + a 16x16 binary-alpha texture origins:item/icon/<id>; tool skins: the set's
-    pickaxe; hats / back / front items: the wearable model with a display.gui), and the knowledge_book overrides: one
-    per id in ascending custom_model_data, then the catch-all to the plain look; every number resolves to its icon."""
+    pickaxe or first tool; hats / back / front items: the wearable model with a display.gui), and the knowledge_book
+    overrides: one per id in ascending custom_model_data, then the catch-all to the plain look; every number resolves to
+    its icon."""
     with open(ICONS_JSON, encoding='utf-8') as f:
         icons = json.load(f)
     with open(ICON_CATALOG_JSON, encoding='utf-8') as f:
@@ -570,6 +753,7 @@ def check_icons(pack, models):
     cmds = sorted(e['cmd'] for e in icons.values())
     assert cmds == list(range(ICON_FIRST_CMD, ICON_FIRST_CMD + len(icons))),         f'icons.json: custom_model_data must be unique and contiguous from {ICON_FIRST_CMD}'
     sets = {v: k for k, v in TOOL_SETS.items()}
+    covers = set_states()
     masks = {}
     for cid, e in icons.items():
         mid = f'origins:item/icon/{cid}'
@@ -578,7 +762,8 @@ def check_icons(pack, models):
         kind = e['type']
         assert catalog[cid]['type'] == kind, f'icon {cid}: type {kind} differs from the catalog'
         if kind in ICON_MODEL_PARENTS:
-            want = ICON_MODEL_PARENTS[kind].format(id=cid, set=sets.get(catalog[cid].get('custom_model_data')))
+            ts = sets.get(catalog[cid].get('custom_model_data'))
+            want = ICON_MODEL_PARENTS[kind].format(id=cid, set=ts, state=icon_state(covers[ts]) if ts else None)
             assert data.get('parent') == want and want in models, f'icon {cid}: parent must be {want}'
             if kind != 'tool_skin':
                 gui = data['display']['gui']

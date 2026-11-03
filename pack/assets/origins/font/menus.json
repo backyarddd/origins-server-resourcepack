@@ -429,6 +429,33 @@
       "chars": [
         "\ue36b"
       ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/skills.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue36c"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/skills_detail.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue36d"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "origins:menu/skills_top.png",
+      "ascent": 13,
+      "height": 125,
+      "chars": [
+        "\ue36e"
+      ]
     }
   ]
 }

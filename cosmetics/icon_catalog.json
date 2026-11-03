@@ -186,5 +186,12 @@
   "trail_skulls": {"type": "trail", "name": "Skull Steps", "rarity": "uncommon", "effect": "origins:cosmetics/trail_skulls"},
   "emote_wet": {"type": "emote", "name": "Wet", "rarity": "uncommon", "effect": "origins:cosmetics/emote_wet"},
   "sendout_splash": {"type": "sendout", "name": "Splash", "rarity": "rare", "effect": "origins:cosmetics/sendout_splash"},
-  "aura_soaked": {"type": "aura", "name": "Soaked", "rarity": "epic", "effect": "origins:cosmetics/aura_soaked"}
+  "aura_soaked": {"type": "aura", "name": "Soaked", "rarity": "epic", "effect": "origins:cosmetics/aura_soaked"},
+  "ts_prospector": {"type": "tool_skin", "name": "Prospector Tool Set", "rarity": "legendary", "custom_model_data": 73114},
+  "ts_timber": {"type": "tool_skin", "name": "Timberwright Axe", "rarity": "legendary", "custom_model_data": 73115},
+  "ts_harvest": {"type": "tool_skin", "name": "Harvest Hoe", "rarity": "legendary", "custom_model_data": 73116},
+  "ts_angler": {"type": "tool_skin", "name": "Angler's Rod", "rarity": "legendary", "custom_model_data": 73117},
+  "aura_collector": {"type": "aura", "name": "Collector's Aura", "rarity": "legendary", "effect": "origins:cosmetics/aura_collector"},
+  "victory_veteran": {"type": "victory", "name": "Veteran's Laurel", "rarity": "legendary", "effect": "origins:cosmetics/victory_veteran"},
+  "trail_grandmaster": {"type": "trail", "name": "Grandmaster Trail", "rarity": "legendary", "effect": "origins:cosmetics/trail_grandmaster"}
 }
