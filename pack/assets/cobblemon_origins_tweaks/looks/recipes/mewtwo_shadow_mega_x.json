@@ -1,0 +1,57 @@
+{
+ "format": 1,
+ "source": "cobblemon:textures/pokemon/0150_mewtwo/mewtwo_x.png",
+ "source_sha1": "235fdb0136c476bd87418759783d30a3ec6b064c",
+ "width": 128,
+ "height": 128,
+ "mask": "cobblemon_origins_tweaks:textures/looks/masks/mewtwo_shadow_mega_x.png",
+ "output": "cobblemon_origins_tweaks:textures/looks/mewtwo_shadow_mega_x.png",
+ "classes": [
+  {
+   "name": "body",
+   "map": {
+    "#a196ceff": "#221a34ff",
+    "#b7abdcff": "#2c2242ff",
+    "#c6bbe5ff": "#372b51ff",
+    "#d7cdefff": "#433461ff",
+    "#e7dff9ff": "#504073ff",
+    "#f2edfeff": "#5e4c86ff"
+   }
+  },
+  {
+   "name": "iris",
+   "map": {
+    "#057cd3ff": "#7a0012ff",
+    "#0b8eedff": "#ff7a6aff"
+   }
+  },
+  {
+   "name": "pupil",
+   "map": {
+    "#161217ff": "#0d0208ff"
+   }
+  },
+  {
+   "name": "purple",
+   "map": {
+    "#521a28ff": "#2a0a2eff",
+    "#5f242fff": "#380d3cff",
+    "#814099ff": "#45104aff",
+    "#924fa4ff": "#54145aff",
+    "#a361b2ff": "#721e7aff",
+    "#ae6369ff": "#62186aff",
+    "#b46fc0ff": "#82248aff",
+    "#be81d0ff": "#a032a6ff",
+    "#c3787aff": "#912b98ff"
+   }
+  },
+  {
+   "name": "sclera",
+   "map": {
+    "#d9e4ecff": "#2a2138ff",
+    "#e9f1f4ff": "#382d49ff",
+    "#ffffffff": "#463a5aff"
+   }
+  }
+ ]
+}

@@ -1,0 +1,68 @@
+{
+ "format": 1,
+ "source": "cobblemon:textures/pokemon/0381_latios/megalatios.png",
+ "source_sha1": "7b221f7f3f772320aeda3a283461d03d32900178",
+ "width": 128,
+ "height": 256,
+ "mask": "cobblemon_origins_tweaks:textures/looks/masks/latios_shadow_mega.png",
+ "output": "cobblemon_origins_tweaks:textures/looks/latios_shadow_mega.png",
+ "classes": [
+  {
+   "name": "accent.mark",
+   "map": {
+    "#4f1b23ff": "#2a0a2eff",
+    "#64262fff": "#3d0e42ff",
+    "#d50912ff": "#511358ff",
+    "#eaa633ff": "#932c9aff",
+    "#efc14fff": "#a938adff",
+    "#f21010ff": "#671a6fff",
+    "#f94837ff": "#7d2285ff",
+    "#ffde64ff": "#c048c0ff"
+   }
+  },
+  {
+   "name": "body",
+   "map": {
+    "#744ab7ff": "#140f24ff",
+    "#8a5bc6ff": "#1e1a37ff",
+    "#a471d8ff": "#29234bff",
+    "#bb87deff": "#362e60ff",
+    "#d19cefff": "#473f7aff"
+   }
+  },
+  {
+   "name": "dark.sclera",
+   "map": {
+    "#eaeff8ff": "#07050dff",
+    "#ffffffff": "#141026ff"
+   }
+  },
+  {
+   "name": "eye",
+   "map": {
+    "#0d0f14ff": "#1c0004ff",
+    "#1c1d21ff": "#6e000eff",
+    "#d50912ff": "#b00c1cff",
+    "#f21010ff": "#de1a28ff",
+    "#f4ededff": "#ff6a52ff",
+    "#f94837ff": "#ff3a34ff"
+   }
+  },
+  {
+   "name": "light",
+   "map": {
+    "#bdbde0ff": "#4a4560ff",
+    "#cdcde9ff": "#645e7eff",
+    "#ddddf2ff": "#847d9cff",
+    "#eeeeffff": "#a49ebaff",
+    "#fcfcffff": "#c4bfd6ff"
+   }
+  },
+  {
+   "name": "light.pink",
+   "map": {
+    "#ca7a7aff": "#908aa8ff"
+   }
+  }
+ ]
+}

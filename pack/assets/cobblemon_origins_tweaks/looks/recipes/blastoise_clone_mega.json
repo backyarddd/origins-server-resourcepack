@@ -1,0 +1,31 @@
+{
+ "format": 1,
+ "source": "cobblemon:textures/pokemon/0009_blastoise/blastoise_mega.png",
+ "source_sha1": "67177e0c21bc51d21b4ff1de422977a600e96988",
+ "width": 256,
+ "height": 256,
+ "mask": "cobblemon_origins_tweaks:textures/looks/masks/blastoise_clone_mega.png",
+ "output": "cobblemon_origins_tweaks:textures/looks/blastoise_clone_mega.png",
+ "classes": [
+  {
+   "name": "stripe",
+   "map": {
+    "#3b5cadff": "#1e3672ff",
+    "#4b77bfff": "#1e3672ff",
+    "#5b92d1ff": "#1e3672ff",
+    "#68a8e0ff": "#1e3672ff",
+    "#73b9efff": "#1e3672ff"
+   }
+  },
+  {
+   "name": "tip",
+   "map": {
+    "#3b5cadff": "#2c4c94ff",
+    "#4b77bfff": "#2c4c94ff",
+    "#5b92d1ff": "#2c4c94ff",
+    "#68a8e0ff": "#2c4c94ff",
+    "#73b9efff": "#2c4c94ff"
+   }
+  }
+ ]
+}

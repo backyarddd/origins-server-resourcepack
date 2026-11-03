@@ -1,0 +1,27 @@
+{
+ "format": 1,
+ "source": "cobblemon:textures/pokemon/0383_groudon/groudonprimal_emissive.png",
+ "source_sha1": "2a39f07c3bc682328468ffec64fb8368a7b5211e",
+ "width": 512,
+ "height": 512,
+ "mask": "cobblemon_origins_tweaks:textures/looks/masks/groudon_meta_primal_emissive.png",
+ "output": "cobblemon_origins_tweaks:textures/looks/groudon_meta_primal_emissive.png",
+ "classes": [
+  {
+   "name": "eye",
+   "map": {
+    "#ff4640ff": "#f0b028ff",
+    "#ffeabaff": "#ffd640ff"
+   }
+  },
+  {
+   "name": "glow",
+   "map": {
+    "#f7d7abff": "#348ce2ff",
+    "#fcfca4ff": "#78c8ffff",
+    "#ffa389ff": "#2878c0ff",
+    "#ffcc9eff": "#348ce2ff"
+   }
+  }
+ ]
+}

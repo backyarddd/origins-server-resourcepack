@@ -1,0 +1,66 @@
+{
+  "species": "cobblemon:latias",
+  "order": 10,
+  "variations": [
+    {
+      "aspects": [
+        "shadow"
+      ],
+      "texture": "cobblemon_origins_tweaks:textures/looks/latias_shadow.png",
+      "layers": [
+        {
+          "name": "shadow_eyes",
+          "emissive": true,
+          "translucent": false,
+          "texture": "cobblemon_origins_tweaks:textures/looks/latias_shadow_eyes.png"
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "shadow",
+        "shiny"
+      ],
+      "texture": "cobblemon_origins_tweaks:textures/looks/latias_shadow.png",
+      "layers": [
+        {
+          "name": "shadow_eyes",
+          "emissive": true,
+          "translucent": false,
+          "texture": "cobblemon_origins_tweaks:textures/looks/latias_shadow_eyes.png"
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "shadow",
+        "mega"
+      ],
+      "texture": "cobblemon_origins_tweaks:textures/looks/latias_shadow_mega.png",
+      "layers": [
+        {
+          "name": "shadow_eyes",
+          "emissive": true,
+          "translucent": false,
+          "texture": "cobblemon_origins_tweaks:textures/looks/latias_shadow_mega_eyes.png"
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "shadow",
+        "mega",
+        "shiny"
+      ],
+      "texture": "cobblemon_origins_tweaks:textures/looks/latias_shadow_mega.png",
+      "layers": [
+        {
+          "name": "shadow_eyes",
+          "emissive": true,
+          "translucent": false,
+          "texture": "cobblemon_origins_tweaks:textures/looks/latias_shadow_mega_eyes.png"
+        }
+      ]
+    }
+  ]
+}

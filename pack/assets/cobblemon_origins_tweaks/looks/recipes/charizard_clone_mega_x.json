@@ -1,0 +1,31 @@
+{
+ "format": 1,
+ "source": "cobblemon:textures/pokemon/0006_charizard/megacharizardx.png",
+ "source_sha1": "345eafafdaba12a904a19c7d81a29900dca0b74d",
+ "width": 256,
+ "height": 256,
+ "mask": "cobblemon_origins_tweaks:textures/looks/masks/charizard_clone_mega_x.png",
+ "output": "cobblemon_origins_tweaks:textures/looks/charizard_clone_mega_x.png",
+ "classes": [
+  {
+   "name": "stripe",
+   "map": {
+    "#1f1c1fff": "#6e2c0eff",
+    "#2c2a2cff": "#6e2c0eff",
+    "#3a383aff": "#6e2c0eff",
+    "#464546ff": "#6e2c0eff",
+    "#555555ff": "#6e2c0eff"
+   }
+  },
+  {
+   "name": "tip",
+   "map": {
+    "#1f1c1fff": "#8e3e12ff",
+    "#2c2a2cff": "#8e3e12ff",
+    "#3a383aff": "#8e3e12ff",
+    "#464546ff": "#8e3e12ff",
+    "#555555ff": "#8e3e12ff"
+   }
+  }
+ ]
+}

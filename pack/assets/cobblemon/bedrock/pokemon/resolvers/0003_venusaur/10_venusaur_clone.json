@@ -1,0 +1,98 @@
+{
+  "species": "cobblemon:venusaur",
+  "order": 10,
+  "variations": [
+    {
+      "aspects": [
+        "clone"
+      ],
+      "texture": "cobblemon:textures/pokemon/0003_venusaur/venusaur_clone.png"
+    },
+    {
+      "aspects": [
+        "clone",
+        "shiny"
+      ],
+      "texture": "cobblemon:textures/pokemon/0003_venusaur/venusaur_clone.png"
+    },
+    {
+      "aspects": [
+        "clone",
+        "female"
+      ],
+      "texture": "cobblemon:textures/pokemon/0003_venusaur/venusaur_clone.png"
+    },
+    {
+      "aspects": [
+        "clone",
+        "shiny",
+        "female"
+      ],
+      "texture": "cobblemon:textures/pokemon/0003_venusaur/venusaur_clone.png"
+    },
+    {
+      "aspects": [
+        "clone",
+        "mega"
+      ],
+      "texture": "cobblemon_origins_tweaks:textures/looks/venusaur_clone_mega.png"
+    },
+    {
+      "aspects": [
+        "clone",
+        "mega",
+        "female"
+      ],
+      "texture": "cobblemon_origins_tweaks:textures/looks/venusaur_clone_mega.png"
+    },
+    {
+      "aspects": [
+        "clone",
+        "mega",
+        "shiny"
+      ],
+      "texture": "cobblemon_origins_tweaks:textures/looks/venusaur_clone_mega.png"
+    },
+    {
+      "aspects": [
+        "clone",
+        "mega",
+        "shiny",
+        "female"
+      ],
+      "texture": "cobblemon_origins_tweaks:textures/looks/venusaur_clone_mega.png"
+    },
+    {
+      "aspects": [
+        "clone",
+        "gmax"
+      ],
+      "texture": "cobblemon:textures/pokemon/0003_venusaur/venusaur_gmax.png"
+    },
+    {
+      "aspects": [
+        "clone",
+        "gmax",
+        "female"
+      ],
+      "texture": "cobblemon:textures/pokemon/0003_venusaur/venusaur_gmax.png"
+    },
+    {
+      "aspects": [
+        "clone",
+        "gmax",
+        "shiny"
+      ],
+      "texture": "cobblemon:textures/pokemon/0003_venusaur/venusaur_gmax_shiny.png"
+    },
+    {
+      "aspects": [
+        "clone",
+        "gmax",
+        "shiny",
+        "female"
+      ],
+      "texture": "cobblemon:textures/pokemon/0003_venusaur/venusaur_gmax_shiny.png"
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+ "format": 1,
+ "source": "cobblemon:textures/pokemon/0485_heatran/heatran_mega_emissive.png",
+ "source_sha1": "9fa54db800bc9ea5dbd3e859698f001ad1a3685f",
+ "width": 512,
+ "height": 512,
+ "mask": "cobblemon_origins_tweaks:textures/looks/masks/heatran_shadow_mega_glow.png",
+ "output": "cobblemon_origins_tweaks:textures/looks/heatran_shadow_mega_glow.png",
+ "classes": [
+  {
+   "name": "body",
+   "map": {
+    "#b31509ff": "#29234bff"
+   }
+  },
+  {
+   "name": "eye",
+   "map": {
+    "#160a07ff": "#de1a28ff"
+   }
+  },
+  {
+   "name": "glow",
+   "map": {
+    "#d67421ff": "#a133a7ff",
+    "#dccc36ff": "#b33fb6ff",
+    "#e0d145ff": "#b742b9ff",
+    "#eddb37ff": "#ba44bbff",
+    "#f18300ff": "#a435a9ff",
+    "#f55d00ff": "#a032a6ff",
+    "#f6e75aff": "#bc45bdff",
+    "#ff7500ff": "#a334a8ff",
+    "#ff7d01ff": "#a536aaff",
+    "#ff7e11ff": "#a636abff",
+    "#ff8b00ff": "#a837acff",
+    "#ff9002ff": "#a938adff",
+    "#ff9210ff": "#aa39aeff",
+    "#ff9610ff": "#ac3aafff",
+    "#ff981cff": "#ad3bb0ff",
+    "#ff9d07ff": "#ae3cb1ff",
+    "#ffaf14ff": "#af3db2ff",
+    "#ffb607ff": "#b13db4ff",
+    "#ffb629ff": "#b23eb5ff",
+    "#ffbd3cff": "#b641b8ff",
+    "#ffc500ff": "#b440b7ff",
+    "#ffd307ff": "#b843baff",
+    "#ffda2cff": "#bb44bcff",
+    "#ffff00ff": "#bd46beff",
+    "#ffff1cff": "#bf47bfff",
+    "#ffff2dff": "#c048c0ff"
+   }
+  },
+  {
+   "name": "light.steel",
+   "map": {
+    "#555359ff": "#4a4560ff",
+    "#5e5d64ff": "#514b68ff",
+    "#5f5d65ff": "#575270ff",
+    "#5f5d66ff": "#5e5878ff",
+    "#605d65ff": "#666080ff",
+    "#605d66ff": "#6f6887ff",
+    "#605e66ff": "#77708fff",
+    "#605e67ff": "#7f7997ff",
+    "#605f67ff": "#908aa8ff",
+    "#615e67ff": "#8881a0ff",
+    "#615f67ff": "#9993b0ff",
+    "#6b6a6dff": "#a19bb8ff",
+    "#777282ff": "#aaa4c0ff",
+    "#9d9d9dff": "#b3adc7ff",
+    "#b1b1b1ff": "#bbb6cfff",
+    "#c5c5c5ff": "#c4bfd6ff"
+   }
+  }
+ ]
+}
