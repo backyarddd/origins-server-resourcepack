@@ -1,0 +1,72 @@
+{
+  "species": "cobblemon:charizard",
+  "order": 10,
+  "variations": [
+    {
+      "aspects": [
+        "clone"
+      ],
+      "texture": "cobblemon:textures/pokemon/0006_charizard/charizard_clone.png"
+    },
+    {
+      "aspects": [
+        "clone",
+        "shiny"
+      ],
+      "texture": "cobblemon:textures/pokemon/0006_charizard/charizard_clone.png"
+    },
+    {
+      "aspects": [
+        "clone",
+        "mega_y"
+      ],
+      "texture": "cobblemon_origins_tweaks:textures/looks/charizard_clone_mega_y.png"
+    },
+    {
+      "aspects": [
+        "clone",
+        "mega_y",
+        "shiny"
+      ],
+      "texture": "cobblemon_origins_tweaks:textures/looks/charizard_clone_mega_y.png",
+      "layers": [
+        {
+          "name": "eyes",
+          "texture": "cobblemon:textures/pokemon/0006_charizard/y_eyes_glow.png",
+          "emissive": true,
+          "translucent": false
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "clone",
+        "mega_x"
+      ],
+      "texture": "cobblemon_origins_tweaks:textures/looks/charizard_clone_mega_x.png"
+    },
+    {
+      "aspects": [
+        "clone",
+        "mega_x",
+        "shiny"
+      ],
+      "texture": "cobblemon_origins_tweaks:textures/looks/charizard_clone_mega_x.png"
+    },
+    {
+      "aspects": [
+        "clone",
+        "gmax"
+      ],
+      "texture": "cobblemon:textures/pokemon/0006_charizard/charizard_gigantamax.png"
+    },
+    {
+      "aspects": [
+        "clone",
+        "gmax",
+        "shiny"
+      ],
+      "texture": "cobblemon:textures/pokemon/0006_charizard/charizard_gigantamax_shiny.png"
+    }
+  ]
+}

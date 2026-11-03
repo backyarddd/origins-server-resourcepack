@@ -1,0 +1,41 @@
+{
+ "format": 1,
+ "source": "cobblemon:textures/pokemon/0384_rayquaza/megarayquaza.png",
+ "source_sha1": "3f417a769ba13d502f985b304bc2eca707a0b764",
+ "width": 512,
+ "height": 512,
+ "mask": "cobblemon_origins_tweaks:textures/looks/masks/rayquaza_illusion_mega.png",
+ "output": "cobblemon_origins_tweaks:textures/looks/rayquaza_illusion_mega.png",
+ "classes": [
+  {
+   "name": "accent",
+   "map": {
+    "#754d64ff": "#581c3eff",
+    "#936b82ff": "#702854ff",
+    "#bd628bff": "#963460ff",
+    "#d3849dff": "#b43e6eff"
+   }
+  },
+  {
+   "name": "body",
+   "map": {
+    "#4a8373ff": "#3e2b52ff",
+    "#4f9d7eff": "#48325eff",
+    "#5abd8bff": "#563c70ff",
+    "#78d0a0ff": "#64477eff",
+    "#98e4b8ff": "#7a5a96ff"
+   }
+  },
+  {
+   "name": "rings",
+   "map": {
+    "#d1554cff": "#a03048ff",
+    "#ef8f6bff": "#c04c60ff",
+    "#f6de00ff": "#f07080ff",
+    "#f8c049ff": "#f07080ff",
+    "#fffd7cff": "#ff9aa4ff",
+    "#fffebdff": "#ffc4caff"
+   }
+  }
+ ]
+}

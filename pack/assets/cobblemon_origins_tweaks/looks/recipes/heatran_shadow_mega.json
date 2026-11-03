@@ -1,0 +1,97 @@
+{
+ "format": 1,
+ "source": "cobblemon:textures/pokemon/0485_heatran/heatran_mega.png",
+ "source_sha1": "67f9b4f9c2bb8654fd664671a8e5d4fb46b86959",
+ "width": 512,
+ "height": 512,
+ "mask": "cobblemon_origins_tweaks:textures/looks/masks/heatran_shadow_mega.png",
+ "output": "cobblemon_origins_tweaks:textures/looks/heatran_shadow_mega.png",
+ "classes": [
+  {
+   "name": "body",
+   "map": {
+    "#6a0218ff": "#140f24ff",
+    "#6c0418ff": "#171229ff",
+    "#7a041aff": "#1a152eff",
+    "#800f25ff": "#1c1733ff",
+    "#8d132aff": "#1f1a38ff",
+    "#99160cff": "#221d3eff",
+    "#9e152fff": "#251f43ff",
+    "#ae190dff": "#282248ff",
+    "#bf1d0eff": "#2b244eff",
+    "#c01d0fff": "#2e2753ff",
+    "#c52617ff": "#312a59ff",
+    "#d22112ff": "#352e5fff",
+    "#d62e20ff": "#3d356cff",
+    "#dc2215ff": "#393165ff",
+    "#e03324ff": "#473f7aff",
+    "#ec2715ff": "#423a73ff"
+   }
+  },
+  {
+   "name": "eye",
+   "map": {
+    "#150a08ff": "#1c0004ff",
+    "#fffcf8ff": "#ff6a52ff"
+   }
+  },
+  {
+   "name": "glow",
+   "map": {
+    "#ce752bff": "#a133a7ff",
+    "#d9cb45ff": "#b33fb5ff",
+    "#ddd052ff": "#b742b8ff",
+    "#e85f0cff": "#a032a6ff",
+    "#e8840eff": "#a435a9ff",
+    "#ebda47ff": "#b943bbff",
+    "#f3770eff": "#a334a8ff",
+    "#f37f10ff": "#a536aaff",
+    "#f3801eff": "#a737abff",
+    "#f3e667ff": "#bc45bdff",
+    "#f58c10ff": "#a838acff",
+    "#f59112ff": "#a938aeff",
+    "#f6931fff": "#ab39afff",
+    "#f6992aff": "#ac3ab0ff",
+    "#f69e18ff": "#ad3bb1ff",
+    "#f7b025ff": "#af3cb2ff",
+    "#f8b618ff": "#b03db3ff",
+    "#f8b737ff": "#b13eb4ff",
+    "#f8c513ff": "#b440b6ff",
+    "#f9be49ff": "#b541b7ff",
+    "#fad21bff": "#b842baff",
+    "#fad93dff": "#bb44bcff",
+    "#fdfd18ff": "#bd46beff",
+    "#fdfd32ff": "#bf47bfff",
+    "#fefe40ff": "#c048c0ff"
+   }
+  },
+  {
+   "name": "light.steel",
+   "map": {
+    "#555358ff": "#4a4560ff",
+    "#5e5d63ff": "#4f4965ff",
+    "#5f5d64ff": "#534e6bff",
+    "#5f5d65ff": "#585270ff",
+    "#605d64ff": "#5c5676ff",
+    "#605d65ff": "#615b7bff",
+    "#605e65ff": "#676180ff",
+    "#605e66ff": "#6d6686ff",
+    "#605f66ff": "#787190ff",
+    "#615e66ff": "#726c8bff",
+    "#615f66ff": "#7e7796ff",
+    "#6b6a6dff": "#847d9cff",
+    "#777281ff": "#8983a1ff",
+    "#9f9f9fff": "#8f89a7ff",
+    "#b2b2b2ff": "#958facff",
+    "#b6b5c0ff": "#9b95b2ff",
+    "#c5c2cfff": "#a19bb7ff",
+    "#c6c6c6ff": "#a6a0bdff",
+    "#cfcddbff": "#aca6c2ff",
+    "#dbdbdbf7": "#b2adc7f7",
+    "#dfdfdfff": "#b8b3ccff",
+    "#e3e1ebff": "#beb9d1ff",
+    "#efeef9ff": "#c4bfd6ff"
+   }
+  }
+ ]
+}

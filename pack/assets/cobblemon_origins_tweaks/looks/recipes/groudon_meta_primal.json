@@ -1,0 +1,59 @@
+{
+ "format": 1,
+ "source": "cobblemon:textures/pokemon/0383_groudon/groudonprimal.png",
+ "source_sha1": "644f5f2820bb3715326fca2f511c59ccd042ba64",
+ "width": 512,
+ "height": 512,
+ "mask": "cobblemon_origins_tweaks:textures/looks/masks/groudon_meta_primal.png",
+ "output": "cobblemon_origins_tweaks:textures/looks/groudon_meta_primal.png",
+ "classes": [
+  {
+   "name": "bone",
+   "map": {
+    "#b8daf9ff": "#ceb298ff",
+    "#e9ffffff": "#e8d0b6ff",
+    "#ffffffff": "#f0dcc4ff"
+   }
+  },
+  {
+   "name": "chest",
+   "map": {
+    "#212022ff": "#260c12ff",
+    "#29282aff": "#2e1016ff",
+    "#2a292bff": "#301117ff",
+    "#2e2d2fff": "#341219ff",
+    "#34322eff": "#38141bff",
+    "#363536ff": "#3c161dff",
+    "#3d3b3fff": "#421920ff",
+    "#464049ff": "#4a1d24ff",
+    "#514a57ff": "#5c262dff"
+   }
+  },
+  {
+   "name": "eye",
+   "map": {
+    "#ff8f00ff": "#eeb400ff",
+    "#ffb400ff": "#eed200ff"
+   }
+  },
+  {
+   "name": "line",
+   "map": {
+    "#fcfca4ff": "#4898e0ff",
+    "#ffa389ff": "#1c4c94ff",
+    "#ffcc9eff": "#2a70c0ff"
+   }
+  },
+  {
+   "name": "red",
+   "map": {
+    "#a61538ff": "#8c0e1eff",
+    "#b2002fff": "#800c1aff",
+    "#cc0036ff": "#96101eff",
+    "#d3293fff": "#a71322ff",
+    "#ff0040ff": "#b81626ff",
+    "#ff4f54ff": "#d6343aff"
+   }
+  }
+ ]
+}

@@ -1,0 +1,52 @@
+{
+  "species": "cobblemon:mewtwo",
+  "order": 11,
+  "variations": [
+    {
+      "aspects": [
+        "armored"
+      ],
+      "model": "cobblemon:mewtwo_armored.geo",
+      "poser": "cobblemon:mewtwo",
+      "texture": "cobblemon:textures/pokemon/0150_mewtwo/mewtwo_armored.png",
+      "layers": [
+        {
+          "name": "armor_core",
+          "emissive": true,
+          "translucent": false,
+          "texture": "cobblemon:textures/pokemon/0150_mewtwo/mewtwo_armored_emissive.png"
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "armored",
+        "shiny"
+      ],
+      "texture": "cobblemon:textures/pokemon/0150_mewtwo/mewtwo_armored_shiny.png"
+    },
+    {
+      "aspects": [
+        "armored",
+        "shadow"
+      ],
+      "texture": "cobblemon:textures/pokemon/0150_mewtwo/mewtwo_armored_shadow.png",
+      "layers": [
+        {
+          "name": "shadow_glow",
+          "emissive": true,
+          "translucent": false,
+          "texture": "cobblemon:textures/pokemon/0150_mewtwo/mewtwo_shadow_emissive.png"
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "armored",
+        "shadow",
+        "shiny"
+      ],
+      "texture": "cobblemon:textures/pokemon/0150_mewtwo/mewtwo_armored_shadow.png"
+    }
+  ]
+}

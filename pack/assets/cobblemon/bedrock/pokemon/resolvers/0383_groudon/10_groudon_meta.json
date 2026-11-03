@@ -1,0 +1,104 @@
+{
+  "species": "cobblemon:groudon",
+  "order": 10,
+  "variations": [
+    {
+      "aspects": [
+        "meta"
+      ],
+      "model": "cobblemon_origins_tweaks:groudon_meta",
+      "texture": "cobblemon_origins_tweaks:textures/looks/groudon_meta.png",
+      "layers": [
+        {
+          "name": "origins_meta_eyes",
+          "texture": "cobblemon_origins_tweaks:textures/looks/groudon_meta_eyes.png",
+          "emissive": true,
+          "translucent": false
+        },
+        {
+          "name": "origins_meta_tentacles",
+          "texture": "cobblemon_origins_tweaks:textures/looks/groudon_meta_tentacles.png",
+          "emissive": false,
+          "translucent": false
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "meta",
+        "shiny"
+      ],
+      "model": "cobblemon_origins_tweaks:groudon_meta",
+      "texture": "cobblemon_origins_tweaks:textures/looks/groudon_meta.png",
+      "layers": [
+        {
+          "name": "origins_meta_eyes",
+          "texture": "cobblemon_origins_tweaks:textures/looks/groudon_meta_eyes.png",
+          "emissive": true,
+          "translucent": false
+        },
+        {
+          "name": "origins_meta_tentacles",
+          "texture": "cobblemon_origins_tweaks:textures/looks/groudon_meta_tentacles.png",
+          "emissive": false,
+          "translucent": false
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "primal",
+        "meta"
+      ],
+      "poser": "cobblemon:groudonprimal",
+      "model": "cobblemon_origins_tweaks:groudon_meta_primal",
+      "texture": "cobblemon_origins_tweaks:textures/looks/groudon_meta_primal.png",
+      "layers": [
+        {
+          "name": "emissive",
+          "emissive": true,
+          "texture": "cobblemon_origins_tweaks:textures/looks/groudon_meta_primal_emissive.png",
+          "translucent": true
+        },
+        {
+          "name": "origins_meta_eyes",
+          "enabled": false
+        },
+        {
+          "name": "origins_meta_tentacles",
+          "texture": "cobblemon_origins_tweaks:textures/looks/groudon_meta_tentacles.png",
+          "emissive": false,
+          "translucent": false
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "shiny",
+        "primal",
+        "meta"
+      ],
+      "poser": "cobblemon:groudonprimal",
+      "model": "cobblemon_origins_tweaks:groudon_meta_primal",
+      "texture": "cobblemon_origins_tweaks:textures/looks/groudon_meta_primal.png",
+      "layers": [
+        {
+          "name": "emissive",
+          "emissive": true,
+          "texture": "cobblemon_origins_tweaks:textures/looks/groudon_meta_primal_emissive.png",
+          "translucent": true
+        },
+        {
+          "name": "origins_meta_eyes",
+          "enabled": false
+        },
+        {
+          "name": "origins_meta_tentacles",
+          "texture": "cobblemon_origins_tweaks:textures/looks/groudon_meta_tentacles.png",
+          "emissive": false,
+          "translucent": false
+        }
+      ]
+    }
+  ]
+}

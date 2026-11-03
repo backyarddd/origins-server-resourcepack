@@ -1,0 +1,54 @@
+{
+  "species": "cobblemon:rayquaza",
+  "order": 10,
+  "variations": [
+    {
+      "aspects": [
+        "illusion"
+      ],
+      "texture": "cobblemon_origins_tweaks:textures/looks/rayquaza_illusion.png"
+    },
+    {
+      "aspects": [
+        "illusion",
+        "shiny"
+      ],
+      "texture": "cobblemon_origins_tweaks:textures/looks/rayquaza_illusion.png"
+    },
+    {
+      "aspects": [
+        "illusion",
+        "mega"
+      ],
+      "poser": "cobblemon:megarayquaza",
+      "model": "cobblemon:megarayquaza.geo",
+      "texture": "cobblemon_origins_tweaks:textures/looks/rayquaza_illusion_mega.png",
+      "layers": [
+        {
+          "name": "emissive",
+          "emissive": true,
+          "texture": "cobblemon_origins_tweaks:textures/looks/rayquaza_illusion_mega_emissive.png",
+          "translucent": true
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "illusion",
+        "mega",
+        "shiny"
+      ],
+      "poser": "cobblemon:megarayquaza",
+      "model": "cobblemon:megarayquaza.geo",
+      "texture": "cobblemon_origins_tweaks:textures/looks/rayquaza_illusion_mega.png",
+      "layers": [
+        {
+          "name": "emissive",
+          "emissive": true,
+          "texture": "cobblemon_origins_tweaks:textures/looks/rayquaza_illusion_mega_emissive.png",
+          "translucent": true
+        }
+      ]
+    }
+  ]
+}

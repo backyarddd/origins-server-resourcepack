@@ -1,0 +1,33 @@
+{
+ "format": 1,
+ "source": "cobblemon:textures/pokemon/0003_venusaur/venusaur_mega.png",
+ "source_sha1": "df02e50017513fe919818506a8534a58f85836c0",
+ "width": 256,
+ "height": 256,
+ "mask": "cobblemon_origins_tweaks:textures/looks/masks/venusaur_clone_mega.png",
+ "output": "cobblemon_origins_tweaks:textures/looks/venusaur_clone_mega.png",
+ "classes": [
+  {
+   "name": "edge",
+   "map": {
+    "#2a8ea0ff": "#c8f6ecff",
+    "#309ea8ff": "#c8f6ecff",
+    "#3ab0b2ff": "#c8f6ecff",
+    "#48bfb9ff": "#c8f6ecff",
+    "#56cfc2ff": "#c8f6ecff",
+    "#66dfc8ff": "#c8f6ecff"
+   }
+  },
+  {
+   "name": "fill",
+   "map": {
+    "#2a8ea0ff": "#4cc0b6ff",
+    "#309ea8ff": "#54cabdff",
+    "#3ab0b2ff": "#5cd2c3ff",
+    "#48bfb9ff": "#68dac9ff",
+    "#56cfc2ff": "#74e2cfff",
+    "#66dfc8ff": "#80e8d4ff"
+   }
+  }
+ ]
+}

@@ -1,0 +1,49 @@
+{
+  "species": "cobblemon:blastoise",
+  "order": 10,
+  "variations": [
+    {
+      "aspects": [
+        "clone"
+      ],
+      "texture": "cobblemon:textures/pokemon/0009_blastoise/blastoise_clone.png"
+    },
+    {
+      "aspects": [
+        "clone",
+        "shiny"
+      ],
+      "texture": "cobblemon:textures/pokemon/0009_blastoise/blastoise_clone.png"
+    },
+    {
+      "aspects": [
+        "clone",
+        "mega"
+      ],
+      "texture": "cobblemon_origins_tweaks:textures/looks/blastoise_clone_mega.png"
+    },
+    {
+      "aspects": [
+        "clone",
+        "mega",
+        "shiny"
+      ],
+      "texture": "cobblemon_origins_tweaks:textures/looks/blastoise_clone_mega.png"
+    },
+    {
+      "aspects": [
+        "clone",
+        "gmax"
+      ],
+      "texture": "cobblemon:textures/pokemon/0009_blastoise/blastoise_gigantamax.png"
+    },
+    {
+      "aspects": [
+        "clone",
+        "gmax",
+        "shiny"
+      ],
+      "texture": "cobblemon:textures/pokemon/0009_blastoise/blastoise_gigantamax_shiny.png"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+ "format": 1,
+ "source": "cobblemon:textures/pokemon/0384_rayquaza/megarayquaza_emissive.png",
+ "source_sha1": "ffa3337ff0b13ad0677a1b7a54e3d03bf10742c7",
+ "width": 512,
+ "height": 512,
+ "mask": "cobblemon_origins_tweaks:textures/looks/masks/rayquaza_illusion_mega_emissive.png",
+ "output": "cobblemon_origins_tweaks:textures/looks/rayquaza_illusion_mega_emissive.png",
+ "classes": [
+  {
+   "name": "rings",
+   "map": {
+    "#d1554cff": "#a03048ff",
+    "#ef8f6bff": "#c04c60ff",
+    "#f8c049ff": "#f07080ff",
+    "#fffd7cff": "#ff9aa4ff",
+    "#fffebdff": "#ffc4caff"
+   }
+  }
+ ]
+}
