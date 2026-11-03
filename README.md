@@ -76,7 +76,7 @@ do not edit by hand:
 - `assets/origins/textures/particle/cosmetics/<id>.png`: the sprite sheet of each effect, texture string
   `origins:cosmetics/<id>`.
 - `assets/origins/models/item/toolskin/<set>_<state>.json` + `assets/origins/textures/item/toolskin/<set>_<state>.png`:
-  12 tool skin sets (catalog v1.2), 19 textures each: `sword`, `pickaxe`, `axe`, `shovel`, `hoe` (one design per tool
+  12 full tool skin sets (catalog v1.2) plus 4 partial ones (below), 19 textures per full set: `sword`, `pickaxe`, `axe`, `shovel`, `hoe` (one design per tool
   type, shared by all 6 material tiers), `fishing_rod`, `fishing_rod_cast`, `bow`, `bow_pulling_0..2`,
   `crossbow_standby`, `crossbow_pulling_0..2`, `crossbow_arrow`, `crossbow_firework`, and for the modded tools
   `paxel` (Paxels, all 6 tiers) and `hammer` (one design shared by all 25 Just Hammers items, every kind and tier).
@@ -86,6 +86,19 @@ do not edit by hand:
   (`HAMMER_HANDLE` exempt); check.py asserts all of it on each texture. Parents: tools, paxel and hammer
   `minecraft:item/handheld`, rod `handheld_rod`, bow states `minecraft:item/bow`, crossbow states
   `minecraft:item/crossbow` (so they keep the vanilla hand / third-person transforms).
+
+  Partial sets (phase 4, the earn-only skill level 50 rewards, 73114..73117) declare `tools` in `cosmetics/toolsets.py`
+  and ship only those templates' textures and models (rod: both rod states); the item models of the other tools get no
+  override for them, so such a value on another item shows the highest set below it that covers that item (the server
+  only stamps a set's value on its own items). Every one of the 16 sets follows the vanilla masks: the outlines `VANILLA_MASKS` in
+  check.py (alpha of the 1.21.1 iron pickaxe / axe / shovel / hoe and the cast fishing rod, shape only; up to 2 accent
+  pixels touching them), the pickaxe and shovel outlines symmetric across their handle axis x + y = 16 (approved
+  exceptions in `OUTLINE_SYMMETRY_EXCEPTIONS`), and every texture one 8-connected piece. `cosmetics/shape_rules.py`
+  (masks in `cosmetics/shape_masks.json`, the alpha of the vanilla / paxel / hammer diamond textures) enforces the
+  owner's rules 1-4 on every set x state during the build: outline (against the reference and the other sets),
+  symmetry where vanilla is symmetric, one piece, and no slot-grey pixels or high-contrast fine grip stripes. Run it
+  alone from the repo root: `python -I cosmetics/shape_rules.py check [dir] [--sets a,b]` (one line per failure, exit 1
+  on any), `... masks` (rebuild `shape_masks.json` from the jars) and `... selftest`.
 
   | set | custom_model_data | look |
   |---|---|---|
@@ -101,10 +114,14 @@ do not edit by hand:
   | dragon | 73110 | teal scales with gold trim, curved fang blade, ivory horned guard, amber dragon-eye gem |
   | celestial | 73111 | midnight-blue heads with star pixels and gold constellation lines, crescent guard, star pommel |
   | pumpkin | 73112 | ribbed jack-o'-lantern orange, carved-face axe / shovel and pommels, vine-green grips |
-  | (vanilla) | 73113 and up | the vanilla look again (catch-all) |
+  | prospector | 73114 | Mining 50, pickaxe / shovel / paxel / hammer: slate stone heads, copper and gold ore veins, amber lantern gem in a copper cage, copper-banded handle |
+  | timber | 73115 | Woodcutting 50, axe: dark bark head, amber sap glazing the cutting edge, moss spine and collar, moss-banded handle |
+  | harvest | 73116 | Farming 50, hoe: straw-gold blade, leaf-green collar with a red berry, green handle with straw bands |
+  | angler | 73117 | Fishing 50, rod: sea-teal pole with pearl guides, coral reel and grip bands, pearl lure |
+  | (vanilla) | 73200 and up | the vanilla look again (catch-all; 73113 until phase 4) |
 
-  `cosmetics/toolsets.py`: each set is 10 ASCII templates (sword, pickaxe, axe, shovel, hoe, rod, bow, crossbow,
-  paxel, hammer); head
+  `cosmetics/toolsets.py`: each full set is 10 ASCII templates (sword, pickaxe, axe, shovel, hoe, rod, bow, crossbow,
+  paxel, hammer), a partial set those in its `tools`; head
   and trim pixels are auto-shaded (light from the top-left: lit edges, mid interior gradient, darkest shadow edge) with
   hand-placed facets, gems and glow on top; handles get a lit / mid / shadow cylinder plus the set's grip pattern. The
   rod line, bow string + arrow per draw state and crossbow string + bolt / rocket are drawn in code from the template's
@@ -115,16 +132,16 @@ do not edit by hand:
   file is: the vanilla overrides in vanilla order, then per set in ascending `custom_model_data` the set's base state
   `{custom_model_data: N}` followed by its states in vanilla order (`N` + `cast`; `N` + `pulling`, `N` + `pulling` +
   `pull` 0.65, `N` + `pulling` + `pull` 0.9 for the bow; `N` + `pulling`, + `pull` 0.58, + `pull` 1.0, `N` + `charged`,
-  `N` + `charged` + `firework` for the crossbow), then the same block at 73113 pointing at
+  `N` + `charged` + `firework` for the crossbow), then the same block at 73200 (`CATCH_ALL`) pointing at
   `origins:item/toolskin/vanilla/<item>` (a copy of the vanilla model: an override may not point at its own item model)
   and the vanilla state models. For any value the highest set threshold at or below it wins, and inside a set the most
-  specific state; 73113 and up are vanilla again. `cosmetics/check.py` replays this for every item and every probe
+  specific state; 73200 and up are vanilla again. `cosmetics/check.py` replays this for every item and every probe
   combination.
 - `assets/paxels/models/item/<tier>_paxel.json` (6) and `assets/justhammers/models/item/<tier>_<kind>.json` (25; tiers
   stone, iron, gold, diamond, netherite; kinds hammer, reinforced_hammer, impact_hammer, reinforced_impact_hammer,
   destructor_hammer; the 4 `*_core` crafting parts are not tools and are not listed): the mod's own base model
   (`minecraft:item/handheld`, layer0 `<ns>:item/<name>`, as read from the pinned jars paxels 0.1.3 and justhammers
-  21.1.4) plus one override per set in ascending `custom_model_data` to `<set>_paxel` / `<set>_hammer`, then 73113 to
+  21.1.4) plus one override per set in ascending `custom_model_data` to `<set>_paxel` / `<set>_hammer`, then 73200 to
   the catch-all copy `origins:item/toolskin/vanilla/<ns>/<name>` (the jar base model without overrides). The base
   textures ship in the mod jars, not in this pack; re-read the jars' models after a mod update. On a client without
   the mods these files are unused.
@@ -150,9 +167,12 @@ do not edit by hand:
   the two geometries' texture size and box UV cubes, and the poser ids, read from the Cobblemon jar (name + SHA-1
   recorded). Regenerate after a Cobblemon update with
   `python -I cosmetics/build.py --refresh-cobblemon <path to Cobblemon-fabric-*.jar>`, then rebuild.
-- `cosmetics/preview/` (not in the pack): `particles.png` every sheet at x8; `toolsets.png` the 12 sets x 19 textures
-  at x6; `toolsets_x10.png` every set's sword / pickaxe / bow at x10 and at x2 on an inventory-slot grey;
+- `cosmetics/preview/` (not in the pack): `particles.png` every sheet at x8; `toolsets.png` the 16 sets x 19 textures
+  at x6 (blank where a partial set has none); `toolsets_x10.png` every set's sword / pickaxe / bow at x10 and at x2 on an inventory-slot grey;
   `toolsets_new_x10.png` the same for paxel / hammer, with the set's pickaxe for comparison;
+  `toolsets_skill_x10.png` every texture of the 4 partial skill sets at x10 and x2 on slot grey;
+  `toolsets_before_after.png` review sheet, the 12 older sets x 19 textures as of git HEAD (before the shape-rule
+  redraw) and now, x10 and x2 on slot grey (one-off, not rebuilt by the build);
   `wearables.png` every hat / back item rendered from the shipped model + texture (front, side from the wearer's
   right, back) on a grey head / torso at its contract position plus every ball skin texture at x4; `fronts.png` the
   same views for the front items. `tools_v1.png` is the frozen v1 tool preview, kept for comparison.
@@ -183,8 +203,10 @@ a
 particle identifier that does not match its path, a missing or wrongly sized particle texture (PNG size must equal the
 UV `texture_width` x `texture_height`), an event spawning a missing effect, an override or parent pointing at a missing
 model, a model texture that is missing or not a 16x16 PNG (cosmetic models: square 16..128), and non-binary alpha.
-For tool sets: a set missing any of its 17 models / textures, a set model with the wrong parent, and any item x
-`custom_model_data` x property combination (cast, pulling / pull around every vanilla threshold, charged, firework)
+For tool sets: a set missing any of its models / textures (19, or its own tools' for a partial set), a partial set
+shipping a state it does not cover, a texture off its base mask (paxel / hammer; the vanilla outlines), an
+asymmetric hammer head or pickaxe / shovel outline, a texture in more than one piece, any `shape_rules.py` failure, a set
+model with the wrong parent, and any item x `custom_model_data` x property combination (cast, pulling / pull around every vanilla threshold, charged, firework)
 whose resolved texture is not the expected set state or the vanilla one. For front items: a missing model, or a corner
 off the chest box (z above 6.5).
 For hats / back items: a missing model for any id, a cube corner outside -16..32, a rotation not on one axis by
@@ -204,7 +226,8 @@ knowledge book, and paper stays reserved for the menus. Generated by `cosmetics/
 
 - `assets/origins/models/item/icon/<id>.json`: aura, trail, sendout, victory, nickname, emote and ball skin icons are
   `minecraft:item/generated` with a 16x16 texture `assets/origins/textures/item/icon/<id>.png`; tool skins use the
-  set's pickaxe model (`origins:item/toolskin/<set>_pickaxe`, set from the cosmetic's `custom_model_data`); hats,
+  set's pickaxe model (`origins:item/toolskin/<set>_pickaxe`, set from the cosmetic's `custom_model_data`; a set
+  without a pickaxe: its first tool, the timber axe, harvest hoe and angler's uncast rod); hats,
   back and front items use the wearable model itself (`origins:cosmetic/<id>`) with a `display.gui` whose rotation
   is fixed per kind and whose scale / translation are computed so the model fills the slot without leaving it.
   `plain_knowledge_book.json` is a copy of the vanilla look.

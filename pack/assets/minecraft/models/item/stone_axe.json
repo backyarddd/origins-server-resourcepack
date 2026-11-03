@@ -78,7 +78,13 @@
     },
     {
       "predicate": {
-        "custom_model_data": 73113
+        "custom_model_data": 73115
+      },
+      "model": "origins:item/toolskin/timber_axe"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73200
       },
       "model": "origins:item/toolskin/vanilla/stone_axe"
     }

@@ -1,5 +1,6 @@
 """Cosmetics drop 2 particle effects (catalog-v2.md): 21 emotes, 8 auras, 10 send-outs, 8 victory, 12 trails and 9 emoji
-effects. EFFECTS2 / PARTS2 are merged into cosmetics/build.py's EFFECTS / PARTS and use the same keys (frames, rate, shape,
+effects, plus the 3 skill track effects (specs/origins-skills/build-spec.md Phase 4: aura_collector, victory_veteran,
+trail_grandmaster). EFFECTS2 / PARTS2 are merged into cosmetics/build.py's EFFECTS / PARTS and use the same keys (frames, rate, shape,
 life, size, speed, accel, drag, spin, alpha, part, max, facing). Sprites are original 8x8 ASCII templates coloured by
 palettes (roles O outline, M mid, L light, W highlight, X accent, see art.py); the emote and emoji sprites are the
 16x16 drawings in src/emotes/, read from disk every time this module is imported (i.e. at build time).
@@ -10,7 +11,7 @@ import os
 
 from PIL import Image
 
-from cosmetics.art import (BUBBLE, COIN, CONFETTI, DUST, HEART, LEAF, NOTE, SMOKE, STAR as STAR4, hexrgb,
+from cosmetics.art import (BUBBLE, COIN, CONFETTI, DUST, HEART, LEAF, NOTE, SMOKE, SPARK, STAR as STAR4, hexrgb,
                            shades, sprite)
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -352,12 +353,77 @@ WET_DROP = [
     "................",
 ]
 
+# red-and-white orb (red cap lit at the top left, dark band, white button, white base), the aura_collector mote
+MINI_BALL = [
+    "........",
+    "..OOOO..",
+    ".OLWMMO.",
+    ".OMMMMO.",
+    ".OOWWOO.",
+    ".XWWWWX.",
+    "..XXXX..",
+    "........",
+]
+# 4-point sparkle, red on the top and left arms, white centre going grey on the right and bottom (aura_collector)
+BALL_STAR = [
+    "...L....",
+    "...M....",
+    "..LMM...",
+    "LMWWWWX.",
+    "..WWX...",
+    "...W....",
+    "...X....",
+    "........",
+]
+# soft round glow, cream core to gold rim; drawn at partial alpha by its effect (aura_collector)
+GLOW = [
+    "..MMMM..",
+    ".MLLLLM.",
+    "MLWWWWLM",
+    "MLWWWWLM",
+    "MLWWWWLM",
+    "MLWWWWLM",
+    ".MLLLLM.",
+    "..MMMM..",
+]
+# small faceted diamond, lit from the top left (trail_grandmaster, drawn neutral and tinted)
+GEM = [
+    "........",
+    "...W....",
+    "..WWL...",
+    ".WWLMM..",
+    "..LMM...",
+    "...M....",
+    "........",
+    "........",
+]
+# 16x16 laurel wreath: two branches on a ring stem, leaves pointing outwards, open at the top, tied with a navy ribbon
+# at the bottom; symmetric. The sprite of the victory_veteran_laurel part
+LAUREL = [
+    "................",
+    "....WL....LW....",
+    "...WLM....MLW...",
+    "..W.O......O.W..",
+    ".WL.O......O.LW.",
+    ".LMO........OML.",
+    ".W.O........O.W.",
+    "WLMO........OMLW",
+    "...O........O...",
+    ".W.O........O.W.",
+    "WLMO........OMLW",
+    "..WO........OW..",
+    ".WLMO......OMLW.",
+    "..MMMO.XX.OMMM..",
+    "......OXXO......",
+    ".....XX..XX.....",
+]
+
 TEMPLATES_8 = {k: v for k, v in dict(globals()).items()
                if k.isupper() and isinstance(v, list) and v and all(isinstance(r, str) and set(r) <= set('.OMLWX')
-                                                                    for r in v) and k not in ('TROPHY', 'WET_DROP')}
+                                                                    for r in v) and k not in ('TROPHY', 'WET_DROP', 'LAUREL')}
 for _name, _t in TEMPLATES_8.items():
     assert len(_t) == 8 and all(len(r) == 8 for r in _t), f'{_name}: 8x8 template expected'
-for _name, _t in (('TROPHY', TROPHY), ('WET_DROP', WET_DROP)):
+for _name, _t in (('TROPHY', TROPHY), ('WET_DROP', WET_DROP), ('LAUREL', LAUREL)):
     assert len(_t) == 16 and all(len(r) == 16 for r in _t), f'{_name}: 16x16 template expected'
 
 # --- palettes ------------------------------------------------------------------------------------------------------
@@ -413,6 +479,11 @@ P_GOLD_COIN = pal(O='#7A5313', M='#E2B04A', L='#F7D27A', W='#FFF1D0', X='#FFF1D0
 P_GOLD_COIN2 = pal(O='#B07A22', M='#F7D27A', L='#FFF1D0', W='#FFFFFF', X='#FFFFFF')
 # src/emotes/emote_wet.png's own colours (the emotes' shared dark outline, X its shade)
 P_WET = pal(O='#2B1D0E', M='#4FB3FF', L='#BFE6FF', W='#FFFFFF', X='#2A7FD6')
+P_BALL = pal(O='#8E1A24', M='#E5383B', L='#FF8A8C', W='#FFFFFF', X='#AEB4C0')
+# neutral grey ramp for GEM: tinting multiplies the sprite, so W shows the tint exactly and M about 78 % of it
+P_NEUTRAL_GEM = pal(O='#9A9A9A', M='#C8C8C8', L='#E8E8E8', W='#FFFFFF', X='#FFFFFF')
+# the six skill colours in skill order: Mining, Woodcutting, Farming, Fishing, Catching, Battling
+SKILL_COLORS = ['#9AA6C4', '#C9A26B', '#7BD88F', '#6A92DD', '#FF6B6B', '#F7D27A']
 
 
 def rgb(c):
@@ -500,6 +571,31 @@ def splash(s):
     return (f'{s} * ((0.6 + 0.4 * math.min(1, v.particle_age / 0.12)) '
             f'+ 0.15 * math.sin(180 * math.min(1, v.particle_age / 0.24)))')
 
+
+def skill_tint(step):
+    """Particle colour [r, g, b, a] (MoLang): SKILL_COLORS in order, starting at a random one per particle
+    (v.particle_random_2; random_1 picks the frame) and stepping to the next every [step] seconds, back to Mining after
+    Battling. The index is floor(6 * frac(start + age / cycle)); each channel is a ternary chain over it. Alpha is
+    build.FADE."""
+    t = f'(v.particle_random_2 + v.particle_age / {6 * step:g})'
+    i = f'math.floor(6 * ({t} - math.floor({t})))'
+    rgbs = [hexrgb(c) for c in SKILL_COLORS]
+
+    def chan(k):
+        expr = f'{rgbs[5][k] / 255:.3f}'
+        for n in range(4, -1, -1):
+            expr = f'({i} < {n + 1} ? {rgbs[n][k] / 255:.3f} : {expr})'
+        return expr
+    return [chan(0), chan(1), chan(2), f'1 - math.pow({AGE}, 2)']
+
+
+# aura_collector: frame 0 (GLOW: v.particle_random_1 < 0.2 with 5 frames, the same draw the uv uses) is bigger and at
+# 50 % alpha, a soft gold glow; every mote pops in over the first tenth of its life, holds, and shrinks away at the end
+COLLECTOR_SIZE = f'(v.particle_random_1 < 0.2 ? 0.26 : 0.14) * math.min(1, 3 * math.sin(180 * {AGE}))'
+COLLECTOR_ALPHA = f'(v.particle_random_1 < 0.2 ? 0.5 : 1) * (1 - math.pow({AGE}, 2))'
+# a slow circle: the push turns at 120 deg/s, so with drag 1 each mote settles on a circle of about 0.12 blocks
+# (0.6 / (w * sqrt(1 + w^2)), w = 2.09 rad/s) at 0.25 blocks/s, all turning the same way, 2/3 of a turn per life
+COLLECTOR_ORBIT = [f'{spin_wobble(120)[0]} * 0.6', 0, f'{spin_wobble(120)[1]} * 0.6']
 
 # emote_wet (the three-drop splash) and one of its drops on its own, half as big on the same sheet
 WET_FRAMES = [emote('emote_wet'), sprite(WET_DROP, P_WET)]
@@ -683,13 +779,38 @@ EFFECTS2.update({
         frames=WET_FRAMES, rate=18,
         shape=sphere(0.25, 0.5, ['math.random(-1, 1)', 'math.random(0.7, 1.5)', 'math.random(-1, 1)']),
         life=(1.0, 1.3), size=splash(0.28), speed=4.5, accel=[0, -7, 0], drag=1.5),
-})
-assert len(EFFECTS2) == 68, len(EFFECTS2)
 
-# second emitters (see build.py PARTS): the trophy that rises over the winner
+    # ---- skill track (earn-only, granted at skill level 50; specs/origins-skills/build-spec.md Phase 4) ----
+    # Catching 50: red-and-white orbs and sparkles with gold stars and sparks circling slowly all over the body, among
+    # soft gold glows; density and spread like aura_season_halo
+    'aura_collector': dict(
+        frames=fr((GLOW, P_GOLD_STAR), (MINI_BALL, P_BALL), (BALL_STAR, P_BALL), (STAR4, P_GOLD_STAR),
+                  (SPARK, P_GOLD_STAR)), rate=10, max=24, shape=box([0.6, 0.6, 0.6], 0.6), life=(1.8, 2.2),
+        size=COLLECTOR_SIZE, speed=0.04, accel=COLLECTOR_ORBIT, drag=1, alpha=COLLECTOR_ALPHA),
+    # Battling 50: a gold laurel wreath (part) rises from the chest to just over the head in 1.5 s, a few gold and
+    # white sparks rising round the body with it
+    'victory_veteran': dict(
+        frames=fr((SPARK, P_GOLD_STAR), (STAR4, P_GOLD_STAR), (STAR4, P_WHITE_STAR)), rate=12,
+        shape=disc(0.55, 0.6, [0, 1, 0], surface=True), life=(1.0, 1.5), size=twinkle(0.13), speed=2.6, drag=1.8,
+        part='laurel'),
+    # all six skills at 50: footstep sparks (neutral stars and gems) that step through the six skill colours as they
+    # rise and fade
+    'trail_grandmaster': dict(
+        frames=fr((STAR4, P_NEUTRAL_STAR), (GEM, P_NEUTRAL_GEM)), rate=3, life=(0.7, 1.0), size=shrink(0.15),
+        speed=0.5, accel=[0, 0.4, 0], drag=2, tint=skill_tint(0.2), y=0.15),
+})
+assert len(EFFECTS2) == 71, len(EFFECTS2)
+
+# second emitters (see build.py PARTS): the trophy and the laurel that rise over the winner
 PARTS2 = {
     'victory_trophy_cup': dict(
         frames=[sprite(TROPHY, P_GOLD_CUP)], rate=1, shape=point([0, 0.6, 0], [0, 1, 0]), life=(1.8, 1.8),
         size='0.55 * math.min(1, v.particle_age * 4)', speed=3.2, drag=1.6, facing='rotate_y',
         alpha='v.particle_age < 1.3 ? 1 : 1 - (v.particle_age - 1.3) / 0.5'),
+    # the veteran's laurel (gold + navy, the trophy's palette): pops in over 0.25 s while it rises from 0.6 to about
+    # 2.15 blocks (3 / 1.8 * (1 - e^-2.7)), just over the head, and fades over the last 0.4 s
+    'victory_veteran_laurel': dict(
+        frames=[sprite(LAUREL, P_GOLD_CUP)], rate=1, shape=point([0, 0.6, 0], [0, 1, 0]), life=(1.5, 1.5),
+        size='0.5 * math.min(1, v.particle_age * 4)', speed=3, drag=1.8, facing='rotate_y',
+        alpha='v.particle_age < 1.1 ? 1 : 1 - (v.particle_age - 1.1) / 0.4'),
 }

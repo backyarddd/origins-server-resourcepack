@@ -186,5 +186,12 @@
   "trail_skulls": {"cmd": 7500185, "type": "trail"},
   "emote_wet": {"cmd": 7500186, "type": "emote"},
   "sendout_splash": {"cmd": 7500187, "type": "sendout"},
-  "aura_soaked": {"cmd": 7500188, "type": "aura"}
+  "aura_soaked": {"cmd": 7500188, "type": "aura"},
+  "ts_prospector": {"cmd": 7500189, "type": "tool_skin"},
+  "ts_timber": {"cmd": 7500190, "type": "tool_skin"},
+  "ts_harvest": {"cmd": 7500191, "type": "tool_skin"},
+  "ts_angler": {"cmd": 7500192, "type": "tool_skin"},
+  "aura_collector": {"cmd": 7500193, "type": "aura"},
+  "victory_veteran": {"cmd": 7500194, "type": "victory"},
+  "trail_grandmaster": {"cmd": 7500195, "type": "trail"}
 }

@@ -1136,6 +1136,48 @@
       "predicate": {
         "custom_model_data": 7500189
       },
+      "model": "origins:item/icon/ts_prospector"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500190
+      },
+      "model": "origins:item/icon/ts_timber"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500191
+      },
+      "model": "origins:item/icon/ts_harvest"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500192
+      },
+      "model": "origins:item/icon/ts_angler"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500193
+      },
+      "model": "origins:item/icon/aura_collector"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500194
+      },
+      "model": "origins:item/icon/victory_veteran"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500195
+      },
+      "model": "origins:item/icon/trail_grandmaster"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500196
+      },
       "model": "origins:item/icon/plain_knowledge_book"
     }
   ]

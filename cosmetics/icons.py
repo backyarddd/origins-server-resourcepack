@@ -14,8 +14,9 @@ same outer outline (INK, 4-neighbour) round every flat icon:
   rules); a new cosmetic of these types fails the build until its template is drawn;
 - ball_skin: a ball drawn as a lit sphere, its surface sampled from the skin's own art (art.BALL_SKINS_ART);
 - emote: the emote's own 16x16 sprite (src/emotes, see CREDITS.md there);
-- tool_skin: the set's pickaxe model; hat / back / front: the wearable model itself with a display.gui transform fitted
-  to the slot (GUI_VIEW angles, scale and translation computed from the model's projected bounds).
+- tool_skin: the set's pickaxe model (a set without one: its first tool, e.g. the angler's uncast rod); hat / back /
+  front: the wearable model itself with a display.gui transform fitted to the slot (GUI_VIEW angles, scale and
+  translation computed from the model's projected bounds).
 """
 import json
 import math
@@ -31,7 +32,7 @@ if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 from cosmetics import art  # noqa: E402
 from cosmetics.art import CREAM, LIGHT_GOLD, hexrgb  # noqa: E402
-from cosmetics.check import TOOL_SETS  # noqa: E402
+from cosmetics.check import TOOL_SETS, icon_state, set_states  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ICONS_JSON = os.path.join(HERE, 'icons.json')
@@ -343,8 +344,9 @@ def build(pack, write_json):
         assert kind == e['type'], f'icon {cid}: type {kind} in the catalog, {e["type"]} in icons.json'
         if kind == 'tool_skin':
             s = tool_set(entry, cid)
-            write_json(os.path.join(models, cid + '.json'), {'parent': f'{NS}:item/toolskin/{s}_pickaxe'})
-            with Image.open(os.path.join(pack, 'assets', NS, 'textures', 'item', 'toolskin', f'{s}_pickaxe.png')) as im:
+            st = icon_state(set_states()[s])
+            write_json(os.path.join(models, cid + '.json'), {'parent': f'{NS}:item/toolskin/{s}_{st}'})
+            with Image.open(os.path.join(pack, 'assets', NS, 'textures', 'item', 'toolskin', f'{s}_{st}.png')) as im:
                 img = im.convert('RGBA')
             shown[cid] = (kind, img, None)
         elif kind in ('hat', 'back', 'front'):

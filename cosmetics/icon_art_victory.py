@@ -318,6 +318,27 @@ GG_RAIN = [
 # src/emotes/emote_gg.png's own golds (its dark outline is left to the shared INK outline)
 P_GG = {'B': (0xFF, 0xE0, 0x7A), 'C': (0xFF, 0xC8, 0x3D), 'D': (0xE0, 0x9A, 0x1F)}
 
+# PARTS victory_veteran_laurel (LAUREL in P_GOLD_CUP: gold leaves, dark gold stem, navy ribbon) as the hero, and the
+# sparks rising with it inside the ring: a gold STAR4 (P_GOLD_STAR g / G / h / H) and a white one (P_WHITE_STAR u / v / w)
+VETERAN = [
+    "................",
+    ".....WL..LW.....",
+    "....WLM..MLW....",
+    "...W.O....O.W...",
+    "..WL.O.h..O.LW..",
+    "..LMO.hHG..OML..",
+    "..W.O..G...O.W..",
+    ".WLMO..g...OMLW.",
+    "....O......O....",
+    "..W.O...v..O.W..",
+    ".WLMO..vwu.OMLW.",
+    "...WO...u..OW...",
+    "..WLMO....OMLW..",
+    "...MMMOXXOMMM...",
+    "......OXXO......",
+    "................",
+]
+
 ICONS = {
     'victory_fireworks': drawn(FIREWORKS, P_FIREWORKS),
     'victory_crown_rain': drawn(CROWN_RAIN, cb.P_GOLD),
@@ -335,4 +356,6 @@ ICONS = {
     'victory_champions_crown': drawn(CHAMPIONS_CROWN, {**cb.P_GOLD, **relabel(cb.P_GOLD_STAR, 'ogSc'),
                                                        **relabel(cb.P_WHITE_STAR, 'uwv', 'OMW')}),
     'victory_gg_rain': drawn(GG_RAIN, P_GG),
+    'victory_veteran': drawn(VETERAN, {**art_fx2.P_GOLD_CUP, **relabel(art_fx2.P_GOLD_STAR, 'gGhH'),
+                                       **relabel(art_fx2.P_WHITE_STAR, 'uvw', 'OMW')}),
 }
