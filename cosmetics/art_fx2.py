@@ -1,7 +1,8 @@
 """Cosmetics drop 2 particle effects (catalog-v2.md): 21 emotes, 8 auras, 10 send-outs, 8 victory, 12 trails and 9 emoji
 effects, plus the 3 skill track effects (specs/origins-skills/build-spec.md Phase 4: aura_collector, victory_veteran,
-trail_grandmaster). EFFECTS2 / PARTS2 are merged into cosmetics/build.py's EFFECTS / PARTS and use the same keys (frames, rate, shape,
-life, size, speed, accel, drag, spin, alpha, part, max, facing). Sprites are original 8x8 ASCII templates coloured by
+trail_grandmaster) and the vote bonus prize trail_vote_starfall. EFFECTS2 / PARTS2 are merged into cosmetics/build.py's
+EFFECTS / PARTS and use the same keys (frames, rate, shape, life, size, speed, accel, drag, spin, alpha, part, max,
+facing). Sprites are original 8x8 ASCII templates coloured by
 palettes (roles O outline, M mid, L light, W highlight, X accent, see art.py); the emote and emoji sprites are the
 16x16 drawings in src/emotes/, read from disk every time this module is imported (i.e. at build time).
 
@@ -397,6 +398,17 @@ GEM = [
     "........",
     "........",
 ]
+# small four-point star falling straight down, a broken tail of dimmer specks above it (trail_vote_starfall)
+FALLSTAR = [
+    "...O....",
+    "........",
+    "...M....",
+    "...L....",
+    "..LWL...",
+    "MLWWWLM.",
+    "..LWM...",
+    "...M....",
+]
 # 16x16 laurel wreath: two branches on a ring stem, leaves pointing outwards, open at the top, tied with a navy ribbon
 # at the bottom; symmetric. The sprite of the victory_veteran_laurel part
 LAUREL = [
@@ -477,6 +489,8 @@ P_GREEN_LEAF3 = shades('#7ACB4A', light='#B5EE86', dark='#3A7A24')
 P_GOLD_CUP = pal(O='#7A5313', M='#E2B04A', L='#F7D27A', W='#FFF1D0', X='#1B2E5B')
 P_GOLD_COIN = pal(O='#7A5313', M='#E2B04A', L='#F7D27A', W='#FFF1D0', X='#FFF1D0')
 P_GOLD_COIN2 = pal(O='#B07A22', M='#F7D27A', L='#FFF1D0', W='#FFFFFF', X='#FFFFFF')
+# trail_vote_starfall's night-sky blue (paler and cooler than build.py's P_BLUE_FIRE); its gold is P_GOLD_STAR
+P_STARFALL_BLUE = pal(O='#2E4C9E', M='#5B8DEB', L='#A9C7FF', W='#FFFFFF', X='#FFFFFF')
 # src/emotes/emote_wet.png's own colours (the emotes' shared dark outline, X its shade)
 P_WET = pal(O='#2B1D0E', M='#4FB3FF', L='#BFE6FF', W='#FFFFFF', X='#2A7FD6')
 P_BALL = pal(O='#8E1A24', M='#E5383B', L='#FF8A8C', W='#FFFFFF', X='#AEB4C0')
@@ -798,8 +812,16 @@ EFFECTS2.update({
     'trail_grandmaster': dict(
         frames=fr((STAR4, P_NEUTRAL_STAR), (GEM, P_NEUTRAL_GEM)), rate=3, life=(0.7, 1.0), size=shrink(0.15),
         speed=0.5, accel=[0, 0.4, 0], drag=2, tint=skill_tint(0.2), y=0.15),
+
+    # ---- vote bonus (earn-only, the 1% prize of the daily all-sites vote bonus) ----
+    # blue and gold falling stars dropped at knee height behind each step: they twinkle in and out (size) while they
+    # sink about 0.5 blocks (speed 0.3 down, accel -0.35, drag 0.5) and fade, gone before they reach the ground
+    'trail_vote_starfall': dict(
+        frames=fr((FALLSTAR, P_STARFALL_BLUE), (FALLSTAR, P_GOLD_STAR)), rate=3, life=(0.9, 1.2),
+        size=f'0.14 * math.sin(180 * {AGE}) * (0.85 + 0.15 * math.sin(v.particle_age * 1500))', speed=0.3,
+        accel=[0, -0.35, 0], drag=0.5, direction=[0, -1, 0], y=0.8),
 })
-assert len(EFFECTS2) == 71, len(EFFECTS2)
+assert len(EFFECTS2) == 72, len(EFFECTS2)
 
 # second emitters (see build.py PARTS): the trophy and the laurel that rise over the winner
 PARTS2 = {

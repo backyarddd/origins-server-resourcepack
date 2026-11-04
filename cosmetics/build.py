@@ -204,8 +204,8 @@ EFFECTS = {
     'trail_supporter_sparkles': dict(frames=frames((art.STAR, P_GREEN_STAR), (art.STAR, P_GOLD_STAR)), rate=2,
                                      life=(0.6, 1.0), size=twinkle(0.16), speed=0.05),
 }
-EFFECTS.update(art_fx2.EFFECTS2)  # drop 2: 21 emotes (one 16x16 sprite each, see art_fx2) + 47 others; phase 4: 3
-assert len(EFFECTS) == 31 + 71
+EFFECTS.update(art_fx2.EFFECTS2)  # drop 2: 21 emotes (16x16 sprites, see art_fx2) + 47 others; phase 4: 3; vote: 1
+assert len(EFFECTS) == 31 + 72
 # second emitters for looks one particle sheet cannot give (spawned by the parent's creation_event);
 # cosmetics/parts/<parent>_<name>, not cosmetic ids
 PARTS = {

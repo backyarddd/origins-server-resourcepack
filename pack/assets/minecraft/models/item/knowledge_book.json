@@ -1178,6 +1178,12 @@
       "predicate": {
         "custom_model_data": 7500196
       },
+      "model": "origins:item/icon/trail_vote_starfall"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7500197
+      },
       "model": "origins:item/icon/plain_knowledge_book"
     }
   ]
