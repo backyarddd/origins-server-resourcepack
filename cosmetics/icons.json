@@ -193,5 +193,6 @@
   "ts_angler": {"cmd": 7500192, "type": "tool_skin"},
   "aura_collector": {"cmd": 7500193, "type": "aura"},
   "victory_veteran": {"cmd": 7500194, "type": "victory"},
-  "trail_grandmaster": {"cmd": 7500195, "type": "trail"}
+  "trail_grandmaster": {"cmd": 7500195, "type": "trail"},
+  "trail_vote_starfall": {"cmd": 7500196, "type": "trail"}
 }

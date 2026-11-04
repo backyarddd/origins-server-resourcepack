@@ -541,6 +541,28 @@ GRANDMASTER = [
 P_GRANDMASTER = {k: v for c, ch in zip(art_fx2.SKILL_COLORS[::-1], ('Aa', 'Bb', 'Cc', 'Dd', 'Ee', 'Ff'))
                  for k, v in relabel(shades(c), ch, 'LM').items()}
 
+# FALLSTAR in art_fx2.P_STARFALL_BLUE (upper case) and P_GOLD_STAR (lower case), falling from knee height with their
+# broken tails above them: a big blue star near, a gold one further up the path, a small blue one far off, a gold
+# twinkle (no tail yet) sunk lower right
+VOTE_STARFALL = [
+    "................",
+    ".............O..",
+    "................",
+    "....O........M..",
+    "..........o..L..",
+    "....M.......LWM.",
+    "..........m..M..",
+    "....L.....l.....",
+    "....L....lwl....",
+    "...LWL..lwwwm...",
+    "..LWWWL..lwm....",
+    "MLWWWWWLM.m.....",
+    "..LWWWM......l..",
+    "...LWM......lwm.",
+    "....M........m..",
+    "................",
+]
+
 ICONS = {
     'trail_hearts': drawn(HEARTS, {**relabel(shades('#FF5577'), 'OMLW'), **relabel(shades('#FF8FB1'), 'omlw')}),
     'trail_paw_prints': drawn(PAW_PRINTS, {**relabel(art_fx2.P_BROWN, 'OMLW'), **relabel(art_fx2.P_BROWN2, 'omlw')}),
@@ -568,4 +590,5 @@ ICONS = {
     'trail_toxic': drawn(TOXIC, {**art_fx2.P_LIME_BUBBLE, **relabel(art_fx2.P_LIME_BUBBLE2, 'omlw')}),
     'trail_skulls': drawn(SKULLS, relabel(P_SKULL, 'bcd', 'WGD')),
     'trail_grandmaster': drawn(GRANDMASTER, P_GRANDMASTER),
+    'trail_vote_starfall': drawn(VOTE_STARFALL, {**art_fx2.P_STARFALL_BLUE, **relabel(cb.P_GOLD_STAR, 'omlw')}),
 }

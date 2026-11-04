@@ -193,5 +193,6 @@
   "ts_angler": {"type": "tool_skin", "name": "Angler's Rod", "rarity": "legendary", "custom_model_data": 73117},
   "aura_collector": {"type": "aura", "name": "Collector's Aura", "rarity": "legendary", "effect": "origins:cosmetics/aura_collector"},
   "victory_veteran": {"type": "victory", "name": "Veteran's Laurel", "rarity": "legendary", "effect": "origins:cosmetics/victory_veteran"},
-  "trail_grandmaster": {"type": "trail", "name": "Grandmaster Trail", "rarity": "legendary", "effect": "origins:cosmetics/trail_grandmaster"}
+  "trail_grandmaster": {"type": "trail", "name": "Grandmaster Trail", "rarity": "legendary", "effect": "origins:cosmetics/trail_grandmaster"},
+  "trail_vote_starfall": {"type": "trail", "name": "Starfall Trail", "rarity": "legendary", "effect": "origins:cosmetics/trail_vote_starfall"}
 }
