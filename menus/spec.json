@@ -55,7 +55,8 @@
               "&#c9d4ecin the world you pick."
             ],
             "click": [
-              "[openguimenu] rtp_worlds"
+              "[close]",
+              "[player] rtp"
             ]
           }
         },
@@ -6381,15 +6382,7 @@
           "h": 2,
           "reach": "right",
           "item": {
-            "key": "overworld",
-            "name": "&#f7d27aOverworld",
-            "lore": [
-              "&#c9d4ecRandom spot in the main Overworld."
-            ],
-            "click": [
-              "[close]",
-              "[player] rtp overworld"
-            ]
+            "key": "overworld"
           }
         },
         {
@@ -6402,17 +6395,7 @@
           "h": 2,
           "reach": "left",
           "item": {
-            "key": "resource",
-            "name": "&#f7d27aResource World",
-            "lore": [
-              "&#c9d4ecFresh land, resets every 2 weeks.",
-              "&#c9d4ecHomes there are wiped at reset.",
-              "&#c9d4ec/resource shows time left."
-            ],
-            "click": [
-              "[close]",
-              "[player] rtp resource"
-            ]
+            "key": "resource"
           }
         },
         {
@@ -6425,15 +6408,7 @@
           "h": 2,
           "reach": "right",
           "item": {
-            "key": "nether",
-            "name": "&#f7d27aNether",
-            "lore": [
-              "&#c9d4ecRandom spot in the Nether."
-            ],
-            "click": [
-              "[close]",
-              "[player] rtp nether"
-            ]
+            "key": "nether"
           }
         },
         {
@@ -6446,18 +6421,11 @@
           "h": 2,
           "reach": "left",
           "item": {
-            "key": "end",
-            "name": "&#f7d27aEnd",
-            "lore": [
-              "&#c9d4ecRandom spot on the End's outer islands."
-            ],
-            "click": [
-              "[close]",
-              "[player] rtp end"
-            ]
+            "key": "end"
           }
         }
-      ]
+      ],
+      "renderer": "mod"
     }
   ],
   "commands": [
