@@ -390,6 +390,132 @@ function clearStarsAround(r, x, y, w, h) {
   }
 }
 
+// ---------------- scene tiles ----------------
+// A clickable picture tile: a card plate (gold rim, navy bevel) whose fill is a small landscape drawn in code, with the
+// label outlined in the sky. Painters get the picture box (x0, y0, w, h) and place things by fractions of it; the hash
+// keeps the noise fixed, so a redraw exports the same pixels.
+const hash = (x, y, s) => (((((x + 37 * s) * 73856093) ^ ((y + 11 * s) * 19349663)) >>> 0) % 1000) / 1000;
+function band(r, x0, y0, w, h, ramp) {  // vertical gradient over the top h rows of the picture
+  for (let j = 0; j < h; j++) r.rect(x0, y0 + j, w, 1, ramp[Math.min(ramp.length - 1, Math.floor(j / h * ramp.length))]);
+}
+const DAY = ['5E9BE8', '6CA6EE', '7BB2F2', '8BBEF5', '9CCAF8', 'AED6FA'];
+const RACK = ['A04040', '6A2222', '7E2C2C'];
+const SCENES = {
+  overworld(r, x0, y0, w, h) {
+    const g = h - 8, set = (x, y, c) => r.set(x0 + x, y0 + y, c);
+    band(r, x0, y0, w, g, DAY);
+    for (const [cx, cy, cw] of [[Math.round(w * 0.2), 12, 9], [Math.round(w * 0.68), 11, 11]]) {  // clouds
+      r.rect(x0 + cx + 2, y0 + cy - 1, cw - 5, 1, 'F4F8FF'); r.rect(x0 + cx, y0 + cy, cw, 2, 'F4F8FF');
+      r.rect(x0 + cx + 1, y0 + cy + 2, cw - 2, 1, 'D6E2FA');
+    }
+    for (let x = 0; x < w; x++) {  // far hills
+      const top = Math.round(g - 4 - 2 * Math.sin(x * 0.16) - 1.4 * Math.sin(x * 0.41 + 1));
+      for (let y = top; y < g; y++) set(x, y, y === top ? '6DB862' : '4E9A55');
+    }
+    for (let x = 0; x < w; x++) for (let y = g; y < h; y++) {  // grass over dirt
+      const n = hash(x, y, 1);
+      if (y === g) set(x, y, n < 0.3 ? '86D65E' : '6CC24A');
+      else if (y === g + 1 || (y === g + 2 && n < 0.35)) set(x, y, n < 0.25 ? '6CC24A' : '57A83C');
+      else set(x, y, n < 0.18 ? '9C6B3E' : n < 0.4 ? '74492A' : '8A5A32');
+    }
+    for (const [tx, tall] of [[Math.round(w * 0.1), 10], [Math.round(w * 0.79), 9], [Math.round(w * 0.92), 11]]) {  // oaks
+      const top = g - tall;
+      r.rect(x0 + tx, y0 + top + 5, 1, tall - 5, '6B4423'); r.rect(x0 + tx + 1, y0 + top + 5, 1, tall - 5, '553519');
+      for (let y = top; y < top + 6; y++) for (let x = tx - 3; x < tx + 5; x++) {
+        if ((y === top || y === top + 5) && (x === tx - 3 || x === tx + 4)) continue;  // rounded corners
+        const n = hash(x, y, 2);
+        set(x, y, y <= top + 1 && x <= tx + 1 ? '5AAE48' : y >= top + 4 || x >= tx + 3 ? (n < 0.4 ? '2E6E2C' : '3A8034')
+          : n < 0.25 ? '5AAE48' : '3F8F3A');
+      }
+    }
+    for (const fx of [Math.round(w * 0.36), Math.round(w * 0.55)]) { set(fx, g - 1, 'E8343F'); set(fx + 4, g - 1, 'F7D27A'); }
+  },
+  nether(r, x0, y0, w, h) {
+    const set = (x, y, c) => r.set(x0 + x, y0 + y, c), lava = h - 6, rack = (x, y) => {
+      const n = hash(x, y, 3); return n < 0.08 ? RACK[0] : n < 0.3 ? RACK[1] : RACK[2];
+    };
+    band(r, x0, y0, w, h, ['2A0808', '360B0B', '440F0E', '541412', '64191A', '7A2216', '8E2E14']);
+    for (let x = 0; x < w; x++) for (let y = lava; y < h; y++) {  // lava sea, the cliffs are drawn over it
+      const n = hash(x, y, 5);
+      set(x, y, y === lava ? (n < 0.5 ? 'FFC24A' : 'FF9A2E') : n < 0.12 ? 'FFD25A' : n < 0.5 ? 'F07A1E' : 'D85E14');
+    }
+    const fx = Math.round(w * 0.6);  // lava fall from the ceiling into the sea
+    for (let y = 3; y < lava; y++) { set(fx, y, hash(fx, y, 6) < 0.5 ? 'FFD25A' : 'FFC24A'); set(fx + 1, y, 'FF9A2E'); set(fx + 2, y, 'F07A1E'); }
+    for (const dx of [-1, 3]) set(fx + dx, lava - 1, 'FF9A2E');  // splash
+    const lEdge = Math.round(w * 0.3), rEdge = Math.round(w * 0.7);
+    for (let x = 0; x < w; x++) {
+      const c = 2 + Math.round(1.2 * Math.sin(x * 0.5)) + (hash(x, 0, 4) < 0.2 ? 2 : 0);  // ceiling with drips
+      for (let y = 0; y < c; y++) set(x, y, rack(x, y));
+      const l = Math.round(lava - 10 + 3 * Math.cos(x * 0.18));  // cliff tops slope down into the lava
+      const top = x < lEdge ? l + Math.max(0, x - lEdge + 6) * 2 : x > rEdge ? l - 3 + Math.max(0, rEdge + 5 - x) * 2 : h;
+      for (let y = Math.max(c, top); y < h; y++) set(x, y, y === top ? RACK[0] : rack(x, y));
+    }
+    for (const [gx, gy] of [[2, 2], [w - 7, 2]]) for (const [i, j, c] of [[0, 0, 'E8A33A'], [1, 0, 'FFE38A'], [2, 0, 'E8A33A'],
+      [0, 1, 'FFE38A'], [1, 1, 'FFF1D0'], [2, 1, 'C98A2E'], [1, 2, 'E8A33A']]) set(gx + i, gy + j, c);  // glowstone
+  },
+  end(r, x0, y0, w, h) {
+    const set = (x, y, c) => r.set(x0 + x, y0 + y, c), g = h - 7;
+    band(r, x0, y0, w, h, ['120A20', '170D29', '1D1133', '24153E', '2C1A4A', '351F56']);
+    for (let y = 12; y < g; y++) for (let x = 1; x < w - 1; x++) {  // stars, kept out of the label rows
+      const n = hash(x, y, 7);
+      if (n < 0.025) set(x, y, n < 0.01 ? C.cream : 'A98BEA');
+    }
+    const cx = Math.round(w * 0.66), body = '4A3366', shade = '362450', cap = '6A4C8E';  // end city, lit purpur windows
+    for (const [tx, ty, tw] of [[cx - 7, 13, 5], [cx + 9, 10, 5], [cx, 6, 6]]) {  // back to front
+      r.rect(x0 + tx, y0 + ty + 2, tw, g - ty - 2, body); r.rect(x0 + tx + tw - 1, y0 + ty + 2, 1, g - ty - 2, shade);
+      r.rect(x0 + tx - 1, y0 + ty, tw + 2, 2, cap); r.rect(x0 + tx + 1, y0 + ty - 1, tw - 2, 1, cap);
+      r.rect(x0 + tx - 1, y0 + ty + 1, tw + 2, 1, shade);
+      for (let y = ty + 4; y < g - 1; y += 3) set(tx + Math.floor((tw - 1) / 2), y, 'E0C8FF');
+    }
+    r.rect(x0 + cx + 6, y0 + 14, 3, 1, cap);  // bridge
+    for (const [px, ph] of [[Math.round(w * 0.12), 7], [Math.round(w * 0.24), 5]]) {  // chorus plants
+      r.rect(x0 + px, y0 + g - ph, 1, ph, '8A5AA8'); r.rect(x0 + px - 1, y0 + g - ph + 1, 1, 2, '8A5AA8');
+      set(px, g - ph - 1, 'D6C2FF'); set(px - 1, g - ph, 'D6C2FF');
+    }
+    for (let y = g; y < h; y++) {  // end stone island, tapering into the void
+      const t = y - g, cut = Math.round(t * t * 0.9);
+      for (let x = Math.max(0, cut - 4); x <= Math.min(w - 1, w + 1 - cut); x++) {
+        const n = hash(x, y, 8);
+        set(x, y, y === g ? (n < 0.4 ? 'F6F3C4' : 'EAE6AC') : n < 0.2 ? 'B9B474' : t > 4 ? 'BFBA7C' : 'DAD596');
+      }
+    }
+  },
+  quarry(r, x0, y0, w, h) {
+    const set = (x, y, c) => r.set(x0 + x, y0 + y, c), sky = 11, step = 6;
+    band(r, x0, y0, w, sky, DAY);
+    for (let x = 0; x < w; x++) {  // a pit cut in terraces, 4 px per step
+      const k = Math.min(Math.floor(x / step), Math.floor((w - 1 - x) / step), 3), top = sky + 4 * k;
+      for (let y = sky; y < h; y++) {
+        const n = hash(x, y, 9);
+        if (y < top) set(x, y, n < 0.3 ? '4E535C' : '5A606A');  // back wall
+        else if (k === 0 && y === top) set(x, y, n < 0.3 ? '86D65E' : '6CC24A');
+        else if (k === 0 && y <= top + 2) set(x, y, n < 0.4 ? '74492A' : '8A5A32');
+        else if (y === top) set(x, y, 'A7ACB4');
+        else set(x, y, n < 0.2 ? '6E737C' : n < 0.6 ? '8A8F98' : '7D828B');
+      }
+    }
+    const ORE = { coal: ['26262C', '3A3A42'], iron: ['D8AF93', 'B48A6E'], gold: ['F7D27A', 'C99A2E'], diamond: ['6FE8E0', '2EB8B0'],
+      redstone: ['F0403A', 'A81E1E'], emerald: ['4AE07A', '1E9A48'] };
+    for (const [ore, fx, oy] of [['coal', 0.04, 17], ['iron', 0.22, 20], ['gold', 0.4, 14], ['diamond', 0.5, 24],
+      ['redstone', 0.66, 22], ['coal', 0.82, 18], ['emerald', 0.93, 23], ['iron', 0.6, 13]]) {
+      const ox = Math.round(fx * (w - 3)), [hi, lo] = ORE[ore];
+      for (const [i, j, c] of [[0, 0, hi], [1, 0, hi], [0, 1, lo], [1, 1, hi], [2, 1, lo], [1, 2, lo]]) set(ox + i, Math.min(h - 1, oy + j), c);
+    }
+  },
+};
+function outlinedText(r, s, x, y) {  // cream caps with a full 1 px outline, readable over any picture
+  for (let j = -1; j <= 1; j++) for (let i = -1; i <= 1; i++) if (i || j) drawText(r, s, x + i, y + j, C.O);
+  drawText(r, s, x, y, C.cream);
+}
+function scene(r, name, label, cx, cy, cw, ch) {
+  const paint = SCENES[name]; if (!paint) throw new Error('scene ' + name);
+  const x = cellX(cx) + 1, y = cellY(cy) + 1, w = CELL * cw - 2, h = CELL * ch - 2;
+  if (textWidth(label) > w - 10) throw new Error('label too wide for ' + cw + ' cells: ' + label);
+  plate(r, x, y, w, h, CARD.navy);
+  paint(r, x + 3, y + 3, w - 6, h - 6);
+  outlinedText(r, label, x + Math.floor((w - textWidth(label)) / 2), y + 5);
+}
+
 // One spec element (menus/spec.json) onto a raster; slot holes are punched after every element is drawn.
 function drawElement(r, e) {
   const w = e.w || 1, h = e.h || 1;
@@ -401,6 +527,7 @@ function drawElement(r, e) {
   else if (e.type === 'slot') slotRings(r, e.x, e.y, w, h, e.style);
   else if (e.type === 'arrow') { arrow(r, e.icon, e.x, e.y); clearStarsAround(r, cellX(e.x) + 1, cellY(e.y) + 1, 16, 16); }
   else if (e.type === 'text') text(r, e.label, e.color, e.x, e.y, w);
+  else if (e.type === 'scene') { scene(r, e.style, e.label, e.x, e.y, w, h); clearStarsAround(r, cellX(e.x) + 1, cellY(e.y) + 1, CELL * w - 2, CELL * h - 2); }
   else throw new Error('element type ' + e.type);
 }
 function drawMenu(r, menu) {
