@@ -52,10 +52,10 @@
             "name": "&#f7d27aRandom Teleport",
             "lore": [
               "&#c9d4ecTeleport to a random spot",
-              "&#c9d4ecin the Overworld."
+              "&#c9d4ecin the world you pick."
             ],
             "click": [
-              "[openguimenu] rtp_confirm"
+              "[openguimenu] rtp_worlds"
             ]
           }
         },
@@ -376,7 +376,7 @@
             ],
             "click": [
               "[close]",
-              "[player] rtp"
+              "[player] rtp overworld"
             ]
           }
         }
@@ -6361,6 +6361,100 @@
           "y": 5,
           "item": {
             "key": "close"
+          }
+        }
+      ]
+    },
+    {
+      "id": "rtp_worlds",
+      "glyph": "E36F",
+      "rows": 4,
+      "title": "Random Teleport",
+      "elements": [
+        {
+          "type": "scene",
+          "style": "overworld",
+          "label": "OVERWORLD",
+          "x": 0,
+          "y": 0,
+          "w": 4,
+          "h": 2,
+          "reach": "right",
+          "item": {
+            "key": "overworld",
+            "name": "&#f7d27aOverworld",
+            "lore": [
+              "&#c9d4ecRandom spot in the main Overworld."
+            ],
+            "click": [
+              "[close]",
+              "[player] rtp overworld"
+            ]
+          }
+        },
+        {
+          "type": "scene",
+          "style": "quarry",
+          "label": "RESOURCE",
+          "x": 5,
+          "y": 0,
+          "w": 4,
+          "h": 2,
+          "reach": "left",
+          "item": {
+            "key": "resource",
+            "name": "&#f7d27aResource World",
+            "lore": [
+              "&#c9d4ecFresh land, resets every 2 weeks.",
+              "&#c9d4ecHomes there are wiped at reset.",
+              "&#c9d4ec/resource shows time left."
+            ],
+            "click": [
+              "[close]",
+              "[player] rtp resource"
+            ]
+          }
+        },
+        {
+          "type": "scene",
+          "style": "nether",
+          "label": "NETHER",
+          "x": 0,
+          "y": 2,
+          "w": 4,
+          "h": 2,
+          "reach": "right",
+          "item": {
+            "key": "nether",
+            "name": "&#f7d27aNether",
+            "lore": [
+              "&#c9d4ecRandom spot in the Nether."
+            ],
+            "click": [
+              "[close]",
+              "[player] rtp nether"
+            ]
+          }
+        },
+        {
+          "type": "scene",
+          "style": "end",
+          "label": "END",
+          "x": 5,
+          "y": 2,
+          "w": 4,
+          "h": 2,
+          "reach": "left",
+          "item": {
+            "key": "end",
+            "name": "&#f7d27aEnd",
+            "lore": [
+              "&#c9d4ecRandom spot on the End's outer islands."
+            ],
+            "click": [
+              "[close]",
+              "[player] rtp end"
+            ]
           }
         }
       ]

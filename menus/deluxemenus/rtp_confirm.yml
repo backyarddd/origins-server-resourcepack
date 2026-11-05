@@ -32,4 +32,4 @@ items:
     - '&#c9d4ecTeleport now.'
     click_commands:
     - '[close]'
-    - '[player] rtp'
+    - '[player] rtp overworld'

@@ -57,12 +57,12 @@ REF = 'origins:menus'
 WIDTH, CELL, GRID_X, GRID_Y = 176, 18, 7, 17
 FIGMA_MAX = 50000  # use_figma code size limit, in characters
 CHAMFER = {(0, 0), (1, 0), (0, 1), (173, 0), (174, 0), (175, 0), (174, 1), (175, 1), (175, 2)}
-CLICKABLE = {'card', 'button', 'icon_button', 'tab', 'slot'}  # types that may carry an "item"
-SOLID_CLICK = {'card', 'button', 'icon_button', 'tab'}  # drawn buttons (holes may not sit under them)
+CLICKABLE = {'card', 'button', 'icon_button', 'tab', 'slot', 'scene'}  # types that may carry an "item"
+SOLID_CLICK = {'card', 'button', 'icon_button', 'tab', 'scene'}  # drawn buttons (holes may not sit under them)
 ACTIONS = {'click': 'click_commands', 'left': 'left_click_commands', 'right': 'right_click_commands',
            'shift_left': 'shift_left_click_commands', 'shift_right': 'shift_right_click_commands'}
 # tuples, not sets: spec values may be unhashable and `in` must not raise on them
-TYPES = ('panel', 'card', 'button', 'icon_button', 'tab', 'slot', 'text', 'arrow')
+TYPES = ('panel', 'card', 'button', 'icon_button', 'tab', 'slot', 'text', 'arrow', 'scene')
 PANEL_STYLES = ('well', 'night', 'stripes')
 CARD_COLORS = ('navy', 'red', 'green', 'gold', 'violet')
 BTN_COLORS = ('red', 'green', 'gold', 'navy', 'done')
@@ -70,9 +70,11 @@ TAB_ICONS = ('left', 'right', 'up', 'down')
 ARROW_ICONS = ('up', 'down')
 SLOT_STYLES = ('pedestal', 'reel')  # absent = plain vanilla slot rings
 TEXT_COLORS = ('cream', 'gold')
+SCENE_STYLES = ('overworld', 'nether', 'end', 'quarry')  # landscape painters in lib.js SCENES
+REACH_SIDES = ('left', 'right')  # a scene drawn half a cell past its cells on that side (lib.js sceneBox)
 LABEL_MAX = {2: 4, 3: 7, 4: 10}  # button width in cells -> max label characters
 # a typo such as "shift_rigth" must fail validation instead of silently dropping the action
-ELEMENT_KEYS = {'type', 'x', 'y', 'w', 'h', 'style', 'color', 'icon', 'label', 'item'}
+ELEMENT_KEYS = {'type', 'x', 'y', 'w', 'h', 'style', 'color', 'icon', 'label', 'item', 'reach'}
 ITEM_KEYS = {'key', 'name', 'lore', 'material', *ACTIONS}
 MENU_KEYS = {'id', 'glyph', 'rows', 'title', 'open_command', 'elements', 'dynamic', 'renderer'}
 SPEC_KEYS = {'menus', 'commands'}
@@ -181,6 +183,18 @@ def _check_elements(m, ids, mods):
             need(i, isinstance(e.get('label'), str) and e['label'], 'label is required')
             need(i, e.get('color') in TEXT_COLORS, f'color must be one of {TEXT_COLORS}')
             need(i, h == 1, 'h must be 1')
+        elif t == 'scene':
+            need(i, e.get('style') in SCENE_STYLES, f'style must be one of {SCENE_STYLES}')
+            label = e.get('label')
+            need(i, isinstance(label, str) and label, 'label is required')
+            need(i, w >= 2 and h >= 2, 'w and h must be >= 2')
+            reach = e.get('reach')
+            need(i, reach is None or reach in REACH_SIDES, f'reach must be one of {REACH_SIDES}')
+            need(i, reach != 'left' or x >= 1, 'reach left needs a column to the left')
+            need(i, reach != 'right' or x + w <= 8, 'reach right needs a column to the right')
+            # 5 px caps + 1 px spacing must fit the picture (lib.js scene(): tile width - 10)
+            most = (CELL * w + (CELL // 2 if reach else 0) - 11) // 6
+            need(i, len(label) <= most, f'label too long ({len(label)} > {most} for w={w})')
         elif t == 'arrow':
             need(i, e.get('icon') in ARROW_ICONS, f'icon must be one of {ARROW_ICONS}')
             need(i, w == 1 and h == 1, 'w and h must be 1')
@@ -188,6 +202,7 @@ def _check_elements(m, ids, mods):
             need(i, e['style'] in SLOT_STYLES, f'style must be one of {SLOT_STYLES}')
             # the reel highlights its middle cell, so it needs one
             need(i, e['style'] != 'reel' or (h == 1 and w % 2 == 1), 'a reel must be one row with an odd width')
+        need(i, t == 'scene' or 'reach' not in e, 'reach is only allowed on scene elements')
         if 'item' not in e:
             continue
         need(i, t in CLICKABLE, f'type {t} cannot carry an item')
@@ -222,6 +237,15 @@ def _check_elements(m, ids, mods):
         for i, e in enumerate(els):
             k = e.get('item', {}).get('key', '')
             need(i, not reserved.fullmatch(k), f'item key {k!r} is reserved for menus/warps_sync.py')
+    # a scene's reach covers half of the next column: only another scene reaching in from the other side may share it
+    for i, e in enumerate(els):
+        if e['type'] != 'scene' or 'reach' not in e:
+            continue
+        col = e['x'] - 1 if e['reach'] == 'left' else e['x'] + e['w']
+        half = {(col, r) for r in range(e['y'], e['y'] + e['h'])}
+        for j, o in enumerate(els):
+            ok = o['type'] == 'scene' and o.get('reach') == ('right' if e['reach'] == 'left' else 'left')
+            need(i, j == i or ok or not half & set(cells(o)), f'reach overlaps element {j}')
     # rule 3: items never share a cell; a hole never sits under a drawn button
     items = [(i, set(cells(e))) for i, e in enumerate(els) if 'item' in e]
     for (_, a), (j, b) in itertools.combinations(items, 2):
@@ -476,7 +500,7 @@ def layouts(spec_path=SPEC, mod_out=MOD_OUT):
 # Only what lib.js/menus.js draw from: item names, lore, clicks, glyphs and commands never reach Figma, and embedding
 # them pushed menus.run.js past FIGMA_MAX.
 FIGMA_MENU_KEYS = ('id', 'rows', 'title', 'open_command')
-FIGMA_ELEMENT_KEYS = ('type', 'x', 'y', 'w', 'h', 'style', 'color', 'icon', 'label')
+FIGMA_ELEMENT_KEYS = ('type', 'x', 'y', 'w', 'h', 'style', 'color', 'icon', 'label', 'reach')
 
 
 PREVIEW_STEP = WIDTH * 4 + 80  # menus.js lays the 4x previews side by side
@@ -703,6 +727,20 @@ def selftest():
     _rejects(mutated(lambda m: m.update(renderer='other')), 'renderer')
     _rejects(mutated(lambda m: m['elements'].append({'type': 'arrow', 'icon': 'left', 'x': 0, 'y': 0})), 'icon must be')
     _rejects(mutated(lambda m: m['elements'].append({'type': 'slot', 'style': 'odd', 'x': 0, 'y': 0})), 'style must be')
+    sc = {'type': 'scene', 'style': 'end', 'label': 'END', 'x': 0, 'y': 0, 'w': 4, 'h': 2, 'item': {'key': 's', 'name': 'n'}}
+    mutated(lambda m: m['elements'].append(dict(sc)))()
+    _rejects(mutated(lambda m: m['elements'].append({**sc, 'style': 'moon'})), 'style must be')
+    _rejects(mutated(lambda m: m['elements'].append({**sc, 'label': 'ABCDEFGHIJK'})), 'label too long')
+    _rejects(mutated(lambda m: m['elements'].append({**sc, 'h': 1})), 'w and h must be >= 2')
+    _rejects(mutated(lambda m: m['elements'].extend([sc, {'type': 'slot', 'x': 1, 'y': 1}])), 'hole sits under')
+    pair = [{**sc, 'reach': 'right'}, {**sc, 'x': 5, 'reach': 'left', 'item': {'key': 's2', 'name': 'n'}}]
+    mutated(lambda m: m['elements'].extend(pair))()  # two scenes meeting in column 4
+    _rejects(mutated(lambda m: m['elements'].append({**sc, 'reach': 'up'})), 'reach must be')
+    _rejects(mutated(lambda m: m['elements'].append({**sc, 'reach': 'left'})), 'reach left needs')
+    _rejects(mutated(lambda m: m['elements'].append({**sc, 'x': 5, 'reach': 'right'})), 'reach right needs')
+    _rejects(mutated(lambda m: btn(m).update(reach='left')), 'only allowed on scene')
+    _rejects(mutated(lambda m: m['elements'].extend([{**sc, 'reach': 'right'}, {'type': 'slot', 'x': 4, 'y': 1}])),
+             'reach overlaps')
     _rejects(mutated(lambda m: m['elements'].append({'type': 'slot', 'style': 'reel', 'x': 0, 'y': 0, 'w': 4})), 'odd width')
     _rejects(mutated(lambda m: m['elements'].extend([{'type': 'slot', 'x': 0, 'y': 0, 'item': {'key': 'g', 'name': 'n',
              'material': 'STONE'}}, {'type': 'slot', 'x': 2, 'y': 0, 'item': {'key': 'g', 'name': 'n', 'material': 'STONE'}}])),
@@ -837,9 +875,8 @@ def selftest():
 
         fonts = _load(os.path.join(pack, 'assets', 'origins', 'font', 'menus.json'))['providers']
         assert fonts[0] == {'type': 'space', 'advances': {SHIFT_IN: -8, SHIFT_OUT: -169}}
-        assert [p['type'] for p in fonts[1:]] == ['bitmap'] * 45
-        assert [p['height'] for p in fonts[1:]] == [125, 89, 71, 107, 125, 125, 89, 89, 89, 125, 125, 125, 125, 107, 125, *[125] * 7, 107, 89, 125,
-                                                    125, 89, 125, 125, 107, 107, 107, 125, 107, 125, 125, 107, *[125] * 8]
+        assert [p['type'] for p in fonts[1:]] == ['bitmap'] * len(real['menus'])
+        assert [p['height'] for p in fonts[1:]] == [height(m['rows']) for m in real['menus']]
 
         def ymenu(name):
             with open(os.path.join(dm, name + '.yml'), encoding='utf-8') as f:
@@ -849,9 +886,16 @@ def selftest():
         assert info['slots'] == [4] and info['material'] == 'COMPASS' and 'model_data' not in info
         spawn = ymenu('menu')['items']['spawn']
         assert spawn['slots'] == [0, 1, 2, 9, 10, 11] and spawn['material'] == 'PAPER' and spawn['model_data'] == 7300
-        assert list(ymenu('gui_menus')['gui_menus']) == ['menu', 'rtp_confirm', 'warps', 'spawn_cmd', 'rules_cmd', 'discord_cmd', 'help_cmd']
+        assert list(ymenu('gui_menus')['gui_menus']) == ['menu', 'rtp_confirm', 'warps', 'rtp_worlds', 'spawn_cmd', 'rules_cmd',
+                                                         'discord_cmd', 'help_cmd']
+        worlds = ymenu('rtp_worlds')
+        assert worlds['size'] == 36 and 'open_command' not in worlds
+        assert worlds['items']['resource']['slots'] == [5, 6, 7, 8, 14, 15, 16, 17]
+        assert not any(s in it['slots'] for it in worlds['items'].values() for s in (4, 13, 22, 31))
+        assert worlds['items']['resource']['click_commands'] == ['[close]', '[player] rtp resource']
+        assert worlds['items']['overworld']['model_data'] == 7300
+        assert ymenu('menu')['items']['rtp']['click_commands'] == ['[openguimenu] rtp_worlds']
         mod_ids = [m['id'] for m in real['menus'] if m.get('renderer') == 'mod']
-        assert len(mod_ids) == 42
         assert not any(os.path.exists(os.path.join(dm, i + '.yml')) for i in mod_ids)
         assert sorted(os.listdir(mod)) == sorted(i + '.json' for i in mod_ids), os.listdir(mod)
         market = _load(os.path.join(mod, 'market.json'))
