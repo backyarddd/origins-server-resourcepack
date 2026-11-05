@@ -35,7 +35,8 @@ items:
     - '&#c9d4ecTeleport to a random spot'
     - '&#c9d4ecin the world you pick.'
     click_commands:
-    - '[openguimenu] rtp_worlds'
+    - '[close]'
+    - '[player] rtp'
   homes:
     material: PAPER
     model_data: 7300

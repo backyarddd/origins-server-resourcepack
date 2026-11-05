@@ -6,8 +6,6 @@ gui_menus:
     file: rtp_confirm.yml
   warps:
     file: warps.yml
-  rtp_worlds:
-    file: rtp_worlds.yml
   spawn_cmd:
     file: spawn_cmd.yml
   rules_cmd:

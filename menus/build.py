@@ -886,15 +886,12 @@ def selftest():
         assert info['slots'] == [4] and info['material'] == 'COMPASS' and 'model_data' not in info
         spawn = ymenu('menu')['items']['spawn']
         assert spawn['slots'] == [0, 1, 2, 9, 10, 11] and spawn['material'] == 'PAPER' and spawn['model_data'] == 7300
-        assert list(ymenu('gui_menus')['gui_menus']) == ['menu', 'rtp_confirm', 'warps', 'rtp_worlds', 'spawn_cmd', 'rules_cmd',
+        assert list(ymenu('gui_menus')['gui_menus']) == ['menu', 'rtp_confirm', 'warps', 'spawn_cmd', 'rules_cmd',
                                                          'discord_cmd', 'help_cmd']
-        worlds = ymenu('rtp_worlds')
-        assert worlds['size'] == 36 and 'open_command' not in worlds
-        assert worlds['items']['resource']['slots'] == [5, 6, 7, 8, 14, 15, 16, 17]
-        assert not any(s in it['slots'] for it in worlds['items'].values() for s in (4, 13, 22, 31))
-        assert worlds['items']['resource']['click_commands'] == ['[close]', '[player] rtp resource']
-        assert worlds['items']['overworld']['model_data'] == 7300
-        assert ymenu('menu')['items']['rtp']['click_commands'] == ['[openguimenu] rtp_worlds']
+        worlds = _load(os.path.join(mod, 'rtp_worlds.json'))
+        assert worlds['rows'] == 4 and worlds['slots']['resource'] == [5, 6, 7, 8, 14, 15, 16, 17]
+        assert not any(s in v for v in worlds['slots'].values() for s in (4, 13, 22, 31))
+        assert ymenu('menu')['items']['rtp']['click_commands'] == ['[close]', '[player] rtp']
         mod_ids = [m['id'] for m in real['menus'] if m.get('renderer') == 'mod']
         assert not any(os.path.exists(os.path.join(dm, i + '.yml')) for i in mod_ids)
         assert sorted(os.listdir(mod)) == sorted(i + '.json' for i in mod_ids), os.listdir(mod)
