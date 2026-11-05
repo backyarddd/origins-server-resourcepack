@@ -6372,14 +6372,6 @@
       "title": "Random Teleport",
       "elements": [
         {
-          "type": "panel",
-          "style": "stripes",
-          "x": 4,
-          "y": 0,
-          "w": 1,
-          "h": 4
-        },
-        {
           "type": "scene",
           "style": "overworld",
           "label": "OVERWORLD",
@@ -6387,6 +6379,7 @@
           "y": 0,
           "w": 4,
           "h": 2,
+          "reach": "right",
           "item": {
             "key": "overworld",
             "name": "&#f7d27aOverworld",
@@ -6401,12 +6394,36 @@
         },
         {
           "type": "scene",
-          "style": "nether",
-          "label": "NETHER",
+          "style": "quarry",
+          "label": "RESOURCE",
           "x": 5,
           "y": 0,
           "w": 4,
           "h": 2,
+          "reach": "left",
+          "item": {
+            "key": "resource",
+            "name": "&#f7d27aResource World",
+            "lore": [
+              "&#c9d4ecFresh land, resets every 2 weeks.",
+              "&#c9d4ecHomes there are wiped at reset.",
+              "&#c9d4ec/resource shows time left."
+            ],
+            "click": [
+              "[close]",
+              "[player] rtp resource"
+            ]
+          }
+        },
+        {
+          "type": "scene",
+          "style": "nether",
+          "label": "NETHER",
+          "x": 0,
+          "y": 2,
+          "w": 4,
+          "h": 2,
+          "reach": "right",
           "item": {
             "key": "nether",
             "name": "&#f7d27aNether",
@@ -6423,10 +6440,11 @@
           "type": "scene",
           "style": "end",
           "label": "END",
-          "x": 0,
+          "x": 5,
           "y": 2,
           "w": 4,
           "h": 2,
+          "reach": "left",
           "item": {
             "key": "end",
             "name": "&#f7d27aEnd",
@@ -6436,28 +6454,6 @@
             "click": [
               "[close]",
               "[player] rtp end"
-            ]
-          }
-        },
-        {
-          "type": "scene",
-          "style": "quarry",
-          "label": "RESOURCE",
-          "x": 5,
-          "y": 2,
-          "w": 4,
-          "h": 2,
-          "item": {
-            "key": "resource",
-            "name": "&#f7d27aResource World",
-            "lore": [
-              "&#c9d4ecFresh land, resets every 2 weeks.",
-              "&#c9d4ecHomes there are wiped at reset.",
-              "&#c9d4ec/resource shows time left."
-            ],
-            "click": [
-              "[close]",
-              "[player] rtp resource"
             ]
           }
         }
