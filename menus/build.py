@@ -893,9 +893,10 @@ def selftest():
         assert list(ymenu('gui_menus')['gui_menus']) == ['menu', 'rtp_confirm', 'warps', 'spawn_cmd', 'rules_cmd',
                                                          'discord_cmd', 'help_cmd']
         worlds = _load(os.path.join(mod, 'rtp_worlds.json'))
-        assert worlds['rows'] == 5 and worlds['slots']['resource'] == [27, 28, 29, 36, 37, 38]
+        assert worlds['rows'] == 6 and worlds['slots']['resource'] == [36, 37, 38, 45, 46, 47]
         assert list(worlds['slots']) == ['overworld', 'nether', 'end', 'resource', 'resource_nether', 'resource_end']
-        assert not any(s in v for v in worlds['slots'].values() for s in range(18, 27))  # the header row
+        headers = [*range(0, 9), *range(27, 36)]  # the two header rows carry no item
+        assert not any(s in v for v in worlds['slots'].values() for s in headers)
         assert ymenu('menu')['items']['rtp']['click_commands'] == ['[close]', '[player] rtp']
         mod_ids = [m['id'] for m in real['menus'] if m.get('renderer') == 'mod']
         assert not any(os.path.exists(os.path.join(dm, i + '.yml')) for i in mod_ids)
