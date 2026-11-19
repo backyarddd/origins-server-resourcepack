@@ -75,13 +75,25 @@ const FONT = {
   '+': ['.....', '..#..', '..#..', '#####', '..#..', '..#..', '.....'], '/': ['....#', '...#.', '...#.', '..#..', '.#...', '.#...', '#....'],
   "'": ['#', '#', '.', '.', '.', '.', '.'],
 };
-function glyph(ch) { const g = FONT[ch]; if (!g) throw new Error('font has no glyph for ' + JSON.stringify(ch)); return g; }
-function textWidth(s) { return [...s].reduce((w, ch) => w + glyph(ch)[0].length, 0) + Math.max(0, s.length - 1); }
-function drawText(r, s, x, y, color, shadow) {
+// 5 px caps (1 px strokes, 1 px letter spacing) for labels the 7 px font cannot fit, such as scene tiles 3 cells wide
+const CAPS5 = {
+  A: ['.#.', '#.#', '###', '#.#', '#.#'], B: ['##.', '#.#', '##.', '#.#', '##.'], C: ['.##', '#..', '#..', '#..', '.##'],
+  D: ['##.', '#.#', '#.#', '#.#', '##.'], E: ['###', '#..', '##.', '#..', '###'], F: ['###', '#..', '##.', '#..', '#..'],
+  G: ['.##', '#..', '#.#', '#.#', '.##'], H: ['#.#', '#.#', '###', '#.#', '#.#'], I: ['###', '.#.', '.#.', '.#.', '###'],
+  J: ['..#', '..#', '..#', '#.#', '.#.'], K: ['#.#', '#.#', '##.', '#.#', '#.#'], L: ['#..', '#..', '#..', '#..', '###'],
+  M: ['#...#', '##.##', '#.#.#', '#...#', '#...#'], N: ['#..#', '##.#', '#.##', '#..#', '#..#'], O: ['.#.', '#.#', '#.#', '#.#', '.#.'],
+  P: ['##.', '#.#', '##.', '#..', '#..'], Q: ['.#.', '#.#', '#.#', '##.', '.##'], R: ['##.', '#.#', '##.', '#.#', '#.#'],
+  S: ['.##', '#..', '.#.', '..#', '##.'], T: ['###', '.#.', '.#.', '.#.', '.#.'], U: ['#.#', '#.#', '#.#', '#.#', '###'],
+  V: ['#.#', '#.#', '#.#', '#.#', '.#.'], W: ['#...#', '#...#', '#.#.#', '##.##', '#...#'], X: ['#.#', '#.#', '.#.', '#.#', '#.#'],
+  Y: ['#.#', '#.#', '.#.', '.#.', '.#.'], Z: ['###', '..#', '.#.', '#..', '###'], ' ': ['...', '...', '...', '...', '...'],
+};
+function glyph(ch, font = FONT) { const g = font[ch]; if (!g) throw new Error('font has no glyph for ' + JSON.stringify(ch)); return g; }
+function textWidth(s, font = FONT) { return [...s].reduce((w, ch) => w + glyph(ch, font)[0].length, 0) + Math.max(0, s.length - 1); }
+function drawText(r, s, x, y, color, shadow, font = FONT) {
   for (const pass of shadow ? [1, 0] : [0]) {
     let cx = x;
     for (const ch of s) {
-      const g = glyph(ch);
+      const g = glyph(ch, font);
       g.forEach((row, j) => [...row].forEach((p, i) => { if (p === '#') r.set(cx + i + pass, y + j + pass, pass ? shadow : color); }));
       cx += g[0].length + 1;
     }
@@ -399,11 +411,82 @@ function band(r, x0, y0, w, h, ramp) {  // vertical gradient over the top h rows
   for (let j = 0; j < h; j++) r.rect(x0, y0 + j, w, 1, ramp[Math.min(ramp.length - 1, Math.floor(j / h * ramp.length))]);
 }
 const DAY = ['5E9BE8', '6CA6EE', '7BB2F2', '8BBEF5', '9CCAF8', 'AED6FA'];
+const NETHER_SKY = ['16030A', '1E050C', '2A070E', '3A0B10', '521212', '6E1A14', '8A2A16'];
+const END_SKY = ['120A20', '170D29', '1D1133', '24153E', '2C1A4A', '351F56'];
+function endStars(r, x0, y0, w, g) {  // stars, kept out of the label rows
+  for (let y = 10; y < g; y++) for (let x = 1; x < w - 1; x++) {
+    const n = hash(x, y, 7);
+    if (n < 0.025) r.set(x0 + x, y0 + y, n < 0.01 ? C.cream : 'A98BEA');
+  }
+}
+function chorus(r, x, ground, ph) {  // a chorus plant of height ph standing on row ground
+  r.rect(x, ground - ph, 1, ph, '8A5AA8'); r.rect(x - 1, ground - ph + 1, 1, 2, '8A5AA8');
+  r.set(x, ground - ph - 1, 'D6C2FF'); r.set(x - 1, ground - ph, 'D6C2FF');
+}
+// Resource-world tiles: one open pit in cross-section (rim, a ledge each side, a floor) per dimension, its walls full
+// of raw veins, a loaded minecart and a pickaxe on the floor, and the reset badge (the world is wiped on a cycle).
+const ORE = { coal: ['3A3A42', '1E1E24'], iron: ['E2BFA4', 'B48A6E'], gold: ['FFE38A', 'D9A62E'], diamond: ['8FF4EC', '2EB8B0'],
+  redstone: ['FF5A50', 'B01E1E'], emerald: ['6AF08E', '1E9A48'], quartz: ['FBF6EE', 'C9BCB0'], debris: ['A08270', '5E4236'],
+  obsidian: ['5A3E8C', '1C1430'] };
+const PIT = {
+  overworld: { sky: DAY, rim: ['86D65E', '6CC24A', '8A5A32'], top: 'CDD1D7', body: '9DA2AA', line: '868B94', riser: '6E737C',
+    ores: ['iron', 'coal', 'gold', 'redstone', 'diamond', 'coal', 'gold', 'iron', 'emerald'], load: ['FFE38A', '8FF4EC', '3A3A42', 'FFE38A'] },
+  nether: { sky: NETHER_SKY, rim: ['D0404A', 'A0262E', '8E3430'], top: 'D0604A', body: '8E3430', line: '7A2A28', riser: '5A1C1E',
+    ores: ['quartz', 'gold', 'quartz', 'debris', 'gold', 'quartz', 'debris', 'gold', 'quartz'], load: ['FBF6EE', 'FFE38A', 'A08270', 'FBF6EE'],
+    embers: true },
+  end: { sky: END_SKY, rim: ['F6F3C4', 'EAE6AC', 'DAD596'], top: 'F6F3C4', body: 'DAD596', line: 'C4BF84', riser: 'A8A266',
+    ores: ['obsidian', 'obsidian', 'obsidian', 'obsidian', 'obsidian', 'obsidian', 'obsidian', 'obsidian', 'obsidian'],
+    load: ['D6C2FF', '8A5AA8', '2EB8B0', 'D6C2FF'], stars: true, chorus: true },
+};
+function pit(r, x0, y0, w, h, t) {
+  const set = (x, y, c) => r.set(x0 + x, y0 + y, c), rim = 11, step = 5, sw = Math.floor(w / 6);
+  band(r, x0, y0, w, h, t.sky);
+  if (t.stars) endStars(r, x0, y0, w, rim);
+  if (t.embers) for (const [ex, ey, c] of [[0.15, 9, 'FF9A2E'], [0.5, 10, 'FFC24A'], [0.82, 9, 'FF9A2E']]) set(Math.round(ex * w), ey, c);
+  const level = x => Math.min(Math.floor(x / sw), Math.floor((w - 1 - x) / sw), 2);  // 0 rim, 1 ledge, 2 floor
+  for (let x = 0; x < w; x++) {
+    const k = level(x), top = rim + step * k;
+    for (let y = top; y < h; y++) {
+      if (k === 0 && y < top + 3) set(x, y, t.rim[y - top]);
+      else if (y === top) set(x, y, t.top);
+      else set(x, y, (y - top) % 5 === 4 ? t.line : t.body);
+    }
+  }
+  for (let x = 1; x < w; x++) {  // risers: the upper step's edge column in shade, the lower ledge lit at its foot
+    const a = level(x - 1), b = level(x);
+    if (a === b) continue;
+    const hiX = a > b ? x : x - 1, dir = a > b ? -1 : 1, lowTop = rim + step * Math.max(a, b);
+    for (let y = rim + step * Math.min(a, b) + 1; y < h; y++) set(hiX, y, t.riser);
+    for (let i = 1; i <= 2; i++) set(hiX + dir * i, lowTop, t.body);
+  }
+  const vein = (ore, ox, oy) => { const [hi, lo] = ORE[ore];
+    for (const [i, j, c] of [[0, 0, hi], [1, 0, hi], [0, 1, hi], [1, 1, lo], [2, 1, hi], [1, 2, lo], [2, 2, lo]]) set(ox + i, oy + j, c); };
+  const l1 = rim + step, floor = rim + 2 * step;
+  [[2, rim + 4], [3, rim + 10], [sw + 2, l1 + 2], [sw + 3, l1 + 7], [2 * sw + 3, floor + 3], [w - 2 * sw - 8, floor + 2],
+    [w - 2 * sw + 1, l1 + 2], [w - sw - 6, l1 + 7], [w - 6, rim + 4]].forEach(([vx, vy], i) => vein(t.ores[i], vx, vy));
+  if (t.chorus) { chorus(r, x0 + 4, y0 + rim, 6); chorus(r, x0 + w - 5, y0 + rim, 4); }
+  const fx = 2 * sw, fw = w - 4 * sw, rx = fx + fw - 9;  // rail across the floor, a loaded minecart at its right end
+  for (let x = fx; x < fx + fw; x++) set(x, floor - 1, x % 3 ? '9AA0A8' : '7A4A1E');
+  r.rect(x0 + rx, y0 + floor - 6, 9, 1, 'CDD1D7'); r.rect(x0 + rx, y0 + floor - 5, 9, 3, '868B94');
+  r.rect(x0 + rx + 1, y0 + floor - 5, 7, 1, '5F656F');
+  [2, 3, 5, 6].forEach((i, n) => set(rx + i, floor - 7, t.load[n]));
+  for (const i of [1, 6]) { set(rx + i, floor - 2, '1E1E24'); set(rx + i + 1, floor - 2, '1E1E24'); }
+  const px = fx + 1;  // pickaxe leaning on the left riser
+  for (let i = 0; i < 5; i++) set(px + 4 - i, floor - 1 - i, i % 2 ? '6B4423' : '8A5A32');
+  for (const [i, j] of [[-1, -6], [0, -7], [1, -7], [2, -7], [3, -6]]) set(px + i, floor + j, '6FE8E0');
+  resetBadge(r, x0 + w - 9, y0 + h - 9);
+}
+// Reset badge: a gold circular arrow with a full outline, drawn at its 7x7 top-left (x, y).
+const RESET = ['..###.#', '.#...##', '#...###', '#......', '#.....#', '.#...#.', '..###..'];
+function resetBadge(r, x, y) {
+  for (let j = -1; j <= 1; j++) for (let i = -1; i <= 1; i++) if (i || j) drawMask(r, RESET, x + i, y + j, C.O);
+  drawMask(r, RESET, x, y, C.goldHi);
+}
 const SCENES = {
   overworld(r, x0, y0, w, h) {
     const g = h - 8, set = (x, y, c) => r.set(x0 + x, y0 + y, c);
     band(r, x0, y0, w, g, DAY);
-    for (const [cx, cy, cw] of [[Math.round(w * 0.2), 12, 9], [Math.round(w * 0.68), 11, 11]]) {  // clouds
+    for (const [cx, cy, cw] of [[Math.round(w * 0.2), 12, 9], [Math.round(w * 0.56), 10, 9]]) {  // clouds
       r.rect(x0 + cx + 2, y0 + cy - 1, cw - 5, 1, 'F4F8FF'); r.rect(x0 + cx, y0 + cy, cw, 2, 'F4F8FF');
       r.rect(x0 + cx + 1, y0 + cy + 2, cw - 2, 1, 'D6E2FA');
     }
@@ -417,7 +500,7 @@ const SCENES = {
       else if (y === g + 1 || (y === g + 2 && n < 0.35)) set(x, y, n < 0.25 ? '6CC24A' : '57A83C');
       else set(x, y, n < 0.18 ? '9C6B3E' : n < 0.4 ? '74492A' : '8A5A32');
     }
-    for (const [tx, tall] of [[Math.round(w * 0.1), 10], [Math.round(w * 0.79), 9], [Math.round(w * 0.92), 11]]) {  // oaks
+    for (const [tx, tall] of [[Math.round(w * 0.1), 10], [Math.round(w * 0.86), 11]]) {  // oaks, canopies kept inside w
       const top = g - tall;
       r.rect(x0 + tx, y0 + top + 5, 1, tall - 5, '6B4423'); r.rect(x0 + tx + 1, y0 + top + 5, 1, tall - 5, '553519');
       for (let y = top; y < top + 6; y++) for (let x = tx - 3; x < tx + 5; x++) {
@@ -431,18 +514,18 @@ const SCENES = {
   },
   nether(r, x0, y0, w, h) {  // layered cliffs darker toward the back, a fortress bridge, a lava sea
     const set = (x, y, c) => r.set(x0 + x, y0 + y, c), sea = h - 5;
-    band(r, x0, y0, w, sea, ['16030A', '1E050C', '2A070E', '3A0B10', '521212', '6E1A14', '8A2A16']);
-    for (const [ex, ey, c] of [[6, 9, 'FF9A2E'], [12, 12, 'FFC24A'], [66, 10, 'FF9A2E'], [30, 11, 'FFC24A'], [47, 12, 'FF9A2E']]) set(Math.round(ex / 73 * w), ey, c);  // embers
+    band(r, x0, y0, w, sea, NETHER_SKY);
+    for (const [ex, ey, c] of [[6, 10, 'FF9A2E'], [30, 11, 'FFC24A'], [62, 10, 'FF9A2E']]) set(Math.round(ex / 73 * w), ey, c);  // embers
     const ridge = (x, base, a, f, p) => Math.round(base + a * Math.sin(x * f + p));
     for (let x = 0; x < w; x++) for (let y = ridge(x, 19, 1.5, 0.23, 1); y < sea; y++) set(x, y, '24080C');  // far ridge
-    const deck = 13, tx = Math.round(w * 0.8), brick = '140408';  // fortress bridge against the glow: deck, arches, a tower
+    const deck = 13, tx = Math.round(w * 0.78), brick = '140408';  // fortress bridge against the glow: deck, arches, a tower
     r.rect(x0, y0 + deck, w, 2, brick);
     for (let px = 1; px < w; px += 9) {
       r.rect(x0 + px, y0 + deck + 2, 3, sea - deck - 2, brick);
       set(px - 1, deck + 2, brick); set(px + 3, deck + 2, brick);  // arch shoulders
     }
-    r.rect(x0 + tx, y0 + deck - 5, 6, 5, brick); r.rect(x0 + tx - 1, y0 + deck - 6, 8, 1, brick);
-    for (const [wx, wy] of [[1, 1], [4, 1], [1, 3], [4, 3]]) set(tx + wx, deck - 5 + wy, 'FFB040');
+    r.rect(x0 + tx, y0 + deck - 4, 6, 4, brick); r.rect(x0 + tx - 1, y0 + deck - 5, 8, 1, brick);  // tower below the label rows
+    for (const [wx, wy] of [[1, 1], [4, 1]]) set(tx + wx, deck - 4 + wy, 'FFB040');
     for (let x = 6; x < w; x += 13) set(x, deck, 'FFB040');  // lit windows along the deck
     const mid = (x, ox, d) => 12 + Math.round(Math.abs(x - ox) * d);
     for (let x = 0; x < w; x++) {  // middle cliffs, left and right
@@ -465,23 +548,17 @@ const SCENES = {
   },
   end(r, x0, y0, w, h) {
     const set = (x, y, c) => r.set(x0 + x, y0 + y, c), g = h - 7;
-    band(r, x0, y0, w, h, ['120A20', '170D29', '1D1133', '24153E', '2C1A4A', '351F56']);
-    for (let y = 12; y < g; y++) for (let x = 1; x < w - 1; x++) {  // stars, kept out of the label rows
-      const n = hash(x, y, 7);
-      if (n < 0.025) set(x, y, n < 0.01 ? C.cream : 'A98BEA');
-    }
+    band(r, x0, y0, w, h, END_SKY);
+    endStars(r, x0, y0, w, g);
     const cx = Math.round(w * 0.66), body = '4A3366', shade = '362450', cap = '6A4C8E';  // end city, lit purpur windows
-    for (const [tx, ty, tw] of [[cx - 7, 13, 5], [cx + 9, 10, 5], [cx, 6, 6]]) {  // back to front
+    for (const [tx, ty, tw] of [[cx - 6, 14, 4], [cx + 7, 11, 4], [cx, 9, 5]]) {  // back to front, tops below the label rows
       r.rect(x0 + tx, y0 + ty + 2, tw, g - ty - 2, body); r.rect(x0 + tx + tw - 1, y0 + ty + 2, 1, g - ty - 2, shade);
       r.rect(x0 + tx - 1, y0 + ty, tw + 2, 2, cap); r.rect(x0 + tx + 1, y0 + ty - 1, tw - 2, 1, cap);
       r.rect(x0 + tx - 1, y0 + ty + 1, tw + 2, 1, shade);
       for (let y = ty + 4; y < g - 1; y += 3) set(tx + Math.floor((tw - 1) / 2), y, 'E0C8FF');
     }
-    r.rect(x0 + cx + 6, y0 + 14, 3, 1, cap);  // bridge
-    for (const [px, ph] of [[Math.round(w * 0.12), 7], [Math.round(w * 0.24), 5]]) {  // chorus plants
-      r.rect(x0 + px, y0 + g - ph, 1, ph, '8A5AA8'); r.rect(x0 + px - 1, y0 + g - ph + 1, 1, 2, '8A5AA8');
-      set(px, g - ph - 1, 'D6C2FF'); set(px - 1, g - ph, 'D6C2FF');
-    }
+    r.rect(x0 + cx + 5, y0 + 15, 2, 1, cap);  // bridge
+    for (const [px, ph] of [[Math.round(w * 0.12), 7], [Math.round(w * 0.26), 5]]) chorus(r, x0 + px, y0 + g, ph);
     for (let y = g; y < h; y++) {  // end stone island, tapering into the void
       const t = y - g, cut = Math.round(t * t * 0.9);
       for (let x = Math.max(0, cut - 4); x <= Math.min(w - 1, w + 1 - cut); x++) {
@@ -490,46 +567,13 @@ const SCENES = {
       }
     }
   },
-  quarry(r, x0, y0, w, h) {  // an open pit in cross-section: grass rim, stone ledges down to a floor, ores, cart, pickaxe
-    const set = (x, y, c) => r.set(x0 + x, y0 + y, c), rim = 11, step = 5, sw = 12;
-    band(r, x0, y0, w, h, DAY);
-    const level = x => Math.min(Math.floor(x / sw), Math.floor((w - 1 - x) / sw), 2);  // 0 rim, 1 ledge, 2 floor
-    for (let x = 0; x < w; x++) {
-      const k = level(x), top = rim + step * k;
-      for (let y = rim; y < h; y++) {
-        if (y < top) continue;  // open air over the lower steps
-        if (k === 0 && y < top + 3) set(x, y, y === top ? '86D65E' : y === top + 1 ? '6CC24A' : '8A5A32');
-        else if (y === top) set(x, y, 'CDD1D7');
-        else set(x, y, (y - top) % 5 === 4 ? '868B94' : '9DA2AA');
-      }
-    }
-    for (let x = 1; x < w; x++) {  // risers: the upper step's edge column in shade, the lower ledge darker at its foot
-      const a = level(x - 1), b = level(x);
-      if (a === b) continue;
-      const hiX = a > b ? x : x - 1, dir = a > b ? -1 : 1, lowTop = rim + step * Math.max(a, b);
-      for (let y = rim + step * Math.min(a, b) + 1; y < h; y++) set(hiX, y, '6E737C');
-      for (let i = 1; i <= 2; i++) set(hiX + dir * i, lowTop, '9DA2AA');
-    }
-    const ORE = { coal: ['3A3A42', '1E1E24'], iron: ['E2BFA4', 'B48A6E'], gold: ['FFE38A', 'D9A62E'], diamond: ['8FF4EC', '2EB8B0'],
-      redstone: ['FF5A50', 'B01E1E'], emerald: ['6AF08E', '1E9A48'] };
-    const vein = (ore, ox, oy) => { const [hi, lo] = ORE[ore];
-      for (const [i, j, c] of [[0, 0, hi], [1, 0, hi], [0, 1, hi], [1, 1, lo], [2, 1, hi], [1, 2, lo], [2, 2, lo]]) set(ox + i, oy + j, c); };
-    vein('iron', 2, 15); vein('coal', 6, 22); vein('gold', 14, 19); vein('redstone', 18, 24); vein('diamond', 29, 24);
-    vein('coal', w - 25, 24); vein('gold', w - 16, 19); vein('emerald', w - 6, 15); vein('iron', w - 9, 22);
-    const rx = Math.round(w * 0.52), floor = rim + step * 2;  // rail with a loaded minecart on the floor
-    for (let x = rx - 4; x < rx + 14; x++) set(x, floor - 1, x % 3 ? '9AA0A8' : '7A4A1E');
-    r.rect(x0 + rx, y0 + floor - 6, 9, 1, 'CDD1D7'); r.rect(x0 + rx, y0 + floor - 5, 9, 3, '868B94');
-    r.rect(x0 + rx + 1, y0 + floor - 5, 7, 1, '5F656F');
-    for (const [i, c] of [[2, 'FFE38A'], [3, '8FF4EC'], [5, '3A3A42'], [6, 'FFE38A']]) set(rx + i, floor - 7, c);
-    for (const i of [1, 6]) { set(rx + i, floor - 2, '1E1E24'); set(rx + i + 1, floor - 2, '1E1E24'); }
-    const px = 2 * sw + 2;  // pickaxe leaning on the ledge riser
-    for (let i = 0; i < 5; i++) set(px + 4 - i, floor - 1 - i, i % 2 ? '6B4423' : '8A5A32');
-    for (const [i, j] of [[-1, -6], [0, -7], [1, -7], [2, -7], [3, -6]]) set(px + i, floor + j, '6FE8E0');
-  },
+  quarry(r, x0, y0, w, h) { pit(r, x0, y0, w, h, PIT.overworld); },
+  quarry_nether(r, x0, y0, w, h) { pit(r, x0, y0, w, h, PIT.nether); },
+  quarry_end(r, x0, y0, w, h) { pit(r, x0, y0, w, h, PIT.end); },
 };
-function outlinedText(r, s, x, y) {  // cream caps with a full 1 px outline, readable over any picture
-  for (let j = -1; j <= 1; j++) for (let i = -1; i <= 1; i++) if (i || j) drawText(r, s, x + i, y + j, C.O);
-  drawText(r, s, x, y, C.cream);
+function outlinedText(r, s, x, y, font) {  // cream caps with a full 1 px outline, readable over any picture
+  for (let j = -1; j <= 1; j++) for (let i = -1; i <= 1; i++) if (i || j) drawText(r, s, x + i, y + j, C.O, null, font);
+  drawText(r, s, x, y, C.cream, null, font);
 }
 // reach 'left' / 'right': the tile is drawn half a cell (9 px) past its cells on that side, so two tiles reaching into
 // the same column meet with the usual 2 px gap; the click cells stay whole (spec validation keeps that column empty).
@@ -542,10 +586,11 @@ function scene(r, e) {
   const paint = SCENES[e.style]; if (!paint) throw new Error('scene ' + e.style);
   if (e.reach && e.reach !== 'left' && e.reach !== 'right') throw new Error('scene reach ' + e.reach);
   const { x, y, w, h } = sceneBox(e), label = e.label, cw = e.w || 1;
-  if (textWidth(label) > w - 10) throw new Error('label too wide for ' + cw + ' cells: ' + label);
+  // 5 px caps on every tile, so OVERWORLD fits a 3-cell tile and all labels of a picker match
+  if (textWidth(label, CAPS5) > w - 10) throw new Error('label too wide for ' + cw + ' cells: ' + label);
   plate(r, x, y, w, h, CARD.navy);
   paint(r, x + 3, y + 3, w - 6, h - 6);
-  outlinedText(r, label, x + Math.floor((w - textWidth(label)) / 2), y + 5);
+  outlinedText(r, label, x + Math.floor((w - textWidth(label, CAPS5)) / 2), y + 5, CAPS5);
 }
 
 // One spec element (menus/spec.json) onto a raster; slot holes are punched after every element is drawn.

@@ -6369,7 +6369,7 @@
     {
       "id": "rtp_worlds",
       "glyph": "E36F",
-      "rows": 4,
+      "rows": 5,
       "title": "Random Teleport",
       "elements": [
         {
@@ -6378,35 +6378,20 @@
           "label": "OVERWORLD",
           "x": 0,
           "y": 0,
-          "w": 4,
+          "w": 3,
           "h": 2,
-          "reach": "right",
           "item": {
             "key": "overworld"
           }
         },
         {
           "type": "scene",
-          "style": "quarry",
-          "label": "RESOURCE",
-          "x": 5,
-          "y": 0,
-          "w": 4,
-          "h": 2,
-          "reach": "left",
-          "item": {
-            "key": "resource"
-          }
-        },
-        {
-          "type": "scene",
           "style": "nether",
           "label": "NETHER",
-          "x": 0,
-          "y": 2,
-          "w": 4,
+          "x": 3,
+          "y": 0,
+          "w": 3,
           "h": 2,
-          "reach": "right",
           "item": {
             "key": "nether"
           }
@@ -6415,13 +6400,64 @@
           "type": "scene",
           "style": "end",
           "label": "END",
-          "x": 5,
-          "y": 2,
-          "w": 4,
+          "x": 6,
+          "y": 0,
+          "w": 3,
           "h": 2,
-          "reach": "left",
           "item": {
             "key": "end"
+          }
+        },
+        {
+          "type": "panel",
+          "style": "night",
+          "x": 0,
+          "y": 2,
+          "w": 9,
+          "h": 1
+        },
+        {
+          "type": "text",
+          "label": "RESOURCE WORLDS",
+          "color": "gold",
+          "x": 0,
+          "y": 2,
+          "w": 9
+        },
+        {
+          "type": "scene",
+          "style": "quarry",
+          "label": "OVERWORLD",
+          "x": 0,
+          "y": 3,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "resource"
+          }
+        },
+        {
+          "type": "scene",
+          "style": "quarry_nether",
+          "label": "NETHER",
+          "x": 3,
+          "y": 3,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "resource_nether"
+          }
+        },
+        {
+          "type": "scene",
+          "style": "quarry_end",
+          "label": "END",
+          "x": 6,
+          "y": 3,
+          "w": 3,
+          "h": 2,
+          "item": {
+            "key": "resource_end"
           }
         }
       ],
